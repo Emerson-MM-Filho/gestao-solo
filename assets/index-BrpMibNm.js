@@ -1,1 +1,0 @@
-import{j as o,L as n}from"./index-CfQSrzAa.js";function e(){return o.jsxs("div",{children:[o.jsx("h1",{className:"text-xl font-bold",children:"Welcome to the Home Page"}),o.jsx("br",{}),o.jsx(n,{to:"/auth/login",children:"Login"}),o.jsx("br",{}),o.jsx("br",{}),o.jsx(n,{to:"/auth/signup",children:"Sign Up"})]})}export{e as component};
