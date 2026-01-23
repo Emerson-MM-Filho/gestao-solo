@@ -28,8 +28,8 @@ jobs:
       # Save Environment Variables
       - name: Save Environment Variables
         run: |
-          echo "VITE_SUPABASE_URL=${{ vars.VITE_SUPABASE_URL }}" >> .env.production &&
-          echo "VITE_SUPABASE_PUBLISHABLE_KEY=${{ vars.VITE_SUPABASE_PUBLISHABLE_KEY }}" >> .env.production &&
+          echo "VITE_SUPABASE_URL=${{ secrets.VITE_SUPABASE_URL }}" >> .env.production &&
+          echo "VITE_SUPABASE_PUBLISHABLE_KEY=${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}" >> .env.production &&
           echo "VITE_BASE_PATH=${{ github.event.repository.name }}" >> .env.production
 
       # Test Environment Variables
