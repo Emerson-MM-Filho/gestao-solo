@@ -32,6 +32,7 @@ jobs:
           VITE_SUPABASE_PUBLISHABLE_KEY=${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }} \
           VITE_BASE_PATH=${{ github.event.repository.name }} \
           bun run build
+          cp dist/index.html dist/404.html
 
       # Deploy to github pages
       - name: Deploy to github pages
