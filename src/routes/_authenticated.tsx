@@ -14,7 +14,14 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { supabase } from "@/lib/supabase"
-import { createFileRoute, Outlet, redirect } from "@tanstack/react-router"
+import {
+  createFileRoute,
+  Link,
+  Outlet,
+  redirect,
+  useLocation,
+} from "@tanstack/react-router"
+import { useTranslation } from "react-i18next"
 
 export const Route = createFileRoute("/_authenticated")({
   component: AuthenticatedLayout,
@@ -32,6 +39,20 @@ export const Route = createFileRoute("/_authenticated")({
 });
 
 function AuthenticatedLayout() {
+  const location = useLocation();
+  const { t } = useTranslation(["common"]);
+
+  // Map routes to translation keys
+  const routeMap: Record<string, string> = {
+    "/orders": "common:navigation.orders",
+    "/stock": "common:navigation.stock",
+    "/reports": "common:navigation.reports",
+    "/settings": "common:navigation.settings",
+  };
+
+  const currentPageKey = routeMap[location.pathname];
+  const currentPageTitle = currentPageKey ? t(currentPageKey) : "";
+
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -46,14 +67,18 @@ function AuthenticatedLayout() {
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="#">
-                    Building Your Application
+                  <BreadcrumbLink asChild>
+                    <Link to="/orders">{t("common:appName")}</Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
-                <BreadcrumbSeparator className="hidden md:block" />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-                </BreadcrumbItem>
+                {currentPageTitle && (
+                  <>
+                    <BreadcrumbSeparator className="hidden md:block" />
+                    <BreadcrumbItem>
+                      <BreadcrumbPage>{currentPageTitle}</BreadcrumbPage>
+                    </BreadcrumbItem>
+                  </>
+                )}
               </BreadcrumbList>
             </Breadcrumb>
           </div>

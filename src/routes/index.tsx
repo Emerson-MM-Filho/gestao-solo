@@ -1,10 +1,10 @@
-import { useAuth } from "@/components/auth-provider";
-import { LanguageToggle } from "@/components/language-toggle";
-import { ModeToggle } from "@/components/theme-mode-toggle";
-import { Button } from "@/components/ui/button";
-import { Icon3dCubeSphere } from "@tabler/icons-react";
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useTranslation } from "react-i18next";
+import { useAuth } from "@/components/auth-provider"
+import { LanguageToggle } from "@/components/language-toggle"
+import { ModeToggle } from "@/components/theme-mode-toggle"
+import { Button } from "@/components/ui/button"
+import { Icon3dCubeSphere } from "@tabler/icons-react"
+import { createFileRoute, Link } from "@tanstack/react-router"
+import { useTranslation } from "react-i18next"
 
 export const Route = createFileRoute("/")({
   component: RouteComponent,
@@ -47,7 +47,9 @@ function RouteComponent() {
             {!user ? (
               <>
                 <Button size="lg" asChild>
-                  <Link to="/auth/signup">{t("common:buttons.getStarted")}</Link>
+                  <Link to="/auth/signup">
+                    {t("common:buttons.getStarted")}
+                  </Link>
                 </Button>
                 <Button size="lg" variant="outline" asChild>
                   <Link to="/auth/signin">{t("common:buttons.signIn")}</Link>
@@ -55,7 +57,7 @@ function RouteComponent() {
               </>
             ) : (
               <Button size="lg" asChild>
-                <Link to="/dashboard">{t("common:buttons.goToDashboard")}</Link>
+                <Link to="/orders">{t("common:buttons.goToDashboard")}</Link>
               </Button>
             )}
           </div>

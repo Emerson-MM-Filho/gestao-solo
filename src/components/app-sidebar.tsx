@@ -1,173 +1,71 @@
 "use client";
 
 import {
-    IconWaveSine,
-    IconNotebook,
-    IconRobot,
-    IconCommand,
-    IconFrame,
-    IconLayoutList,
-    IconMap,
-    IconChartPie,
-    IconSettings,
-    IconTerminal2,
+  IconChartBar,
+  IconPackage,
+  IconReceipt,
+  IconSettings,
 } from "@tabler/icons-react"
 import * as React from "react"
+import { useTranslation } from "react-i18next"
 
+import { useAuth } from "@/components/auth-provider"
 import { NavMain } from "@/components/nav-main"
-import { NavProjects } from "@/components/nav-projects"
 import { NavUser } from "@/components/nav-user"
-import { TeamSwitcher } from "@/components/team-switcher"
 import {
-    Sidebar,
-    SidebarContent,
-    SidebarFooter,
-    SidebarHeader,
-    SidebarRail,
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarRail,
 } from "@/components/ui/sidebar"
 
-// This is sample data.
-const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
-  teams: [
-    {
-      name: "Acme Inc",
-      logo: IconLayoutList,
-      plan: "Enterprise",
-    },
-    {
-      name: "Acme Corp.",
-      logo: IconWaveSine,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: IconCommand,
-      plan: "Free",
-    },
-  ],
-  navMain: [
-    {
-      title: "Playground",
-      url: "#",
-      icon: IconTerminal2,
-      isActive: true,
-      items: [
-        {
-          title: "History",
-          url: "#",
-        },
-        {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Models",
-      url: "#",
-      icon: IconRobot,
-      items: [
-        {
-          title: "Genesis",
-          url: "#",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Documentation",
-      url: "#",
-      icon: IconNotebook,
-      items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Settings",
-      url: "#",
-      icon: IconSettings,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
-    },
-  ],
-  projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: IconFrame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: IconChartPie,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: IconMap,
-    },
-  ],
-};
-
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { user } = useAuth();
+  const { t } = useTranslation(["common"]);
+
+  const navMain = [
+    {
+      title: t("common:navigation.orders"),
+      url: "/orders",
+      icon: IconReceipt,
+    },
+    {
+      title: t("common:navigation.stock"),
+      url: "/stock",
+      icon: IconPackage,
+    },
+    {
+      title: t("common:navigation.reports"),
+      url: "/reports",
+      icon: IconChartBar,
+    },
+    {
+      title: t("common:navigation.settings"),
+      url: "/settings",
+      icon: IconSettings,
+    },
+  ];
+
+  const userData = {
+    name:
+      user?.user_metadata?.display_name || user?.email?.split("@")[0] || "User",
+    email: user?.email || "",
+    avatar: "",
+  };
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+        <div className="flex h-14 items-center px-4">
+          <span className="text-lg font-semibold">{t("common:appName")}</span>
+        </div>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
+        <NavMain items={navMain} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={userData} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

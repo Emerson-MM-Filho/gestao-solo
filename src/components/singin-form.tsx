@@ -1,19 +1,19 @@
-import { Icon3dCubeSphere } from "@tabler/icons-react";
-import { Link, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Icon3dCubeSphere } from "@tabler/icons-react"
+import { Link, useNavigate } from "@tanstack/react-router"
+import { useState } from "react"
+import { useTranslation } from "react-i18next"
 
-import { useAuth } from "@/components/auth-provider";
-import { Button } from "@/components/ui/button";
+import { useAuth } from "@/components/auth-provider"
+import { Button } from "@/components/ui/button"
 import {
   Field,
   FieldDescription,
   FieldGroup,
   FieldLabel,
-} from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
-import { getAuthErrorMessage } from "@/lib/auth-utils";
-import { cn } from "@/lib/utils";
+} from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
+import { getAuthErrorMessage } from "@/lib/auth-utils"
+import { cn } from "@/lib/utils"
 
 export function SigninForm({
   className,
@@ -34,7 +34,7 @@ export function SigninForm({
 
     try {
       await signIn(email, password);
-      navigate({ to: "/dashboard" });
+      navigate({ to: "/orders" });
     } catch (err) {
       setError(getAuthErrorMessage(err));
     } finally {

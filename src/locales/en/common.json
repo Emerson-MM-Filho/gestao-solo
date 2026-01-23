@@ -5,7 +5,7 @@
     "signIn": "Sign In",
     "signUp": "Sign Up",
     "signOut": "Sign Out",
-    "goToDashboard": "Go to Dashboard",
+    "goToDashboard": "Enter",
     "backToHome": "Back to Home",
     "submit": "Submit",
     "cancel": "Cancel"
@@ -27,5 +27,16 @@
     "termsOfService": "Terms of Service",
     "privacyPolicy": "Privacy Policy",
     "copyright": "© 2026 Gestão Solo. All rights reserved."
+  },
+  "navigation": {
+    "orders": "Orders",
+    "stock": "Stock",
+    "reports": "Reports",
+    "settings": "Settings"
+  },
+  "userMenu": {
+    "account": "Account",
+    "notifications": "Notifications",
+    "logOut": "Log Out"
   }
 }

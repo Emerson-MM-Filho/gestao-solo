@@ -5,7 +5,7 @@
     "signIn": "Entrar",
     "signUp": "Criar Conta",
     "signOut": "Sair",
-    "goToDashboard": "Ir para o Painel",
+    "goToDashboard": "Entrar",
     "backToHome": "Voltar ao Início",
     "submit": "Enviar",
     "cancel": "Cancelar"
@@ -27,5 +27,16 @@
     "termsOfService": "Termos de Serviço",
     "privacyPolicy": "Política de Privacidade",
     "copyright": "© 2026 Gestão Solo. Todos os direitos reservados."
+  },
+  "navigation": {
+    "orders": "Comandas",
+    "stock": "Estoque",
+    "reports": "Relatórios",
+    "settings": "Configurações"
+  },
+  "userMenu": {
+    "account": "Conta",
+    "notifications": "Notificações",
+    "logOut": "Sair"
   }
 }
