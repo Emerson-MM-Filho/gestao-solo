@@ -6,13 +6,22 @@ export const Route = createFileRoute("/")({
 
 function RouteComponent() {
   return (
-    <div>
+    <div className="p-8">
       <h1 className="text-xl font-bold">Welcome to the Home Page</h1>
       <br />
-      <Link to="/auth/signin">Sign In</Link>
+      <Link to="/auth/signin" className="text-primary hover:underline">
+        Sign In
+      </Link>
       <br />
       <br />
-      <Link to="/auth/signup">Sign Up</Link>
+      <Link to="/auth/signup" className="text-primary hover:underline">
+        Sign Up
+      </Link>
+      <br />
+      <br />
+      <Link to="/dashboard" className="text-primary hover:underline">
+        Dashboard
+      </Link>
     </div>
   );
 }

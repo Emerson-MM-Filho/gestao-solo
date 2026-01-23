@@ -1,6 +1,7 @@
 import { routeTree } from "@/routeTree.gen"
 import { createRouter, RouterProvider } from "@tanstack/react-router"
 import { ThemeProvider } from "./components/theme-provider"
+import { AuthProvider } from "./components/auth-provider"
 
 const router = createRouter({
   routeTree,
@@ -16,7 +17,9 @@ declare module "@tanstack/react-router" {
 export function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="gestao-solo-theme">
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </ThemeProvider>
   );
 }
