@@ -1,9 +1,9 @@
-import { useAuth } from "@/components/auth-provider";
-import { LanguageToggle } from "@/components/language-toggle";
-import { ModeToggle } from "@/components/theme-mode-toggle";
-import { Button } from "@/components/ui/button";
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useTranslation } from "react-i18next";
+import { useAuth } from "@/components/auth-provider"
+import { LanguageToggle } from "@/components/language-toggle"
+import { ModeToggle } from "@/components/theme-mode-toggle"
+import { Button } from "@/components/ui/button"
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router"
+import { useTranslation } from "react-i18next"
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   component: DashboardComponent,
@@ -25,7 +25,7 @@ function DashboardComponent() {
 
   return (
     <div className="min-h-screen p-8">
-      <div className="mx-auto max-w-4xl">
+      <div className="mx-auto ">
         <div className="mb-8 flex items-center justify-between">
           <h1 className="text-3xl font-bold">{t("dashboard:title")}</h1>
           <div className="flex items-center gap-4">
@@ -38,7 +38,9 @@ function DashboardComponent() {
         </div>
 
         <div className="rounded-lg border p-6">
-          <h2 className="mb-4 text-xl font-semibold">{t("dashboard:welcome")}</h2>
+          <h2 className="mb-4 text-xl font-semibold">
+            {t("dashboard:welcome")}
+          </h2>
 
           <div className="space-y-3">
             <div>
@@ -46,7 +48,8 @@ function DashboardComponent() {
                 {t("dashboard:displayName")}
               </p>
               <p className="font-medium">
-                {user?.user_metadata?.display_name || t("dashboard:notProvided")}
+                {user?.user_metadata?.display_name ||
+                  t("dashboard:notProvided")}
               </p>
             </div>
 
