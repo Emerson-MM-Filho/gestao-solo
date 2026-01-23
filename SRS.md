@@ -55,7 +55,7 @@ Oferecer apoio informatizado ao controle de vendas e de estoque de operações s
 
 | ID | Requisito | Especificação Técnica |
 | --- | --- | --- |
-| **RNF01** | **Usabilidade Mobile** | Interface otimizada para operação com uma mão (foco no polegar direito). |
+| **RNF01** | **Usabilidade Mobile** | Interface otimizada para operação com dispositivos móveis. |
 | **RNF02** | **Portabilidade** | Web App Responsivo (PWA) compatível com Safari (iOS) e Chrome (Android). |
 | **RNF03** | **Persistência** | Garantia de manutenção dos dados de comandas abertas em caso de recarregamento da página. |
 | **RNF04** | **Desempenho** | Resposta de interface para adição de itens e buscas em até 200ms. |
