@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Icon3dCubeSphere,
   IconChartBar,
   IconPackage,
   IconReceipt,
@@ -57,8 +58,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <div className="flex h-14 items-center px-4">
-          <span className="text-lg font-semibold">{t("common:appName")}</span>
+        <div className="flex h-14 items-center gap-3 px-4 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-2">
+          <div className="flex size-8 shrink-0 items-center justify-center rounded-md bg-primary text-primary-foreground">
+            <Icon3dCubeSphere className="size-5" />
+          </div>
+          <span className="text-lg font-semibold truncate group-data-[collapsible=icon]:hidden">
+            {t("common:appName")}
+          </span>
         </div>
       </SidebarHeader>
       <SidebarContent>
