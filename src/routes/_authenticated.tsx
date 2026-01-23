@@ -51,7 +51,7 @@ function AuthenticatedLayout() {
   };
 
   const currentPageKey = routeMap[location.pathname];
-  const currentPageTitle = currentPageKey ? t(currentPageKey) : "";
+  const currentPageTitle = currentPageKey ? t(currentPageKey as any) : "";
 
   return (
     <SidebarProvider>
