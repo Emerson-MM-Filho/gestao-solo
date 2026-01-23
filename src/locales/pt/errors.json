@@ -1,0 +1,13 @@
+{
+  "validation": {
+    "invalidEmail": "Por favor, insira um endereço de e-mail válido",
+    "passwordTooShort": "A senha deve ter pelo menos 6 caracteres",
+    "passwordsDoNotMatch": "As senhas não correspondem"
+  },
+  "auth": {
+    "invalidCredentials": "E-mail ou senha inválidos",
+    "emailNotConfirmed": "Por favor, verifique seu endereço de e-mail",
+    "userAlreadyExists": "Já existe uma conta com este e-mail",
+    "unexpectedError": "Ocorreu um erro inesperado"
+  }
+}

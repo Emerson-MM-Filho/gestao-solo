@@ -1,0 +1,27 @@
+{
+  "appName": "Gestão Solo",
+  "buttons": {
+    "getStarted": "Get Started",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "signOut": "Sign Out",
+    "goToDashboard": "Go to Dashboard",
+    "backToHome": "Back to Home",
+    "submit": "Submit",
+    "cancel": "Cancel"
+  },
+  "labels": {
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password"
+  },
+  "placeholders": {
+    "email": "m@example.com",
+    "password": "••••••••"
+  },
+  "footer": {
+    "termsOfService": "Terms of Service",
+    "privacyPolicy": "Privacy Policy",
+    "copyright": "© 2026 Gestão Solo. All rights reserved."
+  }
+}

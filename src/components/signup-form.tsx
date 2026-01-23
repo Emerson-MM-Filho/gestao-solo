@@ -1,22 +1,23 @@
-import { Icon3dCubeSphere } from "@tabler/icons-react"
-import { useState } from "react"
+import { Icon3dCubeSphere } from "@tabler/icons-react";
+import { Link } from "@tanstack/react-router";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
-import { useAuth } from "@/components/auth-provider"
-import { Button } from "@/components/ui/button"
+import { useAuth } from "@/components/auth-provider";
+import { Button } from "@/components/ui/button";
 import {
   Field,
   FieldDescription,
   FieldGroup,
-  FieldLabel
-} from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
+  FieldLabel,
+} from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
 import {
   getAuthErrorMessage,
   validateEmail,
   validatePassword,
-} from "@/lib/auth-utils"
-import { cn } from "@/lib/utils"
-import { Link } from "@tanstack/react-router"
+} from "@/lib/auth-utils";
+import { cn } from "@/lib/utils";
 
 export function SignupForm({
   className,
@@ -29,6 +30,7 @@ export function SignupForm({
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const { signUp } = useAuth();
+  const { t } = useTranslation(["auth", "common", "errors"]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,7 +51,7 @@ export function SignupForm({
     }
 
     if (password !== confirmPassword) {
-      setError("Passwords do not match");
+      setError(t("errors:validation.passwordsDoNotMatch"));
       return;
     }
 
@@ -80,11 +82,12 @@ export function SignupForm({
               <div className="flex size-8 items-center justify-center rounded-md">
                 <Icon3dCubeSphere className="size-6" />
               </div>
-              <span className="sr-only">Acme Inc.</span>
+              <span className="sr-only">{t("common:appName")}</span>
             </a>
-            <h1 className="text-xl font-bold">Welcome to Acme Inc.</h1>
+            <h1 className="text-xl font-bold">{t("auth:signup.title")}</h1>
             <FieldDescription>
-              Already have an account? <Link to="/auth/signin">Sign in</Link>
+              {t("auth:signup.subtitle")}{" "}
+              <Link to="/auth/signin">{t("common:buttons.signIn")}</Link>
             </FieldDescription>
           </div>
           {error && (
@@ -94,15 +97,15 @@ export function SignupForm({
           )}
           {success && (
             <div className="rounded-md bg-green-500/15 p-3 text-sm text-green-600 dark:text-green-400">
-              Check your email to confirm your account
+              {t("auth:signup.success")}
             </div>
           )}
           <Field>
-            <FieldLabel htmlFor="email">Email</FieldLabel>
+            <FieldLabel htmlFor="email">{t("common:labels.email")}</FieldLabel>
             <Input
               id="email"
               type="email"
-              placeholder="m@example.com"
+              placeholder={t("common:placeholders.email")}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={loading}
@@ -110,11 +113,13 @@ export function SignupForm({
             />
           </Field>
           <Field>
-            <FieldLabel htmlFor="password">Password</FieldLabel>
+            <FieldLabel htmlFor="password">
+              {t("common:labels.password")}
+            </FieldLabel>
             <Input
               id="password"
               type="password"
-              placeholder="••••••••"
+              placeholder={t("common:placeholders.password")}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               disabled={loading}
@@ -123,11 +128,13 @@ export function SignupForm({
             />
           </Field>
           <Field>
-            <FieldLabel htmlFor="confirmPassword">Confirm Password</FieldLabel>
+            <FieldLabel htmlFor="confirmPassword">
+              {t("common:labels.confirmPassword")}
+            </FieldLabel>
             <Input
               id="confirmPassword"
               type="password"
-              placeholder="••••••••"
+              placeholder={t("common:placeholders.password")}
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               disabled={loading}
@@ -137,7 +144,7 @@ export function SignupForm({
           </Field>
           <Field>
             <Button type="submit" disabled={loading}>
-              {loading ? "Creating account..." : "Create Account"}
+              {loading ? t("auth:signup.loading") : t("auth:signup.button")}
             </Button>
           </Field>
           {/* <FieldSeparator>Or</FieldSeparator> */}
@@ -164,8 +171,10 @@ export function SignupForm({
         </FieldGroup>
       </form>
       <FieldDescription className="px-6 text-center">
-        By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
-        and <a href="#">Privacy Policy</a>.
+        {t("auth:agreement", {
+          terms: t("auth:terms"),
+          privacy: t("auth:privacy"),
+        })}
       </FieldDescription>
     </div>
   );

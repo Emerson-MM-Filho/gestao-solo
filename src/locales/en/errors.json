@@ -1,0 +1,13 @@
+{
+  "validation": {
+    "invalidEmail": "Please enter a valid email address",
+    "passwordTooShort": "Password must be at least 6 characters",
+    "passwordsDoNotMatch": "Passwords do not match"
+  },
+  "auth": {
+    "invalidCredentials": "Invalid email or password",
+    "emailNotConfirmed": "Please verify your email address",
+    "userAlreadyExists": "An account with this email already exists",
+    "unexpectedError": "An unexpected error occurred"
+  }
+}
