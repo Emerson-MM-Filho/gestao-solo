@@ -9,7 +9,7 @@ function RouteComponent() {
     <div>
       <h1 className="text-xl font-bold">Welcome to the Home Page</h1>
       <br />
-      <Link to="/auth/login">Login</Link>
+      <Link to="/auth/signin">Sign In</Link>
       <br />
       <br />
       <Link to="/auth/signup">Sign Up</Link>

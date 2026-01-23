@@ -33,7 +33,7 @@ export function SignupForm({
             <h1 className="text-xl font-bold">Welcome to Acme Inc.</h1>
             <FieldDescription>
               Already have an account?{" "}
-              <Link to="/auth/login">Sign in</Link>
+              <Link to="/auth/signin">Sign in</Link>
             </FieldDescription>
           </div>
           <Field>

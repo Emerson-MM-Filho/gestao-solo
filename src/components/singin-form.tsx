@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import { Link } from "@tanstack/react-router"
 
-export function LoginForm({
+export function SigninForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
@@ -45,7 +45,7 @@ export function LoginForm({
             />
           </Field>
           <Field>
-            <Button type="submit">Login</Button>
+            <Button type="submit">Sign In</Button>
           </Field>
           <FieldSeparator>Or</FieldSeparator>
           <Field className="grid gap-4 sm:grid-cols-2">
