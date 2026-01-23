@@ -1,28 +1,33 @@
-import { Icon3dCubeSphere } from "@tabler/icons-react";
-import { Link } from "@tanstack/react-router";
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Icon3dCubeSphere } from "@tabler/icons-react"
+import { Link } from "@tanstack/react-router"
+import { useState } from "react"
+import { useTranslation } from "react-i18next"
 
-import { useAuth } from "@/components/auth-provider";
-import { Button } from "@/components/ui/button";
+import { useAuth } from "@/components/auth-provider"
+import { PhoneInput } from "@/components/phone-input"
+import { Button } from "@/components/ui/button"
 import {
   Field,
   FieldDescription,
   FieldGroup,
   FieldLabel,
-} from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
+} from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
 import {
   getAuthErrorMessage,
+  validateDisplayName,
   validateEmail,
   validatePassword,
-} from "@/lib/auth-utils";
-import { cn } from "@/lib/utils";
+  validatePhone,
+} from "@/lib/auth-utils"
+import { cn } from "@/lib/utils"
 
 export function SignupForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const [displayName, setDisplayName] = useState("");
+  const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -30,7 +35,10 @@ export function SignupForm({
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const { signUp } = useAuth();
-  const { t } = useTranslation(["auth", "common", "errors"]);
+  const { t, i18n } = useTranslation(["auth", "common", "errors"]);
+
+  // Set default country based on locale
+  const defaultCountry = i18n.language === "pt" ? "BR" : "US";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,6 +46,18 @@ export function SignupForm({
     setSuccess(false);
 
     // Client-side validation
+    const displayNameError = validateDisplayName(displayName);
+    if (displayNameError) {
+      setError(displayNameError);
+      return;
+    }
+
+    const phoneError = validatePhone(phone);
+    if (phoneError) {
+      setError(phoneError);
+      return;
+    }
+
     const emailError = validateEmail(email);
     if (emailError) {
       setError(emailError);
@@ -58,8 +78,10 @@ export function SignupForm({
     setLoading(true);
 
     try {
-      await signUp(email, password);
+      await signUp(email, password, displayName, phone);
       setSuccess(true);
+      setDisplayName("");
+      setPhone("");
       setEmail("");
       setPassword("");
       setConfirmPassword("");
@@ -100,6 +122,31 @@ export function SignupForm({
               {t("auth:signup.success")}
             </div>
           )}
+          <Field>
+            <FieldLabel htmlFor="displayName">
+              {t("common:labels.displayName")}
+            </FieldLabel>
+            <Input
+              id="displayName"
+              type="text"
+              placeholder={t("common:placeholders.displayName")}
+              value={displayName}
+              onChange={(e) => setDisplayName(e.target.value)}
+              disabled={loading}
+              required
+            />
+          </Field>
+          <Field>
+            <FieldLabel htmlFor="phone">{t("common:labels.phone")}</FieldLabel>
+            <PhoneInput
+              id="phone"
+              value={phone}
+              onChange={(value) => setPhone(value || "")}
+              disabled={loading}
+              defaultCountry={defaultCountry}
+              placeholder={t("common:placeholders.phone")}
+            />
+          </Field>
           <Field>
             <FieldLabel htmlFor="email">{t("common:labels.email")}</FieldLabel>
             <Input

@@ -1,5 +1,8 @@
 {
   "validation": {
+    "displayNameRequired": "Display name is required",
+    "displayNameTooLong": "Display name must be less than 50 characters",
+    "phoneInvalid": "Phone must be in E.164 format (e.g., +12025551234)",
     "invalidEmail": "Please enter a valid email address",
     "passwordTooShort": "Password must be at least 6 characters",
     "passwordsDoNotMatch": "Passwords do not match"

@@ -11,11 +11,15 @@
     "cancel": "Cancel"
   },
   "labels": {
+    "displayName": "Display Name",
+    "phone": "Phone Number",
     "email": "Email",
     "password": "Password",
     "confirmPassword": "Confirm Password"
   },
   "placeholders": {
+    "displayName": "John Doe",
+    "phone": "+12025551234",
     "email": "m@example.com",
     "password": "••••••••"
   },

@@ -11,11 +11,15 @@
     "cancel": "Cancelar"
   },
   "labels": {
+    "displayName": "Nome de Exibição",
+    "phone": "Número de Telefone",
     "email": "E-mail",
     "password": "Senha",
     "confirmPassword": "Confirmar Senha"
   },
   "placeholders": {
+    "displayName": "João Silva",
+    "phone": "(11) 98765-4321",
     "email": "m@exemplo.com",
     "password": "••••••••"
   },

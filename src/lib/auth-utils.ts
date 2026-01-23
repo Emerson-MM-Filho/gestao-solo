@@ -36,3 +36,28 @@ export function validateEmail(email: string): string | null {
   }
   return null;
 }
+
+export function validateDisplayName(displayName: string): string | null {
+  if (displayName.trim().length === 0) {
+    return i18n.t("errors:validation.displayNameRequired");
+  }
+  if (displayName.length > 50) {
+    return i18n.t("errors:validation.displayNameTooLong");
+  }
+  return null;
+}
+
+export function validatePhone(phone: string): string | null {
+  // Allow empty since phone is optional
+  if (phone.trim().length === 0) {
+    return null;
+  }
+
+  // E.164 format: + followed by 1-15 digits
+  const phoneRegex = /^\+[1-9]\d{1,14}$/;
+  if (!phoneRegex.test(phone)) {
+    return i18n.t("errors:validation.phoneInvalid");
+  }
+
+  return null;
+}

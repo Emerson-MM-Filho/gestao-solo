@@ -1,5 +1,8 @@
 {
   "validation": {
+    "displayNameRequired": "Nome de exibição é obrigatório",
+    "displayNameTooLong": "Nome de exibição deve ter menos de 50 caracteres",
+    "phoneInvalid": "Telefone deve estar no formato E.164 (ex: +5511987654321)",
     "invalidEmail": "Por favor, insira um endereço de e-mail válido",
     "passwordTooShort": "A senha deve ter pelo menos 6 caracteres",
     "passwordsDoNotMatch": "As senhas não correspondem"

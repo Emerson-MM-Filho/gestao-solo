@@ -1,6 +1,9 @@
 {
   "title": "Painel",
   "welcome": "Bem-vindo!",
-  "signedInAs": "Você está conectado como:",
-  "userId": "ID do Usuário:"
+  "email": "Email:",
+  "userId": "ID do Usuário:",
+  "displayName": "Nome:",
+  "phone": "Telefone:",
+  "notProvided": "Não informado"
 }

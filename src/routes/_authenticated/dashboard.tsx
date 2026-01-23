@@ -39,13 +39,40 @@ function DashboardComponent() {
 
         <div className="rounded-lg border p-6">
           <h2 className="mb-4 text-xl font-semibold">{t("dashboard:welcome")}</h2>
-          <p className="mb-2 text-muted-foreground">
-            {t("dashboard:signedInAs")}{" "}
-            <span className="font-medium text-foreground">{user?.email}</span>
-          </p>
-          <p className="text-sm text-muted-foreground">
-            {t("dashboard:userId")} {user?.id}
-          </p>
+
+          <div className="space-y-3">
+            <div>
+              <p className="text-sm text-muted-foreground">
+                {t("dashboard:displayName")}
+              </p>
+              <p className="font-medium">
+                {user?.user_metadata?.display_name || t("dashboard:notProvided")}
+              </p>
+            </div>
+
+            <div>
+              <p className="text-sm text-muted-foreground">
+                {t("dashboard:email")}
+              </p>
+              <p className="font-medium">{user?.email}</p>
+            </div>
+
+            {user?.user_metadata?.phone && (
+              <div>
+                <p className="text-sm text-muted-foreground">
+                  {t("dashboard:phone")}
+                </p>
+                <p className="font-medium">{user.user_metadata.phone}</p>
+              </div>
+            )}
+
+            <div>
+              <p className="text-sm text-muted-foreground">
+                {t("dashboard:userId")}
+              </p>
+              <p className="font-mono text-sm">{user?.id}</p>
+            </div>
+          </div>
         </div>
 
         <div className="mt-6">
