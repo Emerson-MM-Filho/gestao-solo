@@ -1,11 +1,11 @@
 import { routeTree } from "@/routeTree.gen"
 import { createRouter, RouterProvider } from "@tanstack/react-router"
-import { ThemeProvider } from "./components/theme-provider"
 import { AuthProvider } from "./components/auth-provider"
+import { ThemeProvider } from "./components/theme-provider"
 
 const router = createRouter({
   routeTree,
-  basepath: "/gestao-solo",
+  basepath: import.meta.env.VITE_BASE_PATH || "/",
 });
 
 declare module "@tanstack/react-router" {
