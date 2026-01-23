@@ -9,7 +9,6 @@ import {
   FieldDescription,
   FieldGroup,
   FieldLabel,
-  FieldSeparator,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { getAuthErrorMessage } from "@/lib/auth-utils"
@@ -95,8 +94,8 @@ export function SigninForm({
               {loading ? "Signing in..." : "Sign In"}
             </Button>
           </Field>
-          <FieldSeparator>Or</FieldSeparator>
-          <Field className="grid gap-4 sm:grid-cols-2">
+          {/* <FieldSeparator>Or</FieldSeparator> */}
+          {/* <Field className="grid gap-4 sm:grid-cols-2">
             <Button variant="outline" type="button">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path
@@ -115,7 +114,7 @@ export function SigninForm({
               </svg>
               Continue with Google
             </Button>
-          </Field>
+          </Field> */}
         </FieldGroup>
       </form>
       <FieldDescription className="px-6 text-center">
