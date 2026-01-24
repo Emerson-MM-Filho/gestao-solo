@@ -49,18 +49,14 @@
       "namePlaceholder": "Digite o nome do item",
       "type": "Tipo",
       "typeOptions": {
-        "mercadoria": "Mercadoria (Dedução automática)",
-        "insumo": "Insumo (Controle manual)"
+        "merchandise": "Mercadoria (Dedução automática)",
+        "supply": "Insumo (Controle manual)"
       },
       "category": "Categoria",
       "categoryPlaceholder": "Selecione ou crie uma categoria",
       "categoryCreate": "Criar \"{{name}}\"",
       "price": "Preço",
       "pricePlaceholder": "0,00",
-      "promotionalPrice": "Preço Promocional",
-      "promotionalPricePlaceholder": "Opcional",
-      "promotionalStart": "Início da Promoção",
-      "promotionalEnd": "Fim da Promoção",
       "stockQuantity": "Quantidade em Estoque",
       "stockQuantityPlaceholder": "0",
       "criticalThreshold": "Limite Crítico",
@@ -73,8 +69,6 @@
       "priceRequired": "Preço é obrigatório",
       "pricePositive": "Preço deve ser maior que zero",
       "thresholdOrder": "Limite crítico deve ser menor ou igual ao limite de estoque baixo",
-      "promoDatesRequired": "Datas promocionais são obrigatórias ao definir preço promocional",
-      "promoEndAfterStart": "Data de término deve ser posterior à data de início",
       "stockNonNegative": "Quantidade em estoque não pode ser negativa"
     },
     "submit": {

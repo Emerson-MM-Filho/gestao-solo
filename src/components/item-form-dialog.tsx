@@ -66,12 +66,9 @@ export function ItemFormDialog({
   // Form state
   const [formData, setFormData] = useState<ItemFormData>({
     name: "",
-    type: "mercadoria",
+    type: "merchandise",
     category_id: null,
     price: 0,
-    promotional_price: null,
-    promotional_start: null,
-    promotional_end: null,
     stock_quantity: 0,
     critical_threshold: 2,
     low_threshold: 5,
@@ -95,9 +92,6 @@ export function ItemFormDialog({
           type: item.type,
           category_id: item.category_id,
           price: item.price,
-          promotional_price: item.promotional_price,
-          promotional_start: item.promotional_start,
-          promotional_end: item.promotional_end,
           stock_quantity: item.stock_quantity,
           critical_threshold: item.critical_threshold,
           low_threshold: item.low_threshold,
@@ -106,12 +100,9 @@ export function ItemFormDialog({
       } else {
         setFormData({
           name: "",
-          type: "mercadoria",
+          type: "merchandise",
           category_id: null,
           price: 0,
-          promotional_price: null,
-          promotional_start: null,
-          promotional_end: null,
           stock_quantity: 0,
           critical_threshold: 2,
           low_threshold: 5,
@@ -161,7 +152,7 @@ export function ItemFormDialog({
     e.preventDefault();
 
     // Validate form
-    const validationErrors = validateItemForm(formData, t);
+    const validationErrors = validateItemForm(formData);
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
@@ -249,11 +240,11 @@ export function ItemFormDialog({
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value={"mercadoria"}>
-                    {t("stock:itemForm.fields.typeOptions.mercadoria")}
+                  <SelectItem value={"merchandise"}>
+                    {t("stock:itemForm.fields.typeOptions.merchandise")}
                   </SelectItem>
-                  <SelectItem value={"insumo"}>
-                    {t("stock:itemForm.fields.typeOptions.insumo")}
+                  <SelectItem value={"supply"}>
+                    {t("stock:itemForm.fields.typeOptions.supply")}
                   </SelectItem>
                 </SelectContent>
               </Select>
@@ -376,78 +367,6 @@ export function ItemFormDialog({
                 )}
               </Field>
             </div>
-
-            {/* Promotional Price */}
-            <Field>
-              <FieldLabel htmlFor="promotional_price">
-                {t("stock:itemForm.fields.promotionalPrice")}
-              </FieldLabel>
-              <Input
-                id="promotional_price"
-                type="number"
-                step="0.01"
-                min="0"
-                value={formData.promotional_price || ""}
-                onChange={(e) =>
-                  handleFieldChange(
-                    "promotional_price",
-                    e.target.value ? parseFloat(e.target.value) : null,
-                  )
-                }
-                placeholder={t(
-                  "stock:itemForm.fields.promotionalPricePlaceholder",
-                )}
-              />
-            </Field>
-
-            {/* Promotional Dates */}
-            {formData.promotional_price !== null && (
-              <div className="grid grid-cols-2 gap-4">
-                <Field>
-                  <FieldLabel htmlFor="promotional_start">
-                    {t("stock:itemForm.fields.promotionalStart")}
-                  </FieldLabel>
-                  <Input
-                    id="promotional_start"
-                    type="date"
-                    value={formData.promotional_start || ""}
-                    onChange={(e) =>
-                      handleFieldChange(
-                        "promotional_start",
-                        e.target.value || null,
-                      )
-                    }
-                  />
-                  {errors.promotional_start && (
-                    <p className="text-sm text-destructive">
-                      {errors.promotional_start}
-                    </p>
-                  )}
-                </Field>
-
-                <Field>
-                  <FieldLabel htmlFor="promotional_end">
-                    {t("stock:itemForm.fields.promotionalEnd")}
-                  </FieldLabel>
-                  <Input
-                    id="promotional_end"
-                    type="date"
-                    value={formData.promotional_end || ""}
-                    onChange={(e) =>
-                      handleFieldChange(
-                        "promotional_end",
-                        e.target.value || null,
-                      )
-                    }
-                  />
-                  {errors.promotional_end && (
-                    <p className="text-sm text-destructive">
-                      {errors.promotional_end}
-                    </p>
-                  )}
-                </Field>
-              </div>
-            )}
 
             {/* Thresholds */}
             <div className="grid grid-cols-2 gap-4">

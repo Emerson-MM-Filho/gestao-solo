@@ -43,7 +43,7 @@ export function StockAdjustmentDialog({
   const { t } = useTranslation(["stock"]);
 
   const [formData, setFormData] = useState<StockAdjustmentFormData>({
-    type: "entrada",
+    type: "entry",
     quantity: 0,
     notes: null,
   });
@@ -55,7 +55,7 @@ export function StockAdjustmentDialog({
   useEffect(() => {
     if (open) {
       setFormData({
-        type: "entrada",
+        type: "entry",
         quantity: 0,
         notes: null,
       });
@@ -64,7 +64,7 @@ export function StockAdjustmentDialog({
   }, [open]);
 
   const projectedStock =
-    formData.type === "entrada"
+    formData.type === "entry"
       ? item.stock_quantity + formData.quantity
       : item.stock_quantity - formData.quantity;
 
@@ -93,7 +93,7 @@ export function StockAdjustmentDialog({
     }
 
     if (
-      formData.type === "saida_manual" &&
+      formData.type === "manual_exit" &&
       formData.quantity > item.stock_quantity
     ) {
       setError(t("stock:adjustment.validation.insufficientStock"));
@@ -134,7 +134,7 @@ export function StockAdjustmentDialog({
                 onValueChange={(value) =>
                   setFormData((prev) => ({
                     ...prev,
-                    type: value as "entrada" | "saida_manual",
+                    type: value as "entry" | "manual_exit",
                   }))
                 }
               >
@@ -142,10 +142,10 @@ export function StockAdjustmentDialog({
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value={"entrada"}>
+                  <SelectItem value={"entry"}>
                     {t("stock:adjustment.typeOptions.entry")}
                   </SelectItem>
-                  <SelectItem value={"saida_manual"}>
+                  <SelectItem value={"manual_exit"}>
                     {t("stock:adjustment.typeOptions.manual_exit")}
                   </SelectItem>
                 </SelectContent>

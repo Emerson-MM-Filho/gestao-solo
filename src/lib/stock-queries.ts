@@ -143,7 +143,7 @@ export async function recordStockMovement(
 
   const currentStock = item.stock_quantity;
   const quantityChange =
-    movementData.type === 'entrada'
+    movementData.type === 'entry'
       ? movementData.quantity
       : -movementData.quantity;
   const newBalance = currentStock + quantityChange;

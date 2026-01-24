@@ -49,18 +49,14 @@
       "namePlaceholder": "Enter item name",
       "type": "Type",
       "typeOptions": {
-        "mercadoria": "Merchandise (Auto stock deduction)",
-        "insumo": "Supply (Manual control)"
+        "merchandise": "Merchandise (Auto stock deduction)",
+        "supply": "Supply (Manual control)"
       },
       "category": "Category",
       "categoryPlaceholder": "Select or create category",
       "categoryCreate": "Create \"{{name}}\"",
       "price": "Price",
       "pricePlaceholder": "0.00",
-      "promotionalPrice": "Promotional Price",
-      "promotionalPricePlaceholder": "Optional",
-      "promotionalStart": "Promotion Start",
-      "promotionalEnd": "Promotion End",
       "stockQuantity": "Stock Quantity",
       "stockQuantityPlaceholder": "0",
       "criticalThreshold": "Critical Threshold",
@@ -73,8 +69,6 @@
       "priceRequired": "Price is required",
       "pricePositive": "Price must be greater than zero",
       "thresholdOrder": "Critical threshold must be less than or equal to low threshold",
-      "promoDatesRequired": "Promotional dates are required when setting promotional price",
-      "promoEndAfterStart": "End date must be after start date",
       "stockNonNegative": "Stock quantity cannot be negative"
     },
     "submit": {

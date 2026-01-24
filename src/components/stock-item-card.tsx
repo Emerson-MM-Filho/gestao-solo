@@ -39,13 +39,6 @@ export function StockItemCard({
 }: StockItemCardProps) {
   const { t } = useTranslation(["stock"]);
 
-  const isPromotional =
-    item.promotional_price &&
-    item.promotional_start &&
-    item.promotional_end &&
-    new Date() >= new Date(item.promotional_start) &&
-    new Date() <= new Date(item.promotional_end);
-
   if (viewMode === "list") {
     return (
       <Card className="hover:bg-muted/50 transition-colors">
@@ -83,29 +76,12 @@ export function StockItemCard({
               </div>
               <div className="text-right min-w-[80px]">
                 <p className="text-muted-foreground">{t("stock:itemForm.fields.price")}</p>
-                {isPromotional ? (
-                  <div className="space-y-1">
-                    <p className="text-xs line-through text-muted-foreground">
-                      {new Intl.NumberFormat("pt-BR", {
-                        style: "currency",
-                        currency: "BRL",
-                      }).format(item.price)}
-                    </p>
-                    <p className="font-semibold text-green-600">
-                      {new Intl.NumberFormat("pt-BR", {
-                        style: "currency",
-                        currency: "BRL",
-                      }).format(item.effectivePrice)}
-                    </p>
-                  </div>
-                ) : (
-                  <p className="font-semibold">
-                    {new Intl.NumberFormat("pt-BR", {
-                      style: "currency",
-                      currency: "BRL",
-                    }).format(item.effectivePrice)}
-                  </p>
-                )}
+                <p className="font-semibold">
+                  {new Intl.NumberFormat("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  }).format(item.price)}
+                </p>
               </div>
             </div>
 
@@ -213,29 +189,12 @@ export function StockItemCard({
           <span className="text-sm text-muted-foreground">
             {t("stock:itemForm.fields.price")}
           </span>
-          {isPromotional ? (
-            <div className="text-right">
-              <p className="text-xs line-through text-muted-foreground">
-                {new Intl.NumberFormat("pt-BR", {
-                  style: "currency",
-                  currency: "BRL",
-                }).format(item.price)}
-              </p>
-              <p className="font-semibold text-green-600">
-                {new Intl.NumberFormat("pt-BR", {
-                  style: "currency",
-                  currency: "BRL",
-                }).format(item.effectivePrice)}
-              </p>
-            </div>
-          ) : (
-            <span className="font-semibold">
-              {new Intl.NumberFormat("pt-BR", {
-                style: "currency",
-                currency: "BRL",
-              }).format(item.effectivePrice)}
-            </span>
-          )}
+          <span className="font-semibold">
+            {new Intl.NumberFormat("pt-BR", {
+              style: "currency",
+              currency: "BRL",
+            }).format(item.price)}
+          </span>
         </div>
 
         {/* Type Badge */}

@@ -1,17 +1,17 @@
 // Stock Management Type Definitions
 
 export const ItemTypeOptions = {
-  MERCADORIA: "mercadoria",
-  INSUMO: "insumo",
+  MERCHANDISE: "merchandise",
+  SUPPLY: "supply",
 } as const;
 
 export type ItemType = (typeof ItemTypeOptions)[keyof typeof ItemTypeOptions];
 
 export const StockMovementOptions = {
-  ENTRADA: "entrada",
-  SAIDA_MANUAL: "saida_manual",
-  VENDA: "venda",
-  ESTORNO: "estorno",
+  ENTRY: "entry",
+  MANUAL_EXIT: "manual_exit",
+  SALE: "sale",
+  REVERSAL: "reversal",
 } as const;
 
 export type StockMovementType =
@@ -42,9 +42,6 @@ export interface Item {
   name: string;
   type: ItemType;
   price: number;
-  promotional_price: number | null;
-  promotional_start: string | null;
-  promotional_end: string | null;
   stock_quantity: number;
   critical_threshold: number;
   low_threshold: number;
@@ -58,7 +55,6 @@ export interface Item {
 
 export interface ItemWithStatus extends Item {
   status: StockStatusType;
-  effectivePrice: number;
 }
 
 export interface StockMovement {
@@ -85,9 +81,6 @@ export interface ItemFormData {
   type: ItemType;
   category_id: string | null;
   price: number;
-  promotional_price: number | null;
-  promotional_start: string | null;
-  promotional_end: string | null;
   stock_quantity: number;
   critical_threshold: number;
   low_threshold: number;

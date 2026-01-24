@@ -113,12 +113,12 @@ export function StockHistoryDialog({
                         </TableCell>
                         <TableCell
                           className={`text-right font-medium ${
-                            movement.type === "entrada"
+                            movement.type === "entry"
                               ? "text-green-600"
                               : "text-red-600"
                           }`}
                         >
-                          {movement.type === "entrada" ? "+" : "-"}
+                          {movement.type === "entry" ? "+" : "-"}
                           {movement.quantity}
                         </TableCell>
                         <TableCell className="text-right font-semibold">
@@ -150,12 +150,12 @@ export function StockHistoryDialog({
                         <div className="flex items-center justify-between">
                           <span
                             className={`text-lg font-bold ${
-                              movement.type === "entrada"
+                              movement.type === "entry"
                                 ? "text-green-600"
                                 : "text-red-600"
                             }`}
                           >
-                            {movement.type === "entrada" ? "+" : "-"}
+                            {movement.type === "entry" ? "+" : "-"}
                             {movement.quantity}
                           </span>
                           <div className="text-right">

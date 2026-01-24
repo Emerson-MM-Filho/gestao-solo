@@ -350,7 +350,7 @@ interface Item {
   name: string;
   price: number;
   category: string;
-  type: 'mercadoria' | 'insumo';
+  type: 'merchandise' | 'supply';
   stock_quantity: number;
   is_favorite: boolean;
   usage_count: number;
@@ -674,7 +674,7 @@ CREATE POLICY "Users can manage own categories"
 -- -----------------------------------------------------------------------------
 -- ITEMS (Mercadorias e Insumos) [RF04, RF07, RF10, RF11]
 -- -----------------------------------------------------------------------------
-CREATE TYPE item_type AS ENUM ('mercadoria', 'insumo');
+CREATE TYPE item_type AS ENUM ('merchandise', 'supply');
 
 CREATE TABLE public.items (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -684,9 +684,6 @@ CREATE TABLE public.items (
   name VARCHAR(100) NOT NULL,
   type item_type NOT NULL,
   price DECIMAL(10, 2) NOT NULL CHECK (price >= 0),
-  promotional_price DECIMAL(10, 2) CHECK (promotional_price >= 0),
-  promotional_start TIMESTAMPTZ,
-  promotional_end TIMESTAMPTZ,
 
   stock_quantity DECIMAL(10, 3) NOT NULL DEFAULT 0,  -- Supports fractional (kg, L)
   critical_threshold DECIMAL(10, 3) NOT NULL DEFAULT 2,
@@ -699,17 +696,13 @@ CREATE TABLE public.items (
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW(),
 
-  CONSTRAINT valid_thresholds CHECK (critical_threshold <= low_threshold),
-  CONSTRAINT valid_promotion CHECK (
-    (promotional_price IS NULL) OR
-    (promotional_start IS NOT NULL AND promotional_end IS NOT NULL AND promotional_start < promotional_end)
-  )
+  CONSTRAINT valid_thresholds CHECK (critical_threshold <= low_threshold)
 );
 
 CREATE INDEX idx_items_user_active ON public.items(user_id, is_active);
 CREATE INDEX idx_items_category ON public.items(category_id);
 CREATE INDEX idx_items_stock_alert ON public.items(user_id, stock_quantity, low_threshold)
-  WHERE is_active = TRUE AND type = 'mercadoria';
+  WHERE is_active = TRUE AND type = 'merchandise';
 
 ALTER TABLE public.items ENABLE ROW LEVEL SECURITY;
 
@@ -764,10 +757,10 @@ CREATE TRIGGER items_price_change
 -- STOCK MOVEMENTS [RF05, RF06]
 -- -----------------------------------------------------------------------------
 CREATE TYPE movement_type AS ENUM (
-  'entrada',      -- Manual purchase entry
-  'saida_manual', -- Manual loss/usage
-  'venda',        -- Automatic from comanda close
-  'estorno'       -- Stock return from cancelled comanda
+  'entry',      -- Manual purchase entry
+  'manual_exit', -- Manual loss/usage
+  'sale',        -- Automatic from comanda close
+  'reversal'       -- Stock return from cancelled comanda
 );
 
 CREATE TABLE public.stock_movements (
@@ -776,7 +769,7 @@ CREATE TABLE public.stock_movements (
   comanda_id UUID REFERENCES public.comandas(id) ON DELETE SET NULL,
 
   type movement_type NOT NULL,
-  quantity DECIMAL(10, 3) NOT NULL,  -- Positive for entrada/estorno, negative for saida
+  quantity DECIMAL(10, 3) NOT NULL,  -- Positive for entry/reversal, negative for exit
   balance_after DECIMAL(10, 3) NOT NULL,  -- Stock balance after movement
 
   notes TEXT,
@@ -982,13 +975,13 @@ BEGIN
     );
   END LOOP;
 
-  -- Deduct stock for mercadorias
+  -- Deduct stock for merchandise items
   FOR v_item IN
     SELECT ci.item_id, ci.quantity, i.type, i.stock_quantity
     FROM public.comanda_items ci
     JOIN public.items i ON ci.item_id = i.id
     WHERE ci.comanda_id = p_comanda_id
-      AND i.type = 'mercadoria'
+      AND i.type = 'merchandise'
   LOOP
     -- Update stock
     UPDATE public.items
@@ -1001,7 +994,7 @@ BEGIN
     VALUES (
       v_item.item_id,
       p_comanda_id,
-      'venda',
+      'sale',
       -v_item.quantity,
       v_item.stock_quantity - v_item.quantity
     );
@@ -1045,7 +1038,7 @@ BEGIN
       FROM public.comanda_items ci
       JOIN public.items i ON ci.item_id = i.id
       WHERE ci.comanda_id = p_comanda_id
-        AND i.type = 'mercadoria'
+        AND i.type = 'merchandise'
     LOOP
       UPDATE public.items
       SET stock_quantity = stock_quantity + v_item.quantity
@@ -1055,7 +1048,7 @@ BEGIN
       VALUES (
         v_item.item_id,
         p_comanda_id,
-        'estorno',
+        'reversal',
         v_item.quantity,
         v_item.stock_quantity + v_item.quantity,
         'Comanda cancelled with stock return'
@@ -1084,7 +1077,6 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
 |--------|-------|------------|--------|
 | Item | price | >= 0 | Database CHECK |
 | Item | thresholds | critical <= low | Database CHECK |
-| Item | promotional dates | start < end when promo active | Database CHECK |
 | Comanda Item | quantity | > 0 | Database CHECK |
 | Payment | amount | > 0 | Database CHECK |
 | Comanda Close | payment sum | = total_amount | Function logic |
@@ -1316,7 +1308,7 @@ const { data, error } = await supabase
   .from('items')
   .insert({
     name: 'Café Expresso',
-    type: 'mercadoria',
+    type: 'merchandise',
     price: 5.00,
     category_id: categoryId,
     stock_quantity: 100,
@@ -1391,7 +1383,7 @@ const { data, error } = await supabase
 const { data, error } = await supabase
   .from('items')
   .select('id, name, usage_count')
-  .eq('type', 'mercadoria')
+  .eq('type', 'merchandise')
   .eq('is_active', true)
   .order('usage_count', { ascending: false })
   .limit(10);
@@ -1736,14 +1728,14 @@ useEffect(() => {
 | **RF01** Gestao de Comandas | `comandas` table, `comanda-form.tsx`, `comandas/` routes |
 | **RF02** Lancamento de Itens | `comanda_items` table, `item-selector.tsx`, `comanda-form.tsx` |
 | **RF03** Fechamento e Pagamento | `payments` table, `payment-form.tsx`, `close_comanda()` function |
-| **RF04** Classificacao de Itens | `items.type` enum (mercadoria/insumo), `item-form.tsx` |
+| **RF04** Classificacao de Itens | `items.type` enum (merchandise/supply), `item-form.tsx` |
 | **RF05** Baixa Automatica | `close_comanda()` function, `stock_movements` table |
 | **RF06** Ajuste Manual de Estoque | `stock_movements` table, `stock-adjustment.tsx` |
 | **RF07** Monitoramento Visual | `v_low_stock_items` view, `stock-badge.tsx`, threshold fields |
 | **RF08** Geracao de Relatorios | `v_daily_sales` view, `relatorios/` routes, `export-buttons.tsx` |
 | **RF09** Alertas de Reposicao | Real-time subscription, `alert-banner.tsx`, push notifications |
 | **RF10** Busca e Filtro de Itens | `categories` table, `item-selector.tsx` (search, filter, sort) |
-| **RF11** Gestao de Precos | `price_history` table, `promotional_*` fields, price trigger |
+| **RF11** Gestao de Precos | `price_history` table, price trigger |
 | **RF12** Cancelamento de Comandas | `cancel_comanda()` function, `comanda_actions.tsx` |
 | **RF13** Pagamentos Multiplos | `payments` table (1:N), `payment-form.tsx` |
 | **RNF01** Usabilidade Mobile | Mobile-first CSS, 48px touch targets, touch counts |

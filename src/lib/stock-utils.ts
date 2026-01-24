@@ -27,29 +27,6 @@ export function calculateStockStatus(
 }
 
 /**
- * Calculate effective price (promotional or regular based on dates)
- */
-export function calculateEffectivePrice(item: Item): number {
-  if (
-    !item.promotional_price ||
-    !item.promotional_start ||
-    !item.promotional_end
-  ) {
-    return item.price;
-  }
-
-  const now = new Date();
-  const start = new Date(item.promotional_start);
-  const end = new Date(item.promotional_end);
-
-  if (now >= start && now <= end) {
-    return item.promotional_price;
-  }
-
-  return item.price;
-}
-
-/**
  * Add computed properties to item
  */
 export function enrichItem(item: Item): ItemWithStatus {
@@ -60,7 +37,6 @@ export function enrichItem(item: Item): ItemWithStatus {
       item.critical_threshold,
       item.low_threshold,
     ),
-    effectivePrice: calculateEffectivePrice(item),
   };
 }
 
@@ -94,22 +70,6 @@ export function validateItemForm(
     );
   }
 
-  if (data.promotional_price !== undefined && data.promotional_price !== null) {
-    if (!data.promotional_start || !data.promotional_end) {
-      errors.promotional_start = i18n.t(
-        "stock:itemForm.validation.promoDatesRequired",
-      );
-    } else {
-      const start = new Date(data.promotional_start);
-      const end = new Date(data.promotional_end);
-      if (start >= end) {
-        errors.promotional_end = i18n.t(
-          "stock:itemForm.validation.promoEndAfterStart",
-        );
-      }
-    }
-  }
-
   if (data.stock_quantity !== undefined && data.stock_quantity < 0) {
     errors.stock_quantity = i18n.t(
       "stock:itemForm.validation.stockNonNegative",
@@ -124,10 +84,10 @@ export function validateItemForm(
  */
 export function formatStockMovementType(type: StockMovementType): string {
   const typeMap: Record<StockMovementType, string> = {
-    entrada: i18n.t("stock:history.types.entry"),
-    saida_manual: i18n.t("stock:history.types.manual_exit"),
-    venda: i18n.t("stock:history.types.sale"),
-    estorno: i18n.t("stock:history.types.reversal"),
+    entry: i18n.t("stock:history.types.entry"),
+    manual_exit: i18n.t("stock:history.types.manual_exit"),
+    sale: i18n.t("stock:history.types.sale"),
+    reversal: i18n.t("stock:history.types.reversal"),
   };
 
   return typeMap[type] || type;
