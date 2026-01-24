@@ -36,7 +36,6 @@
   },
   "userMenu": {
     "account": "Account",
-    "notifications": "Notifications",
     "logOut": "Log Out"
   }
 }

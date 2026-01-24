@@ -1,14 +1,15 @@
 "use client";
 
 import {
-  IconBell,
   IconChevronsRight,
   IconLogout,
   IconUser,
 } from "@tabler/icons-react"
 import { useNavigate } from "@tanstack/react-router"
+import { useState } from "react"
 import { useTranslation } from "react-i18next"
 
+import { AccountDialog } from "@/components/account-dialog"
 import { useAuth } from "@/components/auth-provider"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
@@ -39,7 +40,8 @@ export function NavUser({
   const { isMobile } = useSidebar();
   const { signOut } = useAuth();
   const navigate = useNavigate();
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation(["common", "account"]);
+  const [accountDialogOpen, setAccountDialogOpen] = useState(false);
 
   const handleSignOut = async () => {
     try {
@@ -102,13 +104,9 @@ export function NavUser({
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setAccountDialogOpen(true)}>
                 <IconUser />
                 {t("common:userMenu.account")}
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <IconBell />
-                {t("common:userMenu.notifications")}
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
@@ -119,6 +117,10 @@ export function NavUser({
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>
+      <AccountDialog
+        open={accountDialogOpen}
+        onOpenChange={setAccountDialogOpen}
+      />
     </SidebarMenu>
   );
 }

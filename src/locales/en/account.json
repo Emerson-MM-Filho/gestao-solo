@@ -1,0 +1,18 @@
+{
+  "dialog": {
+    "title": "Account Information",
+    "description": "View your account details",
+    "fields": {
+      "displayName": "Display Name",
+      "email": "Email",
+      "phone": "Phone",
+      "phoneNotProvided": "Not provided",
+      "accountCreated": "Account Created",
+      "lastLogin": "Last Login"
+    },
+    "actions": {
+      "logout": "Log Out",
+      "loggingOut": "Logging out..."
+    }
+  }
+}

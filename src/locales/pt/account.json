@@ -1,0 +1,18 @@
+{
+  "dialog": {
+    "title": "Informações da Conta",
+    "description": "Visualize os detalhes da sua conta",
+    "fields": {
+      "displayName": "Nome de Exibição",
+      "email": "E-mail",
+      "phone": "Telefone",
+      "phoneNotProvided": "Não fornecido",
+      "accountCreated": "Conta Criada",
+      "lastLogin": "Último Acesso"
+    },
+    "actions": {
+      "logout": "Sair da Conta",
+      "loggingOut": "Saindo..."
+    }
+  }
+}
