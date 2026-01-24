@@ -4,12 +4,14 @@ import enCommon from "@/locales/en/common.json";
 import enErrors from "@/locales/en/errors.json";
 import enLanding from "@/locales/en/landing.json";
 import enSettings from "@/locales/en/settings.json";
+import enStock from "@/locales/en/stock.json";
 import ptAccount from "@/locales/pt/account.json";
 import ptAuth from "@/locales/pt/auth.json";
 import ptCommon from "@/locales/pt/common.json";
 import ptErrors from "@/locales/pt/errors.json";
 import ptLanding from "@/locales/pt/landing.json";
 import ptSettings from "@/locales/pt/settings.json";
+import ptStock from "@/locales/pt/stock.json";
 
 const resources = {
   en: {
@@ -19,6 +21,7 @@ const resources = {
     errors: enErrors,
     account: enAccount,
     settings: enSettings,
+    stock: enStock,
   },
   pt: {
     common: ptCommon,
@@ -27,6 +30,7 @@ const resources = {
     errors: ptErrors,
     account: ptAccount,
     settings: ptSettings,
+    stock: ptStock,
   },
 } as const;
 

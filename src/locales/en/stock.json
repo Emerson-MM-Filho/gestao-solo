@@ -1,0 +1,153 @@
+{
+  "page": {
+    "title": "Stock Management",
+    "description": "Manage inventory, track stock levels, and receive low-stock alerts"
+  },
+  "actions": {
+    "addItem": "Add Item",
+    "editItem": "Edit Item",
+    "deleteItem": "Delete Item",
+    "adjustStock": "Adjust Stock",
+    "viewHistory": "View History",
+    "refresh": "Refresh"
+  },
+  "filters": {
+    "search": "Search items...",
+    "category": "All Categories",
+    "sortBy": "Sort by",
+    "sort": {
+      "alphabetical": "Alphabetical",
+      "favorites": "Favorites",
+      "mostUsed": "Most Used"
+    },
+    "viewMode": "View",
+    "view": {
+      "grid": "Grid",
+      "list": "List"
+    }
+  },
+  "status": {
+    "critical": "Critical",
+    "low": "Low Stock",
+    "ok": "Available"
+  },
+  "alerts": {
+    "title": "Stock Alerts",
+    "critical": "Critical",
+    "low": "Low Stock",
+    "none": "All stock levels are healthy",
+    "criticalCount": "{{count}} critical item",
+    "criticalCount_other": "{{count}} critical items",
+    "lowCount": "{{count}} low stock item",
+    "lowCount_other": "{{count}} low stock items"
+  },
+  "itemForm": {
+    "createTitle": "Add New Item",
+    "editTitle": "Edit Item",
+    "fields": {
+      "name": "Item Name",
+      "namePlaceholder": "Enter item name",
+      "type": "Type",
+      "typeOptions": {
+        "mercadoria": "Merchandise (Auto stock deduction)",
+        "insumo": "Supply (Manual control)"
+      },
+      "category": "Category",
+      "categoryPlaceholder": "Select or create category",
+      "categoryCreate": "Create \"{{name}}\"",
+      "price": "Price",
+      "pricePlaceholder": "0.00",
+      "promotionalPrice": "Promotional Price",
+      "promotionalPricePlaceholder": "Optional",
+      "promotionalStart": "Promotion Start",
+      "promotionalEnd": "Promotion End",
+      "stockQuantity": "Stock Quantity",
+      "stockQuantityPlaceholder": "0",
+      "criticalThreshold": "Critical Threshold",
+      "lowThreshold": "Low Stock Threshold",
+      "isFavorite": "Mark as favorite"
+    },
+    "validation": {
+      "nameRequired": "Item name is required",
+      "nameMaxLength": "Name cannot exceed 100 characters",
+      "priceRequired": "Price is required",
+      "pricePositive": "Price must be greater than zero",
+      "thresholdOrder": "Critical threshold must be less than or equal to low threshold",
+      "promoDatesRequired": "Promotional dates are required when setting promotional price",
+      "promoEndAfterStart": "End date must be after start date",
+      "stockNonNegative": "Stock quantity cannot be negative"
+    },
+    "submit": {
+      "create": "Add Item",
+      "edit": "Save Changes",
+      "creating": "Adding...",
+      "editing": "Saving..."
+    },
+    "success": {
+      "created": "Item created successfully",
+      "updated": "Item updated successfully"
+    },
+    "error": {
+      "create": "Failed to create item",
+      "update": "Failed to update item"
+    }
+  },
+  "adjustment": {
+    "title": "Adjust Stock",
+    "type": "Adjustment Type",
+    "typeOptions": {
+      "entry": "Entry (Purchase)",
+      "manual_exit": "Manual Exit (Loss/Usage)"
+    },
+    "quantity": "Quantity",
+    "quantityPlaceholder": "0",
+    "notes": "Notes",
+    "notesPlaceholder": "Optional notes...",
+    "currentStock": "Current Stock",
+    "newStock": "New Stock",
+    "validation": {
+      "quantityRequired": "Quantity is required",
+      "quantityPositive": "Quantity must be greater than zero",
+      "insufficientStock": "Insufficient stock for this exit"
+    },
+    "submit": "Record Adjustment",
+    "submitting": "Recording...",
+    "success": "Stock adjusted successfully",
+    "error": "Failed to adjust stock"
+  },
+  "history": {
+    "title": "Stock Movement History",
+    "columns": {
+      "date": "Date",
+      "type": "Type",
+      "quantity": "Quantity",
+      "balance": "Balance After",
+      "notes": "Notes"
+    },
+    "types": {
+      "entry": "Entry",
+      "manual_exit": "Manual Exit",
+      "sale": "Sale",
+      "reversal": "Reversal"
+    },
+    "empty": "No movements recorded yet",
+    "loading": "Loading history..."
+  },
+  "delete": {
+    "title": "Delete Item",
+    "message": "Are you sure you want to delete \"{{name}}\"? This action cannot be undone.",
+    "confirm": "Delete",
+    "cancel": "Cancel",
+    "deleting": "Deleting...",
+    "success": "Item deleted successfully",
+    "error": "Failed to delete item"
+  },
+  "empty": {
+    "title": "No items yet",
+    "description": "Add your first item to start managing stock",
+    "noResults": "No items match your search",
+    "noCategory": "No category"
+  },
+  "loading": "Loading items...",
+  "error": "Failed to load items"
+}

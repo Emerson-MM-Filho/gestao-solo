@@ -1,0 +1,153 @@
+{
+  "page": {
+    "title": "Gestão de Estoque",
+    "description": "Gerencie inventário, acompanhe níveis de estoque e receba alertas de estoque baixo"
+  },
+  "actions": {
+    "addItem": "Adicionar Item",
+    "editItem": "Editar Item",
+    "deleteItem": "Excluir Item",
+    "adjustStock": "Ajustar Estoque",
+    "viewHistory": "Ver Histórico",
+    "refresh": "Atualizar"
+  },
+  "filters": {
+    "search": "Buscar itens...",
+    "category": "Todas as Categorias",
+    "sortBy": "Ordenar por",
+    "sort": {
+      "alphabetical": "Alfabética",
+      "favorites": "Favoritos",
+      "mostUsed": "Mais Usados"
+    },
+    "viewMode": "Visualização",
+    "view": {
+      "grid": "Grade",
+      "list": "Lista"
+    }
+  },
+  "status": {
+    "critical": "Crítico",
+    "low": "Estoque Baixo",
+    "ok": "Disponível"
+  },
+  "alerts": {
+    "title": "Alertas de Estoque",
+    "critical": "Crítico",
+    "low": "Estoque Baixo",
+    "none": "Todos os níveis de estoque estão saudáveis",
+    "criticalCount": "{{count}} item crítico",
+    "criticalCount_other": "{{count}} itens críticos",
+    "lowCount": "{{count}} item com estoque baixo",
+    "lowCount_other": "{{count}} itens com estoque baixo"
+  },
+  "itemForm": {
+    "createTitle": "Adicionar Novo Item",
+    "editTitle": "Editar Item",
+    "fields": {
+      "name": "Nome do Item",
+      "namePlaceholder": "Digite o nome do item",
+      "type": "Tipo",
+      "typeOptions": {
+        "mercadoria": "Mercadoria (Dedução automática)",
+        "insumo": "Insumo (Controle manual)"
+      },
+      "category": "Categoria",
+      "categoryPlaceholder": "Selecione ou crie uma categoria",
+      "categoryCreate": "Criar \"{{name}}\"",
+      "price": "Preço",
+      "pricePlaceholder": "0,00",
+      "promotionalPrice": "Preço Promocional",
+      "promotionalPricePlaceholder": "Opcional",
+      "promotionalStart": "Início da Promoção",
+      "promotionalEnd": "Fim da Promoção",
+      "stockQuantity": "Quantidade em Estoque",
+      "stockQuantityPlaceholder": "0",
+      "criticalThreshold": "Limite Crítico",
+      "lowThreshold": "Limite de Estoque Baixo",
+      "isFavorite": "Marcar como favorito"
+    },
+    "validation": {
+      "nameRequired": "Nome do item é obrigatório",
+      "nameMaxLength": "Nome não pode exceder 100 caracteres",
+      "priceRequired": "Preço é obrigatório",
+      "pricePositive": "Preço deve ser maior que zero",
+      "thresholdOrder": "Limite crítico deve ser menor ou igual ao limite de estoque baixo",
+      "promoDatesRequired": "Datas promocionais são obrigatórias ao definir preço promocional",
+      "promoEndAfterStart": "Data de término deve ser posterior à data de início",
+      "stockNonNegative": "Quantidade em estoque não pode ser negativa"
+    },
+    "submit": {
+      "create": "Adicionar Item",
+      "edit": "Salvar Alterações",
+      "creating": "Adicionando...",
+      "editing": "Salvando..."
+    },
+    "success": {
+      "created": "Item criado com sucesso",
+      "updated": "Item atualizado com sucesso"
+    },
+    "error": {
+      "create": "Falha ao criar item",
+      "update": "Falha ao atualizar item"
+    }
+  },
+  "adjustment": {
+    "title": "Ajustar Estoque",
+    "type": "Tipo de Ajuste",
+    "typeOptions": {
+      "entry": "Entrada (Compra)",
+      "manual_exit": "Saída Manual (Perda/Uso)"
+    },
+    "quantity": "Quantidade",
+    "quantityPlaceholder": "0",
+    "notes": "Observações",
+    "notesPlaceholder": "Observações opcionais...",
+    "currentStock": "Estoque Atual",
+    "newStock": "Novo Estoque",
+    "validation": {
+      "quantityRequired": "Quantidade é obrigatória",
+      "quantityPositive": "Quantidade deve ser maior que zero",
+      "insufficientStock": "Estoque insuficiente para esta saída"
+    },
+    "submit": "Registrar Ajuste",
+    "submitting": "Registrando...",
+    "success": "Estoque ajustado com sucesso",
+    "error": "Falha ao ajustar estoque"
+  },
+  "history": {
+    "title": "Histórico de Movimentação de Estoque",
+    "columns": {
+      "date": "Data",
+      "type": "Tipo",
+      "quantity": "Quantidade",
+      "balance": "Saldo Após",
+      "notes": "Observações"
+    },
+    "types": {
+      "entry": "Entrada",
+      "manual_exit": "Saída Manual",
+      "sale": "Venda",
+      "reversal": "Estorno"
+    },
+    "empty": "Nenhuma movimentação registrada ainda",
+    "loading": "Carregando histórico..."
+  },
+  "delete": {
+    "title": "Excluir Item",
+    "message": "Tem certeza que deseja excluir \"{{name}}\"? Esta ação não pode ser desfeita.",
+    "confirm": "Excluir",
+    "cancel": "Cancelar",
+    "deleting": "Excluindo...",
+    "success": "Item excluído com sucesso",
+    "error": "Falha ao excluir item"
+  },
+  "empty": {
+    "title": "Nenhum item ainda",
+    "description": "Adicione seu primeiro item para começar a gerenciar o estoque",
+    "noResults": "Nenhum item corresponde à sua busca",
+    "noCategory": "Sem categoria"
+  },
+  "loading": "Carregando itens...",
+  "error": "Falha ao carregar itens"
+}
