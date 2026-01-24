@@ -2,6 +2,8 @@
   "dialog": {
     "title": "Account Information",
     "description": "View your account details",
+    "editTitle": "Edit Profile",
+    "editDescription": "Update your account information",
     "fields": {
       "displayName": "Display Name",
       "email": "Email",
@@ -11,8 +13,14 @@
       "lastLogin": "Last Login"
     },
     "actions": {
-      "logout": "Log Out",
-      "loggingOut": "Logging out..."
+      "edit": "Edit Profile",
+      "save": "Save",
+      "saving": "Saving...",
+      "cancel": "Cancel"
+    },
+    "messages": {
+      "updateSuccess": "Profile updated successfully",
+      "updateError": "Failed to update profile"
     }
   }
 }

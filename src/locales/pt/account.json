@@ -2,6 +2,8 @@
   "dialog": {
     "title": "Informações da Conta",
     "description": "Visualize os detalhes da sua conta",
+    "editTitle": "Editar Perfil",
+    "editDescription": "Atualize as informações da sua conta",
     "fields": {
       "displayName": "Nome de Exibição",
       "email": "E-mail",
@@ -11,8 +13,14 @@
       "lastLogin": "Último Acesso"
     },
     "actions": {
-      "logout": "Sair da Conta",
-      "loggingOut": "Saindo..."
+      "edit": "Editar Perfil",
+      "save": "Salvar",
+      "saving": "Salvando...",
+      "cancel": "Cancelar"
+    },
+    "messages": {
+      "updateSuccess": "Perfil atualizado com sucesso",
+      "updateError": "Falha ao atualizar perfil"
     }
   }
 }

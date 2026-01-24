@@ -61,6 +61,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (error) throw error;
   };
 
+  const updateProfile = async (displayName: string, phone: string) => {
+    const { error } = await supabase.auth.updateUser({
+      data: {
+        display_name: displayName,
+        phone: phone || null,
+      },
+    });
+    if (error) throw error;
+  };
+
   const value: AuthContextValue = {
     user,
     session,
@@ -68,6 +78,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     signIn,
     signUp,
     signOut,
+    updateProfile,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
