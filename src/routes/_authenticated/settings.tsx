@@ -51,7 +51,7 @@ function SettingsComponent() {
                 </p>
               </div>
               <div className="flex-shrink-0">
-                <ModeToggle showLabel className="min-w-[140px]" />
+                <ModeToggle showLabel/>
               </div>
             </div>
           </div>
