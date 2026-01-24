@@ -9,13 +9,19 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export function LanguageToggle() {
-  const { i18n } = useTranslation();
+export function LanguageToggle({
+  showLabel = false
+}: {
+  showLabel?: boolean
+}) {
+  const { i18n, t } = useTranslation(["settings"]);
 
   const languages = [
-    { code: "en", label: "English" },
-    { code: "pt", label: "Português" },
+    { code: "en", label: t("settings:settings.language.options.en") },
+    { code: "pt", label: t("settings:settings.language.options.pt") },
   ];
+
+  const currentLanguage = languages.find(lang => lang.code === i18n.language);
 
   const changeLanguage = (lang: string) => {
     i18n.changeLanguage(lang);
@@ -24,8 +30,11 @@ export function LanguageToggle() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
+        <Button variant="outline" size={showLabel ? "default" : "icon"}>
           <IconLanguage className="size-[1.2rem]" />
+          {showLabel && currentLanguage && (
+            <span className="ml-2">{currentLanguage.label}</span>
+          )}
           <span className="sr-only">Toggle language</span>
         </Button>
       </DropdownMenuTrigger>

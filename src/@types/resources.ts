@@ -3,11 +3,13 @@ import enAuth from "@/locales/en/auth.json";
 import enCommon from "@/locales/en/common.json";
 import enErrors from "@/locales/en/errors.json";
 import enLanding from "@/locales/en/landing.json";
+import enSettings from "@/locales/en/settings.json";
 import ptAccount from "@/locales/pt/account.json";
 import ptAuth from "@/locales/pt/auth.json";
 import ptCommon from "@/locales/pt/common.json";
 import ptErrors from "@/locales/pt/errors.json";
 import ptLanding from "@/locales/pt/landing.json";
+import ptSettings from "@/locales/pt/settings.json";
 
 const resources = {
   en: {
@@ -16,6 +18,7 @@ const resources = {
     auth: enAuth,
     errors: enErrors,
     account: enAccount,
+    settings: enSettings,
   },
   pt: {
     common: ptCommon,
@@ -23,6 +26,7 @@ const resources = {
     auth: ptAuth,
     errors: ptErrors,
     account: ptAccount,
+    settings: ptSettings,
   },
 } as const;
 

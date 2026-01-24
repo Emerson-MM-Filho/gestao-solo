@@ -1,0 +1,35 @@
+{
+  "page": {
+    "title": "Configurações",
+    "description": "Gerencie suas preferências e configurações do aplicativo"
+  },
+  "sections": {
+    "appearance": {
+      "title": "Aparência",
+      "description": "Personalize como o Gestão Solo aparece"
+    },
+    "regional": {
+      "title": "Idioma e Regional",
+      "description": "Defina seu idioma e preferências regionais"
+    }
+  },
+  "settings": {
+    "theme": {
+      "label": "Tema",
+      "description": "Escolha seu esquema de cores preferido",
+      "options": {
+        "light": "Claro",
+        "dark": "Escuro",
+        "system": "Sistema"
+      }
+    },
+    "language": {
+      "label": "Idioma",
+      "description": "Selecione seu idioma preferido",
+      "options": {
+        "en": "English",
+        "pt": "Português"
+      }
+    }
+  }
+}

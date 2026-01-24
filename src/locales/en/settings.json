@@ -1,0 +1,35 @@
+{
+  "page": {
+    "title": "Settings",
+    "description": "Manage your preferences and application settings"
+  },
+  "sections": {
+    "appearance": {
+      "title": "Appearance",
+      "description": "Customize how Gestão Solo looks"
+    },
+    "regional": {
+      "title": "Language & Regional",
+      "description": "Set your language and regional preferences"
+    }
+  },
+  "settings": {
+    "theme": {
+      "label": "Theme",
+      "description": "Choose your preferred color scheme",
+      "options": {
+        "light": "Light",
+        "dark": "Dark",
+        "system": "System"
+      }
+    },
+    "language": {
+      "label": "Language",
+      "description": "Select your preferred language",
+      "options": {
+        "en": "English",
+        "pt": "Português"
+      }
+    }
+  }
+}
