@@ -8,9 +8,9 @@
       "title": "Appearance",
       "description": "Customize how Gestão Solo looks"
     },
-    "regional": {
-      "title": "Language & Regional",
-      "description": "Set your language and regional preferences"
+    "language": {
+      "title": "Language & Region",
+      "description": "Set your language and region preferences"
     }
   },
   "settings": {

@@ -8,9 +8,9 @@
       "title": "Aparência",
       "description": "Personalize como o Gestão Solo aparece"
     },
-    "regional": {
-      "title": "Idioma e Regional",
-      "description": "Defina seu idioma e preferências regionais"
+    "language": {
+      "title": "Idioma e Região",
+      "description": "Defina seu idioma e preferências de região"
     }
   },
   "settings": {

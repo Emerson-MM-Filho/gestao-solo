@@ -58,12 +58,12 @@ function SettingsComponent() {
         </CardContent>
       </Card>
 
-      {/* Language & Regional Section */}
+      {/* Language & Region Section */}
       <Card>
         <CardHeader>
-          <CardTitle>{t("settings:sections.regional.title")}</CardTitle>
+          <CardTitle>{t("settings:sections.language.title")}</CardTitle>
           <CardDescription>
-            {t("settings:sections.regional.description")}
+            {t("settings:sections.language.description")}
           </CardDescription>
         </CardHeader>
         <CardContent>
