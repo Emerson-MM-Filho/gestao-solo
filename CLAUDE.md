@@ -14,6 +14,81 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 2. **Mobile-First**: Interface must be optimized for mobile devices per RNF01
 3. **Scope Discipline**: The system explicitly does NOT handle payment processing, fiscal documents, or CRM - don't add these features
 
+### Code Standards
+
+**English-Only Code**:
+
+All code elements MUST be written in English:
+
+- **Variables, functions, types**: Use English names (e.g., `order`, `customer`, `payment`)
+- **Database objects**: Tables, columns, enums, views, functions in English (e.g., `orders`, `order_items`, `order_status`)
+- **File names**: Components, utilities, routes in English (e.g., `order-form.tsx`, `order-queries.ts`)
+- **Comments**: Write code comments in English
+- **Git commits**: Use English for commit messages
+
+**Portuguese Usage**:
+
+Portuguese is ONLY allowed in:
+- User-facing text via i18n translation files (`src/locales/pt/`)
+- Documentation for end users
+- Requirements documents (SRS.md can use Portuguese terms when explaining business concepts)
+
+**Common Translations**:
+
+| Portuguese (❌ Don't Use in Code) | English (✅ Use in Code) |
+|-----------------------------------|--------------------------|
+| comanda | order |
+| mercadoria | merchandise |
+| insumo | supply |
+| estoque | stock/inventory |
+| entrada | entry |
+| saída | exit |
+| venda | sale |
+| estorno | reversal |
+| fechamento | closure |
+| pagamento | payment |
+
+**No Emojis in Code**:
+
+- NEVER use emojis in code, comments, function names, or variable names
+- NEVER use emojis in commit messages
+- NEVER use emojis in documentation files (README.md, CLAUDE.md, SDD.md, etc.)
+- Emojis are ONLY acceptable in user-facing i18n translation strings when explicitly requested
+
+**Examples**:
+
+✅ **Good:**
+```typescript
+// orders table
+export interface Order {
+  id: string;
+  customer_name: string;
+  status: OrderStatus;
+  total_amount: number;
+}
+
+// order-form.tsx
+function OrderForm() {
+  const [orderData, setOrderData] = useState<Order>();
+}
+```
+
+❌ **Bad:**
+```typescript
+// comandas table ❌ Portuguese
+export interface Comanda { // ❌ Portuguese
+  id: string;
+  nome_cliente: string; // ❌ Portuguese
+  status: StatusComanda; // ❌ Portuguese
+  valor_total: number; // ❌ Portuguese
+}
+
+// 🍔 comanda-form.tsx ❌ Emoji in comment
+function ComandaForm() { // ❌ Portuguese
+  const [dadosComanda, setDadosComanda] = useState<Comanda>(); // ❌ Portuguese
+}
+```
+
 ### Authentication & Authorization
 
 All protected routes live under `_authenticated/` directory. The authentication guard pattern is implemented in `_authenticated.tsx` using TanStack Router's `beforeLoad` hook:
