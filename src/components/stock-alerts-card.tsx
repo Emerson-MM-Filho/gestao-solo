@@ -51,7 +51,7 @@ export function StockAlertsCard({
 
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-      <Card className="border-yellow-200 bg-yellow-50">
+      <Card className="border-yellow-200 bg-yellow-50 text-yellow-600">
         <CardHeader className="pb-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
