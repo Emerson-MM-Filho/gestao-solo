@@ -1,1 +1,0 @@
-import{j as o,O as t}from"./index-CNJlNhce.js";import{M as s}from"./theme-mode-toggle-BiWSOsZO.js";import"./dropdown-menu-CNkmD1gL.js";import"./useTranslation-DYRmHC84.js";function n(){return o.jsxs("div",{children:[o.jsx(s,{className:"absolute top-4 right-4"}),o.jsx(t,{})]})}export{n as component};
