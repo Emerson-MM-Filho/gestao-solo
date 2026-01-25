@@ -109,7 +109,9 @@ CREATE INDEX idx_stock_movements_type ON api.stock_movements(type);
 -- =======================
 
 -- Low Stock Alerts View (RF07, RF09)
-CREATE OR REPLACE VIEW api.v_low_stock_items AS
+-- SECURITY INVOKER ensures RLS policies on api.items are enforced
+CREATE OR REPLACE VIEW api.v_low_stock_items
+WITH (security_invoker = true) AS
 SELECT
   i.id AS item_id,
   i.name AS item_name,
