@@ -88,7 +88,7 @@ export interface ItemFormData {
 }
 
 export interface StockAdjustmentFormData {
-  type: (typeof StockMovementOptions)["ENTRADA" | "SAIDA_MANUAL"];
+  type: (typeof StockMovementOptions)["ENTRY" | "MANUAL_EXIT"];
   quantity: number;
   notes: string | null;
 }

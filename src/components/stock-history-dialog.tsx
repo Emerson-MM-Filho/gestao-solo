@@ -109,7 +109,7 @@ export function StockHistoryDialog({
                           {formatDate(movement.created_at)}
                         </TableCell>
                         <TableCell>
-                          {formatStockMovementType(movement.type, t)}
+                          {formatStockMovementType(movement.type)}
                         </TableCell>
                         <TableCell
                           className={`text-right font-medium ${
@@ -141,7 +141,7 @@ export function StockHistoryDialog({
                       <div className="space-y-2">
                         <div className="flex items-center justify-between">
                           <span className="text-sm font-medium">
-                            {formatStockMovementType(movement.type, t)}
+                            {formatStockMovementType(movement.type)}
                           </span>
                           <span className="text-xs text-muted-foreground">
                             {formatDate(movement.created_at)}

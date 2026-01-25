@@ -149,15 +149,6 @@ function StockComponent() {
     return result;
   }, [enrichedItems, searchQuery, categoryFilter, sortOption]);
 
-  // Calculate alerts summary
-  const alertsSummary = useMemo(() => {
-    const critical = enrichedItems.filter(
-      (item) => item.status === "critical"
-    ).length;
-    const low = enrichedItems.filter((item) => item.status === "low").length;
-    return { critical, low };
-  }, [enrichedItems]);
-
   // Action handlers
   function handleAddItem() {
     setItemFormMode("create");
@@ -344,7 +335,7 @@ function StockComponent() {
         open={itemFormOpen}
         onOpenChange={setItemFormOpen}
         mode={itemFormMode}
-        item={itemFormMode === "edit" ? selectedItem : undefined}
+        item={itemFormMode === "edit" ? selectedItem ?? undefined : undefined}
         categories={categories}
         onSuccess={handleOperationComplete}
       />

@@ -8,7 +8,6 @@ import type {
   ItemFormData,
   StockAdjustmentFormData,
   LowStockAlert,
-  StockMovementType,
 } from './types/stock';
 
 /**
