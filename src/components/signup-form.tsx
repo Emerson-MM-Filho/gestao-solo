@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useTranslation } from "react-i18next"
 
 import { useAuth } from "@/components/auth-provider"
-import { PhoneInput } from "@/components/phone-input"
+import { PhoneInputLazy as PhoneInput } from "@/components/phone-input-lazy"
 import { Button } from "@/components/ui/button"
 import {
   Field,
