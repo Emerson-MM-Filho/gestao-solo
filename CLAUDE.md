@@ -173,6 +173,13 @@ Form validation utilities follow a consistent pattern:
 - Environment switches between local (.env.local) and production (.env.production)
 - Database schema managed in `supabase/` directory
 
+**Schema Configuration**:
+
+- All tables are created in the `api` schema (not `public`)
+- Supabase client configured to use `api` schema via `db.schema` option
+- `supabase/config.toml` exposes `api` schema via PostgREST
+- Always use `api.table_name` in SQL migrations
+
 ### Adding UI Components
 
 Use shadcn CLI to add new components - they'll be configured correctly for this project's setup (Radix Nova style, Tabler icons, zinc theme).

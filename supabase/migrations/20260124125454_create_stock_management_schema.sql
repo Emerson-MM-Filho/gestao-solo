@@ -3,11 +3,25 @@
 -- Implements RF04-RF12 from SRS.md
 
 -- =======================
+-- SCHEMA SETUP
+-- =======================
+
+-- Create api schema if it doesn't exist
+CREATE SCHEMA IF NOT EXISTS api;
+
+-- Grant usage on api schema
+GRANT USAGE ON SCHEMA api TO anon, authenticated, service_role;
+
+-- Set default privileges for future tables
+ALTER DEFAULT PRIVILEGES IN SCHEMA api GRANT ALL ON TABLES TO anon, authenticated, service_role;
+ALTER DEFAULT PRIVILEGES IN SCHEMA api GRANT ALL ON SEQUENCES TO anon, authenticated, service_role;
+
+-- =======================
 -- TABLES
 -- =======================
 
 -- Categories Table
-CREATE TABLE IF NOT EXISTS public.categories (
+CREATE TABLE IF NOT EXISTS api.categories (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
   name VARCHAR(100) NOT NULL,
@@ -21,10 +35,10 @@ CREATE TABLE IF NOT EXISTS public.categories (
 );
 
 -- Items Table
-CREATE TABLE IF NOT EXISTS public.items (
+CREATE TABLE IF NOT EXISTS api.items (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
-  category_id UUID REFERENCES public.categories(id) ON DELETE SET NULL,
+  category_id UUID REFERENCES api.categories(id) ON DELETE SET NULL,
 
   name VARCHAR(100) NOT NULL,
   type VARCHAR(20) NOT NULL,
@@ -52,9 +66,9 @@ CREATE TABLE IF NOT EXISTS public.items (
 );
 
 -- Stock Movements Table (Immutable audit trail)
-CREATE TABLE IF NOT EXISTS public.stock_movements (
+CREATE TABLE IF NOT EXISTS api.stock_movements (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  item_id UUID NOT NULL REFERENCES public.items(id) ON DELETE CASCADE,
+  item_id UUID NOT NULL REFERENCES api.items(id) ON DELETE CASCADE,
 
   type VARCHAR(20) NOT NULL,
   quantity NUMERIC(10, 2) NOT NULL,
@@ -73,29 +87,29 @@ CREATE TABLE IF NOT EXISTS public.stock_movements (
 -- =======================
 
 -- Categories indexes
-CREATE INDEX idx_categories_user_id ON public.categories(user_id);
-CREATE INDEX idx_categories_display_order ON public.categories(user_id, display_order);
+CREATE INDEX idx_categories_user_id ON api.categories(user_id);
+CREATE INDEX idx_categories_display_order ON api.categories(user_id, display_order);
 
 -- Items indexes
-CREATE INDEX idx_items_user_id ON public.items(user_id);
-CREATE INDEX idx_items_category_id ON public.items(category_id);
-CREATE INDEX idx_items_user_active ON public.items(user_id, is_active) WHERE is_active = true;
-CREATE INDEX idx_items_user_favorite ON public.items(user_id, is_favorite) WHERE is_favorite = true;
-CREATE INDEX idx_items_user_usage ON public.items(user_id, usage_count DESC);
-CREATE INDEX idx_items_name_search ON public.items USING gin(to_tsvector('simple', name));
-CREATE INDEX idx_items_stock_status ON public.items(user_id, stock_quantity, critical_threshold, low_threshold) WHERE is_active = true;
+CREATE INDEX idx_items_user_id ON api.items(user_id);
+CREATE INDEX idx_items_category_id ON api.items(category_id);
+CREATE INDEX idx_items_user_active ON api.items(user_id, is_active) WHERE is_active = true;
+CREATE INDEX idx_items_user_favorite ON api.items(user_id, is_favorite) WHERE is_favorite = true;
+CREATE INDEX idx_items_user_usage ON api.items(user_id, usage_count DESC);
+CREATE INDEX idx_items_name_search ON api.items USING gin(to_tsvector('simple', name));
+CREATE INDEX idx_items_stock_status ON api.items(user_id, stock_quantity, critical_threshold, low_threshold) WHERE is_active = true;
 
 -- Stock movements indexes
-CREATE INDEX idx_stock_movements_item_id ON public.stock_movements(item_id);
-CREATE INDEX idx_stock_movements_created_at ON public.stock_movements(item_id, created_at DESC);
-CREATE INDEX idx_stock_movements_type ON public.stock_movements(type);
+CREATE INDEX idx_stock_movements_item_id ON api.stock_movements(item_id);
+CREATE INDEX idx_stock_movements_created_at ON api.stock_movements(item_id, created_at DESC);
+CREATE INDEX idx_stock_movements_type ON api.stock_movements(type);
 
 -- =======================
 -- VIEWS
 -- =======================
 
 -- Low Stock Alerts View (RF07, RF09)
-CREATE OR REPLACE VIEW public.v_low_stock_items AS
+CREATE OR REPLACE VIEW api.v_low_stock_items AS
 SELECT
   i.id AS item_id,
   i.name AS item_name,
@@ -107,7 +121,7 @@ SELECT
     WHEN i.stock_quantity <= i.low_threshold THEN 'low'
     ELSE 'ok'
   END AS status
-FROM public.items i
+FROM api.items i
 WHERE i.is_active = true
   AND i.stock_quantity <= i.low_threshold
 ORDER BY
@@ -123,62 +137,62 @@ ORDER BY
 -- =======================
 
 -- Enable RLS on all tables
-ALTER TABLE public.categories ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.items ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.stock_movements ENABLE ROW LEVEL SECURITY;
+ALTER TABLE api.categories ENABLE ROW LEVEL SECURITY;
+ALTER TABLE api.items ENABLE ROW LEVEL SECURITY;
+ALTER TABLE api.stock_movements ENABLE ROW LEVEL SECURITY;
 
 -- Categories policies
 CREATE POLICY "Users can view their own categories"
-  ON public.categories FOR SELECT
+  ON api.categories FOR SELECT
   USING (auth.uid() = user_id);
 
 CREATE POLICY "Users can insert their own categories"
-  ON public.categories FOR INSERT
+  ON api.categories FOR INSERT
   WITH CHECK (auth.uid() = user_id);
 
 CREATE POLICY "Users can update their own categories"
-  ON public.categories FOR UPDATE
+  ON api.categories FOR UPDATE
   USING (auth.uid() = user_id)
   WITH CHECK (auth.uid() = user_id);
 
 CREATE POLICY "Users can delete their own categories"
-  ON public.categories FOR DELETE
+  ON api.categories FOR DELETE
   USING (auth.uid() = user_id);
 
 -- Items policies
 CREATE POLICY "Users can view their own items"
-  ON public.items FOR SELECT
+  ON api.items FOR SELECT
   USING (auth.uid() = user_id);
 
 CREATE POLICY "Users can insert their own items"
-  ON public.items FOR INSERT
+  ON api.items FOR INSERT
   WITH CHECK (auth.uid() = user_id);
 
 CREATE POLICY "Users can update their own items"
-  ON public.items FOR UPDATE
+  ON api.items FOR UPDATE
   USING (auth.uid() = user_id)
   WITH CHECK (auth.uid() = user_id);
 
 CREATE POLICY "Users can delete their own items"
-  ON public.items FOR DELETE
+  ON api.items FOR DELETE
   USING (auth.uid() = user_id);
 
 -- Stock movements policies (ownership via items)
 CREATE POLICY "Users can view movements for their items"
-  ON public.stock_movements FOR SELECT
+  ON api.stock_movements FOR SELECT
   USING (
     EXISTS (
-      SELECT 1 FROM public.items
+      SELECT 1 FROM api.items
       WHERE items.id = stock_movements.item_id
       AND items.user_id = auth.uid()
     )
   );
 
 CREATE POLICY "Users can insert movements for their items"
-  ON public.stock_movements FOR INSERT
+  ON api.stock_movements FOR INSERT
   WITH CHECK (
     EXISTS (
-      SELECT 1 FROM public.items
+      SELECT 1 FROM api.items
       WHERE items.id = stock_movements.item_id
       AND items.user_id = auth.uid()
     )
@@ -191,7 +205,7 @@ CREATE POLICY "Users can insert movements for their items"
 -- =======================
 
 -- Automatic updated_at timestamp function
-CREATE OR REPLACE FUNCTION public.update_updated_at_column()
+CREATE OR REPLACE FUNCTION api.update_updated_at_column()
 RETURNS TRIGGER AS $$
 BEGIN
   NEW.updated_at = now();
@@ -201,12 +215,12 @@ $$ LANGUAGE plpgsql;
 
 -- Apply trigger to categories
 CREATE TRIGGER update_categories_updated_at
-  BEFORE UPDATE ON public.categories
+  BEFORE UPDATE ON api.categories
   FOR EACH ROW
-  EXECUTE FUNCTION public.update_updated_at_column();
+  EXECUTE FUNCTION api.update_updated_at_column();
 
 -- Apply trigger to items
 CREATE TRIGGER update_items_updated_at
-  BEFORE UPDATE ON public.items
+  BEFORE UPDATE ON api.items
   FOR EACH ROW
-  EXECUTE FUNCTION public.update_updated_at_column();
+  EXECUTE FUNCTION api.update_updated_at_column();

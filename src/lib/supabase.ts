@@ -13,4 +13,7 @@ export const supabase = createClient(supabaseUrl, supabasePublishableKey, {
     persistSession: true,
     storage: window.localStorage,
   },
+  db: {
+    schema: 'api',
+  },
 });
