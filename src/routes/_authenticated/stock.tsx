@@ -19,6 +19,7 @@ import {
 } from "@tabler/icons-react";
 import { fetchItems, fetchCategories } from "@/lib/stock-queries";
 import { enrichItem } from "@/lib/stock-utils";
+import { toggleItemFavorite, quickAdjustStock } from "@/lib/stock-actions";
 import type {
   Item,
   ItemWithStatus,
@@ -46,6 +47,7 @@ function StockComponent() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const [loadingItems, setLoadingItems] = useState<Set<string>>(new Set());
 
   // Filter state
   const [searchQuery, setSearchQuery] = useState("");
@@ -175,6 +177,84 @@ function StockComponent() {
   function handleDeleteItem(item: ItemWithStatus) {
     setSelectedItem(item);
     setDeleteOpen(true);
+  }
+
+  async function handleToggleFavorite(item: ItemWithStatus) {
+    // Prevent duplicate calls
+    if (loadingItems.has(item.id)) return;
+
+    setLoadingItems((prev) => new Set(prev).add(item.id));
+
+    // Optimistic update using functional update
+    setItems((prevItems) =>
+      prevItems.map((i) =>
+        i.id === item.id ? { ...i, is_favorite: !i.is_favorite } : i
+      )
+    );
+
+    try {
+      await toggleItemFavorite(item.id, item.is_favorite);
+      toast.success(
+        t(
+          item.is_favorite
+            ? "stock:actions.removedFromFavorites"
+            : "stock:actions.addedToFavorites"
+        )
+      );
+      await loadData();
+    } catch (error) {
+      // Revert on error using functional update
+      setItems((prevItems) =>
+        prevItems.map((i) =>
+          i.id === item.id ? { ...i, is_favorite: !i.is_favorite } : i
+        )
+      );
+      console.error("Failed to toggle favorite:", error);
+      toast.error(t("stock:actions.toggleFavoriteError"));
+    } finally {
+      setLoadingItems((prev) => {
+        const next = new Set(prev);
+        next.delete(item.id);
+        return next;
+      });
+    }
+  }
+
+  async function handleQuickAdjust(item: ItemWithStatus, delta: number) {
+    // Prevent duplicate calls
+    if (loadingItems.has(item.id)) return;
+
+    setLoadingItems((prev) => new Set(prev).add(item.id));
+
+    try {
+      await quickAdjustStock(item.id, delta);
+      toast.success(t("stock:actions.quickAdjustSuccess"));
+      await loadData();
+    } catch (error) {
+      console.error("Failed to quick adjust stock:", error);
+
+      if (error instanceof Error) {
+        if (error.message.includes("cannot be negative")) {
+          toast.error(t("stock:adjustment.validation.insufficientStock"));
+        } else if (error.message.includes("Insufficient stock")) {
+          toast.error(t("stock:adjustment.validation.insufficientStock"));
+        } else if (error.message.includes("non-zero finite")) {
+          toast.error(t("stock:actions.quickAdjustError"));
+        } else if (error.message.includes("cannot exceed")) {
+          toast.error(error.message);
+        } else {
+          toast.error(t("stock:actions.quickAdjustError"));
+        }
+      } else {
+        toast.error(t("stock:actions.quickAdjustError"));
+      }
+    } finally {
+      setLoadingItems((prev) => {
+        const next = new Set(prev);
+        next.delete(item.id);
+        return next;
+      });
+    }
   }
 
   async function handleOperationComplete() {
@@ -324,6 +404,8 @@ function StockComponent() {
                 onAdjust={() => handleAdjustStock(item)}
                 onViewHistory={() => handleViewHistory(item)}
                 onDelete={() => handleDeleteItem(item)}
+                onToggleFavorite={() => handleToggleFavorite(item)}
+                onQuickAdjust={(delta) => handleQuickAdjust(item, delta)}
               />
             ))}
           </div>

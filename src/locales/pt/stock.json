@@ -9,7 +9,26 @@
     "deleteItem": "Excluir Item",
     "adjustStock": "Ajustar Estoque",
     "viewHistory": "Ver Histórico",
-    "refresh": "Atualizar"
+    "refresh": "Atualizar",
+    "toggleFavorite": "Favoritar/Desfavoritar",
+    "addToFavorites": "Adicionar aos Favoritos",
+    "removeFromFavorites": "Remover dos Favoritos",
+    "quickAdjust": "Ajuste Rápido",
+    "quickAdjustSuccess": "Estoque ajustado com sucesso",
+    "quickAdjustError": "Falha ao ajustar estoque",
+    "toggleFavoriteError": "Falha ao atualizar favorito",
+    "addedToFavorites": "Adicionado aos favoritos",
+    "removedFromFavorites": "Removido dos favoritos",
+    "openMenu": "Abrir menu de ações"
+  },
+  "tooltips": {
+    "favoriteItem": "Item favorito - priorizado nas listagens",
+    "notFavorite": "Item não é favorito",
+    "status": {
+      "ok": "Quantidade suficiente disponível",
+      "low": "Estoque baixo - considere reabastecer",
+      "critical": "Nível crítico de estoque - reabastecimento urgente"
+    }
   },
   "filters": {
     "search": "Buscar itens...",
