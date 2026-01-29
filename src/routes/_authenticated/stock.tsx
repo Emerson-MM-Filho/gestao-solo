@@ -19,6 +19,7 @@ import {
 } from "@tabler/icons-react";
 import { fetchItems, fetchCategories } from "@/lib/stock-queries";
 import { enrichItem } from "@/lib/stock-utils";
+import { toggleItemFavorite, quickAdjustStock } from "@/lib/stock-actions";
 import type {
   Item,
   ItemWithStatus,
@@ -177,6 +178,34 @@ function StockComponent() {
     setDeleteOpen(true);
   }
 
+  async function handleToggleFavorite(item: ItemWithStatus) {
+    try {
+      await toggleItemFavorite(item.id, item.is_favorite);
+      toast.success(
+        t(
+          item.is_favorite
+            ? "stock:actions.removedFromFavorites"
+            : "stock:actions.addedToFavorites"
+        )
+      );
+      await loadData();
+    } catch (error) {
+      console.error("Failed to toggle favorite:", error);
+      toast.error(t("stock:actions.toggleFavoriteError"));
+    }
+  }
+
+  async function handleQuickAdjust(item: ItemWithStatus, delta: number) {
+    try {
+      await quickAdjustStock(item.id, delta);
+      toast.success(t("stock:actions.quickAdjustSuccess"));
+      await loadData();
+    } catch (error) {
+      console.error("Failed to quick adjust stock:", error);
+      toast.error(t("stock:actions.quickAdjustError"));
+    }
+  }
+
   async function handleOperationComplete() {
     // Refetch data after any operation
     await loadData();
@@ -324,6 +353,8 @@ function StockComponent() {
                 onAdjust={() => handleAdjustStock(item)}
                 onViewHistory={() => handleViewHistory(item)}
                 onDelete={() => handleDeleteItem(item)}
+                onToggleFavorite={() => handleToggleFavorite(item)}
+                onQuickAdjust={(delta) => handleQuickAdjust(item, delta)}
               />
             ))}
           </div>

@@ -9,7 +9,16 @@
     "deleteItem": "Delete Item",
     "adjustStock": "Adjust Stock",
     "viewHistory": "View History",
-    "refresh": "Refresh"
+    "refresh": "Refresh",
+    "toggleFavorite": "Toggle Favorite",
+    "addToFavorites": "Add to Favorites",
+    "removeFromFavorites": "Remove from Favorites",
+    "quickAdjust": "Quick Adjust",
+    "quickAdjustSuccess": "Stock adjusted successfully",
+    "quickAdjustError": "Failed to adjust stock",
+    "toggleFavoriteError": "Failed to update favorite",
+    "addedToFavorites": "Added to favorites",
+    "removedFromFavorites": "Removed from favorites"
   },
   "filters": {
     "search": "Search items...",

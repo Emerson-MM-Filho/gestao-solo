@@ -9,7 +9,16 @@
     "deleteItem": "Excluir Item",
     "adjustStock": "Ajustar Estoque",
     "viewHistory": "Ver Histórico",
-    "refresh": "Atualizar"
+    "refresh": "Atualizar",
+    "toggleFavorite": "Favoritar/Desfavoritar",
+    "addToFavorites": "Adicionar aos Favoritos",
+    "removeFromFavorites": "Remover dos Favoritos",
+    "quickAdjust": "Ajuste Rápido",
+    "quickAdjustSuccess": "Estoque ajustado com sucesso",
+    "quickAdjustError": "Falha ao ajustar estoque",
+    "toggleFavoriteError": "Falha ao atualizar favorito",
+    "addedToFavorites": "Adicionado aos favoritos",
+    "removedFromFavorites": "Removido dos favoritos"
   },
   "filters": {
     "search": "Buscar itens...",
