@@ -4,6 +4,11 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
@@ -75,13 +80,20 @@ export function StockItemCard({
             <CardContent className="p-4">
               <div className="flex items-center gap-4">
                 {/* Favorite Icon */}
-                <div className="flex-shrink-0">
-                  {item.is_favorite ? (
-                    <IconStarFilled className="h-5 w-5 text-yellow-500" />
-                  ) : (
-                    <IconStar className="h-5 w-5 text-muted-foreground" />
-                  )}
-                </div>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div className="flex-shrink-0 cursor-help">
+                      {item.is_favorite ? (
+                        <IconStarFilled className="h-5 w-5 text-yellow-500" />
+                      ) : (
+                        <IconStar className="h-5 w-5 text-muted-foreground" />
+                      )}
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>{item.is_favorite ? t("stock:tooltips.favoriteItem") : t("stock:tooltips.notFavorite")}</p>
+                  </TooltipContent>
+                </Tooltip>
 
                 {/* Item Info */}
                 <div className="flex-1 min-w-0">
@@ -120,16 +132,23 @@ export function StockItemCard({
                 </div>
 
                 {/* Actions Button */}
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="flex-shrink-0 h-12 w-12"
-                  onClick={handleButtonClick}
-                  aria-label={t("stock:actions.openMenu")}
-                  aria-haspopup="menu"
-                >
-                  <IconDotsVertical className="h-4 w-4" />
-                </Button>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="flex-shrink-0 h-12 w-12"
+                      onClick={handleButtonClick}
+                      aria-label={t("stock:actions.openMenu")}
+                      aria-haspopup="menu"
+                    >
+                      <IconDotsVertical className="h-4 w-4" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>{t("stock:actions.openMenu")}</p>
+                  </TooltipContent>
+                </Tooltip>
               </div>
             </CardContent>
           </Card>
@@ -210,7 +229,16 @@ export function StockItemCard({
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-1">
                   {item.is_favorite && (
-                    <IconStarFilled className="h-4 w-4 text-yellow-500 flex-shrink-0" />
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div className="cursor-help">
+                          <IconStarFilled className="h-4 w-4 text-yellow-500 flex-shrink-0" />
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>{t("stock:tooltips.favoriteItem")}</p>
+                      </TooltipContent>
+                    </Tooltip>
                   )}
                   <h3 className="font-semibold truncate">{item.name}</h3>
                 </div>
@@ -224,16 +252,23 @@ export function StockItemCard({
                   </p>
                 )}
               </div>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-8 w-8 -mr-2"
-                onClick={handleButtonClick}
-                aria-label={t("stock:actions.openMenu")}
-                aria-haspopup="menu"
-              >
-                <IconDotsVertical className="h-4 w-4" />
-              </Button>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8 -mr-2"
+                    onClick={handleButtonClick}
+                    aria-label={t("stock:actions.openMenu")}
+                    aria-haspopup="menu"
+                  >
+                    <IconDotsVertical className="h-4 w-4" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{t("stock:actions.openMenu")}</p>
+                </TooltipContent>
+              </Tooltip>
             </div>
           </CardHeader>
           <CardContent className="space-y-3">

@@ -21,6 +21,15 @@
     "removedFromFavorites": "Removed from favorites",
     "openMenu": "Open actions menu"
   },
+  "tooltips": {
+    "favoriteItem": "Favorite item - prioritized in listings",
+    "notFavorite": "Not a favorite item",
+    "status": {
+      "in_stock": "Sufficient quantity available",
+      "low_stock": "Stock quantity is low - consider restocking",
+      "out_of_stock": "No stock available - needs restocking"
+    }
+  },
   "filters": {
     "search": "Search items...",
     "category": "All Categories",

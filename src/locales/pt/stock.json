@@ -21,6 +21,15 @@
     "removedFromFavorites": "Removido dos favoritos",
     "openMenu": "Abrir menu de ações"
   },
+  "tooltips": {
+    "favoriteItem": "Item favorito - priorizado nas listagens",
+    "notFavorite": "Item não é favorito",
+    "status": {
+      "in_stock": "Quantidade suficiente disponível",
+      "low_stock": "Estoque baixo - considere reabastecer",
+      "out_of_stock": "Sem estoque disponível - necessita reabastecimento"
+    }
+  },
   "filters": {
     "search": "Buscar itens...",
     "category": "Todas as Categorias",
