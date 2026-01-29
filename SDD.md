@@ -250,12 +250,18 @@ src/
 │   │   ├── payment-form.tsx    # Payment registration [RF03, RF13]
 │   │   └── comanda-actions.tsx # Cancel, close actions [RF12]
 │   │
-│   ├── estoque/                # Inventory-specific components
-│   │   ├── item-card.tsx       # Item with stock indicator
-│   │   ├── item-form.tsx       # Create/edit item form [RF04, RF11]
-│   │   ├── stock-badge.tsx     # Visual stock status [RF07]
-│   │   ├── stock-adjustment.tsx # Manual stock entry [RF06]
-│   │   └── alert-banner.tsx    # Low stock alerts [RF09]
+│   ├── estoque/                # Inventory-specific components - IMPLEMENTED
+│   │   ├── stock-item-card.tsx       # Item with stock indicator [IMPLEMENTED]
+│   │   ├── item-form-dialog.tsx      # Create/edit item form [RF04, RF11] [IMPLEMENTED]
+│   │   ├── stock-adjustment-dialog.tsx # Manual stock entry [RF06] [IMPLEMENTED]
+│   │   ├── stock-history-dialog.tsx  # View stock movement history [IMPLEMENTED]
+│   │   ├── stock-alerts-card.tsx     # Low stock alerts [RF09] [IMPLEMENTED]
+│   │   └── delete-confirmation-dialog.tsx # Item deletion confirmation [IMPLEMENTED]
+│   │
+│   ├── account-dialog.tsx      # User profile edit dialog [RNF08] [IMPLEMENTED]
+│   ├── phone-input-lazy.tsx    # E.164 phone number input [IMPLEMENTED]
+│   ├── theme-mode-toggle.tsx   # Light/dark theme toggle [RNF08] [IMPLEMENTED]
+│   ├── language-toggle.tsx     # PT/EN language switcher [RNF08] [IMPLEMENTED]
 │   │
 │   └── relatorios/             # Report components
 │       ├── date-range-picker.tsx # Period selection [RF08]
@@ -271,15 +277,16 @@ src/
 │   └── use-offline-sync.ts     # Offline data synchronization [RNF03]
 │
 ├── lib/                        # Utility functions
-│   ├── supabase.ts             # Supabase client singleton
+│   ├── supabase.ts             # Supabase client singleton (schema: api)
 │   ├── utils.ts                # General utilities (cn, formatters)
-│   ├── auth-utils.ts           # Authentication helpers
-│   ├── validators.ts           # Form validation functions
+│   ├── auth-utils.ts           # Authentication helpers [IMPLEMENTED]
+│   ├── stock-queries.ts        # Stock data fetching functions [IMPLEMENTED]
+│   ├── stock-utils.ts          # Stock status computation [IMPLEMENTED]
 │   └── types/                  # TypeScript type definitions
-│       ├── auth.ts
-│       ├── comanda.ts
-│       ├── item.ts
-│       └── database.ts         # Supabase generated types
+│       ├── auth.ts             # Auth types [IMPLEMENTED]
+│       ├── stock.ts            # Stock types (Item, Category, Movement, etc.) [IMPLEMENTED]
+│       ├── comanda.ts          # Comanda types (pending)
+│       └── database.ts         # Supabase generated types (pending)
 │
 ├── locales/                    # i18n translation files
 │   ├── en/
@@ -300,7 +307,22 @@ src/
 
 ### 3.2 Core Component Specifications
 
-#### 3.2.1 Authentication Guard Component
+#### 3.2.0 Implementation Status Summary
+
+**IMPLEMENTED (Version 1.1):**
+- Stock management system (RF04-RF07, RF10)
+- User settings and account management (RNF08)
+- Database schema with api schema and RLS
+- Stock alerts and visual indicators
+
+**PENDING:**
+- Comanda/order management (RF01-RF03, RF12-RF13)
+- Reporting and exports (RF08)
+- Offline sync (RNF03)
+- Payment tracking
+- Price history
+
+#### 3.2.1 Authentication Guard Component [IMPLEMENTED]
 
 **File:** `src/routes/_authenticated.tsx`
 
@@ -332,7 +354,263 @@ export const Route = createFileRoute("/_authenticated")({
 
 **Design Decision:** Using TanStack Router's `beforeLoad` instead of React context guards ensures authentication check happens before any protected component renders, preventing flash of authenticated content.
 
-#### 3.2.2 Item Selector Component
+#### 3.2.2 Stock Management Route Component [IMPLEMENTED]
+
+**File:** `src/routes/_authenticated/stock.tsx`
+
+**Purpose:** Complete stock management interface implementing RF04, RF06, RF07, RF10. Provides item CRUD, stock adjustments, search/filter/sort, and visual status indicators.
+
+**Interface:**
+```typescript
+// Main component state
+const [items, setItems] = useState<Item[]>([]);
+const [categories, setCategories] = useState<Category[]>([]);
+const [searchQuery, setSearchQuery] = useState("");
+const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
+const [sortOption, setSortOption] = useState<SortOption>("alphabetical");
+const [viewMode, setViewMode] = useState<ViewMode>("grid");
+
+// Item types from lib/types/stock.ts
+interface Item {
+  id: string;
+  user_id: string;
+  category_id: string | null;
+  name: string;
+  type: 'merchandise' | 'supply';
+  price: number;
+  stock_quantity: number;
+  critical_threshold: number;
+  low_threshold: number;
+  is_favorite: boolean;
+  usage_count: number;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+interface ItemWithStatus extends Item {
+  status: 'critical' | 'low' | 'ok';
+  stockPercentage: number;
+}
+```
+
+**Features Implemented:**
+- Real-time item list with enriched status (critical/low/ok)
+- Search by name (client-side filtering)
+- Category filtering via dropdown
+- Sort options: alphabetical, favorites, most-used
+- View toggle: grid (responsive columns) or list
+- Stock alerts card showing critical/low items count
+- CRUD operations via dialogs (create, edit, delete)
+- Stock adjustment dialog (entry/manual_exit)
+- Stock movement history dialog
+- Refresh functionality with loading states
+- Empty states for no items or no search results
+
+**Data Flow:**
+1. `fetchItems()` and `fetchCategories()` from `lib/stock-queries.ts`
+2. Items enriched via `enrichItem()` from `lib/stock-utils.ts`
+3. Client-side filtering and sorting in useMemo
+4. Dialog operations trigger `handleOperationComplete()` → refetch data
+
+**Performance Optimizations:**
+- Memoized enriched items computation
+- Memoized filtered/sorted results
+- Debounced search (150ms) handled at input level
+- Lazy-loaded dialogs
+
+#### 3.2.3 Item Form Dialog Component [IMPLEMENTED]
+
+**File:** `src/components/item-form-dialog.tsx`
+
+**Purpose:** Create and edit items (merchandise or supply). Implements RF04 and RF11 (price management).
+
+**Interface:**
+```typescript
+interface ItemFormDialogProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  mode: 'create' | 'edit';
+  item?: ItemWithStatus;
+  categories: Category[];
+  onSuccess: () => void;
+}
+```
+
+**Validation Rules:**
+- Name: required, max 100 chars
+- Type: merchandise or supply (required)
+- Price: positive number (> 0)
+- Stock quantity: non-negative number (>= 0)
+- Critical threshold: non-negative integer, <= low threshold
+- Low threshold: non-negative integer, >= critical threshold
+- Category: optional selection from user's categories
+
+**Features:**
+- Two modes: create (blank form) or edit (pre-filled)
+- Category selection with "None" option
+- Type toggle (merchandise/supply)
+- Numeric inputs for price, stock, thresholds
+- Favorite toggle
+- Form validation with error messages
+- Supabase API calls (INSERT or UPDATE on api.items)
+- Success toast notifications
+- Auto-close on success with callback to parent
+
+#### 3.2.4 Stock Adjustment Dialog Component [IMPLEMENTED]
+
+**File:** `src/components/stock-adjustment-dialog.tsx`
+
+**Purpose:** Manual stock adjustments for entries (purchases) and exits (losses/usage). Implements RF06.
+
+**Interface:**
+```typescript
+interface StockAdjustmentDialogProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  item: ItemWithStatus;
+  onSuccess: () => void;
+}
+
+interface StockAdjustment {
+  type: 'entry' | 'manual_exit';
+  quantity: number;
+  notes: string;
+}
+```
+
+**Features:**
+- Type selection: Entry (purchase) or Manual Exit (loss/usage)
+- Quantity input (positive number validation)
+- Optional notes field
+- Real-time preview of new balance
+- Transaction processing:
+  1. Update item.stock_quantity
+  2. Insert record into stock_movements
+  3. Calculate balance_after
+- Atomic operations via Supabase transaction
+- Error handling with user-friendly messages
+
+**Validation:**
+- Quantity must be > 0
+- For exits: quantity cannot exceed current stock
+- Notes optional but recommended for audit trail
+
+#### 3.2.5 Stock Alerts Card Component [IMPLEMENTED]
+
+**File:** `src/components/stock-alerts-card.tsx`
+
+**Purpose:** Visual summary of items needing attention. Implements RF07 and RF09.
+
+**Interface:**
+```typescript
+interface StockAlertsCardProps {
+  items: ItemWithStatus[];
+  onFilterByStatus?: (status: 'critical' | 'low') => void;
+}
+```
+
+**Display Logic:**
+- Counts items by status: critical, low, ok
+- Shows warning banner if critical + low > 0
+- Lists critical items (stock <= critical_threshold)
+- Lists low items (stock <= low_threshold)
+- Color coding: red (critical), yellow (low), green (ok)
+- Click to view details (optional callback)
+
+**Visual Design:**
+- Card with warning icon when alerts present
+- Collapsible sections for critical/low items
+- Item name + current quantity displayed
+- Badge with stock status color
+- Empty state when all items ok
+
+#### 3.2.6 Stock Item Card Component [IMPLEMENTED]
+
+**File:** `src/components/stock-item-card.tsx`
+
+**Purpose:** Display individual item with actions. Used in stock route grid/list views.
+
+**Interface:**
+```typescript
+interface StockItemCardProps {
+  item: ItemWithStatus;
+  viewMode: 'grid' | 'list';
+  onEdit: () => void;
+  onAdjust: () => void;
+  onViewHistory: () => void;
+  onDelete: () => void;
+}
+```
+
+**Features:**
+- Responsive layout based on viewMode
+- Stock status badge (RF07)
+- Price display
+- Category label
+- Favorite star indicator
+- Usage count badge
+- Action menu (dropdown):
+  - Edit item
+  - Adjust stock
+  - View history
+  - Delete item
+- Type indicator (merchandise/supply)
+- Visual distinction for low/critical stock
+
+#### 3.2.7 User Account Dialog Component [IMPLEMENTED]
+
+**File:** `src/components/account-dialog.tsx`
+
+**Purpose:** View and edit user profile information. Implements RNF08 (user settings).
+
+**Interface:**
+```typescript
+interface AccountDialogProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}
+```
+
+**Features:**
+- Display mode: Shows email, display name, phone, account creation date
+- Edit mode: Form to update display_name and phone
+- Avatar with fallback (initials from display name)
+- Phone input with E.164 format validation
+- Updates auth.users.user_metadata via Supabase Auth API
+- Success/error feedback with toasts
+
+**Data Storage:**
+User profile data stored in `auth.users.user_metadata`:
+```typescript
+{
+  display_name: string;  // User's full name
+  phone: string;         // E.164 format phone number
+}
+```
+
+#### 3.2.8 Settings Route Component [IMPLEMENTED]
+
+**File:** `src/routes/_authenticated/settings.tsx`
+
+**Purpose:** Application settings page. Implements RNF08 (appearance and language).
+
+**Features:**
+- **Appearance Section:**
+  - Theme toggle (light/dark/system) via `ModeToggle` component
+  - Persisted to localStorage
+
+- **Language & Region Section:**
+  - Language toggle (PT/EN) via `LanguageToggle` component
+  - Updates i18n and persists to localStorage
+
+**Layout:**
+- Card-based sections
+- Mobile-responsive (stacks on small screens)
+- Settings grouped by category
+- Clear labels and descriptions
+
+#### 3.2.OLD Item Selector Component [NOT YET IMPLEMENTED]
 
 **File:** `src/components/comandas/item-selector.tsx`
 
@@ -620,95 +898,115 @@ function useOfflineSync<T>(
 
 ### 4.2 Database Schema (DDL)
 
+**IMPORTANT ARCHITECTURAL CHANGE:** All application tables are now created in the `api` schema (not `public`) for better organization and security. The `api` schema is exposed via PostgREST as configured in `supabase/config.toml`.
+
 ```sql
 -- =============================================================================
 -- GESTAO SOLO DATABASE SCHEMA
 -- Supabase PostgreSQL with Row Level Security
+-- Schema: api (configured in supabase/config.toml)
 -- =============================================================================
 
 -- Enable UUID extension
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- -----------------------------------------------------------------------------
+-- SCHEMA SETUP
+-- -----------------------------------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS api;
+GRANT USAGE ON SCHEMA api TO anon, authenticated, service_role;
+ALTER DEFAULT PRIVILEGES IN SCHEMA api GRANT ALL ON TABLES TO anon, authenticated, service_role;
+ALTER DEFAULT PRIVILEGES IN SCHEMA api GRANT ALL ON SEQUENCES TO anon, authenticated, service_role;
+
+-- -----------------------------------------------------------------------------
 -- USER PROFILES (extends Supabase auth.users)
 -- -----------------------------------------------------------------------------
-CREATE TABLE public.user_profiles (
-  id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
-  display_name VARCHAR(50) NOT NULL,
-  phone VARCHAR(20),  -- E.164 format
-  preferred_language VARCHAR(5) DEFAULT 'pt',
-  created_at TIMESTAMPTZ DEFAULT NOW(),
-  updated_at TIMESTAMPTZ DEFAULT NOW()
+-- NOTE: User profile data stored in auth.users.user_metadata
+-- Fields: display_name (VARCHAR), phone (VARCHAR E.164 format)
+-- Updated via supabase.auth.updateUser({ data: { display_name, phone } })
+
+-- -----------------------------------------------------------------------------
+-- CATEGORIES (for item organization) [RF10] - IMPLEMENTED
+-- -----------------------------------------------------------------------------
+CREATE TABLE api.categories (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  name VARCHAR(100) NOT NULL,
+  display_order INTEGER NOT NULL DEFAULT 0,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+
+  CONSTRAINT categories_name_not_empty CHECK (char_length(trim(name)) > 0),
+  CONSTRAINT categories_display_order_non_negative CHECK (display_order >= 0),
+  CONSTRAINT categories_unique_name_per_user UNIQUE (user_id, name)
 );
 
--- RLS: Users can only access their own profile
-ALTER TABLE public.user_profiles ENABLE ROW LEVEL SECURITY;
+CREATE INDEX idx_categories_user_id ON api.categories(user_id);
+CREATE INDEX idx_categories_display_order ON api.categories(user_id, display_order);
 
-CREATE POLICY "Users can view own profile"
-  ON public.user_profiles FOR SELECT
-  USING (auth.uid() = id);
+ALTER TABLE api.categories ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Users can update own profile"
-  ON public.user_profiles FOR UPDATE
-  USING (auth.uid() = id);
+CREATE POLICY "Users can view their own categories"
+  ON api.categories FOR SELECT USING (auth.uid() = user_id);
+CREATE POLICY "Users can insert their own categories"
+  ON api.categories FOR INSERT WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "Users can update their own categories"
+  ON api.categories FOR UPDATE USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "Users can delete their own categories"
+  ON api.categories FOR DELETE USING (auth.uid() = user_id);
 
 -- -----------------------------------------------------------------------------
--- CATEGORIES (for item organization) [RF10]
+-- ITEMS (Mercadorias e Insumos) [RF04, RF07, RF10, RF11] - IMPLEMENTED
 -- -----------------------------------------------------------------------------
-CREATE TABLE public.categories (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+CREATE TABLE api.items (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
-  name VARCHAR(50) NOT NULL,
-  display_order INTEGER DEFAULT 0,
-  created_at TIMESTAMPTZ DEFAULT NOW(),
-
-  UNIQUE(user_id, name)
-);
-
-ALTER TABLE public.categories ENABLE ROW LEVEL SECURITY;
-
-CREATE POLICY "Users can manage own categories"
-  ON public.categories FOR ALL
-  USING (auth.uid() = user_id);
-
--- -----------------------------------------------------------------------------
--- ITEMS (Mercadorias e Insumos) [RF04, RF07, RF10, RF11]
--- -----------------------------------------------------------------------------
-CREATE TYPE item_type AS ENUM ('merchandise', 'supply');
-
-CREATE TABLE public.items (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
-  category_id UUID REFERENCES public.categories(id) ON DELETE SET NULL,
+  category_id UUID REFERENCES api.categories(id) ON DELETE SET NULL,
 
   name VARCHAR(100) NOT NULL,
-  type item_type NOT NULL,
-  price DECIMAL(10, 2) NOT NULL CHECK (price >= 0),
+  type VARCHAR(20) NOT NULL,  -- 'merchandise' or 'supply' - validated via CHECK
 
-  stock_quantity DECIMAL(10, 3) NOT NULL DEFAULT 0,  -- Supports fractional (kg, L)
-  critical_threshold DECIMAL(10, 3) NOT NULL DEFAULT 2,
-  low_threshold DECIMAL(10, 3) NOT NULL DEFAULT 5,
+  price NUMERIC(10, 2) NOT NULL,
 
-  is_favorite BOOLEAN DEFAULT FALSE,
-  usage_count INTEGER DEFAULT 0,  -- For "most used" sorting
+  stock_quantity NUMERIC(10, 2) NOT NULL DEFAULT 0,  -- Supports fractional (kg, L)
+  critical_threshold INTEGER NOT NULL DEFAULT 2,
+  low_threshold INTEGER NOT NULL DEFAULT 5,
 
-  is_active BOOLEAN DEFAULT TRUE,  -- Soft delete
-  created_at TIMESTAMPTZ DEFAULT NOW(),
-  updated_at TIMESTAMPTZ DEFAULT NOW(),
+  is_favorite BOOLEAN NOT NULL DEFAULT false,
+  usage_count INTEGER NOT NULL DEFAULT 0,  -- For "most used" sorting
+  is_active BOOLEAN NOT NULL DEFAULT true,  -- Soft delete
 
-  CONSTRAINT valid_thresholds CHECK (critical_threshold <= low_threshold)
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+
+  CONSTRAINT items_type_valid CHECK (type IN ('merchandise', 'supply')),
+  CONSTRAINT items_name_not_empty CHECK (char_length(trim(name)) > 0),
+  CONSTRAINT items_price_positive CHECK (price > 0),
+  CONSTRAINT items_stock_non_negative CHECK (stock_quantity >= 0),
+  CONSTRAINT items_thresholds_non_negative CHECK (critical_threshold >= 0 AND low_threshold >= 0),
+  CONSTRAINT items_threshold_order CHECK (critical_threshold <= low_threshold),
+  CONSTRAINT items_usage_count_non_negative CHECK (usage_count >= 0)
 );
 
-CREATE INDEX idx_items_user_active ON public.items(user_id, is_active);
-CREATE INDEX idx_items_category ON public.items(category_id);
-CREATE INDEX idx_items_stock_alert ON public.items(user_id, stock_quantity, low_threshold)
-  WHERE is_active = TRUE AND type = 'merchandise';
+-- Performance indexes
+CREATE INDEX idx_items_user_id ON api.items(user_id);
+CREATE INDEX idx_items_category_id ON api.items(category_id);
+CREATE INDEX idx_items_user_active ON api.items(user_id, is_active) WHERE is_active = true;
+CREATE INDEX idx_items_user_favorite ON api.items(user_id, is_favorite) WHERE is_favorite = true;
+CREATE INDEX idx_items_user_usage ON api.items(user_id, usage_count DESC);
+CREATE INDEX idx_items_name_search ON api.items USING gin(to_tsvector('simple', name));
+CREATE INDEX idx_items_stock_status ON api.items(user_id, stock_quantity, critical_threshold, low_threshold) WHERE is_active = true;
 
-ALTER TABLE public.items ENABLE ROW LEVEL SECURITY;
+ALTER TABLE api.items ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Users can manage own items"
-  ON public.items FOR ALL
-  USING (auth.uid() = user_id);
+CREATE POLICY "Users can view their own items"
+  ON api.items FOR SELECT USING (auth.uid() = user_id);
+CREATE POLICY "Users can insert their own items"
+  ON api.items FOR INSERT WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "Users can update their own items"
+  ON api.items FOR UPDATE USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "Users can delete their own items"
+  ON api.items FOR DELETE USING (auth.uid() = user_id);
 
 -- -----------------------------------------------------------------------------
 -- PRICE HISTORY [RF11]
@@ -754,52 +1052,52 @@ CREATE TRIGGER items_price_change
   EXECUTE FUNCTION record_price_change();
 
 -- -----------------------------------------------------------------------------
--- STOCK MOVEMENTS [RF05, RF06]
+-- STOCK MOVEMENTS [RF05, RF06] - IMPLEMENTED
 -- -----------------------------------------------------------------------------
-CREATE TYPE movement_type AS ENUM (
-  'entry',      -- Manual purchase entry
-  'manual_exit', -- Manual loss/usage
-  'sale',        -- Automatic from comanda close
-  'reversal'       -- Stock return from cancelled comanda
-);
+-- Immutable audit trail - no UPDATE/DELETE operations allowed
+CREATE TABLE api.stock_movements (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  item_id UUID NOT NULL REFERENCES api.items(id) ON DELETE CASCADE,
 
-CREATE TABLE public.stock_movements (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  item_id UUID NOT NULL REFERENCES public.items(id) ON DELETE CASCADE,
-  comanda_id UUID REFERENCES public.comandas(id) ON DELETE SET NULL,
-
-  type movement_type NOT NULL,
-  quantity DECIMAL(10, 3) NOT NULL,  -- Positive for entry/reversal, negative for exit
-  balance_after DECIMAL(10, 3) NOT NULL,  -- Stock balance after movement
-
+  type VARCHAR(20) NOT NULL,  -- 'entry', 'manual_exit', 'sale', 'reversal'
+  quantity NUMERIC(10, 2) NOT NULL,  -- Always positive value
+  balance_after NUMERIC(10, 2) NOT NULL,  -- Stock balance after movement
   notes TEXT,
-  created_at TIMESTAMPTZ DEFAULT NOW()
+
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+
+  CONSTRAINT stock_movements_type_valid CHECK (type IN ('entry', 'manual_exit', 'sale', 'reversal')),
+  CONSTRAINT stock_movements_quantity_positive CHECK (quantity > 0),
+  CONSTRAINT stock_movements_balance_non_negative CHECK (balance_after >= 0)
 );
 
-CREATE INDEX idx_stock_movements_item ON public.stock_movements(item_id, created_at DESC);
-CREATE INDEX idx_stock_movements_comanda ON public.stock_movements(comanda_id);
+CREATE INDEX idx_stock_movements_item_id ON api.stock_movements(item_id);
+CREATE INDEX idx_stock_movements_created_at ON api.stock_movements(item_id, created_at DESC);
+CREATE INDEX idx_stock_movements_type ON api.stock_movements(type);
 
-ALTER TABLE public.stock_movements ENABLE ROW LEVEL SECURITY;
+ALTER TABLE api.stock_movements ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Users can view own stock movements"
-  ON public.stock_movements FOR SELECT
+CREATE POLICY "Users can view movements for their items"
+  ON api.stock_movements FOR SELECT
   USING (
     EXISTS (
-      SELECT 1 FROM public.items
+      SELECT 1 FROM api.items
       WHERE items.id = stock_movements.item_id
       AND items.user_id = auth.uid()
     )
   );
 
-CREATE POLICY "Users can insert own stock movements"
-  ON public.stock_movements FOR INSERT
+CREATE POLICY "Users can insert movements for their items"
+  ON api.stock_movements FOR INSERT
   WITH CHECK (
     EXISTS (
-      SELECT 1 FROM public.items
+      SELECT 1 FROM api.items
       WHERE items.id = stock_movements.item_id
       AND items.user_id = auth.uid()
     )
   );
+
+-- Note: No UPDATE/DELETE policies - movements are immutable for audit integrity
 
 -- -----------------------------------------------------------------------------
 -- COMANDAS [RF01, RF12]
@@ -894,29 +1192,16 @@ CREATE POLICY "Users can manage own payments"
 -- VIEWS FOR REPORTING [RF08]
 -- =============================================================================
 
--- Daily sales summary
-CREATE VIEW public.v_daily_sales AS
-SELECT
-  c.user_id,
-  DATE(c.closed_at) as sale_date,
-  COUNT(c.id) as total_comandas,
-  SUM(c.total_amount) as total_revenue,
-  SUM(CASE WHEN p.method = 'pix' THEN p.amount ELSE 0 END) as pix_total,
-  SUM(CASE WHEN p.method = 'credit' THEN p.amount ELSE 0 END) as credit_total,
-  SUM(CASE WHEN p.method = 'debit' THEN p.amount ELSE 0 END) as debit_total,
-  SUM(CASE WHEN p.method = 'cash' THEN p.amount ELSE 0 END) as cash_total
-FROM public.comandas c
-LEFT JOIN public.payments p ON c.id = p.comanda_id
-WHERE c.status = 'closed'
-GROUP BY c.user_id, DATE(c.closed_at);
+-- Daily sales summary (NOT YET IMPLEMENTED - comandas table pending)
+-- CREATE VIEW api.v_daily_sales AS ...
 
--- Items needing restock
-CREATE VIEW public.v_low_stock_items AS
+-- Items needing restock [RF07, RF09] - IMPLEMENTED
+-- Uses security_invoker to enforce RLS policies from api.items
+CREATE OR REPLACE VIEW api.v_low_stock_items
+WITH (security_invoker = true) AS
 SELECT
-  i.id,
-  i.user_id,
-  i.name,
-  i.type,
+  i.id AS item_id,
+  i.name AS item_name,
   i.stock_quantity,
   i.critical_threshold,
   i.low_threshold,
@@ -924,10 +1209,17 @@ SELECT
     WHEN i.stock_quantity <= i.critical_threshold THEN 'critical'
     WHEN i.stock_quantity <= i.low_threshold THEN 'low'
     ELSE 'ok'
-  END as stock_status
-FROM public.items i
-WHERE i.is_active = TRUE
-  AND i.stock_quantity <= i.low_threshold;
+  END AS status
+FROM api.items i
+WHERE i.is_active = true
+  AND i.stock_quantity <= i.low_threshold
+ORDER BY
+  CASE
+    WHEN i.stock_quantity <= i.critical_threshold THEN 1
+    WHEN i.stock_quantity <= i.low_threshold THEN 2
+    ELSE 3
+  END,
+  i.stock_quantity ASC;
 
 -- =============================================================================
 -- FUNCTIONS
@@ -1275,19 +1567,24 @@ interface BackupData {
 
 ```typescript
 import { createClient } from "@supabase/supabase-js";
-import type { Database } from "./types/database";
+// import type { Database } from "./types/database";  // TODO: Generate types
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
     autoRefreshToken: true,
     persistSession: true,
     storage: window.localStorage,
   },
+  db: {
+    schema: 'api',  // IMPORTANT: Use api schema instead of public
+  },
 });
 ```
+
+**Configuration Note:** The Supabase client is configured to use the `api` schema via the `db.schema` option. This aligns with the PostgREST configuration in `supabase/config.toml` which exposes the `api` schema.
 
 #### 5.2.2 Data Access Patterns
 
@@ -1748,31 +2045,39 @@ useEffect(() => {
 
 ### 9.2 Component to Requirements
 
-| Component | Addresses |
-|-----------|-----------|
-| `_authenticated.tsx` | RNF05 |
-| `item-selector.tsx` | RF02, RF10 |
-| `payment-form.tsx` | RF03, RF13 |
-| `stock-badge.tsx` | RF07 |
-| `alert-banner.tsx` | RF09 |
-| `comanda-form.tsx` | RF01, RF02 |
-| `stock-adjustment.tsx` | RF06 |
-| `date-range-picker.tsx` | RF08 |
-| `export-buttons.tsx` | RF08, RNF07 |
-| `use-offline-sync.ts` | RNF03 |
+| Component | Addresses | Status |
+|-----------|-----------|--------|
+| `_authenticated.tsx` | RNF05 | IMPLEMENTED |
+| `stock.tsx` (route) | RF04, RF06, RF07, RF10 | IMPLEMENTED |
+| `settings.tsx` (route) | RNF08 | IMPLEMENTED |
+| `item-form-dialog.tsx` | RF04, RF11 | IMPLEMENTED |
+| `stock-item-card.tsx` | RF07, RF10 | IMPLEMENTED |
+| `stock-adjustment-dialog.tsx` | RF06 | IMPLEMENTED |
+| `stock-history-dialog.tsx` | RF06 (view history) | IMPLEMENTED |
+| `stock-alerts-card.tsx` | RF07, RF09 | IMPLEMENTED |
+| `account-dialog.tsx` | RNF08 (profile edit) | IMPLEMENTED |
+| `theme-mode-toggle.tsx` | RNF08 (theme) | IMPLEMENTED |
+| `language-toggle.tsx` | RNF08 (i18n) | IMPLEMENTED |
+| `item-selector.tsx` | RF02, RF10 | NOT YET IMPLEMENTED |
+| `payment-form.tsx` | RF03, RF13 | NOT YET IMPLEMENTED |
+| `comanda-form.tsx` | RF01, RF02 | NOT YET IMPLEMENTED |
+| `date-range-picker.tsx` | RF08 | NOT YET IMPLEMENTED |
+| `export-buttons.tsx` | RF08, RNF07 | NOT YET IMPLEMENTED |
+| `use-offline-sync.ts` | RNF03 | NOT YET IMPLEMENTED |
 
 ### 9.3 Database Tables to Requirements
 
-| Table | Addresses |
-|-------|-----------|
-| `user_profiles` | RNF05 |
-| `categories` | RF10 |
-| `items` | RF04, RF07, RF10, RF11 |
-| `price_history` | RF11 |
-| `stock_movements` | RF05, RF06, RF12 |
-| `comandas` | RF01, RF12 |
-| `comanda_items` | RF02, RF11 |
-| `payments` | RF03, RF13 |
+| Table | Addresses | Status | Schema |
+|-------|-----------|--------|--------|
+| `user_metadata` (auth.users) | RNF05, RNF08 | IMPLEMENTED | auth |
+| `categories` | RF10 | IMPLEMENTED | api |
+| `items` | RF04, RF07, RF10, RF11 | IMPLEMENTED | api |
+| `stock_movements` | RF05, RF06, RF12 | IMPLEMENTED | api |
+| `v_low_stock_items` (view) | RF07, RF09 | IMPLEMENTED | api |
+| `price_history` | RF11 | NOT YET IMPLEMENTED | api |
+| `comandas` | RF01, RF12 | NOT YET IMPLEMENTED | api |
+| `comanda_items` | RF02, RF11 | NOT YET IMPLEMENTED | api |
+| `payments` | RF03, RF13 | NOT YET IMPLEMENTED | api |
 
 ---
 
@@ -1806,6 +2111,152 @@ useEffect(() => {
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
 | 1.0 | January 2026 | Claude Opus 4.5 | Initial release |
+| 1.1 | January 2026 | Claude Sonnet 4.5 | Stock management implementation, API schema migration, settings and account features |
+
+---
+
+## Appendix C: Implementation Progress and Next Steps
+
+### Completed in Version 1.1 (January 2026)
+
+**Stock Management System (RF04-RF07, RF10):**
+
+- ✅ Categories table and UI
+- ✅ Items table with types (merchandise/supply)
+- ✅ Stock movements audit trail (immutable)
+- ✅ Stock alerts with configurable thresholds
+- ✅ Visual status indicators (critical/low/ok)
+- ✅ Search, filter, sort functionality
+- ✅ Grid and list view toggle
+- ✅ CRUD operations with dialogs
+- ✅ Stock adjustment (entry/manual_exit)
+- ✅ Movement history viewing
+
+**Database Architecture:**
+
+- ✅ Migration to `api` schema (from `public`)
+- ✅ Row Level Security policies on all tables
+- ✅ Security invoker views for proper RLS enforcement
+- ✅ Performance indexes for queries
+- ✅ Check constraints for data validation
+- ✅ Automatic updated_at triggers
+
+**User Experience:**
+
+- ✅ Account profile editing (display_name, phone)
+- ✅ App settings page (theme, language)
+- ✅ Theme toggle (light/dark/system)
+- ✅ Language toggle (PT/EN)
+- ✅ Mobile-responsive layouts
+- ✅ Toast notifications for feedback
+
+**DevOps:**
+
+- ✅ GitHub Actions workflow for migrations
+- ✅ Automated migration execution on push
+- ✅ Supabase CLI integration
+
+### Pending Implementation (Prioritized Roadmap)
+
+**Phase 2 - Order Management (Core Business Flow):**
+
+- 🔲 Comandas table and RLS policies (RF01)
+- 🔲 Comanda items table with price snapshot (RF02, RF11)
+- 🔲 Comanda lifecycle (open → closed → cancelled) (RF12)
+- 🔲 Item selector component for adding to orders (RF02, RF10)
+- 🔲 Comanda detail view with item list
+- 🔲 Close comanda functionality with stock deduction (RF05)
+
+**Phase 3 - Payment Tracking:**
+
+- 🔲 Payments table (RF03, RF13)
+- 🔲 Payment form component (single and split payments)
+- 🔲 Payment method selection (pix, credit, debit, cash)
+- 🔲 Payment validation (must equal total)
+- 🔲 Comanda closure integration
+
+**Phase 4 - Reporting and Analytics:**
+
+- 🔲 Sales summary reports (RF08)
+- 🔲 Date range picker component
+- 🔲 Sales by payment method breakdown
+- 🔲 Top selling items report
+- 🔲 Stock value report
+- 🔲 Export functionality (PDF, CSV, Print)
+
+**Phase 5 - Advanced Features:**
+
+- 🔲 Price history tracking (RF11)
+- 🔲 Price history view component
+- 🔲 Offline sync with IndexedDB (RNF03)
+- 🔲 Conflict resolution for offline changes
+- 🔲 Data backup/restore (RNF07)
+- 🔲 Progressive Web App manifest optimization
+
+**Phase 6 - Polish and Optimization:**
+
+- 🔲 Real-time subscriptions for stock alerts
+- 🔲 Push notifications for critical stock
+- 🔲 Performance optimization for large datasets
+- 🔲 Virtual scrolling for long lists
+- 🔲 Image upload for items (optional)
+- 🔲 Advanced search (fuzzy matching)
+
+### Technical Debt and Improvements
+
+**Database:**
+
+- Generate TypeScript types from Supabase schema
+- Add database migration rollback scripts
+- Consider partitioning for stock_movements (if volume grows)
+
+**Code Quality:**
+
+- Add unit tests for utility functions
+- Add integration tests for stock operations
+- Add E2E tests with Playwright for critical flows
+- Extract common validation logic to shared validators
+
+**Documentation:**
+
+- Generate API documentation from code
+- Create user manual (end-user facing)
+- Document deployment process
+- Add troubleshooting guide
+
+**Performance:**
+
+- Implement query result caching
+- Add optimistic UI updates
+- Lazy load images (if added)
+- Code splitting optimization
+
+### Architecture Decisions Made in v1.1
+
+1. **API Schema Migration:**
+   - **Decision:** Move all tables from `public` to `api` schema
+   - **Rationale:** Better organization, clearer separation from Supabase internal tables, PostgREST exposure control
+   - **Impact:** Requires `db.schema` config in Supabase client, affects all queries
+
+2. **Security Invoker Views:**
+   - **Decision:** Use `WITH (security_invoker = true)` on views
+   - **Rationale:** Ensures RLS policies from underlying tables are properly enforced
+   - **Impact:** Views respect user-level permissions, no separate view policies needed
+
+3. **Immutable Stock Movements:**
+   - **Decision:** No UPDATE/DELETE policies on stock_movements table
+   - **Rationale:** Audit trail integrity, regulatory compliance, debugging capability
+   - **Impact:** Corrections require new compensating entries, not edits
+
+4. **Client-Side Filtering:**
+   - **Decision:** Search and filter performed client-side instead of database queries
+   - **Rationale:** Better UX (instant feedback), reduced API calls, acceptable for target dataset size (< 100 items)
+   - **Impact:** All items fetched on page load, memory usage scales with item count
+
+5. **User Metadata Storage:**
+   - **Decision:** Store profile info in `auth.users.user_metadata` instead of separate `user_profiles` table
+   - **Rationale:** Simplifies architecture, reduces joins, leverages Supabase Auth built-in features
+   - **Impact:** Profile updates via `supabase.auth.updateUser()`, not table operations
 
 ---
 

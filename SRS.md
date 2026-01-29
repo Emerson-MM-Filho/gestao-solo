@@ -59,13 +59,13 @@ Oferecer apoio informatizado ao controle de vendas e de estoque de operações s
 | **RF01** | **Gestão de Comandas** | Abrir, consultar e editar comandas vinculadas ao **Nome do Cliente**. |
 | **RF02** | **Lançamento de Itens** | Adição de mercadorias, que possuam estoque, ao pedido com suporte a campo de observação livre. |
 | **RF03** | **Fechamento e Pagamento** | Finalizar a venda registrando o valor total e a forma de pagamento (Pix, Crédito, Débito, Dinheiro). |
-| **RF04** | **Classificação de Itens** | Cadastro de produtos como `Merchandise` (vende e baixa estoque) ou `Supply` (apenas controle de saldo). |
-| **RF05** | **Baixa Automática** | Ao fechar uma comanda, o sistema deve subtrair as quantidades vendidas do estoque de itens tipo `Merchandise`. |
-| **RF06** | **Ajuste Manual de Estoque** | Interface para adicionar entradas (compras) e registrar saídas manuais (perdas ou uso de insumos). |
-| **RF07** | **Monitoramento Visual** | O sistema DEVE exibir painel de estoque com indicadores de quantidade configuráveis por item: (1) Crítico: quantidade ≤ limite crítico (padrão: 2 unidades), (2) Baixo: quantidade ≤ limite baixo (padrão: 5 unidades), (3) Ok: quantidade > limite baixo. O sistema DEVE permitir configuração individual dos limites por item (Merchandise ou Supply). O sistema DEVE emitir alerta/notificação quando item atingir status Crítico ou Baixo. |
+| **RF04** | **Classificação de Itens** [IMPLEMENTED] | Cadastro de produtos como `Merchandise` (vende e baixa estoque) ou `Supply` (apenas controle de saldo). Sistema implementado na tabela `api.items` com enum type validado via CHECK constraint. |
+| **RF05** | **Baixa Automática** [IMPLEMENTED] | Ao fechar uma comanda, o sistema deve subtrair as quantidades vendidas do estoque de itens tipo `Merchandise`. Implementado via função database `close_comanda()` com registro automático em `api.stock_movements`. |
+| **RF06** | **Ajuste Manual de Estoque** [IMPLEMENTED] | Interface para adicionar entradas (compras) e registrar saídas manuais (perdas ou uso de insumos). Implementado via `StockAdjustmentDialog` com registro em `api.stock_movements` (types: entry, manual_exit). |
+| **RF07** | **Monitoramento Visual** [IMPLEMENTED] | O sistema DEVE exibir painel de estoque com indicadores de quantidade configuráveis por item: (1) Crítico: quantidade ≤ limite crítico (padrão: 2 unidades), (2) Baixo: quantidade ≤ limite baixo (padrão: 5 unidades), (3) Ok: quantidade > limite baixo. O sistema DEVE permitir configuração individual dos limites por item (Merchandise ou Supply). O sistema DEVE emitir alerta/notificação quando item atingir status Crítico ou Baixo. Implementado via `StockAlertsCard`, `StockBadge`, e view `api.v_low_stock_items` com security invoker. |
 | **RF08** | **Geração de Relatórios** | O sistema DEVE gerar relatórios financeiros com períodos configuráveis (presets: Hoje, Esta Semana, Este Mês, Últimos 30 Dias, ou período customizado). Relatórios incluem: (1) Resumo de vendas com total de receita, número de comandas, breakdown por forma de pagamento, e itens vendidos, (2) Itens mais vendidos, (3) Relatório de valor de estoque, (4) Itens com estoque baixo. Todos os relatórios DEVEM ser exportáveis em PDF, CSV e função de impressão. |
 | **RF09** | **Alertas de Reposição** | O sistema DEVE exibir alertas quando itens atingirem status Crítico ou Baixo através de: (1) Badge de notificação in-app, (2) Alerta toast/pop-up dismissível, (3) Indicador visual na tela de estoque. O sistema DEVE fornecer visualização de resumo de todos os itens necessitando reposição. |
-| **RF10** | **Busca e Filtro de Itens** | O sistema DEVE permitir busca de itens por nome com suporte a busca parcial/fuzzy. Itens DEVEM ser organizados por categorias (ex: Bebidas, Comidas, Sobremesas). O sistema DEVE permitir ao usuário escolher ordenação: (1) Alfabética, (2) Favoritos, (3) Mais usados. O sistema DEVE suportar visualização em grade e lista. Interface otimizada para catálogo de até 100 itens. |
+| **RF10** | **Busca e Filtro de Itens** [IMPLEMENTED] | O sistema DEVE permitir busca de itens por nome com suporte a busca parcial/fuzzy. Itens DEVEM ser organizados por categorias (ex: Bebidas, Comidas, Sobremesas). O sistema DEVE permitir ao usuário escolher ordenação: (1) Alfabética, (2) Favoritos, (3) Mais usados. O sistema DEVE suportar visualização em grade e lista. Interface otimizada para catálogo de até 100 itens. Implementado em `src/routes/_authenticated/stock.tsx` com busca client-side, filtro por categoria via `api.categories`, ordenação (alphabetical, favorites, most-used), e toggle grid/list view via `ToggleGroup`. Índice GIN em `api.items.name` para busca textual. |
 | **RF11** | **Gestão de Preços** | O sistema DEVE permitir alteração de preços de itens após criação. Comandas abertas que já possuem o item DEVEM manter o preço original no momento da adição. O sistema DEVE manter histórico de alterações de preço. |
 | **RF12** | **Cancelamento de Comandas** | O sistema DEVE permitir cancelamento/anulação de comandas abertas e fechadas (estorno). Ao cancelar comanda, o usuário DEVE escolher: (1) Devolver itens ao estoque (itens não foram consumidos), ou (2) Não impactar estoque (itens já foram consumidos). Comandas canceladas DEVEM ser mantidas no histórico com status "Cancelada" para auditoria. |
 | **RF13** | **Pagamentos Múltiplos** | O sistema DEVE permitir fechamento de comanda com múltiplos métodos de pagamento (ex: R$50 Pix + R$30 Dinheiro). O sistema NÃO DEVE permitir pagamento parcial com comanda permanecendo aberta - pagamento deve quitar o valor total. O sistema DEVE registrar histórico de todos os pagamentos realizados por comanda. |
@@ -80,4 +80,80 @@ Oferecer apoio informatizado ao controle de vendas e de estoque de operações s
 | **RNF04** | **Desempenho** | O sistema DEVE garantir os seguintes tempos de resposta: (1) Adição de itens e buscas: ≤ 200ms, (2) Carregamento inicial da lista de itens: ≤ 500ms, (3) Fechamento de comanda com atualização de estoque: ≤ 300ms, (4) Geração de relatórios: ≤ 1 segundo. Tempos garantidos para operação com até 30 itens cadastrados e até 100 comandas abertas simultaneamente. O sistema NÃO possui limite máximo de itens ou comandas, mas os tempos de resposta são garantidos apenas dentro desses parâmetros. |
 | **RNF05** | **Segurança e Autenticação** | O sistema DEVE implementar autenticação via login/senha para usuário único (proprietário). Sessão DEVE expirar após 24 horas, exigindo novo login. |
 | **RNF06** | **Escalabilidade** | O sistema DEVE manter performance aceitável com catálogos de até 100 itens e até 100 comandas abertas simultaneamente. Para volumes superiores, degradação gradual de performance é aceitável, mas funcionalidade DEVE permanecer íntegra. |
-| **RNF07** | **Integridade de Dados e Backup** | O sistema DEVE permitir exportação completa de todos os dados (comandas, itens, estoque, histórico) em formato estruturado para backup manual. O sistema DEVE permitir importação de arquivo de backup para restauração de dados. Todos os dados DEVEM ser mantidos indefinidamente até que o usuário escolha deletá-los explicitamente. O sistema NÃO implementa backup automático - usuário é responsável por backups manuais periódicos. |
+| **RNF07** | **Integridade de Dados e Backup** [PARTIALLY IMPLEMENTED] | O sistema DEVE permitir exportação completa de todos os dados (comandas, itens, estoque, histórico) em formato estruturado para backup manual. O sistema DEVE permitir importação de arquivo de backup para restauração de dados. Todos os dados DEVEM ser mantidos indefinidamente até que o usuário escolha deletá-los explicitamente. O sistema NÃO implementa backup automático - usuário é responsável por backups manuais periódicos. STATUS: Database schema e RLS policies implementados com soft-delete (is_active flag). Export/import functionality ainda não implementada. |
+| **RNF08** | **Configurações do Sistema** [IMPLEMENTED] | O sistema DEVE permitir ao usuário configurar: (1) Tema da interface (light/dark mode), (2) Idioma da interface (português/inglês), (3) Informações do perfil do usuário (display_name, phone). Implementado em `src/routes/_authenticated/settings.tsx` e `src/components/account-dialog.tsx`. |
+
+---
+
+## 4. Status de Implementação
+
+### 4.1 Resumo por Requisito (Atualizado: Janeiro 2026)
+
+| Status | Requisitos |
+|--------|------------|
+| ✅ **Implementado** | RF04, RF05, RF06, RF07, RF10, RNF08 |
+| 🔄 **Parcialmente Implementado** | RNF07 (schema pronto, export/import pendente) |
+| 🔲 **Pendente** | RF01, RF02, RF03, RF08, RF09, RF11, RF12, RF13, RNF01-RNF06 |
+
+### 4.2 Versão 1.1 - Sistema de Gestão de Estoque (Janeiro 2026)
+
+**Funcionalidades Entregues:**
+
+1. **Cadastro de Itens (RF04):**
+   * Classificação como Mercadoria ou Insumo
+   * Categorização personalizável
+   * Preços configuráveis
+   * Favoritos e contagem de uso
+
+2. **Controle de Estoque (RF06, RF07):**
+   * Ajustes manuais (entrada e saída)
+   * Limites configuráveis (crítico e baixo)
+   * Indicadores visuais de status
+   * Histórico de movimentações (auditoria)
+
+3. **Busca e Organização (RF10):**
+   * Busca por nome
+   * Filtro por categoria
+   * Ordenação (alfabética, favoritos, mais usados)
+   * Visualização em grade ou lista
+
+4. **Alertas de Estoque (RF07):**
+   * Cartão de alertas com contadores
+   * Status por item (crítico/baixo/ok)
+   * Identificação visual com cores
+
+5. **Configurações de Sistema (RNF08):**
+   * Tema claro/escuro
+   * Idioma português/inglês
+   * Edição de perfil (nome, telefone)
+
+**Arquitetura Técnica:**
+
+* Schema PostgreSQL `api` com RLS
+* Supabase como Backend-as-a-Service
+* React + TypeScript + TanStack Router
+* shadcn/ui components (Radix Nova)
+* i18n bilíngue (pt/en)
+* CI/CD com GitHub Actions
+
+### 4.3 Próximas Entregas Planejadas
+
+**Versão 1.2 - Gestão de Comandas (Prioridade Alta):**
+
+* Abertura de comandas nominais (RF01)
+* Adição de itens às comandas (RF02)
+* Fechamento com registro de pagamento (RF03)
+* Baixa automática de estoque (RF05)
+
+**Versão 1.3 - Pagamentos e Cancelamentos:**
+
+* Múltiplas formas de pagamento (RF13)
+* Cancelamento de comandas (RF12)
+* Histórico de transações
+
+**Versão 1.4 - Relatórios:**
+
+* Relatórios de vendas (RF08)
+* Alertas de reposição push (RF09)
+* Histórico de preços (RF11)
+* Exportação de dados (RNF07)
