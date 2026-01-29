@@ -18,7 +18,8 @@
     "quickAdjustError": "Failed to adjust stock",
     "toggleFavoriteError": "Failed to update favorite",
     "addedToFavorites": "Added to favorites",
-    "removedFromFavorites": "Removed from favorites"
+    "removedFromFavorites": "Removed from favorites",
+    "openMenu": "Open actions menu"
   },
   "filters": {
     "search": "Search items...",

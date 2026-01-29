@@ -125,6 +125,8 @@ export function StockItemCard({
                   size="icon"
                   className="flex-shrink-0 h-12 w-12"
                   onClick={handleButtonClick}
+                  aria-label={t("stock:actions.openMenu")}
+                  aria-haspopup="menu"
                 >
                   <IconDotsVertical className="h-4 w-4" />
                 </Button>
@@ -162,6 +164,9 @@ export function StockItemCard({
               </ContextMenuItem>
               <ContextMenuItem onClick={() => onQuickAdjust(-5)}>
                 -5
+              </ContextMenuItem>
+              <ContextMenuItem onClick={() => onQuickAdjust(-10)}>
+                -10
               </ContextMenuItem>
             </ContextMenuSubContent>
           </ContextMenuSub>
@@ -224,6 +229,8 @@ export function StockItemCard({
                 size="icon"
                 className="h-8 w-8 -mr-2"
                 onClick={handleButtonClick}
+                aria-label={t("stock:actions.openMenu")}
+                aria-haspopup="menu"
               >
                 <IconDotsVertical className="h-4 w-4" />
               </Button>
@@ -296,6 +303,9 @@ export function StockItemCard({
             <ContextMenuItem onClick={() => onQuickAdjust(5)}>+5</ContextMenuItem>
             <ContextMenuItem onClick={() => onQuickAdjust(-5)}>
               -5
+            </ContextMenuItem>
+            <ContextMenuItem onClick={() => onQuickAdjust(-10)}>
+              -10
             </ContextMenuItem>
           </ContextMenuSubContent>
         </ContextMenuSub>

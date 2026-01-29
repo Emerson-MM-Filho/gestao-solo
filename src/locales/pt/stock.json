@@ -18,7 +18,8 @@
     "quickAdjustError": "Falha ao ajustar estoque",
     "toggleFavoriteError": "Falha ao atualizar favorito",
     "addedToFavorites": "Adicionado aos favoritos",
-    "removedFromFavorites": "Removido dos favoritos"
+    "removedFromFavorites": "Removido dos favoritos",
+    "openMenu": "Abrir menu de ações"
   },
   "filters": {
     "search": "Buscar itens...",
