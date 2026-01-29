@@ -271,7 +271,7 @@ src/
 │
 ├── hooks/                      # Custom React hooks
 │   ├── use-mobile.ts           # Mobile detection
-│   ├── use-comandas.ts         # Comandas CRUD operations
+│   ├── use-orders.ts           # Orders CRUD operations
 │   ├── use-items.ts            # Items CRUD operations
 │   ├── use-stock.ts            # Stock queries and mutations
 │   └── use-offline-sync.ts     # Offline data synchronization [RNF03]
@@ -285,7 +285,7 @@ src/
 │   └── types/                  # TypeScript type definitions
 │       ├── auth.ts             # Auth types [IMPLEMENTED]
 │       ├── stock.ts            # Stock types (Item, Category, Movement, etc.) [IMPLEMENTED]
-│       ├── comanda.ts          # Comanda types (pending)
+│       ├── order.ts            # Order types (pending)
 │       └── database.ts         # Supabase generated types (pending)
 │
 ├── locales/                    # i18n translation files
@@ -293,7 +293,7 @@ src/
 │   │   ├── common.json
 │   │   ├── auth.json
 │   │   ├── dashboard.json
-│   │   ├── comandas.json
+│   │   ├── orders.json
 │   │   ├── estoque.json
 │   │   ├── relatorios.json
 │   │   └── errors.json
@@ -1225,77 +1225,159 @@ ORDER BY
 -- FUNCTIONS
 -- =============================================================================
 
--- Function to close comanda and deduct stock [RF03, RF05]
-CREATE OR REPLACE FUNCTION close_comanda(
-  p_comanda_id UUID,
+-- Function to add item to order with immediate stock deduction [RF02, RF05]
+-- CRITICAL: Stock is deducted when item is ADDED, not when order is closed
+CREATE OR REPLACE FUNCTION add_item_to_order(
+  p_order_id UUID,
+  p_item_id UUID,
+  p_quantity DECIMAL(10, 2),
+  p_observation TEXT DEFAULT NULL
+)
+RETURNS JSONB AS $$
+DECLARE
+  v_order RECORD;
+  v_item RECORD;
+  v_existing_order_item RECORD;
+  v_new_stock DECIMAL(10, 2);
+  v_order_item_id UUID;
+BEGIN
+  -- Validate order exists and is open
+  SELECT * INTO v_order FROM api.orders WHERE id = p_order_id;
+
+  IF v_order IS NULL THEN
+    RETURN jsonb_build_object('success', false, 'error', 'Order not found');
+  END IF;
+
+  IF v_order.status != 'open' THEN
+    RETURN jsonb_build_object('success', false, 'error', 'Order is not open');
+  END IF;
+
+  -- Get item details
+  SELECT * INTO v_item FROM api.items WHERE id = p_item_id AND is_active = true;
+
+  IF v_item IS NULL THEN
+    RETURN jsonb_build_object('success', false, 'error', 'Item not found or inactive');
+  END IF;
+
+  -- CRITICAL: For merchandise, check and deduct stock IMMEDIATELY
+  IF v_item.type = 'merchandise' THEN
+    IF v_item.stock_quantity < p_quantity THEN
+      RETURN jsonb_build_object(
+        'success', false,
+        'error', 'Insufficient stock',
+        'available', v_item.stock_quantity
+      );
+    END IF;
+
+    v_new_stock := v_item.stock_quantity - p_quantity;
+
+    -- Deduct stock immediately
+    UPDATE api.items
+    SET stock_quantity = v_new_stock, updated_at = now()
+    WHERE id = p_item_id;
+
+    -- Record stock movement
+    INSERT INTO api.stock_movements (item_id, type, quantity, balance_after, notes)
+    VALUES (
+      p_item_id,
+      'sale',
+      p_quantity,
+      v_new_stock,
+      'Added to order ' || p_order_id
+    );
+  END IF;
+
+  -- Check if item already in order (same item updates quantity)
+  SELECT * INTO v_existing_order_item
+  FROM api.order_items
+  WHERE order_id = p_order_id AND item_id = p_item_id;
+
+  IF v_existing_order_item IS NOT NULL THEN
+    -- Update existing order item quantity
+    UPDATE api.order_items
+    SET quantity = quantity + p_quantity,
+        observation = COALESCE(p_observation, observation),
+        updated_at = now()
+    WHERE id = v_existing_order_item.id
+    RETURNING id INTO v_order_item_id;
+  ELSE
+    -- Insert new order item with current price snapshot
+    INSERT INTO api.order_items (order_id, item_id, quantity, unit_price, observation)
+    VALUES (p_order_id, p_item_id, p_quantity, v_item.price, p_observation)
+    RETURNING id INTO v_order_item_id;
+  END IF;
+
+  -- Update order total
+  UPDATE api.orders
+  SET total_amount = (
+    SELECT COALESCE(SUM(quantity * unit_price), 0)
+    FROM api.order_items
+    WHERE order_id = p_order_id
+  ),
+  updated_at = now()
+  WHERE id = p_order_id;
+
+  RETURN jsonb_build_object(
+    'success', true,
+    'order_item_id', v_order_item_id,
+    'new_stock', v_new_stock
+  );
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- Function to close order with payment validation [RF03]
+-- NOTE: Stock already deducted when items were added (RF05)
+CREATE OR REPLACE FUNCTION close_order(
+  p_order_id UUID,
   p_payments JSONB  -- Array of {method, amount}
 )
 RETURNS JSONB AS $$
 DECLARE
-  v_comanda RECORD;
+  v_order RECORD;
   v_payment RECORD;
-  v_item RECORD;
   v_total_paid DECIMAL(10, 2) := 0;
 BEGIN
-  -- Get comanda
-  SELECT * INTO v_comanda FROM public.comandas WHERE id = p_comanda_id;
+  -- Get order
+  SELECT * INTO v_order FROM api.orders WHERE id = p_order_id;
 
-  IF v_comanda IS NULL THEN
-    RETURN jsonb_build_object('success', false, 'error', 'Comanda not found');
+  IF v_order IS NULL THEN
+    RETURN jsonb_build_object('success', false, 'error', 'Order not found');
   END IF;
 
-  IF v_comanda.status != 'open' THEN
-    RETURN jsonb_build_object('success', false, 'error', 'Comanda is not open');
+  IF v_order.status != 'open' THEN
+    RETURN jsonb_build_object('success', false, 'error', 'Order is not open');
   END IF;
 
   -- Validate payments total
   SELECT SUM((p->>'amount')::DECIMAL) INTO v_total_paid
   FROM jsonb_array_elements(p_payments) p;
 
-  IF v_total_paid != v_comanda.total_amount THEN
-    RETURN jsonb_build_object('success', false, 'error', 'Payment total does not match comanda total');
+  IF v_total_paid != v_order.total_amount THEN
+    RETURN jsonb_build_object('success', false, 'error', 'Payment total does not match order total');
   END IF;
 
   -- Insert payments
   FOR v_payment IN SELECT * FROM jsonb_array_elements(p_payments)
   LOOP
-    INSERT INTO public.payments (comanda_id, method, amount)
+    INSERT INTO api.payments (order_id, method, amount)
     VALUES (
-      p_comanda_id,
+      p_order_id,
       (v_payment.value->>'method')::payment_method,
       (v_payment.value->>'amount')::DECIMAL
     );
   END LOOP;
 
-  -- Deduct stock for merchandise items
-  FOR v_item IN
-    SELECT ci.item_id, ci.quantity, i.type, i.stock_quantity
-    FROM public.comanda_items ci
-    JOIN public.items i ON ci.item_id = i.id
-    WHERE ci.comanda_id = p_comanda_id
-      AND i.type = 'merchandise'
-  LOOP
-    -- Update stock
-    UPDATE public.items
-    SET stock_quantity = stock_quantity - v_item.quantity,
-        usage_count = usage_count + 1
-    WHERE id = v_item.item_id;
+  -- Update usage count for items (stock already deducted when added)
+  UPDATE api.items
+  SET usage_count = usage_count + 1
+  WHERE id IN (
+    SELECT DISTINCT item_id FROM api.order_items WHERE order_id = p_order_id
+  );
 
-    -- Record movement
-    INSERT INTO public.stock_movements (item_id, comanda_id, type, quantity, balance_after)
-    VALUES (
-      v_item.item_id,
-      p_comanda_id,
-      'sale',
-      -v_item.quantity,
-      v_item.stock_quantity - v_item.quantity
-    );
-  END LOOP;
-
-  -- Update comanda status
-  UPDATE public.comandas
+  -- Update order status
+  UPDATE api.orders
   SET status = 'closed', closed_at = NOW(), updated_at = NOW()
-  WHERE id = p_comanda_id;
+  WHERE id = p_order_id;
 
   RETURN jsonb_build_object('success', true);
 END;
@@ -2022,11 +2104,11 @@ useEffect(() => {
 
 | Requirement | Design Elements |
 |-------------|-----------------|
-| **RF01** Gestao de Comandas | `comandas` table, `comanda-form.tsx`, `comandas/` routes |
-| **RF02** Lancamento de Itens | `comanda_items` table, `item-selector.tsx`, `comanda-form.tsx` |
-| **RF03** Fechamento e Pagamento | `payments` table, `payment-form.tsx`, `close_comanda()` function |
+| **RF01** Gestao de Comandas | `orders` table, `order-form-dialog.tsx`, `orders/` routes |
+| **RF02** Lancamento de Itens | `order_items` table, `item-selector-dialog.tsx`, `add_item_to_order()` function |
+| **RF03** Fechamento e Pagamento | `payments` table, `payment-dialog.tsx`, `close_order()` function |
 | **RF04** Classificacao de Itens | `items.type` enum (merchandise/supply), `item-form.tsx` |
-| **RF05** Baixa Automatica | `close_comanda()` function, `stock_movements` table |
+| **RF05** Baixa Automatica de Estoque | `add_item_to_order()` function (deducts on add), `stock_movements` table |
 | **RF06** Ajuste Manual de Estoque | `stock_movements` table, `stock-adjustment.tsx` |
 | **RF07** Monitoramento Visual | `v_low_stock_items` view, `stock-badge.tsx`, threshold fields |
 | **RF08** Geracao de Relatorios | `v_daily_sales` view, `relatorios/` routes, `export-buttons.tsx` |
@@ -2075,8 +2157,8 @@ useEffect(() => {
 | `stock_movements` | RF05, RF06, RF12 | IMPLEMENTED | api |
 | `v_low_stock_items` (view) | RF07, RF09 | IMPLEMENTED | api |
 | `price_history` | RF11 | NOT YET IMPLEMENTED | api |
-| `comandas` | RF01, RF12 | NOT YET IMPLEMENTED | api |
-| `comanda_items` | RF02, RF11 | NOT YET IMPLEMENTED | api |
+| `orders` | RF01, RF12 | NOT YET IMPLEMENTED | api |
+| `order_items` | RF02, RF05, RF11 | NOT YET IMPLEMENTED | api |
 | `payments` | RF03, RF13 | NOT YET IMPLEMENTED | api |
 
 ---

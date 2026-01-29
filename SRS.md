@@ -60,7 +60,7 @@ Oferecer apoio informatizado ao controle de vendas e de estoque de operações s
 | **RF02** | **Lançamento de Itens** | Adição de mercadorias, que possuam estoque, ao pedido com suporte a campo de observação livre. |
 | **RF03** | **Fechamento e Pagamento** | Finalizar a venda registrando o valor total e a forma de pagamento (Pix, Crédito, Débito, Dinheiro). |
 | **RF04** | **Classificação de Itens** [IMPLEMENTED] | Cadastro de produtos como `Merchandise` (vende e baixa estoque) ou `Supply` (apenas controle de saldo). Sistema implementado na tabela `api.items` com enum type validado via CHECK constraint. |
-| **RF05** | **Baixa Automática** [IMPLEMENTED] | Ao fechar uma comanda, o sistema deve subtrair as quantidades vendidas do estoque de itens tipo `Merchandise`. Implementado via função database `close_comanda()` com registro automático em `api.stock_movements`. |
+| **RF05** | **Baixa Automática de Estoque** | O sistema DEVE deduzir automaticamente o estoque quando um item tipo `Merchandise` é ADICIONADO a uma comanda aberta. A dedução ocorre imediatamente no momento da adição, não no fechamento da comanda. O sistema DEVE bloquear a adição se não houver estoque suficiente. O sistema DEVE registrar a movimentação em `api.stock_movements` com tipo `sale`. Se o item for removido da comanda antes do fechamento, o usuário pode optar por devolver ou não o estoque (RF12). |
 | **RF06** | **Ajuste Manual de Estoque** [IMPLEMENTED] | Interface para adicionar entradas (compras) e registrar saídas manuais (perdas ou uso de insumos). Implementado via `StockAdjustmentDialog` com registro em `api.stock_movements` (types: entry, manual_exit). |
 | **RF07** | **Monitoramento Visual** [IMPLEMENTED] | O sistema DEVE exibir painel de estoque com indicadores de quantidade configuráveis por item: (1) Crítico: quantidade ≤ limite crítico (padrão: 2 unidades), (2) Baixo: quantidade ≤ limite baixo (padrão: 5 unidades), (3) Ok: quantidade > limite baixo. O sistema DEVE permitir configuração individual dos limites por item (Merchandise ou Supply). O sistema DEVE emitir alerta/notificação quando item atingir status Crítico ou Baixo. Implementado via `StockAlertsCard`, `StockBadge`, e view `api.v_low_stock_items` com security invoker. |
 | **RF08** | **Geração de Relatórios** | O sistema DEVE gerar relatórios financeiros com períodos configuráveis (presets: Hoje, Esta Semana, Este Mês, Últimos 30 Dias, ou período customizado). Relatórios incluem: (1) Resumo de vendas com total de receita, número de comandas, breakdown por forma de pagamento, e itens vendidos, (2) Itens mais vendidos, (3) Relatório de valor de estoque, (4) Itens com estoque baixo. Todos os relatórios DEVEM ser exportáveis em PDF, CSV e função de impressão. |
@@ -91,9 +91,9 @@ Oferecer apoio informatizado ao controle de vendas e de estoque de operações s
 
 | Status | Requisitos |
 |--------|------------|
-| ✅ **Implementado** | RF04, RF05, RF06, RF07, RF10, RNF08 |
+| ✅ **Implementado** | RF04, RF06, RF07, RF10, RNF08 |
 | 🔄 **Parcialmente Implementado** | RNF07 (schema pronto, export/import pendente) |
-| 🔲 **Pendente** | RF01, RF02, RF03, RF08, RF09, RF11, RF12, RF13, RNF01-RNF06 |
+| 🔲 **Pendente** | RF01, RF02, RF03, RF05, RF08, RF09, RF11, RF12, RF13, RNF01-RNF06 |
 
 ### 4.2 Versão 1.1 - Sistema de Gestão de Estoque (Janeiro 2026)
 
