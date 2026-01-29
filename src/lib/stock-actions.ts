@@ -12,10 +12,7 @@ export async function toggleItemFavorite(
   const newValue = !currentValue;
   const { error } = await supabase
     .from("items")
-    .update({
-      is_favorite: newValue,
-      updated_at: new Date().toISOString(),
-    })
+    .update({ is_favorite: newValue })
     .eq("id", itemId);
 
   if (error) throw error;
@@ -29,6 +26,10 @@ export async function quickAdjustStock(
   itemId: string,
   adjustment: number
 ): Promise<void> {
+  if (!Number.isFinite(adjustment) || adjustment === 0) {
+    throw new Error("Adjustment must be a non-zero finite number");
+  }
+
   const adjustmentData = {
     type:
       adjustment > 0

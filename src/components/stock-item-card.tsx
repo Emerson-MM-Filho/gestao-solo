@@ -53,7 +53,6 @@ export function StockItemCard({
     e.preventDefault();
     e.stopPropagation();
 
-    // Trigger a synthetic context menu event at the button position
     if (triggerRef.current) {
       const rect = e.currentTarget.getBoundingClientRect();
       const contextMenuEvent = new MouseEvent("contextmenu", {

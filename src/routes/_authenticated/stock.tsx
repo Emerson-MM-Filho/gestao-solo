@@ -179,6 +179,13 @@ function StockComponent() {
   }
 
   async function handleToggleFavorite(item: ItemWithStatus) {
+    const newValue = !item.is_favorite;
+
+    // Optimistic update
+    setItems(items.map(i =>
+      i.id === item.id ? { ...i, is_favorite: newValue } : i
+    ));
+
     try {
       await toggleItemFavorite(item.id, item.is_favorite);
       toast.success(
@@ -190,6 +197,10 @@ function StockComponent() {
       );
       await loadData();
     } catch (error) {
+      // Revert on error
+      setItems(items.map(i =>
+        i.id === item.id ? { ...i, is_favorite: item.is_favorite } : i
+      ));
       console.error("Failed to toggle favorite:", error);
       toast.error(t("stock:actions.toggleFavoriteError"));
     }
@@ -202,7 +213,18 @@ function StockComponent() {
       await loadData();
     } catch (error) {
       console.error("Failed to quick adjust stock:", error);
-      toast.error(t("stock:actions.quickAdjustError"));
+
+      if (error instanceof Error) {
+        if (error.message.includes("cannot be negative")) {
+          toast.error(t("stock:adjustment.validation.insufficientStock"));
+        } else if (error.message.includes("non-zero finite")) {
+          toast.error(t("stock:actions.quickAdjustError"));
+        } else {
+          toast.error(t("stock:actions.quickAdjustError"));
+        }
+      } else {
+        toast.error(t("stock:actions.quickAdjustError"));
+      }
     }
   }
 
