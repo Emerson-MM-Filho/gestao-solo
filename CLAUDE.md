@@ -8,6 +8,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Development Principles
 
+### Package Manager
+
+**Use Bun Only**: This project uses Bun as its package manager and runtime.
+
+- ALWAYS use `bun` instead of `npm` (e.g., `bun install`, `bun run dev`)
+- ALWAYS use `bunx` instead of `npx` (e.g., `bunx shadcn@latest add button`)
+- Never use npm or npx commands - they may cause dependency conflicts
+
 ### Feature Implementation
 
 1. **Requirements First**: Check `SRS.md` for functional (RF) and non-functional (RNF) requirements before coding
@@ -129,12 +137,14 @@ All protected routes live under `_authenticated/` directory. The authentication 
 - Custom business components go in `src/components/`
 - Use Tabler Icons consistently (`@tabler/icons-react`)
 - Follow the established pattern: import from shadcn, compose custom logic on top
+- TooltipProvider must be placed at layout level (`src/routes/_authenticated.tsx`), not in individual routes
 
 **Component Composition**:
 
 - Build complex forms by composing shadcn primitives
 - Keep validation logic in `src/lib/auth-utils.ts` or similar utility files
 - Return internationalized error messages from validators
+- Memoize event handlers with `useCallback` in components that render lists to prevent unnecessary re-renders
 
 ### State Management
 
@@ -143,6 +153,8 @@ All protected routes live under `_authenticated/` directory. The authentication 
 - Supabase handles auth state, session persistence, and database state
 - Use Supabase client hooks for reactive data
 - Session persists in localStorage automatically
+- Use functional state updates (`setState(prev => ...)`) for async operations to prevent race conditions
+- Implement loading state tracking (`Set<string>`) to prevent duplicate async calls
 
 ### Validation Patterns
 
@@ -151,6 +163,8 @@ Form validation utilities follow a consistent pattern:
 - Validators in `src/lib/` return `string | null` (error message or null)
 - Error messages use i18n for bilingual support
 - Validation happens client-side before Supabase calls
+- Use proactive validation: fetch current state before mutations (e.g., check stock before adjustment)
+- Set reasonable bounds on numeric inputs to prevent accidents (e.g., max adjustment ±1000)
 
 ### Type Safety
 
@@ -170,6 +184,7 @@ Form validation utilities follow a consistent pattern:
 4. Add translations to both language files
 5. Implement with TypeScript types
 6. Test mobile responsiveness (RNF01 requirement)
+7. Test with Playwright to catch runtime issues TypeScript misses (e.g., context providers)
 
 ### Working with Supabase
 
@@ -334,7 +349,7 @@ Comprehensive descriptions to help understand when to invoke each plugin:
 
 Configured in `.mcp.json`. Tools available automatically:
 
-**shadcn MCP** (`npx shadcn@latest mcp`):
+**shadcn MCP** (`bunx shadcn@latest mcp`):
 
 - Search and view shadcn/ui components and examples
 - Get CLI commands to add components to project
