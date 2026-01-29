@@ -30,6 +30,26 @@ export async function quickAdjustStock(
     throw new Error("Adjustment must be a non-zero finite number");
   }
 
+  // Add reasonable bounds to prevent accidental large adjustments
+  const MAX_ADJUSTMENT = 1000;
+  if (Math.abs(adjustment) > MAX_ADJUSTMENT) {
+    throw new Error(`Adjustment cannot exceed ±${MAX_ADJUSTMENT}`);
+  }
+
+  // Fetch current stock to validate adjustment won't cause negative stock
+  const { data: currentItem, error: fetchError } = await supabase
+    .from("items")
+    .select("stock_quantity")
+    .eq("id", itemId)
+    .single();
+
+  if (fetchError) throw fetchError;
+
+  // Validate adjustment won't cause negative stock
+  if (adjustment < 0 && currentItem.stock_quantity + adjustment < 0) {
+    throw new Error("Insufficient stock for this adjustment");
+  }
+
   const adjustmentData = {
     type:
       adjustment > 0

@@ -25,9 +25,9 @@
     "favoriteItem": "Item favorito - priorizado nas listagens",
     "notFavorite": "Item não é favorito",
     "status": {
-      "in_stock": "Quantidade suficiente disponível",
-      "low_stock": "Estoque baixo - considere reabastecer",
-      "out_of_stock": "Sem estoque disponível - necessita reabastecimento"
+      "ok": "Quantidade suficiente disponível",
+      "low": "Estoque baixo - considere reabastecer",
+      "critical": "Nível crítico de estoque - reabastecimento urgente"
     }
   },
   "filters": {

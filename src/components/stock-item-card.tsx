@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -54,7 +54,7 @@ export function StockItemCard({
   const { t } = useTranslation(["stock"]);
   const triggerRef = useRef<HTMLDivElement>(null);
 
-  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleButtonClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
 
@@ -69,7 +69,7 @@ export function StockItemCard({
       });
       triggerRef.current.dispatchEvent(contextMenuEvent);
     }
-  };
+  }, []);
 
   if (viewMode === "list") {
     return (
@@ -158,9 +158,9 @@ export function StockItemCard({
         <ContextMenuContent>
           <ContextMenuItem onClick={onToggleFavorite}>
             {item.is_favorite ? (
-              <IconStar className="mr-2 h-4 w-4" />
-            ) : (
               <IconStarFilled className="mr-2 h-4 w-4" />
+            ) : (
+              <IconStar className="mr-2 h-4 w-4" />
             )}
             {item.is_favorite
               ? t("stock:actions.removeFromFavorites")
@@ -279,12 +279,21 @@ export function StockItemCard({
               </span>
               <div className="flex items-center gap-2">
                 <span className="font-semibold">{item.stock_quantity}</span>
-                <Badge
-                  variant={getStatusBadgeVariant(item.status)}
-                  className="text-xs"
-                >
-                  {t(`stock:status.${item.status}`)}
-                </Badge>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div className="cursor-help">
+                      <Badge
+                        variant={getStatusBadgeVariant(item.status)}
+                        className="text-xs"
+                      >
+                        {t(`stock:status.${item.status}`)}
+                      </Badge>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>{t(`stock:tooltips.status.${item.status}`)}</p>
+                  </TooltipContent>
+                </Tooltip>
               </div>
             </div>
 
@@ -315,9 +324,9 @@ export function StockItemCard({
       <ContextMenuContent>
         <ContextMenuItem onClick={onToggleFavorite}>
           {item.is_favorite ? (
-            <IconStar className="mr-2 h-4 w-4" />
-          ) : (
             <IconStarFilled className="mr-2 h-4 w-4" />
+          ) : (
+            <IconStar className="mr-2 h-4 w-4" />
           )}
           {item.is_favorite
             ? t("stock:actions.removeFromFavorites")

@@ -25,9 +25,9 @@
     "favoriteItem": "Favorite item - prioritized in listings",
     "notFavorite": "Not a favorite item",
     "status": {
-      "in_stock": "Sufficient quantity available",
-      "low_stock": "Stock quantity is low - consider restocking",
-      "out_of_stock": "No stock available - needs restocking"
+      "ok": "Sufficient quantity available",
+      "low": "Stock quantity is low - consider restocking",
+      "critical": "Critical stock level - urgent restocking needed"
     }
   },
   "filters": {

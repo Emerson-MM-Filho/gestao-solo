@@ -47,6 +47,7 @@ function StockComponent() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const [loadingItems, setLoadingItems] = useState<Set<string>>(new Set());
 
   // Filter state
   const [searchQuery, setSearchQuery] = useState("");
@@ -179,12 +180,17 @@ function StockComponent() {
   }
 
   async function handleToggleFavorite(item: ItemWithStatus) {
-    const newValue = !item.is_favorite;
+    // Prevent duplicate calls
+    if (loadingItems.has(item.id)) return;
 
-    // Optimistic update
-    setItems(items.map(i =>
-      i.id === item.id ? { ...i, is_favorite: newValue } : i
-    ));
+    setLoadingItems((prev) => new Set(prev).add(item.id));
+
+    // Optimistic update using functional update
+    setItems((prevItems) =>
+      prevItems.map((i) =>
+        i.id === item.id ? { ...i, is_favorite: !i.is_favorite } : i
+      )
+    );
 
     try {
       await toggleItemFavorite(item.id, item.is_favorite);
@@ -197,16 +203,29 @@ function StockComponent() {
       );
       await loadData();
     } catch (error) {
-      // Revert on error
-      setItems(items.map(i =>
-        i.id === item.id ? { ...i, is_favorite: item.is_favorite } : i
-      ));
+      // Revert on error using functional update
+      setItems((prevItems) =>
+        prevItems.map((i) =>
+          i.id === item.id ? { ...i, is_favorite: !i.is_favorite } : i
+        )
+      );
       console.error("Failed to toggle favorite:", error);
       toast.error(t("stock:actions.toggleFavoriteError"));
+    } finally {
+      setLoadingItems((prev) => {
+        const next = new Set(prev);
+        next.delete(item.id);
+        return next;
+      });
     }
   }
 
   async function handleQuickAdjust(item: ItemWithStatus, delta: number) {
+    // Prevent duplicate calls
+    if (loadingItems.has(item.id)) return;
+
+    setLoadingItems((prev) => new Set(prev).add(item.id));
+
     try {
       await quickAdjustStock(item.id, delta);
       toast.success(t("stock:actions.quickAdjustSuccess"));
@@ -217,14 +236,24 @@ function StockComponent() {
       if (error instanceof Error) {
         if (error.message.includes("cannot be negative")) {
           toast.error(t("stock:adjustment.validation.insufficientStock"));
+        } else if (error.message.includes("Insufficient stock")) {
+          toast.error(t("stock:adjustment.validation.insufficientStock"));
         } else if (error.message.includes("non-zero finite")) {
           toast.error(t("stock:actions.quickAdjustError"));
+        } else if (error.message.includes("cannot exceed")) {
+          toast.error(error.message);
         } else {
           toast.error(t("stock:actions.quickAdjustError"));
         }
       } else {
         toast.error(t("stock:actions.quickAdjustError"));
       }
+    } finally {
+      setLoadingItems((prev) => {
+        const next = new Set(prev);
+        next.delete(item.id);
+        return next;
+      });
     }
   }
 
