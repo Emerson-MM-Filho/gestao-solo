@@ -9,40 +9,35 @@
  *   bun run seed --list             # List all profiles
  */
 
-import { parseArgs } from "util";
 import { SeedExecutor } from "../src/seed/executor";
 import { getProfile, listProfiles } from "../src/seed/profiles";
 import type { SeedProfileSize } from "../src/seed/types";
 
-// Parse command line arguments
-const args = parseArgs({
-  args: process.argv.slice(2),
-  options: {
-    profile: {
-      type: "string",
-      short: "p",
-      default: "small",
-    },
-    userId: {
-      type: "string",
-      short: "u",
-    },
-    list: {
-      type: "boolean",
-      short: "l",
-      default: false,
-    },
-    help: {
-      type: "boolean",
-      short: "h",
-      default: false,
-    },
-  },
-  allowPositionals: true,
-});
+// Parse command line arguments using Bun
+const args = Bun.argv.slice(2);
+const parsedArgs = {
+  profile: "small",
+  userId: undefined as string | undefined,
+  list: false,
+  help: false,
+};
+
+for (let i = 0; i < args.length; i++) {
+  const arg = args[i];
+  
+  if (arg === "-h" || arg === "--help") {
+    parsedArgs.help = true;
+  } else if (arg === "-l" || arg === "--list") {
+    parsedArgs.list = true;
+  } else if (arg === "-p" || arg === "--profile") {
+    parsedArgs.profile = args[++i];
+  } else if (arg === "-u" || arg === "--userId") {
+    parsedArgs.userId = args[++i];
+  }
+}
 
 // Show help
-if (args.values.help) {
+if (parsedArgs.help) {
   console.log(`
 Database Seeding CLI for Gestao Solo
 
@@ -73,7 +68,7 @@ Note:
 }
 
 // List profiles
-if (args.values.list) {
+if (parsedArgs.list) {
   console.log("\nAvailable seed profiles:\n");
 
   for (const { size, profile } of listProfiles()) {
@@ -95,7 +90,7 @@ if (args.values.list) {
 }
 
 // Get selected profile
-const profileSize = args.values.profile as SeedProfileSize;
+const profileSize = parsedArgs.profile as SeedProfileSize;
 const profile = getProfile(profileSize);
 
 if (!profile) {
@@ -136,7 +131,7 @@ console.log(
 console.log("");
 
 // Execute seeding
-const executor = new SeedExecutor(profile.config, args.values.userId);
+const executor = new SeedExecutor(profile.config, parsedArgs.userId);
 const result = await executor.execute();
 
 // Exit with appropriate code
