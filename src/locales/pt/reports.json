@@ -1,0 +1,63 @@
+{
+  "title": "Relatórios",
+  "datePresets": {
+    "today": "Hoje",
+    "thisWeek": "Esta Semana",
+    "thisMonth": "Este Mês",
+    "last30Days": "Últimos 30 Dias",
+    "custom": "Personalizado"
+  },
+  "salesSummary": {
+    "title": "Resumo de Vendas",
+    "description": "Visão geral do desempenho de vendas no período selecionado",
+    "totalRevenue": "Receita Total",
+    "orderCount": "Comandas Fechadas",
+    "itemsSold": "Itens Vendidos",
+    "paymentBreakdown": "Formas de Pagamento"
+  },
+  "topItems": {
+    "title": "Itens Mais Vendidos",
+    "description": "Produtos com melhor desempenho por quantidade e receita",
+    "noData": "Nenhuma venda registrada no período selecionado",
+    "table": {
+      "rank": "#",
+      "item": "Item",
+      "quantity": "Quantidade",
+      "revenue": "Receita"
+    }
+  },
+  "stockValue": {
+    "title": "Valor do Estoque",
+    "description": "Valor total do inventário atual",
+    "totalValue": "Valor Total",
+    "itemCount": "{{count}} item",
+    "itemCount_other": "{{count}} itens",
+    "merchandise": "Mercadorias",
+    "supplies": "Insumos",
+    "ofTotal": "do total"
+  },
+  "lowStock": {
+    "title": "Alertas de Estoque",
+    "description": "Itens que precisam de reposição",
+    "allGood": "Tudo em ordem!",
+    "noItemsNeedRestock": "Nenhum item precisa de reposição",
+    "critical": "Crítico",
+    "low": "Baixo",
+    "threshold": "Limite",
+    "statusCritical": "CRÍTICO",
+    "statusLow": "BAIXO"
+  },
+  "paymentMethods": {
+    "pix": "Pix",
+    "credit": "Crédito",
+    "debit": "Débito",
+    "cash": "Dinheiro",
+    "voucher": "Voucher",
+    "online": "Online"
+  },
+  "errors": {
+    "ordersLoadFailed": "Falha ao carregar dados de vendas",
+    "stockLoadFailed": "Falha ao carregar dados de estoque",
+    "lowStockLoadFailed": "Falha ao carregar alertas de estoque"
+  }
+}
