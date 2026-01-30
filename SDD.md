@@ -3,7 +3,7 @@
 ## Document Information
 
 | Field | Value |
-|-------|-------|
+| ------- | ------- |
 | **Document Title** | Software Design Document - Gestao Solo |
 | **Version** | 1.0 |
 | **Date** | January 2026 |
@@ -33,6 +33,7 @@
 This Software Design Document (SDD) provides a comprehensive architectural and detailed design description for the **Gestao Solo** system. It transforms the functional and non-functional requirements defined in SRS.md into implementable design specifications following IEEE 1016 standards.
 
 The document serves as the primary technical reference for:
+
 - Development team implementing system features
 - Quality assurance for validation against requirements
 - Future maintainers understanding system architecture
@@ -47,6 +48,7 @@ Gestao Solo is a Progressive Web Application (PWA) designed for sales and invent
 - Replenishment alerts and basic financial reporting
 
 **Explicit Exclusions (per SRS.md Section 2.3):**
+
 - Payment processing (informational recording only)
 - Fiscal document generation (no invoice/receipt issuance)
 - Customer Relationship Management (no persistent customer records)
@@ -55,7 +57,7 @@ Gestao Solo is a Progressive Web Application (PWA) designed for sales and invent
 ### 1.3 Definitions, Acronyms, and Abbreviations
 
 | Term | Definition |
-|------|------------|
+| ------ | ------------ |
 | **PWA** | Progressive Web App - web application installable on devices |
 | **PDV** | Ponto de Venda (Point of Sale) |
 | **Comanda** | Named order/tab associated with a customer name |
@@ -86,34 +88,34 @@ Gestao Solo follows a **client-heavy Single Page Application (SPA) architecture*
 3. **Leverage real-time features** - Supabase provides built-in real-time subscriptions
 4. **Enable rapid development** - Pre-built authentication, database, and storage
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────┐
 │                        CLIENT LAYER (PWA)                           │
-│  ┌─────────────────────────────────────────────────────────────┐   │
-│  │                    React Application                         │   │
-│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐    │   │
-│  │  │  Routes  │  │Components│  │  Hooks   │  │   Lib    │    │   │
-│  │  │(TanStack)│  │(shadcn)  │  │          │  │(Supabase)│    │   │
-│  │  └──────────┘  └──────────┘  └──────────┘  └──────────┘    │   │
-│  └─────────────────────────────────────────────────────────────┘   │
-│  ┌─────────────────────────────────────────────────────────────┐   │
-│  │              Local Storage / IndexedDB                       │   │
-│  │         (Offline Data + Session + Preferences)               │   │
-│  └─────────────────────────────────────────────────────────────┘   │
+│  ┌─────────────────────────────────────────────────────────────┐    │
+│  │                    React Application                        │    │
+│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐     │    │
+│  │  │  Routes  │  │Components│  │  Hooks   │  │   Lib    │     │    │
+│  │  │(TanStack)│  │(shadcn)  │  │          │  │(Supabase)│     │    │
+│  │  └──────────┘  └──────────┘  └──────────┘  └──────────┘     │    │
+│  └─────────────────────────────────────────────────────────────┘    │
+│  ┌─────────────────────────────────────────────────────────────┐    │
+│  │              Local Storage / IndexedDB                      │    │
+│  │         (Offline Data + Session + Preferences)              │    │
+│  └─────────────────────────────────────────────────────────────┘    │
 └─────────────────────────────────────────────────────────────────────┘
                                   │
                                   │ HTTPS (REST API / Realtime WS)
                                   ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                      SUPABASE PLATFORM                              │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐           │
-│  │   Auth   │  │ Database │  │ Realtime │  │ Storage  │           │
-│  │(GoTrue)  │  │(Postgres)│  │   (WS)   │  │  (S3)    │           │
-│  └──────────┘  └──────────┘  └──────────┘  └──────────┘           │
-│  ┌─────────────────────────────────────────────────────────────┐   │
-│  │                 Row Level Security (RLS)                     │   │
-│  └─────────────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│                      SUPABASE PLATFORM                      │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐     │
+│  │   Auth   │  │ Database │  │ Realtime │  │ Storage  │     │
+│  │(GoTrue)  │  │(Postgres)│  │   (WS)   │  │  (S3)    │     │
+│  └──────────┘  └──────────┘  └──────────┘  └──────────┘     │
+│  ┌──────────────────────────────────────────────────────┐   │
+│  │                 Row Level Security (RLS)             │   │
+│  └──────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ### 2.2 Architectural Style
@@ -121,7 +123,7 @@ Gestao Solo follows a **client-heavy Single Page Application (SPA) architecture*
 The system employs a **Layered Architecture** within the client application:
 
 | Layer | Responsibility | Key Technologies |
-|-------|---------------|------------------|
+| ------- | --------------- | ------------------ |
 | **Presentation** | UI rendering, user interaction | React, shadcn/ui, Tailwind CSS |
 | **Routing** | Navigation, route guards, code splitting | TanStack Router |
 | **Business Logic** | Form validation, data transformation | Custom hooks, utility functions |
@@ -131,7 +133,7 @@ The system employs a **Layered Architecture** within the client application:
 ### 2.3 Technology Stack
 
 | Category | Technology | Version | Rationale |
-|----------|-----------|---------|-----------|
+| ---------- | ----------- | --------- | ----------- |
 | **UI Framework** | React | 19.x | Modern features, large ecosystem |
 | **Language** | TypeScript | 5.9.x | Type safety, improved DX |
 | **Routing** | TanStack Router | 1.154.x | Type-safe, file-based, code splitting |
@@ -145,7 +147,7 @@ The system employs a **Layered Architecture** within the client application:
 
 ### 2.4 Deployment Architecture
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────┐
 │                    DEPLOYMENT TOPOLOGY                              │
 │                                                                     │
@@ -173,6 +175,7 @@ The system employs a **Layered Architecture** within the client application:
 ```
 
 **Deployment Considerations:**
+
 - Static assets hosted on GitHub Pages with custom domain support
 - `404.html` copied from `index.html` enables SPA routing on direct URL access
 - Environment-specific configuration via Vite's `loadEnv`
@@ -181,7 +184,7 @@ The system employs a **Layered Architecture** within the client application:
 ### 2.5 Design Rationale
 
 | Decision | Rationale | Addresses Requirements |
-|----------|-----------|----------------------|
+| ---------- | ----------- | ---------------------- |
 | **SPA Architecture** | Single deployment, offline-capable, fast navigation | RNF02, RNF03 |
 | **Supabase BaaS** | Reduces operational complexity, built-in auth/realtime | RNF05, RNF07 |
 | **File-based Routing** | Explicit structure, automatic code splitting | RNF04 |
@@ -195,7 +198,7 @@ The system employs a **Layered Architecture** within the client application:
 
 ### 3.1 Component Hierarchy
 
-```
+```text
 src/
 ├── main.tsx                    # Application entry point
 ├── App.tsx                     # Root component with providers
@@ -212,9 +215,7 @@ src/
 │   └── _authenticated/         # Protected routes (requires auth)
 │       ├── _authenticated.tsx  # Auth guard layout
 │       ├── dashboard.tsx       # Main dashboard
-│       ├── comandas/           # Order management [RF01, RF02, RF03, RF12, RF13]
-│       │   ├── index.tsx       # Comandas list
-│       │   ├── $comandaId.tsx  # Single comanda view/edit
+│       ├── orders.tsx          # Order management [RF01, RF02, RF03, RF12, RF13]
 │       │   └── new.tsx         # New comanda creation
 │       ├── estoque/            # Inventory management [RF04, RF05, RF06, RF07]
 │       │   ├── index.tsx       # Stock overview with alerts
@@ -243,9 +244,11 @@ src/
 │   ├── app-sidebar.tsx         # Navigation sidebar
 │   ├── language-toggle.tsx     # PT/EN language switcher
 │   │
-│   ├── comandas/               # Comanda-specific components
-│   │   ├── comanda-card.tsx    # Comanda preview card
-│   │   ├── comanda-form.tsx    # Create/edit comanda form
+│   ├── orders/                 # Order-specific components
+│   │   ├── order-details-dialog.tsx    # Order details and management
+│   │   ├── add-item-dialog.tsx         # Add items to order
+│   │   ├── close-order-dialog.tsx      # Close order with payments
+│   │   ├── cancel-order-dialog.tsx     # Cancel order with stock return
 │   │   ├── item-selector.tsx   # Product selection interface [RF10]
 │   │   ├── payment-form.tsx    # Payment registration [RF03, RF13]
 │   │   └── comanda-actions.tsx # Cancel, close actions [RF12]
@@ -310,17 +313,27 @@ src/
 #### 3.2.0 Implementation Status Summary
 
 **IMPLEMENTED (Version 1.1):**
+
 - Stock management system (RF04-RF07, RF10)
 - User settings and account management (RNF08)
 - Database schema with api schema and RLS
 - Stock alerts and visual indicators
 
+**IMPLEMENTED (Version 1.2):**
+
+- Order management system (RF01-RF03, RF05)
+- Order cancellation with stock return (RF12)
+- Multiple payment methods (RF13)
+- Order items with customizations
+- Automatic stock deduction on item add
+
 **PENDING:**
-- Comanda/order management (RF01-RF03, RF12-RF13)
+
 - Reporting and exports (RF08)
 - Offline sync (RNF03)
-- Payment tracking
-- Price history
+- Price history tracking (RF11)
+- Push notifications for alerts (RF09)
+- Data backup/import functionality (RNF07)
 
 #### 3.2.1 Authentication Guard Component [IMPLEMENTED]
 
@@ -329,6 +342,7 @@ src/
 **Purpose:** Protects all child routes requiring authentication. Addresses RNF05.
 
 **Interface:**
+
 ```typescript
 // Route configuration with beforeLoad guard
 export const Route = createFileRoute("/_authenticated")({
@@ -347,6 +361,7 @@ export const Route = createFileRoute("/_authenticated")({
 ```
 
 **Behavior:**
+
 1. Before rendering any child route, checks for valid Supabase session
 2. If no session, redirects to `/auth/signin` with return URL
 3. Provides session context to child routes via route context
@@ -361,6 +376,7 @@ export const Route = createFileRoute("/_authenticated")({
 **Purpose:** Complete stock management interface implementing RF04, RF06, RF07, RF10. Provides item CRUD, stock adjustments, search/filter/sort, and visual status indicators.
 
 **Interface:**
+
 ```typescript
 // Main component state
 const [items, setItems] = useState<Item[]>([]);
@@ -395,6 +411,7 @@ interface ItemWithStatus extends Item {
 ```
 
 **Features Implemented:**
+
 - Real-time item list with enriched status (critical/low/ok)
 - Search by name (client-side filtering)
 - Category filtering via dropdown
@@ -408,12 +425,14 @@ interface ItemWithStatus extends Item {
 - Empty states for no items or no search results
 
 **Data Flow:**
+
 1. `fetchItems()` and `fetchCategories()` from `lib/stock-queries.ts`
 2. Items enriched via `enrichItem()` from `lib/stock-utils.ts`
 3. Client-side filtering and sorting in useMemo
 4. Dialog operations trigger `handleOperationComplete()` → refetch data
 
 **Performance Optimizations:**
+
 - Memoized enriched items computation
 - Memoized filtered/sorted results
 - Debounced search (150ms) handled at input level
@@ -426,6 +445,7 @@ interface ItemWithStatus extends Item {
 **Purpose:** Create and edit items (merchandise or supply). Implements RF04 and RF11 (price management).
 
 **Interface:**
+
 ```typescript
 interface ItemFormDialogProps {
   open: boolean;
@@ -438,6 +458,7 @@ interface ItemFormDialogProps {
 ```
 
 **Validation Rules:**
+
 - Name: required, max 100 chars
 - Type: merchandise or supply (required)
 - Price: positive number (> 0)
@@ -447,6 +468,7 @@ interface ItemFormDialogProps {
 - Category: optional selection from user's categories
 
 **Features:**
+
 - Two modes: create (blank form) or edit (pre-filled)
 - Category selection with "None" option
 - Type toggle (merchandise/supply)
@@ -464,6 +486,7 @@ interface ItemFormDialogProps {
 **Purpose:** Manual stock adjustments for entries (purchases) and exits (losses/usage). Implements RF06.
 
 **Interface:**
+
 ```typescript
 interface StockAdjustmentDialogProps {
   open: boolean;
@@ -480,6 +503,7 @@ interface StockAdjustment {
 ```
 
 **Features:**
+
 - Type selection: Entry (purchase) or Manual Exit (loss/usage)
 - Quantity input (positive number validation)
 - Optional notes field
@@ -492,6 +516,7 @@ interface StockAdjustment {
 - Error handling with user-friendly messages
 
 **Validation:**
+
 - Quantity must be > 0
 - For exits: quantity cannot exceed current stock
 - Notes optional but recommended for audit trail
@@ -503,6 +528,7 @@ interface StockAdjustment {
 **Purpose:** Visual summary of items needing attention. Implements RF07 and RF09.
 
 **Interface:**
+
 ```typescript
 interface StockAlertsCardProps {
   items: ItemWithStatus[];
@@ -511,6 +537,7 @@ interface StockAlertsCardProps {
 ```
 
 **Display Logic:**
+
 - Counts items by status: critical, low, ok
 - Shows warning banner if critical + low > 0
 - Lists critical items (stock <= critical_threshold)
@@ -519,6 +546,7 @@ interface StockAlertsCardProps {
 - Click to view details (optional callback)
 
 **Visual Design:**
+
 - Card with warning icon when alerts present
 - Collapsible sections for critical/low items
 - Item name + current quantity displayed
@@ -532,6 +560,7 @@ interface StockAlertsCardProps {
 **Purpose:** Display individual item with actions. Used in stock route grid/list views.
 
 **Interface:**
+
 ```typescript
 interface StockItemCardProps {
   item: ItemWithStatus;
@@ -544,6 +573,7 @@ interface StockItemCardProps {
 ```
 
 **Features:**
+
 - Responsive layout based on viewMode
 - Stock status badge (RF07)
 - Price display
@@ -565,6 +595,7 @@ interface StockItemCardProps {
 **Purpose:** View and edit user profile information. Implements RNF08 (user settings).
 
 **Interface:**
+
 ```typescript
 interface AccountDialogProps {
   open: boolean;
@@ -573,6 +604,7 @@ interface AccountDialogProps {
 ```
 
 **Features:**
+
 - Display mode: Shows email, display name, phone, account creation date
 - Edit mode: Form to update display_name and phone
 - Avatar with fallback (initials from display name)
@@ -582,6 +614,7 @@ interface AccountDialogProps {
 
 **Data Storage:**
 User profile data stored in `auth.users.user_metadata`:
+
 ```typescript
 {
   display_name: string;  // User's full name
@@ -596,6 +629,7 @@ User profile data stored in `auth.users.user_metadata`:
 **Purpose:** Application settings page. Implements RNF08 (appearance and language).
 
 **Features:**
+
 - **Appearance Section:**
   - Theme toggle (light/dark/system) via `ModeToggle` component
   - Persisted to localStorage
@@ -605,6 +639,7 @@ User profile data stored in `auth.users.user_metadata`:
   - Updates i18n and persists to localStorage
 
 **Layout:**
+
 - Card-based sections
 - Mobile-responsive (stacks on small screens)
 - Settings grouped by category
@@ -617,6 +652,7 @@ User profile data stored in `auth.users.user_metadata`:
 **Purpose:** Provides fast, mobile-optimized product selection for adding items to comandas. Addresses RF02, RF10.
 
 **Interface:**
+
 ```typescript
 interface ItemSelectorProps {
   onSelectItem: (item: Item, quantity: number, observation?: string) => void;
@@ -636,6 +672,7 @@ interface Item {
 ```
 
 **Features:**
+
 - Fuzzy search by item name (RF10)
 - Category filtering (RF10)
 - Configurable sort order: Alphabetical, Favorites, Most Used (RF10)
@@ -646,6 +683,7 @@ interface Item {
 - Optional observation text field
 
 **State Management:**
+
 ```typescript
 const [searchQuery, setSearchQuery] = useState('');
 const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -654,6 +692,7 @@ const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 ```
 
 **Performance Considerations:**
+
 - Debounced search input (150ms)
 - Virtual scrolling for lists > 50 items
 - Memoized filtered/sorted results
@@ -665,6 +704,7 @@ const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 **Purpose:** Visual indicator of stock status with configurable thresholds. Addresses RF07.
 
 **Interface:**
+
 ```typescript
 interface StockBadgeProps {
   quantity: number;
@@ -677,13 +717,15 @@ type StockStatus = 'critical' | 'low' | 'ok';
 ```
 
 **Visual Design:**
+
 | Status | Condition | Color | Icon |
-|--------|-----------|-------|------|
+| -------- | ----------- | ------- | ------ |
 | Critical | quantity <= criticalThreshold | Red (destructive) | Alert triangle |
 | Low | quantity <= lowThreshold | Yellow (warning) | Info circle |
 | OK | quantity > lowThreshold | Green (success) | Check circle |
 
 **Implementation:**
+
 ```typescript
 function getStockStatus(
   quantity: number,
@@ -703,6 +745,7 @@ function getStockStatus(
 **Purpose:** Handles single and multiple payment methods for comanda closure. Addresses RF03, RF13.
 
 **Interface:**
+
 ```typescript
 interface PaymentFormProps {
   totalAmount: number;
@@ -717,12 +760,14 @@ interface Payment {
 ```
 
 **Validation Rules (RF13):**
+
 - Sum of all payment amounts must equal totalAmount exactly
 - Partial payments not allowed (comanda must be fully paid)
 - At least one payment method required
 - Each payment amount must be > 0
 
 **UI Flow:**
+
 1. Display total amount prominently
 2. Single payment mode by default (one method, full amount)
 3. "Split payment" toggle enables multiple payment entry
@@ -733,7 +778,7 @@ interface Payment {
 
 #### 3.3.1 Comanda Lifecycle
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────┐
 │                    COMANDA LIFECYCLE                                │
 │                                                                     │
@@ -760,7 +805,7 @@ interface Payment {
 
 #### 3.3.2 Stock Adjustment Flow
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────┐
 │                    STOCK ADJUSTMENT SOURCES                         │
 │                                                                     │
@@ -792,7 +837,7 @@ interface Payment {
 #### 3.4.1 State Categories
 
 | Category | Storage | Scope | Sync Strategy |
-|----------|---------|-------|---------------|
+| ---------- | --------- | ------- | --------------- |
 | **Auth State** | Supabase + localStorage | Global | Real-time via Supabase |
 | **User Preferences** | localStorage | Global | Local only |
 | **i18n Language** | localStorage | Global | Local only |
@@ -850,7 +895,7 @@ function useOfflineSync<T>(
 
 ### 4.1 Entity-Relationship Diagram
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────┐
 │                    ENTITY RELATIONSHIPS                             │
 │                                                                     │
@@ -870,14 +915,14 @@ function useOfflineSync<T>(
 │         │ 1:N                                                      │
 │         ▼                                                          │
 │   ┌─────────────────┐              ┌─────────────────┐            │
-│   │ stock_movements │              │    comandas     │            │
+│   │ stock_movements │              │     orders      │            │
 │   │                 │              │                 │            │
 │   └─────────────────┘              └─────────────────┘            │
 │                                          │                        │
 │                                          │ 1:N                    │
 │                                          ▼                        │
 │                                    ┌─────────────────┐            │
-│                                    │  comanda_items  │            │
+│                                    │  order_items    │            │
 │                                    └─────────────────┘            │
 │                                          │                        │
 │                                          │ N:1                    │
@@ -887,7 +932,7 @@ function useOfflineSync<T>(
 │                                    └─────────────────┘            │
 │                                                                    │
 │   ┌─────────────────┐                                             │
-│   │    payments     │◄────────── N:1 ──── comandas                │
+│   │    payments     │◄────────── N:1 ──── orders                  │
 │   └─────────────────┘                                             │
 │                                                                    │
 │   ┌─────────────────┐                                             │
@@ -1448,7 +1493,7 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
 ### 4.3 Data Validation Rules
 
 | Entity | Field | Validation | Source |
-|--------|-------|------------|--------|
+| -------- | ------- | ------------ | -------- |
 | Item | price | >= 0 | Database CHECK |
 | Item | thresholds | critical <= low | Database CHECK |
 | Comanda Item | quantity | > 0 | Database CHECK |
@@ -1460,6 +1505,7 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
 ### 4.4 Data Integrity and Backup (RNF07)
 
 **Export Format:**
+
 ```typescript
 interface BackupData {
   version: string;
@@ -1478,12 +1524,14 @@ interface BackupData {
 ```
 
 **Export Implementation:**
+
 - JSON format for structured data
 - Includes all user data with relationships
 - Version number for migration compatibility
 - User responsible for periodic manual exports
 
 **Import Validation:**
+
 - Version compatibility check
 - Referential integrity verification
 - Duplicate detection (skip or overwrite strategy)
@@ -1497,7 +1545,7 @@ interface BackupData {
 
 #### 5.1.1 Mobile-First Layout System (RNF01)
 
-```
+```text
 ┌────────────────────────────────────────┐
 │  MOBILE LAYOUT (< 768px)               │
 │                                        │
@@ -1542,7 +1590,7 @@ interface BackupData {
 #### 5.1.2 Touch Target Guidelines (RNF01)
 
 | Element | Minimum Size | Spacing |
-|---------|-------------|---------|
+| --------- | ------------- | --------- |
 | Buttons | 48x48px | 8px between |
 | List items | 48px height | 4px vertical |
 | Form inputs | 48px height | 16px margin-bottom |
@@ -1551,7 +1599,7 @@ interface BackupData {
 #### 5.1.3 Typography Scale
 
 | Element | Size | Weight | Use Case |
-|---------|------|--------|----------|
+| --------- | ------ | -------- | ---------- |
 | Page Title | 24px (1.5rem) | 600 | Main headings |
 | Section Title | 18px (1.125rem) | 600 | Card headers |
 | Body | 16px (1rem) | 400 | Default text (min for readability) |
@@ -1560,8 +1608,9 @@ interface BackupData {
 
 #### 5.1.4 Key Screen Wireframes
 
-**Comandas List (Mobile)**
-```
+Comandas List (Mobile)
+
+```tex
 ┌────────────────────────────────────┐
 │ [=] Comandas                 [+]   │
 ├────────────────────────────────────┤
@@ -1586,8 +1635,9 @@ interface BackupData {
 └────────────────────────────────────┘
 ```
 
-**Item Selection (Mobile) - RF10**
-```
+Item Selection (Mobile) - RF10
+
+```text
 ┌────────────────────────────────────┐
 │ [<] Adicionar Item                 │
 ├────────────────────────────────────┤
@@ -1612,8 +1662,9 @@ interface BackupData {
 └────────────────────────────────────┘
 ```
 
-**Stock Overview with Alerts - RF07, RF09**
-```
+Stock Overview with Alerts - RF07, RF09
+
+```text
 ┌────────────────────────────────────┐
 │ [=] Estoque                        │
 ├────────────────────────────────────┤
@@ -1671,6 +1722,7 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
 #### 5.2.2 Data Access Patterns
 
 **Items CRUD:**
+
 ```typescript
 // Fetch all active items with stock status
 const { data, error } = await supabase
@@ -1705,6 +1757,7 @@ const { error } = await supabase
 ```
 
 **Comanda Operations:**
+
 ```typescript
 // Open new comanda (2 touches max - RNF01)
 const { data, error } = await supabase
@@ -1744,6 +1797,7 @@ const { data, error } = await supabase
 ```
 
 **Reporting Queries:**
+
 ```typescript
 // Sales report with date range [RF08]
 const { data, error } = await supabase
@@ -1797,6 +1851,7 @@ const subscription = supabase
 ### 5.3 External System Interfaces
 
 **No external system integrations** per SRS.md Section 2.3 constraints:
+
 - No payment gateway integration
 - No fiscal system integration
 - No CRM integration
@@ -1811,7 +1866,7 @@ The system is intentionally self-contained.
 
 #### 6.1.1 Authentication Flow
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────┐
 │                    AUTHENTICATION FLOW                              │
 │                                                                     │
@@ -1853,7 +1908,7 @@ export const Route = createFileRoute("/_authenticated")({
 #### 6.1.3 Password Requirements
 
 | Requirement | Value | Rationale |
-|-------------|-------|-----------|
+| ------------- | ------- | ----------- |
 | Minimum length | 6 characters | Supabase default, sufficient for single-user system |
 | Complexity | None required | Balance between security and usability for target users |
 
@@ -1862,6 +1917,7 @@ export const Route = createFileRoute("/_authenticated")({
 #### 6.2.1 Row Level Security (RLS)
 
 All database tables implement RLS policies ensuring:
+
 - Users can only access their own data
 - Queries automatically filtered by `auth.uid()`
 - No need for application-level authorization checks
@@ -1876,6 +1932,7 @@ CREATE POLICY "Users can manage own items"
 #### 6.2.2 Single-User Model
 
 Per SRS.md, the system is designed for single-user operation (solo entrepreneur). Therefore:
+
 - No role-based access control needed
 - No multi-tenancy beyond RLS
 - No team/organization hierarchy
@@ -1883,7 +1940,7 @@ Per SRS.md, the system is designed for single-user operation (solo entrepreneur)
 ### 6.3 Data Protection
 
 | Data Type | Protection Method |
-|-----------|------------------|
+| ----------- | ------------------ |
 | Credentials | Supabase handles hashing (bcrypt) |
 | Session tokens | JWT with short expiry, stored in localStorage |
 | Business data | RLS prevents cross-user access |
@@ -1892,11 +1949,13 @@ Per SRS.md, the system is designed for single-user operation (solo entrepreneur)
 ### 6.4 Security Considerations
 
 **Client-Side Vulnerabilities:**
+
 - XSS: React's automatic escaping + `escapeValue: false` disabled only for i18n interpolation
 - CSRF: Not applicable (no cookies for auth, JWT-based)
 - localStorage tampering: Session validation server-side via Supabase
 
 **API Security:**
+
 - Supabase anon key is public (designed for client-side use)
 - RLS provides actual data protection
 - Rate limiting handled by Supabase
@@ -1908,7 +1967,7 @@ Per SRS.md, the system is designed for single-user operation (solo entrepreneur)
 ### 7.1 Performance Requirements (RNF04)
 
 | Operation | Target | Guaranteed Volume |
-|-----------|--------|-------------------|
+| ----------- | -------- | ------------------- |
 | Add item to comanda | <= 200ms | 30 items, 100 comandas |
 | Search items | <= 200ms | 30 items |
 | Initial item list load | <= 500ms | 30 items |
@@ -1920,6 +1979,7 @@ Per SRS.md, the system is designed for single-user operation (solo entrepreneur)
 #### 7.2.1 Code Splitting
 
 TanStack Router with `autoCodeSplitting: true` ensures:
+
 - Each route loads only when navigated to
 - Smaller initial bundle size
 - Faster time-to-interactive
@@ -1932,6 +1992,7 @@ tanstackRouter({ target: "react", autoCodeSplitting: true })
 #### 7.2.2 Database Indexing
 
 Strategic indexes for common queries:
+
 ```sql
 CREATE INDEX idx_items_user_active ON items(user_id, is_active);
 CREATE INDEX idx_comandas_user_status ON comandas(user_id, status);
@@ -1941,6 +2002,7 @@ CREATE INDEX idx_comandas_user_date ON comandas(user_id, created_at DESC);
 #### 7.2.3 Client-Side Caching
 
 **Supabase Real-time for Cache Invalidation:**
+
 ```typescript
 // Items remain in React state, updates pushed via subscription
 const [items, setItems] = useState<Item[]>([]);
@@ -1978,11 +2040,13 @@ const debouncedSearch = useDebouncedCallback(
 ### 7.3 Scalability Considerations (RNF06)
 
 **Target Performance Envelope:**
+
 - Up to 100 items: Full performance guaranteed
 - Up to 100 open comandas: Full performance guaranteed
 - Beyond limits: Graceful degradation, functionality preserved
 
 **Scaling Strategies (if needed):**
+
 - Virtual scrolling for large lists
 - Pagination for historical data
 - Archive old comandas (> 1 year)
@@ -1996,7 +2060,7 @@ const debouncedSearch = useDebouncedCallback(
 #### 8.1.1 Error Categories
 
 | Category | Handling | User Feedback |
-|----------|----------|---------------|
+| ---------- | ---------- | --------------- |
 | **Validation** | Client-side prevention | Inline field errors |
 | **Network** | Retry with backoff, offline queue | Toast notification |
 | **Authentication** | Redirect to login | Error page |
@@ -2054,17 +2118,20 @@ const handleSubmit = () => {
 #### 8.2.1 Client-Side Logging
 
 **Development:**
+
 - Console logging for debugging
 - React DevTools integration
 - TanStack Router devtools
 
 **Production:**
+
 - Minimal console output
 - Consider future integration with error tracking (Sentry, etc.)
 
 #### 8.2.2 Audit Trail
 
 Business-critical operations logged in database:
+
 - Stock movements (all types)
 - Price changes (price_history table)
 - Comanda status changes (timestamps in comandas table)
@@ -2103,20 +2170,20 @@ useEffect(() => {
 ### 9.1 Requirements to Design Elements
 
 | Requirement | Design Elements |
-|-------------|-----------------|
-| **RF01** Gestao de Comandas | `orders` table, `order-form-dialog.tsx`, `orders/` routes |
-| **RF02** Lancamento de Itens | `order_items` table, `item-selector-dialog.tsx`, `add_item_to_order()` function |
-| **RF03** Fechamento e Pagamento | `payments` table, `payment-dialog.tsx`, `close_order()` function |
-| **RF04** Classificacao de Itens | `items.type` enum (merchandise/supply), `item-form.tsx` |
+| ------------- | ----------------- |
+| **RF01** Gestao de Comandas | `orders` table, `orders.tsx` route, `order-details-dialog.tsx` |
+| **RF02** Lancamento de Itens | `order_items` table, `add-item-dialog.tsx`, `add_item_to_order()` function |
+| **RF03** Fechamento e Pagamento | `payments` table, `close-order-dialog.tsx`, `close_order()` function |
+| **RF04** Classificacao de Itens | `items.type` enum (merchandise/supply), `item-form-dialog.tsx` |
 | **RF05** Baixa Automatica de Estoque | `add_item_to_order()` function (deducts on add), `stock_movements` table |
-| **RF06** Ajuste Manual de Estoque | `stock_movements` table, `stock-adjustment.tsx` |
+| **RF06** Ajuste Manual de Estoque | `stock_movements` table, `stock-adjustment-dialog.tsx` |
 | **RF07** Monitoramento Visual | `v_low_stock_items` view, `stock-badge.tsx`, threshold fields |
-| **RF08** Geracao de Relatorios | `v_daily_sales` view, `relatorios/` routes, `export-buttons.tsx` |
-| **RF09** Alertas de Reposicao | Real-time subscription, `alert-banner.tsx`, push notifications |
-| **RF10** Busca e Filtro de Itens | `categories` table, `item-selector.tsx` (search, filter, sort) |
-| **RF11** Gestao de Precos | `price_history` table, price trigger |
-| **RF12** Cancelamento de Comandas | `cancel_comanda()` function, `comanda_actions.tsx` |
-| **RF13** Pagamentos Multiplos | `payments` table (1:N), `payment-form.tsx` |
+| **RF08** Geracao de Relatorios | `reports.tsx` route (placeholder), future export components |
+| **RF09** Alertas de Reposicao | `stock-alerts-card.tsx`, future push notifications |
+| **RF10** Busca e Filtro de Itens | `categories` table, `stock.tsx` (search, filter, sort) |
+| **RF11** Gestao de Precos | `price_history` table (not yet implemented), price trigger |
+| **RF12** Cancelamento de Comandas | `cancel_order()` function, `cancel-order-dialog.tsx` |
+| **RF13** Pagamentos Multiplos | `payments` table (1:N), `close-order-dialog.tsx` |
 | **RNF01** Usabilidade Mobile | Mobile-first CSS, 48px touch targets, touch counts |
 | **RNF02** Portabilidade | PWA manifest, responsive design, browser support |
 | **RNF03** Persistencia e Offline | IndexedDB, localStorage, `use-offline-sync.ts` |
@@ -2128,21 +2195,24 @@ useEffect(() => {
 ### 9.2 Component to Requirements
 
 | Component | Addresses | Status |
-|-----------|-----------|--------|
+| ----------- | ----------- | -------- |
 | `_authenticated.tsx` | RNF05 | IMPLEMENTED |
 | `stock.tsx` (route) | RF04, RF06, RF07, RF10 | IMPLEMENTED |
+| `orders.tsx` (route) | RF01, RF02 | IMPLEMENTED |
+| `reports.tsx` (route) | RF08 | PLACEHOLDER |
 | `settings.tsx` (route) | RNF08 | IMPLEMENTED |
 | `item-form-dialog.tsx` | RF04, RF11 | IMPLEMENTED |
 | `stock-item-card.tsx` | RF07, RF10 | IMPLEMENTED |
 | `stock-adjustment-dialog.tsx` | RF06 | IMPLEMENTED |
 | `stock-history-dialog.tsx` | RF06 (view history) | IMPLEMENTED |
 | `stock-alerts-card.tsx` | RF07, RF09 | IMPLEMENTED |
+| `order-details-dialog.tsx` | RF01, RF02 | IMPLEMENTED |
+| `add-item-dialog.tsx` | RF02, RF05 | IMPLEMENTED |
+| `close-order-dialog.tsx` | RF03, RF13 | IMPLEMENTED |
+| `cancel-order-dialog.tsx` | RF12 | IMPLEMENTED |
 | `account-dialog.tsx` | RNF08 (profile edit) | IMPLEMENTED |
 | `theme-mode-toggle.tsx` | RNF08 (theme) | IMPLEMENTED |
 | `language-toggle.tsx` | RNF08 (i18n) | IMPLEMENTED |
-| `item-selector.tsx` | RF02, RF10 | NOT YET IMPLEMENTED |
-| `payment-form.tsx` | RF03, RF13 | NOT YET IMPLEMENTED |
-| `comanda-form.tsx` | RF01, RF02 | NOT YET IMPLEMENTED |
 | `date-range-picker.tsx` | RF08 | NOT YET IMPLEMENTED |
 | `export-buttons.tsx` | RF08, RNF07 | NOT YET IMPLEMENTED |
 | `use-offline-sync.ts` | RNF03 | NOT YET IMPLEMENTED |
@@ -2150,29 +2220,29 @@ useEffect(() => {
 ### 9.3 Database Tables to Requirements
 
 | Table | Addresses | Status | Schema |
-|-------|-----------|--------|--------|
+| ------- | ----------- | -------- | -------- |
 | `user_metadata` (auth.users) | RNF05, RNF08 | IMPLEMENTED | auth |
 | `categories` | RF10 | IMPLEMENTED | api |
 | `items` | RF04, RF07, RF10, RF11 | IMPLEMENTED | api |
 | `stock_movements` | RF05, RF06, RF12 | IMPLEMENTED | api |
+| `orders` | RF01, RF03, RF12, RF13 | IMPLEMENTED | api |
+| `order_items` | RF02, RF05 | IMPLEMENTED | api |
+| `payments` | RF03, RF13 | IMPLEMENTED | api |
 | `v_low_stock_items` (view) | RF07, RF09 | IMPLEMENTED | api |
 | `price_history` | RF11 | NOT YET IMPLEMENTED | api |
-| `orders` | RF01, RF12 | NOT YET IMPLEMENTED | api |
-| `order_items` | RF02, RF05, RF11 | NOT YET IMPLEMENTED | api |
-| `payments` | RF03, RF13 | NOT YET IMPLEMENTED | api |
 
 ---
 
 ## Appendix A: i18n Namespace Organization
 
 | Namespace | Content |
-|-----------|---------|
+| ----------- | --------- |
 | `common` | Shared UI elements (buttons, labels, navigation) |
 | `auth` | Authentication screens (signin, signup) |
 | `dashboard` | Main dashboard content |
-| `comandas` | Order management screens |
-| `estoque` | Inventory management screens |
-| `relatorios` | Reporting screens |
+| `orders` | Order management screens (comandas) |
+| `stock` | Inventory management screens (estoque) |
+| `reports` | Reporting screens (relatórios) |
 | `errors` | Error messages (validation, API, auth) |
 | `landing` | Public landing page |
 
@@ -2181,7 +2251,7 @@ useEffect(() => {
 ## Appendix B: Environment Configuration
 
 | Variable | Description | Example |
-|----------|-------------|---------|
+| ---------- | ------------- | --------- |
 | `VITE_SUPABASE_URL` | Supabase project URL | `https://xxx.supabase.co` |
 | `VITE_SUPABASE_PUBLISHABLE_KEY` | Supabase anon key | `eyJ...` |
 | `VITE_BASE_PATH` | Deployment base path | `/gestao-solo/` |
@@ -2191,9 +2261,10 @@ useEffect(() => {
 ## Document Revision History
 
 | Version | Date | Author | Changes |
-|---------|------|--------|---------|
+| --------- | ------ | -------- | --------- |
 | 1.0 | January 2026 | Claude Opus 4.5 | Initial release |
 | 1.1 | January 2026 | Claude Sonnet 4.5 | Stock management implementation, API schema migration, settings and account features |
+| 1.2 | January 2026 | Claude Sonnet 4.5 | Orders management implementation, multiple payment methods, order cancellation, traceability matrix updates |
 
 ---
 
@@ -2238,26 +2309,45 @@ useEffect(() => {
 - ✅ Automated migration execution on push
 - ✅ Supabase CLI integration
 
+### Completed in Version 1.2 (January 2026)
+
+**Order Management System (RF01-RF03, RF05, RF12, RF13):**
+
+- ✅ Orders table with status workflow (open/closed/cancelled)
+- ✅ Order items table with customizations support (JSONB)
+- ✅ Payments table for multiple payment methods
+- ✅ RLS policies for orders, order_items, payments
+- ✅ Display ID generation (6-character unique codes)
+- ✅ Database functions: add_item_to_order, remove_item_from_order, close_order, cancel_order
+- ✅ Automatic stock deduction when adding items (RF05)
+- ✅ Stock return option on order cancellation (RF12)
+- ✅ Multiple payment methods support (Pix, Credit, Debit, Cash, Voucher, Online)
+- ✅ Payment validation (total must match order amount)
+
+**User Interface Components:**
+
+- ✅ Orders route with status filtering (open/closed/cancelled)
+- ✅ Order creation dialog with customer name validation
+- ✅ Order details dialog with full item management
+- ✅ Add item dialog with quantity and customization support
+- ✅ Close order dialog with multiple payment entry
+- ✅ Cancel order dialog with stock return option
+- ✅ Order age indicators (time since creation)
+- ✅ Status badges with semantic colors
+- ✅ Customer name search functionality
+
+**Integration:**
+
+- ✅ Stock movements linked to order operations
+- ✅ Usage count tracking for items
+- ✅ Order queries with React Query integration
+- ✅ i18n support for orders namespace (PT/EN)
+- ✅ Toast notifications for order operations
+- ✅ Error handling with user-friendly messages
+
 ### Pending Implementation (Prioritized Roadmap)
 
-**Phase 2 - Order Management (Core Business Flow):**
-
-- 🔲 Comandas table and RLS policies (RF01)
-- 🔲 Comanda items table with price snapshot (RF02, RF11)
-- 🔲 Comanda lifecycle (open → closed → cancelled) (RF12)
-- 🔲 Item selector component for adding to orders (RF02, RF10)
-- 🔲 Comanda detail view with item list
-- 🔲 Close comanda functionality with stock deduction (RF05)
-
-**Phase 3 - Payment Tracking:**
-
-- 🔲 Payments table (RF03, RF13)
-- 🔲 Payment form component (single and split payments)
-- 🔲 Payment method selection (pix, credit, debit, cash)
-- 🔲 Payment validation (must equal total)
-- 🔲 Comanda closure integration
-
-**Phase 4 - Reporting and Analytics:**
+**Phase 3 - Reporting and Analytics:**
 
 - 🔲 Sales summary reports (RF08)
 - 🔲 Date range picker component
@@ -2265,20 +2355,20 @@ useEffect(() => {
 - 🔲 Top selling items report
 - 🔲 Stock value report
 - 🔲 Export functionality (PDF, CSV, Print)
+- 🔲 Data backup/restore (RNF07)
 
-**Phase 5 - Advanced Features:**
+**Phase 4 - Advanced Features:**
 
 - 🔲 Price history tracking (RF11)
 - 🔲 Price history view component
 - 🔲 Offline sync with IndexedDB (RNF03)
 - 🔲 Conflict resolution for offline changes
-- 🔲 Data backup/restore (RNF07)
 - 🔲 Progressive Web App manifest optimization
+- 🔲 Push notifications for critical stock (RF09)
 
-**Phase 6 - Polish and Optimization:**
+**Phase 5 - Polish and Optimization:**
 
 - 🔲 Real-time subscriptions for stock alerts
-- 🔲 Push notifications for critical stock
 - 🔲 Performance optimization for large datasets
 - 🔲 Virtual scrolling for long lists
 - 🔲 Image upload for items (optional)

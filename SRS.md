@@ -91,9 +91,9 @@ Oferecer apoio informatizado ao controle de vendas e de estoque de operações s
 
 | Status | Requisitos |
 |--------|------------|
-| ✅ **Implementado** | RF04, RF06, RF07, RF10, RNF08 |
+| ✅ **Implementado** | RF01, RF02, RF03, RF04, RF05, RF06, RF07, RF10, RF12, RF13, RNF08 |
 | 🔄 **Parcialmente Implementado** | RNF07 (schema pronto, export/import pendente) |
-| 🔲 **Pendente** | RF01, RF02, RF03, RF05, RF08, RF09, RF11, RF12, RF13, RNF01-RNF06 |
+| 🔲 **Pendente** | RF08, RF09, RF11, RNF01-RNF06 |
 
 ### 4.2 Versão 1.1 - Sistema de Gestão de Estoque (Janeiro 2026)
 
@@ -136,24 +136,69 @@ Oferecer apoio informatizado ao controle de vendas e de estoque de operações s
 * i18n bilíngue (pt/en)
 * CI/CD com GitHub Actions
 
-### 4.3 Próximas Entregas Planejadas
+### 4.3 Versão 1.2 - Sistema de Gestão de Comandas (Janeiro 2026)
 
-**Versão 1.2 - Gestão de Comandas (Prioridade Alta):**
+**Funcionalidades Entregues:**
 
-* Abertura de comandas nominais (RF01)
-* Adição de itens às comandas (RF02)
-* Fechamento com registro de pagamento (RF03)
-* Baixa automática de estoque (RF05)
+1. **Gestão de Comandas (RF01):**
+   * Abertura de comandas nominais
+   * Display ID único de 6 caracteres (ex: ABC123)
+   * Listagem com filtros por status (abertas/fechadas/canceladas)
+   * Busca por nome de cliente
+   * Edição de nome do cliente (apenas comandas abertas)
 
-**Versão 1.3 - Pagamentos e Cancelamentos:**
+2. **Lançamento de Itens (RF02, RF05):**
+   * Adição de itens às comandas abertas
+   * Baixa automática de estoque no momento da adição (não no fechamento)
+   * Validação de estoque disponível antes de adicionar
+   * Suporte a customizações por item (observações)
+   * Remoção de itens de comandas abertas
+   * Registro de movimentações em histórico de estoque
 
-* Múltiplas formas de pagamento (RF13)
-* Cancelamento de comandas (RF12)
-* Histórico de transações
+3. **Fechamento e Pagamento (RF03, RF13):**
+   * Fechamento de comandas com validação de pagamento total
+   * Múltiplos métodos de pagamento por comanda (Pix, Crédito, Débito, Dinheiro, Voucher, Online)
+   * Registro imutável de pagamentos
+   * Atualização de contadores de uso dos itens
 
-**Versão 1.4 - Relatórios:**
+4. **Cancelamento de Comandas (RF12):**
+   * Cancelamento de comandas abertas ou fechadas (estorno)
+   * Opção de devolução de estoque ao cancelar
+   * Registro de motivo do cancelamento
+   * Manutenção de histórico de comandas canceladas para auditoria
 
-* Relatórios de vendas (RF08)
-* Alertas de reposição push (RF09)
-* Histórico de preços (RF11)
-* Exportação de dados (RNF07)
+**Banco de Dados:**
+
+* Tabela `api.orders` com status (open/closed/cancelled)
+* Tabela `api.order_items` com suporte a customizações JSONB
+* Tabela `api.payments` com registro de múltiplos pagamentos
+* Funções PostgreSQL: `add_item_to_order`, `remove_item_from_order`, `close_order`, `cancel_order`
+* Políticas RLS para isolamento de dados por usuário
+* Índices otimizados para busca e ordenação
+
+**Interface:**
+
+* Página de comandas com visualização por status
+* Dialog de criação de comanda
+* Dialog de detalhes com gestão completa de itens
+* Dialog de fechamento com múltiplos pagamentos
+* Dialog de cancelamento com opção de devolução de estoque
+* Indicadores de idade da comanda (tempo desde criação)
+* Badges de status com cores semânticas
+
+### 4.4 Próximas Entregas Planejadas
+
+**Versão 1.3 - Relatórios e Análises:**
+
+* Relatórios de vendas com períodos configuráveis (RF08)
+* Exportação de dados (PDF, CSV) (RNF07)
+* Itens mais vendidos
+* Valor de estoque atual
+* Breakdown por forma de pagamento
+
+**Versão 1.4 - Funcionalidades Avançadas:**
+
+* Alertas push de reposição (RF09)
+* Histórico de alterações de preços (RF11)
+* PWA offline-first completo (RNF03)
+* Otimizações de performance mobile (RNF01, RNF04)
