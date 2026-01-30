@@ -1,0 +1,63 @@
+{
+  "title": "Reports",
+  "datePresets": {
+    "today": "Today",
+    "thisWeek": "This Week",
+    "thisMonth": "This Month",
+    "last30Days": "Last 30 Days",
+    "custom": "Custom"
+  },
+  "salesSummary": {
+    "title": "Sales Summary",
+    "description": "Overview of sales performance for the selected period",
+    "totalRevenue": "Total Revenue",
+    "orderCount": "Closed Orders",
+    "itemsSold": "Items Sold",
+    "paymentBreakdown": "Payment Methods"
+  },
+  "topItems": {
+    "title": "Top Selling Items",
+    "description": "Best performing products by quantity and revenue",
+    "noData": "No sales recorded for the selected period",
+    "table": {
+      "rank": "#",
+      "item": "Item",
+      "quantity": "Quantity",
+      "revenue": "Revenue"
+    }
+  },
+  "stockValue": {
+    "title": "Stock Value",
+    "description": "Total value of current inventory",
+    "totalValue": "Total Value",
+    "itemCount": "{{count}} item",
+    "itemCount_other": "{{count}} items",
+    "merchandise": "Merchandise",
+    "supplies": "Supplies",
+    "ofTotal": "of total"
+  },
+  "lowStock": {
+    "title": "Stock Alerts",
+    "description": "Items that need restocking",
+    "allGood": "All good!",
+    "noItemsNeedRestock": "No items need restocking",
+    "critical": "Critical",
+    "low": "Low",
+    "threshold": "Threshold",
+    "statusCritical": "CRITICAL",
+    "statusLow": "LOW"
+  },
+  "paymentMethods": {
+    "pix": "Pix",
+    "credit": "Credit",
+    "debit": "Debit",
+    "cash": "Cash",
+    "voucher": "Voucher",
+    "online": "Online"
+  },
+  "errors": {
+    "ordersLoadFailed": "Failed to load sales data",
+    "stockLoadFailed": "Failed to load stock data",
+    "lowStockLoadFailed": "Failed to load stock alerts"
+  }
+}

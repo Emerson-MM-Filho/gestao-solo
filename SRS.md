@@ -90,10 +90,10 @@ Oferecer apoio informatizado ao controle de vendas e de estoque de operações s
 ### 4.1 Resumo por Requisito (Atualizado: Janeiro 2026)
 
 | Status | Requisitos |
-|--------|------------|
-| ✅ **Implementado** | RF01, RF02, RF03, RF04, RF05, RF06, RF07, RF10, RF12, RF13, RNF08 |
+| -------- | ------------ |
+| ✅ **Implementado** | RF01, RF02, RF03, RF04, RF05, RF06, RF07, RF08, RF10, RF12, RF13, RNF08 |
 | 🔄 **Parcialmente Implementado** | RNF07 (schema pronto, export/import pendente) |
-| 🔲 **Pendente** | RF08, RF09, RF11, RNF01-RNF06 |
+| 🔲 **Pendente** | RF09, RF11, RNF01-RNF06 |
 
 ### 4.2 Versão 1.1 - Sistema de Gestão de Estoque (Janeiro 2026)
 
