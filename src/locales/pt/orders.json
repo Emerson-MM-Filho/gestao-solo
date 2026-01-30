@@ -1,0 +1,143 @@
+{
+  "title": "Comandas",
+  "newOrder": "Nova Comanda",
+  "noOrders": "Nenhuma comanda encontrada",
+  "createFirstOrder": "Crie sua primeira comanda para começar",
+  "filters": {
+    "all": "Todas",
+    "open": "Abertas",
+    "closed": "Fechadas",
+    "cancelled": "Canceladas"
+  },
+  "status": {
+    "open": "Aberta",
+    "closed": "Fechada",
+    "cancelled": "Cancelada"
+  },
+  "card": {
+    "customer": "Cliente",
+    "total": "Total",
+    "age": "Tempo",
+    "items": "{{count}} item",
+    "items_other": "{{count}} itens"
+  },
+  "createDialog": {
+    "title": "Nova Comanda",
+    "description": "Informe o nome do cliente para criar uma nova comanda",
+    "customerName": "Nome do Cliente",
+    "customerNamePlaceholder": "Digite o nome do cliente",
+    "cancel": "Cancelar",
+    "create": "Criar"
+  },
+  "detailsDialog": {
+    "title": "Comanda {{displayId}}",
+    "customer": "Cliente",
+    "status": "Status",
+    "created": "Criada",
+    "closed": "Fechada",
+    "cancelled": "Cancelada",
+    "items": "Itens",
+    "addItem": "Adicionar Item",
+    "noItems": "Nenhum item adicionado",
+    "payments": "Pagamentos",
+    "total": "Total",
+    "actions": "Ações",
+    "closeOrder": "Fechar Comanda",
+    "cancelOrder": "Cancelar Comanda",
+    "deleteOrder": "Excluir Comanda"
+  },
+  "messages": {
+    "orderCreated": "Comanda criada com sucesso",
+    "orderClosed": "Comanda fechada com sucesso",
+    "orderCancelled": "Comanda cancelada com sucesso",
+    "orderDeleted": "Comanda excluída com sucesso",
+    "itemAdded": "Item adicionado com sucesso",
+    "itemRemoved": "Item removido com sucesso",
+    "insufficientStock": "Estoque insuficiente. Disponível: {{available}}",
+    "paymentMismatch": "Total dos pagamentos não corresponde ao total da comanda"
+  },
+  "errors": {
+    "loadOrders": "Erro ao carregar comandas",
+    "createOrder": "Erro ao criar comanda",
+    "loadOrderDetails": "Erro ao carregar detalhes da comanda",
+    "addItem": "Erro ao adicionar item",
+    "removeItem": "Erro ao remover item",
+    "closeOrder": "Erro ao fechar comanda",
+    "cancelOrder": "Erro ao cancelar comanda",
+    "deleteOrder": "Erro ao excluir comanda",
+    "invalidQuantity": "Quantidade inválida",
+    "customerNameRequired": "Nome do cliente é obrigatório",
+    "customerNameMaxLength": "Nome do cliente deve ter no máximo 100 caracteres",
+    "paymentRequired": "Pelo menos um método de pagamento é obrigatório",
+    "paymentAmountPositive": "Valor do pagamento deve ser maior que zero",
+    "paymentTotalMismatch": "Total dos pagamentos ({{totalPaid}}) não corresponde ao total da comanda ({{orderTotal}})"
+  },
+  "validation": {
+    "customerNameRequired": "Nome do cliente é obrigatório",
+    "customerNameMaxLength": "Nome do cliente deve ter no máximo 100 caracteres",
+    "paymentRequired": "Pelo menos um método de pagamento é obrigatório",
+    "paymentAmountPositive": "Valor do pagamento deve ser maior que zero"
+  },
+  "time": {
+    "day": "dia",
+    "days": "dias",
+    "hour": "h",
+    "minute": "min",
+    "minutes": "min"
+  },
+  "paymentMethods": {
+    "pix": "PIX",
+    "credit": "Cartão de Crédito",
+    "debit": "Cartão de Débito",
+    "cash": "Dinheiro",
+    "voucher": "Vale"
+  },
+  "addItemDialog": {
+    "description": "Selecione um item e especifique a quantidade",
+    "itemLabel": "Item",
+    "selectItemPlaceholder": "Selecione um item",
+    "quantityLabel": "Quantidade",
+    "customizationsLabel": "Personalizações (uma por linha, por unidade)",
+    "customizationsPlaceholder": "Ex: sem salada\nqueijo extra",
+    "customizationsHelper": "Para {{quantity}} unidade(s), adicione {{quantity}} linha(s) de personalizações",
+    "subtotal": "Subtotal:",
+    "cancel": "Cancelar",
+    "addItem": "Adicionar Item",
+    "stockLabel": "Estoque: {{stock}}"
+  },
+  "closeOrderDialog": {
+    "description": "Especifique os métodos e valores de pagamento",
+    "orderTotal": "Total da Comanda:",
+    "paymentsLabel": "Pagamentos",
+    "addPaymentButton": "Adicionar Pagamento",
+    "totalPaid": "Total Pago:",
+    "difference": "Diferença:",
+    "overpaid": " (pago a mais)",
+    "underpaid": " (pago a menos)",
+    "cancel": "Cancelar",
+    "closeOrderButton": "Fechar Comanda"
+  },
+  "cancelOrderDialog": {
+    "description": "Cancele esta comanda e opcionalmente devolva o estoque ao inventário",
+    "returnStockLabel": "Devolver itens de mercadoria ao estoque",
+    "reasonLabel": "Motivo do Cancelamento (Opcional)",
+    "reasonPlaceholder": "Digite o motivo do cancelamento...",
+    "backButton": "Voltar",
+    "cancelOrderButton": "Cancelar Comanda"
+  },
+  "errorBoundary": {
+    "title": "Algo deu errado",
+    "description": "Ocorreu um erro inesperado. Por favor, tente novamente.",
+    "tryAgain": "Tentar Novamente",
+    "reloadPage": "Recarregar Página"
+  },
+  "removeItemDialog": {
+    "title": "Remover Item",
+    "description": "Tem certeza que deseja remover este item da comanda?"
+  },
+  "deleteOrderDialog": {
+    "description": "Esta ação não pode ser desfeita. Isso irá excluir permanentemente a comanda.",
+    "cancel": "Cancelar",
+    "delete": "Excluir"
+  }
+}
