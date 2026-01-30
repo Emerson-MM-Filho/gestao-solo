@@ -44,7 +44,8 @@
     "actions": "Actions",
     "closeOrder": "Close Order",
     "cancelOrder": "Cancel Order",
-    "deleteOrder": "Delete Order"
+    "deleteOrder": "Delete Order",
+    "customizationsLabel": "Customizations"
   },
   "messages": {
     "orderCreated": "Order created successfully",
@@ -97,9 +98,9 @@
     "itemLabel": "Item",
     "selectItemPlaceholder": "Select an item",
     "quantityLabel": "Quantity",
-    "customizationsLabel": "Customizations (one per line, per unit)",
+    "customizationsLabel": "Customizations (optional)",
     "customizationsPlaceholder": "E.g.: no salad\nextra cheese",
-    "customizationsHelper": "For {{quantity}} unit(s), add {{quantity}} line(s) of customizations",
+    "customizationsHelper": "Customizations apply to all units of this item",
     "subtotal": "Subtotal:",
     "cancel": "Cancel",
     "addItem": "Add Item",

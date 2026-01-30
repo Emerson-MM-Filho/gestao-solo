@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import {
@@ -94,20 +95,15 @@ export function AddItemDialog({
       return;
     }
 
-    // Parse customizations - one per line
-    const customizationsArray = customizations
-      .split("\n")
-      .map((line) => line.trim())
-      .filter((line) => line.length > 0)
-      .map((notes) => ({ notes }));
+    // Trim customizations and pass as string (or null if empty)
+    const trimmedCustomizations = customizations.trim();
 
     addMutation.mutate({
       orderId,
       itemData: {
         item_id: selectedItemId,
         quantity: quantityNum,
-        customizations:
-          customizationsArray.length > 0 ? customizationsArray : null,
+        customizations: trimmedCustomizations || null,
       },
     });
   };
@@ -165,15 +161,15 @@ export function AddItemDialog({
             <Label htmlFor="customizations">
               {t("orders:addItemDialog.customizationsLabel")}
             </Label>
-            <Input
+            <Textarea
               id="customizations"
               value={customizations}
               onChange={(e) => setCustomizations(e.target.value)}
               placeholder={t("orders:addItemDialog.customizationsPlaceholder")}
-              className="h-20"
+              rows={3}
             />
             <p className="text-xs text-muted-foreground">
-              {t("orders:addItemDialog.customizationsHelper", { quantity })}
+              {t("orders:addItemDialog.customizationsHelper")}
             </p>
           </div>
 

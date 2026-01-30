@@ -42,7 +42,7 @@ import {
   canEditOrder,
   canCancelOrder,
 } from "@/lib/order-utils";
-import type { OrderItem, Payment, Customization } from "@/lib/types/order";
+import type { OrderItem, Payment } from "@/lib/types/order";
 import { AddItemDialog } from "./add-item-dialog";
 import { CloseOrderDialog } from "./close-order-dialog";
 import { CancelOrderDialog } from "./cancel-order-dialog";
@@ -188,21 +188,18 @@ export function OrderDetailsDialog({
                                 orderItem.quantity * orderItem.unit_price,
                               )}
                             </div>
-                            {orderItem.customizations &&
-                              orderItem.customizations.length > 0 && (
-                                <div className="mt-2 space-y-1">
-                                  {orderItem.customizations.map(
-                                    (custom: Customization, idx: number) => (
-                                      <div
-                                        key={idx}
-                                        className="text-xs text-muted-foreground"
-                                      >
-                                        Unit {idx + 1}: {custom.notes}
-                                      </div>
-                                    ),
-                                  )}
+                            {orderItem.customizations && (
+                              <div className="mt-2 space-y-1">
+                                <div className="text-xs font-medium text-muted-foreground">
+                                  {t("orders:detailsDialog.customizationsLabel")}:
                                 </div>
-                              )}
+                                <div className="text-xs text-muted-foreground pl-2">
+                                  {orderItem.customizations.split('\n').map((line, idx) => (
+                                    <div key={idx}>• {line}</div>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
                           </div>
                           {canEditOrder(order.status) && (
                             <Button

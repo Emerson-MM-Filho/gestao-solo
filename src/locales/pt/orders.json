@@ -44,7 +44,8 @@
     "actions": "Ações",
     "closeOrder": "Fechar Comanda",
     "cancelOrder": "Cancelar Comanda",
-    "deleteOrder": "Excluir Comanda"
+    "deleteOrder": "Excluir Comanda",
+    "customizationsLabel": "Personalizações"
   },
   "messages": {
     "orderCreated": "Comanda criada com sucesso",
@@ -97,9 +98,9 @@
     "itemLabel": "Item",
     "selectItemPlaceholder": "Selecione um item",
     "quantityLabel": "Quantidade",
-    "customizationsLabel": "Personalizações (uma por linha, por unidade)",
+    "customizationsLabel": "Personalizações (opcional)",
     "customizationsPlaceholder": "Ex: sem salada\nqueijo extra",
-    "customizationsHelper": "Para {{quantity}} unidade(s), adicione {{quantity}} linha(s) de personalizações",
+    "customizationsHelper": "As personalizações se aplicam a todas as unidades deste item",
     "subtotal": "Subtotal:",
     "cancel": "Cancelar",
     "addItem": "Adicionar Item",

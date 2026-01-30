@@ -37,17 +37,13 @@ export interface Order {
   updated_at: string;
 }
 
-export interface Customization {
-  notes: string;
-}
-
 export interface OrderItem {
   id: string;
   order_id: string;
   item_id: string;
   quantity: number;
   unit_price: number;
-  customizations: Customization[] | null;
+  customizations: string | null;
   created_at: string;
   item?: Item; // Joined from items table
 }
@@ -72,7 +68,7 @@ export interface CreateOrderData {
 export interface AddItemToOrderData {
   item_id: string;
   quantity: number;
-  customizations: Customization[] | null;
+  customizations: string | null;
 }
 
 export interface PaymentData {
