@@ -72,11 +72,20 @@ export function getOrderStatusVariant(
  * Get payment method display name
  */
 export function getPaymentMethodLabel(method: string): string {
-  const key = `orders:paymentMethods.${method}` as const;
-  if (i18n.exists(key)) {
-    return i18n.t(key);
+  switch (method) {
+    case "pix":
+      return i18n.t("orders:paymentMethods.pix");
+    case "credit":
+      return i18n.t("orders:paymentMethods.credit");
+    case "debit":
+      return i18n.t("orders:paymentMethods.debit");
+    case "cash":
+      return i18n.t("orders:paymentMethods.cash");
+    case "voucher":
+      return i18n.t("orders:paymentMethods.voucher");
+    default:
+      return method;
   }
-  return method;
 }
 
 /**
