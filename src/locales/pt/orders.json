@@ -1,0 +1,69 @@
+{
+  "title": "Comandas",
+  "newOrder": "Nova Comanda",
+  "noOrders": "Nenhuma comanda encontrada",
+  "createFirstOrder": "Crie sua primeira comanda para começar",
+  "filters": {
+    "all": "Todas",
+    "open": "Abertas",
+    "closed": "Fechadas",
+    "cancelled": "Canceladas"
+  },
+  "status": {
+    "open": "Aberta",
+    "closed": "Fechada",
+    "cancelled": "Cancelada"
+  },
+  "card": {
+    "customer": "Cliente",
+    "total": "Total",
+    "age": "Tempo",
+    "items": "{{count}} item",
+    "items_other": "{{count}} itens"
+  },
+  "createDialog": {
+    "title": "Nova Comanda",
+    "description": "Informe o nome do cliente para criar uma nova comanda",
+    "customerName": "Nome do Cliente",
+    "customerNamePlaceholder": "Digite o nome do cliente",
+    "cancel": "Cancelar",
+    "create": "Criar"
+  },
+  "detailsDialog": {
+    "title": "Comanda {{displayId}}",
+    "customer": "Cliente",
+    "status": "Status",
+    "created": "Criada",
+    "closed": "Fechada",
+    "cancelled": "Cancelada",
+    "items": "Itens",
+    "addItem": "Adicionar Item",
+    "noItems": "Nenhum item adicionado",
+    "payments": "Pagamentos",
+    "total": "Total",
+    "actions": "Ações",
+    "closeOrder": "Fechar Comanda",
+    "cancelOrder": "Cancelar Comanda",
+    "deleteOrder": "Excluir Comanda"
+  },
+  "messages": {
+    "orderCreated": "Comanda criada com sucesso",
+    "orderClosed": "Comanda fechada com sucesso",
+    "orderCancelled": "Comanda cancelada com sucesso",
+    "orderDeleted": "Comanda excluída com sucesso",
+    "itemAdded": "Item adicionado com sucesso",
+    "itemRemoved": "Item removido com sucesso",
+    "insufficientStock": "Estoque insuficiente. Disponível: {{available}}",
+    "paymentMismatch": "Total dos pagamentos não corresponde ao total da comanda"
+  },
+  "errors": {
+    "loadOrders": "Erro ao carregar comandas",
+    "createOrder": "Erro ao criar comanda",
+    "loadOrderDetails": "Erro ao carregar detalhes da comanda",
+    "addItem": "Erro ao adicionar item",
+    "removeItem": "Erro ao remover item",
+    "closeOrder": "Erro ao fechar comanda",
+    "cancelOrder": "Erro ao cancelar comanda",
+    "deleteOrder": "Erro ao excluir comanda"
+  }
+}

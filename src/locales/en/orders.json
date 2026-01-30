@@ -1,0 +1,69 @@
+{
+  "title": "Orders",
+  "newOrder": "New Order",
+  "noOrders": "No orders found",
+  "createFirstOrder": "Create your first order to get started",
+  "filters": {
+    "all": "All",
+    "open": "Open",
+    "closed": "Closed",
+    "cancelled": "Cancelled"
+  },
+  "status": {
+    "open": "Open",
+    "closed": "Closed",
+    "cancelled": "Cancelled"
+  },
+  "card": {
+    "customer": "Customer",
+    "total": "Total",
+    "age": "Time",
+    "items": "{{count}} item",
+    "items_other": "{{count}} items"
+  },
+  "createDialog": {
+    "title": "New Order",
+    "description": "Enter customer name to create a new order",
+    "customerName": "Customer Name",
+    "customerNamePlaceholder": "Enter customer name",
+    "cancel": "Cancel",
+    "create": "Create"
+  },
+  "detailsDialog": {
+    "title": "Order {{displayId}}",
+    "customer": "Customer",
+    "status": "Status",
+    "created": "Created",
+    "closed": "Closed",
+    "cancelled": "Cancelled",
+    "items": "Items",
+    "addItem": "Add Item",
+    "noItems": "No items added",
+    "payments": "Payments",
+    "total": "Total",
+    "actions": "Actions",
+    "closeOrder": "Close Order",
+    "cancelOrder": "Cancel Order",
+    "deleteOrder": "Delete Order"
+  },
+  "messages": {
+    "orderCreated": "Order created successfully",
+    "orderClosed": "Order closed successfully",
+    "orderCancelled": "Order cancelled successfully",
+    "orderDeleted": "Order deleted successfully",
+    "itemAdded": "Item added successfully",
+    "itemRemoved": "Item removed successfully",
+    "insufficientStock": "Insufficient stock. Available: {{available}}",
+    "paymentMismatch": "Payment total does not match order total"
+  },
+  "errors": {
+    "loadOrders": "Error loading orders",
+    "createOrder": "Error creating order",
+    "loadOrderDetails": "Error loading order details",
+    "addItem": "Error adding item",
+    "removeItem": "Error removing item",
+    "closeOrder": "Error closing order",
+    "cancelOrder": "Error cancelling order",
+    "deleteOrder": "Error deleting order"
+  }
+}
