@@ -1,12 +1,12 @@
 /**
- * Supabase client for seed scripts (Node.js environment)
+ * Supabase client for seed scripts (Bun environment)
  */
 
 import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = process.env.VITE_SUPABASE_URL;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-const supabasePublishableKey = process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+const supabaseUrl = Bun.env.VITE_SUPABASE_URL;
+const supabaseServiceKey = Bun.env.SUPABASE_SERVICE_ROLE_KEY;
+const supabasePublishableKey = Bun.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
 if (!supabaseUrl) {
   throw new Error("Missing VITE_SUPABASE_URL environment variable");
@@ -35,7 +35,7 @@ if (!supabaseServiceKey) {
 }
 
 /**
- * Supabase client for Node.js/Bun environment
+ * Supabase client for Bun environment
  * Uses service role key if available (bypasses RLS)
  * Falls back to publishable key (requires authenticated user)
  */
