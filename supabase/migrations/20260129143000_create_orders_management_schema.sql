@@ -376,8 +376,8 @@ BEGIN
   SELECT SUM((p->>'amount')::NUMERIC) INTO v_total_paid
   FROM jsonb_array_elements(p_payments) p;
 
-  -- Validate payment total matches order total
-  IF v_total_paid != v_order.total_amount THEN
+  -- Validate payment total matches order total (with 0.01 tolerance for floating point)
+  IF ABS(v_total_paid - v_order.total_amount) > 0.01 THEN
     RETURN jsonb_build_object(
       'success', false,
       'error', 'Payment total does not match order total',

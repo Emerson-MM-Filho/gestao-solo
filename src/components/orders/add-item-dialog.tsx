@@ -90,7 +90,7 @@ export function AddItemDialog({
 
     const quantityNum = parseFloat(quantity);
     if (isNaN(quantityNum) || quantityNum <= 0) {
-      toast.error("Invalid quantity");
+      toast.error(t("orders:errors.invalidQuantity"));
       return;
     }
 
@@ -126,23 +126,23 @@ export function AddItemDialog({
         <DialogHeader>
           <DialogTitle>{t("orders:detailsDialog.addItem")}</DialogTitle>
           <DialogDescription>
-            Select an item and specify quantity
+            {t("orders:addItemDialog.description")}
           </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-4 py-4">
           <div className="space-y-2">
-            <Label>Item</Label>
+            <Label>{t("orders:addItemDialog.itemLabel")}</Label>
             <Select value={selectedItemId} onValueChange={setSelectedItemId}>
               <SelectTrigger>
-                <SelectValue placeholder="Select an item" />
+                <SelectValue placeholder={t("orders:addItemDialog.selectItemPlaceholder")} />
               </SelectTrigger>
               <SelectContent>
                 {activeItems.map((item: Item) => (
                   <SelectItem key={item.id} value={item.id}>
                     {item.name} - {formatCurrency(item.price)}
                     {item.type === "merchandise" &&
-                      ` (Stock: ${item.stock_quantity})`}
+                      ` (${t("orders:addItemDialog.stockLabel", { stock: item.stock_quantity })})`}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -150,7 +150,7 @@ export function AddItemDialog({
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="quantity">Quantity</Label>
+            <Label htmlFor="quantity">{t("orders:addItemDialog.quantityLabel")}</Label>
             <Input
               id="quantity"
               type="number"
@@ -163,24 +163,24 @@ export function AddItemDialog({
 
           <div className="space-y-2">
             <Label htmlFor="customizations">
-              Customizations (one per line, per unit)
+              {t("orders:addItemDialog.customizationsLabel")}
             </Label>
             <Input
               id="customizations"
               value={customizations}
               onChange={(e) => setCustomizations(e.target.value)}
-              placeholder="E.g.: no salad&#10;extra cheese"
+              placeholder={t("orders:addItemDialog.customizationsPlaceholder")}
               className="h-20"
             />
             <p className="text-xs text-muted-foreground">
-              For {quantity} unit(s), add {quantity} line(s) of customizations
+              {t("orders:addItemDialog.customizationsHelper", { quantity })}
             </p>
           </div>
 
           {selectedItem && (
             <div className="rounded-lg bg-muted p-3 text-sm">
               <div className="flex justify-between">
-                <span>Subtotal:</span>
+                <span>{t("orders:addItemDialog.subtotal")}</span>
                 <span className="font-medium">
                   {formatCurrency(selectedItem.price * parseFloat(quantity || "0"))}
                 </span>
@@ -191,13 +191,13 @@ export function AddItemDialog({
 
         <DialogFooter>
           <Button variant="outline" onClick={() => onOpenChange(false)}>
-            Cancel
+            {t("orders:addItemDialog.cancel")}
           </Button>
           <Button
             onClick={handleAdd}
             disabled={!selectedItemId || addMutation.isPending}
           >
-            Add Item
+            {t("orders:addItemDialog.addItem")}
           </Button>
         </DialogFooter>
       </DialogContent>

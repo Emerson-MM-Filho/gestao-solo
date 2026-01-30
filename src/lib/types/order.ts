@@ -17,7 +17,6 @@ export const PaymentMethodOptions = {
   DEBIT: "debit",
   CASH: "cash",
   VOUCHER: "voucher",
-  ONLINE: "online",
 } as const;
 
 export type PaymentMethod =

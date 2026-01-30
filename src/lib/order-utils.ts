@@ -1,5 +1,6 @@
 // Order Domain Utilities
 
+import i18n from "@/i18n";
 import type { OrderItem, OrderStatus, PaymentData } from "./types/order";
 
 /**
@@ -39,15 +40,16 @@ export function formatOrderAge(createdAt: string): string {
   const days = Math.floor(hours / 24);
 
   if (days > 0) {
-    return `${days} day${days > 1 ? "s" : ""}`;
+    const dayLabel = days > 1 ? i18n.t("orders:time.days") : i18n.t("orders:time.day");
+    return `${days} ${dayLabel}`;
   }
 
   if (hours > 0) {
     const remainingMinutes = minutes % 60;
-    return `${hours}h ${remainingMinutes}min`;
+    return `${hours}${i18n.t("orders:time.hour")} ${remainingMinutes}${i18n.t("orders:time.minute")}`;
   }
 
-  return `${minutes} min`;
+  return `${minutes} ${i18n.t("orders:time.minute")}`;
 }
 
 /**
@@ -70,14 +72,11 @@ export function getOrderStatusVariant(
  * Get payment method display name
  */
 export function getPaymentMethodLabel(method: string): string {
-  const labels: Record<string, string> = {
-    pix: "PIX",
-    credit: "Credit Card",
-    debit: "Debit Card",
-    cash: "Cash",
-  };
-
-  return labels[method] || method;
+  const key = `orders:paymentMethods.${method}` as const;
+  if (i18n.exists(key)) {
+    return i18n.t(key);
+  }
+  return method;
 }
 
 /**
@@ -112,11 +111,11 @@ export function validateCustomerName(name: string): string | null {
   const trimmed = name.trim();
 
   if (trimmed.length === 0) {
-    return "Customer name is required";
+    return i18n.t("orders:validation.customerNameRequired");
   }
 
   if (trimmed.length > 100) {
-    return "Customer name must be 100 characters or less";
+    return i18n.t("orders:validation.customerNameMaxLength");
   }
 
   return null;
@@ -130,13 +129,13 @@ export function validatePayments(
   orderTotal: number,
 ): string | null {
   if (payments.length === 0) {
-    return "At least one payment method is required";
+    return i18n.t("orders:validation.paymentRequired");
   }
 
   // Validate each payment amount
   for (const payment of payments) {
     if (payment.amount <= 0) {
-      return `Payment amount must be greater than zero`;
+      return i18n.t("orders:validation.paymentAmountPositive");
     }
   }
 
@@ -145,7 +144,10 @@ export function validatePayments(
 
   // Validate total matches (allow 0.01 tolerance for floating point)
   if (Math.abs(totalPaid - orderTotal) > 0.01) {
-    return `Payment total (${totalPaid.toFixed(2)}) does not match order total (${orderTotal.toFixed(2)})`;
+    return i18n.t("orders:errors.paymentTotalMismatch", {
+      totalPaid: totalPaid.toFixed(2),
+      orderTotal: orderTotal.toFixed(2),
+    });
   }
 
   return null;

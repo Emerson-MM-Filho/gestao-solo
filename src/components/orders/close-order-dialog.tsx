@@ -130,14 +130,14 @@ export function CloseOrderDialog({
         <DialogHeader>
           <DialogTitle>{t("orders:detailsDialog.closeOrder")}</DialogTitle>
           <DialogDescription>
-            Specify payment methods and amounts
+            {t("orders:closeOrderDialog.description")}
           </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-4 py-4">
           <div className="rounded-lg bg-muted p-3">
             <div className="flex justify-between text-sm">
-              <span>Order Total:</span>
+              <span>{t("orders:closeOrderDialog.orderTotal")}</span>
               <span className="font-semibold">
                 {formatCurrency(orderTotal)}
               </span>
@@ -146,15 +146,15 @@ export function CloseOrderDialog({
 
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <Label>Payments</Label>
+              <Label>{t("orders:closeOrderDialog.paymentsLabel")}</Label>
               <Button
                 size="sm"
                 variant="outline"
                 onClick={handleAddPayment}
-                aria-label="Add another payment method"
+                aria-label={t("orders:closeOrderDialog.addPaymentButton")}
               >
                 <IconPlus className="h-4 w-4" aria-hidden="true" />
-                Add Payment
+                {t("orders:closeOrderDialog.addPaymentButton")}
               </Button>
             </div>
 
@@ -172,22 +172,19 @@ export function CloseOrderDialog({
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value={PaymentMethodOptions.PIX}>
-                        PIX
+                        {t("orders:paymentMethods.pix")}
                       </SelectItem>
                       <SelectItem value={PaymentMethodOptions.CREDIT}>
-                        Credit
+                        {t("orders:paymentMethods.credit")}
                       </SelectItem>
                       <SelectItem value={PaymentMethodOptions.DEBIT}>
-                        Debit
+                        {t("orders:paymentMethods.debit")}
                       </SelectItem>
                       <SelectItem value={PaymentMethodOptions.CASH}>
-                        Cash
+                        {t("orders:paymentMethods.cash")}
                       </SelectItem>
                       <SelectItem value={PaymentMethodOptions.VOUCHER}>
-                        Voucher
-                      </SelectItem>
-                      <SelectItem value={PaymentMethodOptions.ONLINE}>
-                        Online
+                        {t("orders:paymentMethods.voucher")}
                       </SelectItem>
                     </SelectContent>
                   </Select>
@@ -209,7 +206,7 @@ export function CloseOrderDialog({
                     size="icon"
                     variant="ghost"
                     onClick={() => handleRemovePayment(index)}
-                    aria-label="Remove this payment method"
+                    aria-label={t("orders:closeOrderDialog.addPaymentButton")}
                   >
                     <IconTrash className="h-4 w-4" aria-hidden="true" />
                   </Button>
@@ -222,17 +219,17 @@ export function CloseOrderDialog({
 
           <div className="space-y-2">
             <div className="flex justify-between text-sm">
-              <span>Total Paid:</span>
+              <span>{t("orders:closeOrderDialog.totalPaid")}</span>
               <span className={difference !== 0 ? "text-destructive" : ""}>
                 {formatCurrency(totalPaid)}
               </span>
             </div>
             {difference !== 0 && (
               <div className="flex justify-between text-sm font-medium">
-                <span>Difference:</span>
+                <span>{t("orders:closeOrderDialog.difference")}</span>
                 <span className="text-destructive">
                   {formatCurrency(Math.abs(difference))}
-                  {difference > 0 ? " (overpaid)" : " (underpaid)"}
+                  {difference > 0 ? t("orders:closeOrderDialog.overpaid") : t("orders:closeOrderDialog.underpaid")}
                 </span>
               </div>
             )}
@@ -247,13 +244,13 @@ export function CloseOrderDialog({
               resetForm();
             }}
           >
-            Cancel
+            {t("orders:closeOrderDialog.cancel")}
           </Button>
           <Button
             onClick={handleClose}
             disabled={closeMutation.isPending || difference !== 0}
           >
-            Close Order
+            {t("orders:closeOrderDialog.closeOrderButton")}
           </Button>
         </DialogFooter>
       </DialogContent>

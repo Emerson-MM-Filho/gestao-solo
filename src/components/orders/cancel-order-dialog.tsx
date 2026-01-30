@@ -81,7 +81,7 @@ export function CancelOrderDialog({
         <DialogHeader>
           <DialogTitle>{t("orders:detailsDialog.cancelOrder")}</DialogTitle>
           <DialogDescription>
-            Cancel this order and optionally return stock to inventory
+            {t("orders:cancelOrderDialog.description")}
           </DialogDescription>
         </DialogHeader>
 
@@ -96,17 +96,17 @@ export function CancelOrderDialog({
               htmlFor="returnStock"
               className="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
             >
-              Return merchandise items to stock
+              {t("orders:cancelOrderDialog.returnStockLabel")}
             </Label>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="reason">Cancellation Reason (Optional)</Label>
+            <Label htmlFor="reason">{t("orders:cancelOrderDialog.reasonLabel")}</Label>
             <Textarea
               id="reason"
               value={reason}
               onChange={(e) => setReason(e.target.value)}
-              placeholder="Enter reason for cancellation..."
+              placeholder={t("orders:cancelOrderDialog.reasonPlaceholder")}
               rows={3}
             />
           </div>
@@ -120,14 +120,14 @@ export function CancelOrderDialog({
               resetForm();
             }}
           >
-            Back
+            {t("orders:cancelOrderDialog.backButton")}
           </Button>
           <Button
             variant="destructive"
             onClick={handleCancel}
             disabled={cancelMutation.isPending}
           >
-            Cancel Order
+            {t("orders:cancelOrderDialog.cancelOrderButton")}
           </Button>
         </DialogFooter>
       </DialogContent>

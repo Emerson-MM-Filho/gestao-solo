@@ -305,17 +305,16 @@ export function OrderDetailsDialog({
               {t("orders:detailsDialog.deleteOrder")}
             </AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete the
-              order.
+              {t("orders:deleteOrderDialog.description")}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>{t("orders:deleteOrderDialog.cancel")}</AlertDialogCancel>
             <AlertDialogAction
               onClick={handleDeleteOrder}
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             >
-              Delete
+              {t("orders:deleteOrderDialog.delete")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -328,15 +327,15 @@ export function OrderDetailsDialog({
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Remove Item</AlertDialogTitle>
+            <AlertDialogTitle>{t("orders:removeItemDialog.title")}</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to remove this item from the order?
+              {t("orders:removeItemDialog.description")}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>{t("orders:addItemDialog.cancel")}</AlertDialogCancel>
             <AlertDialogAction onClick={confirmRemoveItem}>
-              Remove
+              {t("orders:detailsDialog.deleteOrder")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
