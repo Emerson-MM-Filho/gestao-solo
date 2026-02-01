@@ -1,0 +1,1134 @@
+{
+	"info": {
+		"_postman_id": "25f4477e-a944-4d26-91e9-06dcc4b0720a",
+		"name": "Financial",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43771734",
+		"_collection_link": "https://cloudy-meadow-2877056.postman.co/workspace/Andr%C3%A9-Uji's-Workspace~ebbf7717-3e30-400d-83c1-c2b6d0c617b2/collection/43771734-25f4477e-a944-4d26-91e9-06dcc4b0720a?action=share&source=collection_link&creator=43771734"
+	},
+	"item": [
+		{
+			"name": "merchants/{merchantId}",
+			"item": [
+				{
+					"name": "Get reconciliation by merchant",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/merchants/:merchantId/reconciliation?competence={{competence}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"merchants",
+								":merchantId",
+								"reconciliation"
+							],
+							"query": [
+								{
+									"key": "competence",
+									"value": "{{competence}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "merchantId",
+									"value": "<uuid>",
+									"description": "(Required) Merchant's UUID"
+								}
+							]
+						},
+						"description": "Returns the reconciliation file, which contains all financial entries that occurred within a calculation period."
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/merchants/:merchantId/reconciliation",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"merchants",
+										":merchantId",
+										"reconciliation"
+									],
+									"variable": [
+										{
+											"key": "merchantId",
+											"value": "<uuid>",
+											"description": "(Required) Merchant's UUID"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"downloadPath\": \"<string>\",\n  \"createdAt\": \"<yyyy-MM-dd'T'HH:mm:ss.SSSXXX>\"\n}"
+						},
+						{
+							"name": "Bad request, check the request params",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/merchants/:merchantId/reconciliation",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"merchants",
+										":merchantId",
+										"reconciliation"
+									],
+									"variable": [
+										{
+											"key": "merchantId",
+											"value": "<uuid>",
+											"description": "(Required) Merchant's UUID"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"field\": \"<string>\",\n    \"details\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      }\n    ]\n  }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Settlements by merchant",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/merchants/:merchantId/settlements",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"merchants",
+								":merchantId",
+								"settlements"
+							],
+							"variable": [
+								{
+									"key": "merchantId",
+									"value": "<uuid>",
+									"description": "(Required) Merchant's UUID"
+								},
+								{
+									"key": "beginPaymentDate",
+									"value": "<string>",
+									"description": "Start date for payment date filter"
+								},
+								{
+									"key": "endPaymentDate",
+									"value": "<string>",
+									"description": "End date for payment date filter"
+								},
+								{
+									"key": "beginCalculationDate",
+									"value": "<string>",
+									"description": "Start date for sales period date filter"
+								},
+								{
+									"key": "endCalculationDate",
+									"value": "<string>",
+									"description": "End date for sales period date filter"
+								}
+							]
+						},
+						"description": "Returns the net amount to be received by partner stores, as well as the value of receivables records sent to financial institutions. <br></br> The submission of the beginPaymentDate and endPaymentDate or beginCalculationDate and endCalculationDate information is mandatory in the request."
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/merchants/:merchantId/settlements",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"merchants",
+										":merchantId",
+										"settlements"
+									],
+									"variable": [
+										{
+											"key": "merchantId",
+											"value": "<uuid>",
+											"description": "(Required) Merchant's UUID"
+										},
+										{
+											"key": "beginPaymentDate",
+											"value": "<string>",
+											"description": "Start date for payment date filter"
+										},
+										{
+											"key": "endPaymentDate",
+											"value": "<string>",
+											"description": "End date for payment date filter"
+										},
+										{
+											"key": "beginCalculationDate",
+											"value": "<string>",
+											"description": "Start date for sales period date filter"
+										},
+										{
+											"key": "endCalculationDate",
+											"value": "<string>",
+											"description": "End date for sales period date filter"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"beginDate\": \"<yyyy-MM-dd>\",\n  \"endDate\": \"<yyyy-MM-dd>\",\n  \"balance\": \"<number>\",\n  \"merchantId\": \"<string>\",\n  \"settlements\": [\n    {\n      \"startDateCalculation\": \"<yyyy-MM-dd>\",\n      \"endDateCalculation\": \"<yyyy-MM-dd>\",\n      \"closingItems\": [\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\",\n          \"product\": \"<string>\",\n          \"amount\": \"<number>\",\n          \"status\": \"<string>\",\n          \"transactionId\": \"<string>\",\n          \"accountDetails\": {\n            \"bankName\": \"<string>\",\n            \"bankNumber\": \"<string>\",\n            \"branchCode\": \"<string>\",\n            \"branchDigit\": \"<string>\",\n            \"accountNumber\": \"<string>\",\n            \"accountDigit\": \"<string>\",\n            \"documentNumber\": \"<string>\"\n          },\n          \"paymentDate\": \"<yyyy-MM-dd>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\",\n          \"product\": \"<string>\",\n          \"amount\": \"<number>\",\n          \"status\": \"<string>\",\n          \"transactionId\": \"<string>\",\n          \"accountDetails\": {\n            \"bankName\": \"<string>\",\n            \"bankNumber\": \"<string>\",\n            \"branchCode\": \"<string>\",\n            \"branchDigit\": \"<string>\",\n            \"accountNumber\": \"<string>\",\n            \"accountDigit\": \"<string>\",\n            \"documentNumber\": \"<string>\"\n          },\n          \"paymentDate\": \"<yyyy-MM-dd>\"\n        }\n      ]\n    },\n    {\n      \"startDateCalculation\": \"<yyyy-MM-dd>\",\n      \"endDateCalculation\": \"<yyyy-MM-dd>\",\n      \"closingItems\": [\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\",\n          \"product\": \"<string>\",\n          \"amount\": \"<number>\",\n          \"status\": \"<string>\",\n          \"transactionId\": \"<string>\",\n          \"accountDetails\": {\n            \"bankName\": \"<string>\",\n            \"bankNumber\": \"<string>\",\n            \"branchCode\": \"<string>\",\n            \"branchDigit\": \"<string>\",\n            \"accountNumber\": \"<string>\",\n            \"accountDigit\": \"<string>\",\n            \"documentNumber\": \"<string>\"\n          },\n          \"paymentDate\": \"<yyyy-MM-dd>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\",\n          \"product\": \"<string>\",\n          \"amount\": \"<number>\",\n          \"status\": \"<string>\",\n          \"transactionId\": \"<string>\",\n          \"accountDetails\": {\n            \"bankName\": \"<string>\",\n            \"bankNumber\": \"<string>\",\n            \"branchCode\": \"<string>\",\n            \"branchDigit\": \"<string>\",\n            \"accountNumber\": \"<string>\",\n            \"accountDigit\": \"<string>\",\n            \"documentNumber\": \"<string>\"\n          },\n          \"paymentDate\": \"<yyyy-MM-dd>\"\n        }\n      ]\n    }\n  ],\n  \"consolidatedMerchants\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}"
+						},
+						{
+							"name": "Bad request, check the request params",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/merchants/:merchantId/settlements",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"merchants",
+										":merchantId",
+										"settlements"
+									],
+									"variable": [
+										{
+											"key": "merchantId",
+											"value": "<uuid>",
+											"description": "(Required) Merchant's UUID"
+										},
+										{
+											"key": "beginPaymentDate",
+											"value": "<string>",
+											"description": "Start date for payment date filter"
+										},
+										{
+											"key": "endPaymentDate",
+											"value": "<string>",
+											"description": "End date for payment date filter"
+										},
+										{
+											"key": "beginCalculationDate",
+											"value": "<string>",
+											"description": "Start date for sales period date filter"
+										},
+										{
+											"key": "endCalculationDate",
+											"value": "<string>",
+											"description": "End date for sales period date filter"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"field\": \"<string>\",\n    \"details\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      }\n    ]\n  }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Anticipations by merchant",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/merchants/:merchantId/anticipations",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"merchants",
+								":merchantId",
+								"anticipations"
+							],
+							"variable": [
+								{
+									"key": "merchantId",
+									"value": "<uuid>",
+									"description": "(Required) Merchant's UUID"
+								},
+								{
+									"key": "beginCalculationDate",
+									"value": "<string>",
+									"description": "Begin date of anticipations"
+								},
+								{
+									"key": "endCalculationDate",
+									"value": "<string>",
+									"description": "End date of anticipations"
+								},
+								{
+									"key": "beginAnticipatedPaymentDate",
+									"value": "<string>",
+									"description": "Begin date of payment"
+								},
+								{
+									"key": "endAnticipatedPaymentDate",
+									"value": "<string>",
+									"description": "End date of payment"
+								}
+							]
+						},
+						"description": "Retrieve anticipations for a merchant based on a specified date range or anticipated date range."
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/merchants/:merchantId/anticipations",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"merchants",
+										":merchantId",
+										"anticipations"
+									],
+									"variable": [
+										{
+											"key": "merchantId",
+											"value": "<uuid>",
+											"description": "(Required) Merchant's UUID"
+										},
+										{
+											"key": "beginCalculationDate",
+											"value": "<string>",
+											"description": "Begin date of anticipations"
+										},
+										{
+											"key": "endCalculationDate",
+											"value": "<string>",
+											"description": "End date of anticipations"
+										},
+										{
+											"key": "beginAnticipatedPaymentDate",
+											"value": "<string>",
+											"description": "Begin date of payment"
+										},
+										{
+											"key": "endAnticipatedPaymentDate",
+											"value": "<string>",
+											"description": "End date of payment"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"beginDate\": \"<yyyy-MM-dd>\",\n  \"endDate\": \"<yyyy-MM-dd>\",\n  \"balance\": \"<number>\",\n  \"merchantId\": \"<string>\",\n  \"settlements\": [\n    {\n      \"startDateCalculation\": \"<yyyy-MM-dd>\",\n      \"endDateCalculation\": \"<yyyy-MM-dd>\",\n      \"closingItems\": [\n        {\n          \"type\": \"<string>\",\n          \"originalPaymentAmount\": \"<number>\",\n          \"feePercentage\": \"<number>\",\n          \"feeAmount\": \"<number>\",\n          \"anticipatedPaymentAmount\": \"<number>\",\n          \"status\": \"<string>\",\n          \"accountDetails\": {\n            \"bankName\": \"<string>\",\n            \"bankNumber\": \"<string>\",\n            \"branchCode\": \"<string>\",\n            \"branchDigit\": \"<string>\",\n            \"accountNumber\": \"<string>\",\n            \"accountDigit\": \"<string>\",\n            \"documentNumber\": \"<string>\"\n          },\n          \"originalPaymentDate\": \"<yyyy-MM-dd>\",\n          \"anticipatedPaymentDate\": \"<yyyy-MM-dd>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"originalPaymentAmount\": \"<number>\",\n          \"feePercentage\": \"<number>\",\n          \"feeAmount\": \"<number>\",\n          \"anticipatedPaymentAmount\": \"<number>\",\n          \"status\": \"<string>\",\n          \"accountDetails\": {\n            \"bankName\": \"<string>\",\n            \"bankNumber\": \"<string>\",\n            \"branchCode\": \"<string>\",\n            \"branchDigit\": \"<string>\",\n            \"accountNumber\": \"<string>\",\n            \"accountDigit\": \"<string>\",\n            \"documentNumber\": \"<string>\"\n          },\n          \"originalPaymentDate\": \"<yyyy-MM-dd>\",\n          \"anticipatedPaymentDate\": \"<yyyy-MM-dd>\"\n        }\n      ]\n    },\n    {\n      \"startDateCalculation\": \"<yyyy-MM-dd>\",\n      \"endDateCalculation\": \"<yyyy-MM-dd>\",\n      \"closingItems\": [\n        {\n          \"type\": \"<string>\",\n          \"originalPaymentAmount\": \"<number>\",\n          \"feePercentage\": \"<number>\",\n          \"feeAmount\": \"<number>\",\n          \"anticipatedPaymentAmount\": \"<number>\",\n          \"status\": \"<string>\",\n          \"accountDetails\": {\n            \"bankName\": \"<string>\",\n            \"bankNumber\": \"<string>\",\n            \"branchCode\": \"<string>\",\n            \"branchDigit\": \"<string>\",\n            \"accountNumber\": \"<string>\",\n            \"accountDigit\": \"<string>\",\n            \"documentNumber\": \"<string>\"\n          },\n          \"originalPaymentDate\": \"<yyyy-MM-dd>\",\n          \"anticipatedPaymentDate\": \"<yyyy-MM-dd>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"originalPaymentAmount\": \"<number>\",\n          \"feePercentage\": \"<number>\",\n          \"feeAmount\": \"<number>\",\n          \"anticipatedPaymentAmount\": \"<number>\",\n          \"status\": \"<string>\",\n          \"accountDetails\": {\n            \"bankName\": \"<string>\",\n            \"bankNumber\": \"<string>\",\n            \"branchCode\": \"<string>\",\n            \"branchDigit\": \"<string>\",\n            \"accountNumber\": \"<string>\",\n            \"accountDigit\": \"<string>\",\n            \"documentNumber\": \"<string>\"\n          },\n          \"originalPaymentDate\": \"<yyyy-MM-dd>\",\n          \"anticipatedPaymentDate\": \"<yyyy-MM-dd>\"\n        }\n      ]\n    }\n  ]\n}"
+						},
+						{
+							"name": "Bad request, check the request params",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/merchants/:merchantId/anticipations",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"merchants",
+										":merchantId",
+										"anticipations"
+									],
+									"variable": [
+										{
+											"key": "merchantId",
+											"value": "<uuid>",
+											"description": "(Required) Merchant's UUID"
+										},
+										{
+											"key": "beginCalculationDate",
+											"value": "<string>",
+											"description": "Begin date of anticipations"
+										},
+										{
+											"key": "endCalculationDate",
+											"value": "<string>",
+											"description": "End date of anticipations"
+										},
+										{
+											"key": "beginAnticipatedPaymentDate",
+											"value": "<string>",
+											"description": "Begin date of payment"
+										},
+										{
+											"key": "endAnticipatedPaymentDate",
+											"value": "<string>",
+											"description": "End date of payment"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"field\": \"<string>\",\n    \"details\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      }\n    ]\n  }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Sales by merchant",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/merchants/:merchantId/sales?beginSalesDate={{beginSalesDate}}&endSalesDate={{endSalesDate}}&page=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"merchants",
+								":merchantId",
+								"sales"
+							],
+							"query": [
+								{
+									"key": "beginSalesDate",
+									"value": "{{beginSalesDate}}"
+								},
+								{
+									"key": "endSalesDate",
+									"value": "{{endSalesDate}}"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							],
+							"variable": [
+								{
+									"key": "merchantId",
+									"value": "<uuid>",
+									"description": "(Required) Merchant's UUID"
+								}
+							]
+						},
+						"description": "Responsible for displaying all sales that occurred within a specific period. It presents information such as the unique order number, payment method, amount paid by the customer, the entity that received the payment, order status, and other relevant details for calculating the net amount to be transferred to the partner."
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "https://merchant-api.ifood.com.br/financial/v3.0/merchants/:merchantId/sales",
+									"protocol": "https",
+									"host": [
+										"merchant-api",
+										"ifood",
+										"com",
+										"br"
+									],
+									"path": [
+										"financial",
+										"v3.0",
+										"merchants",
+										":merchantId",
+										"sales"
+									],
+									"variable": [
+										{
+											"key": "merchantId",
+											"value": "<uuid>",
+											"description": "(Required) Merchant's UUID"
+										},
+										{
+											"key": "beginSalesDate",
+											"value": "<string>",
+											"description": "Start date for sales date filter"
+										},
+										{
+											"key": "endSalesDate",
+											"value": "<string>",
+											"description": "End date for sales date filter"
+										},
+										{
+											"key": "page",
+											"value": "<string>",
+											"description": "Page number"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"page\": \"<number>\",\n    \"size\": \"<number>\",\n    \"beginSalesDate\": \"<yyyy-MM-dd>\",\n    \"endSalesDate\": \"<yyyy-MM-dd>\",\n    \"sales\": [\n        {\n            \"id\": \"<string>\",\n            \"shortId\": \"<number>\",\n            \"createdAt\": \"<yyyy-MM-dd'T'HH:mm:ss.SSS'Z'>\",\n            \"type\": \"<string>\",\n            \"category\": \"<string>\",\n            \"salesChannel\": \"<string>\",\n            \"currentStatus\": \"<string>\",\n            \"merchant\": {\n                \"id\": \"<string>\",\n                \"shortId\": \"<number>\",\n                \"documents\": [\n                    {\n                        \"value\": \"<string>\",\n                        \"type\": \"<string>\"\n                    }\n                ],\n                \"name\": \"<string>\",\n                \"type\": \"<string>\",\n                \"timezone\": \"<string>\"\n            },\n            \"saleGrossValue\": {\n                \"bag\": \"<number>\",\n                \"deliveryFee\": \"<number>\",\n                \"serviceFee\": \"<number>\"\n            },\n            \"benefits\": {\n                \"benefits\": [\n                    {\n                        \"target\": \"<string>\",\n                        \"value\": \"<number>\",\n                        \"sponsorships\": [\n                            {\n                                \"name\": \"<string>\",\n                                \"value\": \"<number>\"\n                            }\n                        ]\n                    }\n                ],\n                \"totalValue\": \"<number>\"\n            },\n            \"delivery\": {\n                \"informationProvider\": {\n                    \"name\": \"<string>\"\n                },\n                \"type\": \"<string>\",\n                \"deliveryParameters\": {\n                    \"logisticProvider\": \"<string>\",\n                    \"deliveryProduct\": \"<string>\",\n                    \"code\": \"<string>\",\n                    \"schedulingType\": \"<string>\"\n                },\n                \"prices\": {\n                    \"grossValue\": \"<number>\",\n                    \"discount\": \"<number>\",\n                    \"netValue\": \"<number>\"\n                }\n            },\n            \"payments\": {\n                \"methods\": [\n                    {\n                        \"wallet\": {\n                            \"name\": \"<string>\"\n                        },\n                        \"method\": \"<string>\",\n                        \"currency\": \"<string>\",\n                        \"type\": \"<string>\",\n                        \"value\": \"<number>\",\n                        \"cash\": {\n                            \"changeFor\": \"<number>\"\n                        },\n                        \"card\": {\n                            \"brand\": \"<string>\"\n                        },\n                        \"installment\": {\n                            \"maxInstallments\": \"<number>\",\n                            \"installmentDetail\": [\n                                {\n                                    \"reference\": \"<string>\",\n                                    \"amount\": \"<number>\"\n                                }\n                            ]\n                        },\n\n                        \"liability\": \"<string>\"\n                    }\n                ]\n            },\n            \"orderStatusHistory\": [\n                {\n                    \"value\": \"<string>\",\n                    \"createdAt\": \"<yyyy-MM-dd'T'HH:mm:ss.SSS'Z'>\",\n                    \"metadata\":\"<map<string,Object>>\"\n                }\n            ],\n            \"billingSummary\": {\n                \"saleBalance\": \"<number>\",\n                \"billingEntries\": [\n                    {\n                        \"name\": \"<string>\",\n                        \"value\": \"<number>\"\n                    }\n                ]\n            },\n            \"orderEvents\": [\n                {\n                    \"id\": \"<string>\",\n                    \"fullCode\": \"<string>\",\n                    \"code\": \"<string>\",\n                    \"metadata\":\"<map<string,Object>>\",\n                    \"createdAt\": \"<yyyy-MM-dd'T'HH:mm:ss.SSS'Z'>\"\n                }\n            ]\n        }\n    ],\n    \"total\": \"<number>\",\n    \"pageCount\": \"<number>\"\n}"
+						},
+						{
+							"name": "Bad request, check the request params",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/merchants/:merchantId/sales",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"merchants",
+										":merchantId",
+										"sales"
+									],
+									"variable": [
+										{
+											"key": "merchantId",
+											"value": "<uuid>",
+											"description": "(Required) Merchant's UUID"
+										},
+										{
+											"key": "beginSalesDate",
+											"value": "<string>",
+											"description": "Start date for sales date filter"
+										},
+										{
+											"key": "endSalesDate",
+											"value": "<string>",
+											"description": "End date for sales date filter"
+										},
+										{
+											"key": "page",
+											"value": "<string>",
+											"description": "Page number"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"field\": \"<string>\",\n    \"details\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      }\n    ]\n  }\n}"
+						}
+					]
+				},
+				{
+					"name": "Post reconciliation on demand",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"competence\": \"<string>\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/merchants/:merchantId/reconciliation/on-demand",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"merchants",
+								":merchantId",
+								"reconciliation",
+								"on-demand"
+							],
+							"variable": [
+								{
+									"key": "merchantId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"competence\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/merchants/:merchantId/reconciliation/on-demand",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"merchants",
+										":merchantId",
+										"reconciliation",
+										"on-demand"
+									],
+									"variable": [
+										{
+											"key": "merchantId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": "{\n    \"competence\": \"<string>\",\n    \"merchantId\": \"<string>\",\n    \"requestId\": \"<string>\"\n}"
+						},
+						{
+							"name": "Conflict",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"competence\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/merchants/:merchantId/reconciliation/on-demand",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"merchants",
+										":merchantId",
+										"reconciliation",
+										"on-demand"
+									],
+									"variable": [
+										{
+											"key": "merchantId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": "{\n    \"code\": 409,\n    \"message\": \"There is already a recent and valid request. Please try again later.\"\n}"
+						},
+						{
+							"name": "Bad request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"competence\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/merchants/:merchantId/reconciliation/on-demand",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"merchants",
+										":merchantId",
+										"reconciliation",
+										"on-demand"
+									],
+									"variable": [
+										{
+											"key": "merchantId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": "{\n    \"code\": 400,\n    \"message\": \"Bad request\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Post reconciliation on demand Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/merchants/:merchantId/reconciliation/on-demand/:requestId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"merchants",
+								":merchantId",
+								"reconciliation",
+								"on-demand",
+								":requestId"
+							],
+							"variable": [
+								{
+									"key": "merchantId",
+									"value": ""
+								},
+								{
+									"key": "requestId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"competence\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/merchants/:merchantId/reconciliation/on-demand",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"merchants",
+										":merchantId",
+										"reconciliation",
+										"on-demand"
+									],
+									"variable": [
+										{
+											"key": "merchantId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": "{\n    \"id\": \"<string>\",\n    \"status\": \"created\",\n    \"merchantId\": \"<string>\",\n    \"competence\": \"<string>\"\n}"
+						},
+						{
+							"name": "Success enqueue",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"competence\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/merchants/:merchantId/reconciliation/on-demand",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"merchants",
+										":merchantId",
+										"reconciliation",
+										"on-demand"
+									],
+									"variable": [
+										{
+											"key": "merchantId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": "{\n    \"id\": \"<string>\",\n    \"status\": \"enqueue\",\n    \"merchantId\": \"<string>\",\n    \"competence\": \"<string>\"\n}"
+						},
+						{
+							"name": "Success processed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"competence\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/merchants/:merchantId/reconciliation/on-demand",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"merchants",
+										":merchantId",
+										"reconciliation",
+										"on-demand"
+									],
+									"variable": [
+										{
+											"key": "merchantId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": "{\n    \"id\": \"<string>\",\n    \"status\": \"processed\",\n    \"merchantId\": \"<string>\",\n    \"competence\": \"<string>\",\n    \"filePath\": \"<string>\"\n}"
+						},
+						{
+							"name": "Sucess with no financial entries",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"competence\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/merchants/:merchantId/reconciliation/on-demand",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"merchants",
+										":merchantId",
+										"reconciliation",
+										"on-demand"
+									],
+									"variable": [
+										{
+											"key": "merchantId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": "{\n    \"id\": \"<string>\",\n    \"status\": \"error\",\n    \"errorMessage\": \"File generation failed: No financial entries exist for merchant <string> in the requested time frame.\",\n    \"merchantId\": \"<string>\",\n    \"competence\": \"<string>\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{bearerToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://merchant-api.ifood.com.br/financial/v3.0",
+			"type": "string"
+		},
+		{
+			"key": "competence",
+			"value": "<string>",
+			"type": "any"
+		}
+	]
+}

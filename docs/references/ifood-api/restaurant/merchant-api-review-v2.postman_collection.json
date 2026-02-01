@@ -1,0 +1,1062 @@
+{
+  "item": [
+    {
+      "id": "d0d0bcad-957c-4ff9-b532-0b96f53e917a",
+      "name": "merchants/{merchantId}",
+      "item": [
+        {
+          "id": "94711b60-2bdf-4728-bf69-c969331620f3",
+          "name": "reviews",
+          "item": [
+            {
+              "id": "563acbe7-ec2a-4534-8181-0bde5c5f6d6e",
+              "name": "List reviews",
+              "request": {
+                "name": "List reviews",
+                "description": {
+                  "content": "Retrieves a filtered reviews list",
+                  "type": "text/plain"
+                },
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "reviews"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "disabled": false,
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "addCount",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "dateFrom",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "dateTo",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "sort",
+                      "value": "DESC"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "sortBy",
+                      "value": "CREATED_AT"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "merchantId",
+                      "description": "(Required) Merchant's UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "d4b24b11-8b1a-467f-801a-af07990cf079",
+                  "name": "OK",
+                  "originalRequest": {
+                    "url": {
+                      "path": [
+                        "merchants",
+                        ":merchantId",
+                        "reviews"
+                      ],
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "query": [
+                        {
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "key": "pageSize",
+                          "value": "10"
+                        },
+                        {
+                          "key": "addCount",
+                          "value": "false"
+                        },
+                        {
+                          "key": "dateFrom",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "key": "dateTo",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "key": "sort",
+                          "value": "DESC"
+                        },
+                        {
+                          "key": "sortBy",
+                          "value": "CREATED_AT"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "disabled": false,
+                          "type": "any",
+                          "value": "<uuid>",
+                          "key": "merchantId",
+                          "description": "(Required) Merchant's UUID"
+                        }
+                      ]
+                    },
+                    "header": [
+                      {
+                        "description": {
+                          "content": "Added as a part of security scheme: bearer",
+                          "type": "text/plain"
+                        },
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "method": "GET",
+                    "body": {}
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "body": "{\n  \"page\": \"<long>\",\n  \"reviews\": [\n    {\n      \"createdAt\": \"<dateTime>\",\n      \"id\": \"<uuid>\",\n      \"order\": {\n        \"createdAt\": \"<dateTime>\",\n        \"id\": \"<uuid>\",\n        \"shortId\": \"<string>\"\n      },\n      \"replies\": [\n        {\n          \"createdAt\": \"<dateTime>\",\n          \"from\": \"<string>\",\n          \"text\": \"<string>\"\n        },\n        {\n          \"createdAt\": \"<dateTime>\",\n          \"from\": \"<string>\",\n          \"text\": \"<string>\"\n        }\n      ],\n      \"score\": \"<double>\",\n      \"status\": \"<string>\",\n      \"comment\": \"<string>\",\n      \"surveyId\": \"<uuid>\",\n      \"version\": \"<string>\",\n      \"visibility\": \"<string>\"\n    },\n    {\n      \"createdAt\": \"<dateTime>\",\n      \"id\": \"<uuid>\",\n      \"order\": {\n        \"createdAt\": \"<dateTime>\",\n        \"id\": \"<uuid>\",\n        \"shortId\": \"<string>\"\n      },\n      \"replies\": [\n        {\n          \"createdAt\": \"<dateTime>\",\n          \"from\": \"<string>\",\n          \"text\": \"<string>\"\n        },\n        {\n          \"createdAt\": \"<dateTime>\",\n          \"from\": \"<string>\",\n          \"text\": \"<string>\"\n        }\n      ],\n      \"score\": \"<double>\",\n      \"status\": \"<string>\",\n      \"comment\": \"<string>\",\n      \"surveyId\": \"<uuid>\",\n      \"version\": \"<string>\",\n      \"visibility\": \"<string>\"\n    }\n  ],\n  \"size\": \"<long>\",\n  \"total\": \"<long>\",\n  \"pageCount\": \"<long>\"\n}",
+                  "cookie": [],
+                  "_postman_previewlanguage": "json"
+                },
+                {
+                  "id": "431a48a9-cce1-4999-ace8-76561a36e1b5",
+                  "name": "Invalid parameter",
+                  "originalRequest": {
+                    "url": {
+                      "path": [
+                        "merchants",
+                        ":merchantId",
+                        "reviews"
+                      ],
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "query": [
+                        {
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "key": "pageSize",
+                          "value": "10"
+                        },
+                        {
+                          "key": "addCount",
+                          "value": "false"
+                        },
+                        {
+                          "key": "dateFrom",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "key": "dateTo",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "key": "sort",
+                          "value": "DESC"
+                        },
+                        {
+                          "key": "sortBy",
+                          "value": "CREATED_AT"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "disabled": false,
+                          "type": "any",
+                          "value": "<uuid>",
+                          "key": "merchantId",
+                          "description": "(Required) Merchant's UUID"
+                        }
+                      ]
+                    },
+                    "header": [
+                      {
+                        "description": {
+                          "content": "Added as a part of security scheme: bearer",
+                          "type": "text/plain"
+                        },
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "method": "GET",
+                    "body": {}
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "body": "{\n  \"errorMessage\": \"<string>\",\n  \"errorType\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"path\": \"<string>\"\n}",
+                  "cookie": [],
+                  "_postman_previewlanguage": "json"
+                }
+              ],
+              "event": [],
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              }
+            },
+            {
+              "id": "a980cbbb-1787-4b98-aef3-e47a0e70a269",
+              "name": "{reviewId}",
+              "item": [
+                {
+                  "id": "a3859068-b50f-4328-b462-2c45a44bc229",
+                  "name": "Get a review",
+                  "request": {
+                    "name": "Get a review",
+                    "description": {
+                      "content": "Retrieves review by its id and merchant id",
+                      "type": "text/plain"
+                    },
+                    "url": {
+                      "path": [
+                        "merchants",
+                        ":merchantId",
+                        "reviews",
+                        ":reviewId"
+                      ],
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "query": [],
+                      "variable": [
+                        {
+                          "disabled": false,
+                          "type": "any",
+                          "value": "<uuid>",
+                          "key": "merchantId",
+                          "description": "(Required) Merchant's UUID"
+                        },
+                        {
+                          "disabled": false,
+                          "type": "any",
+                          "value": "<uuid>",
+                          "key": "reviewId",
+                          "description": "(Required) Review's UUID"
+                        }
+                      ]
+                    },
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "method": "GET",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "9e7d5e70-1e32-4fe0-945c-b4c7ad5f793e",
+                      "name": "OK",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "reviews",
+                            ":reviewId"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<uuid>",
+                              "key": "merchantId",
+                              "description": "(Required) Merchant's UUID"
+                            },
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<uuid>",
+                              "key": "reviewId",
+                              "description": "(Required) Review's UUID"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "GET",
+                        "body": {}
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"createdAt\": \"<dateTime>\",\n  \"id\": \"<uuid>\",\n  \"order\": {\n    \"createdAt\": \"<dateTime>\",\n    \"id\": \"<uuid>\",\n    \"shortId\": \"<string>\"\n  },\n  \"questions\": [\n    {\n      \"id\": \"<uuid>\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"answers\": [\n        {\n          \"id\": \"<uuid>\",\n          \"title\": \"<string>\"\n        },\n        {\n          \"id\": \"<uuid>\",\n          \"title\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"answers\": [\n        {\n          \"id\": \"<uuid>\",\n          \"title\": \"<string>\"\n        },\n        {\n          \"id\": \"<uuid>\",\n          \"title\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"replies\": [\n    {\n      \"createdAt\": \"<dateTime>\",\n      \"from\": \"<string>\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"createdAt\": \"<dateTime>\",\n      \"from\": \"<string>\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"score\": \"<double>\",\n  \"status\": \"<string>\",\n  \"comment\": \"<string>\",\n  \"customerName\": \"<string>\",\n  \"surveyId\": \"<uuid>\",\n  \"version\": \"<string>\",\n  \"visibility\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    },
+                    {
+                      "id": "d8e223e3-2412-4ed7-9ffa-1558aa807604",
+                      "name": "Invalid parameter",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "reviews",
+                            ":reviewId"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<uuid>",
+                              "key": "merchantId",
+                              "description": "(Required) Merchant's UUID"
+                            },
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<uuid>",
+                              "key": "reviewId",
+                              "description": "(Required) Review's UUID"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "GET",
+                        "body": {}
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"errorMessage\": \"<string>\",\n  \"errorType\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"path\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    },
+                    {
+                      "id": "37dedf3d-c004-45ab-bf49-37a125d762aa",
+                      "name": "Review not found",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "reviews",
+                            ":reviewId"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<uuid>",
+                              "key": "merchantId",
+                              "description": "(Required) Merchant's UUID"
+                            },
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<uuid>",
+                              "key": "reviewId",
+                              "description": "(Required) Review's UUID"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "GET",
+                        "body": {}
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"errorMessage\": \"<string>\",\n  \"errorType\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"path\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    }
+                  ],
+                  "event": [],
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  }
+                },
+                {
+                  "id": "d224e93c-5d42-46a8-b42f-be92f61ec222",
+                  "name": "Post a review reply",
+                  "request": {
+                    "name": "Post a review reply",
+                    "description": {
+                      "content": "Posts a text reply for a review by its id",
+                      "type": "text/plain"
+                    },
+                    "url": {
+                      "path": [
+                        "merchants",
+                        ":merchantId",
+                        "reviews",
+                        ":reviewId",
+                        "answers"
+                      ],
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "query": [],
+                      "variable": [
+                        {
+                          "disabled": false,
+                          "type": "any",
+                          "value": "<uuid>",
+                          "key": "merchantId",
+                          "description": "(Required) Merchant's UUID"
+                        },
+                        {
+                          "disabled": false,
+                          "type": "any",
+                          "value": "<uuid>",
+                          "key": "reviewId",
+                          "description": "(Required) Review's UUID"
+                        }
+                      ]
+                    },
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "method": "POST",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}"
+                        }
+                      ]
+                    },
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"text\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "fcb4f4ab-f5d4-473d-8853-0890564d38ef",
+                      "name": "OK",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "reviews",
+                            ":reviewId",
+                            "answers"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<uuid>",
+                              "key": "merchantId",
+                              "description": "(Required) Merchant's UUID"
+                            },
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<uuid>",
+                              "key": "reviewId",
+                              "description": "(Required) Review's UUID"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "POST",
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"text\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"createdAt\": \"<dateTime>\",\n  \"text\": \"<string>\",\n  \"reviewId\": \"<uuid>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    },
+                    {
+                      "id": "d2a0838b-47fb-4e7d-b51f-3d3132eda7f0",
+                      "name": "Invalid parameter",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "reviews",
+                            ":reviewId",
+                            "answers"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<uuid>",
+                              "key": "merchantId",
+                              "description": "(Required) Merchant's UUID"
+                            },
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<uuid>",
+                              "key": "reviewId",
+                              "description": "(Required) Review's UUID"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "POST",
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"text\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"errorMessage\": \"<string>\",\n  \"errorType\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"path\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    },
+                    {
+                      "id": "0d6d6efb-4dd1-4b67-9253-9c39e92f6921",
+                      "name": "Review not found",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "reviews",
+                            ":reviewId",
+                            "answers"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<uuid>",
+                              "key": "merchantId",
+                              "description": "(Required) Merchant's UUID"
+                            },
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<uuid>",
+                              "key": "reviewId",
+                              "description": "(Required) Review's UUID"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "POST",
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"text\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"errorMessage\": \"<string>\",\n  \"errorType\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"path\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    },
+                    {
+                      "id": "68eda339-5773-4479-b77c-5789be183372",
+                      "name": "Review is already discarded or has a pending moderation",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "reviews",
+                            ":reviewId",
+                            "answers"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<uuid>",
+                              "key": "merchantId",
+                              "description": "(Required) Merchant's UUID"
+                            },
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<uuid>",
+                              "key": "reviewId",
+                              "description": "(Required) Review's UUID"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "POST",
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"text\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"errorMessage\": \"<string>\",\n  \"errorType\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"path\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    }
+                  ],
+                  "event": [],
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  }
+                }
+              ],
+              "event": []
+            }
+          ],
+          "event": []
+        },
+        {
+          "id": "9fba2289-92a5-46a1-9660-a330b7aac900",
+          "name": "Get a summary",
+          "request": {
+            "name": "Get a summary",
+            "description": {
+              "content": "Retrieves summary for specified merchant id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "merchants",
+                ":merchantId",
+                "summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "merchantId",
+                  "description": "(Required) Merchant's UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b74e7133-ce9d-4b36-bdb8-a176f50067f5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "merchantId",
+                      "description": "(Required) Merchant's UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"score\": \"<double>\",\n  \"totalReviewsCount\": \"<long>\",\n  \"validReviewsCount\": \"<long>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ea1ebf2-b250-47f0-a0a7-5ed3bf211d37",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "merchantId",
+                      "description": "(Required) Merchant's UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"<string>\",\n  \"errorType\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"path\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://merchant-api.ifood.com.br/review/v2.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "47b308bb-5203-44ae-87ac-a1886e97bb37",
+    "name": "Review",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Reviews API for querying and replying to order reviews.",
+      "type": "text/plain"
+    }
+  }
+}

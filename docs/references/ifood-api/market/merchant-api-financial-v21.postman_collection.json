@@ -1,0 +1,254 @@
+{
+  "item": [
+    {
+      "id": "6f5d7434-01f2-4dfa-8791-b4f35266b935",
+      "name": "Get sales by merchant",
+      "request": {
+        "name": "Get sales by merchant",
+        "description": {
+          "content": "Returns merchant information for sales conciliation by a range of dates or period. To search using periodId, assume that periodId is only updated every Wednesday of the next week (Mon-Sun). If search is before Wednesday, use date filters. Read more in the api documentation.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "merchants",
+            ":merchantId",
+            "sales"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "periodId",
+              "value": "<string>",
+              "description": "Period's ID"
+            },
+            {
+              "disabled": false,
+              "key": "beginLastProcessingDate",
+              "value": "<date>",
+              "description": "Last processing date begin filter, format: yyyy-MM-dd"
+            },
+            {
+              "disabled": false,
+              "key": "endLastProcessingDate",
+              "value": "<date>",
+              "description": "Last processing date end filter, format: yyyy-MM-dd"
+            },
+            {
+              "disabled": false,
+              "key": "beginOrderDate",
+              "value": "<date>",
+              "description": "Order date begin filter, format: yyyy-MM-dd"
+            },
+            {
+              "disabled": false,
+              "key": "endOrderDate",
+              "value": "<date>",
+              "description": "Order date end filter, format: yyyy-MM-dd"
+            }
+          ],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<uuid>",
+              "key": "merchantId",
+              "description": "(Required) Merchant's UUID"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "d0d0bcad-957c-4ff9-b532-0b96f53e917a",
+          "name": "Success",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "merchants",
+                ":merchantId",
+                "sales"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "periodId",
+                  "value": "<string>"
+                },
+                {
+                  "key": "beginLastProcessingDate",
+                  "value": "<date>"
+                },
+                {
+                  "key": "endLastProcessingDate",
+                  "value": "<date>"
+                },
+                {
+                  "key": "beginOrderDate",
+                  "value": "<date>"
+                },
+                {
+                  "key": "endOrderDate",
+                  "value": "<date>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "merchantId",
+                  "description": "(Required) Merchant's UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"billing\": {\n    \"acquirerFee\": \"<number>\",\n    \"acquirerFeeRate\": \"<number>\",\n    \"benefitIfood\": \"<number>\",\n    \"benefitMerchant\": \"<number>\",\n    \"commission\": \"<number>\",\n    \"commissionRate\": \"<number>\",\n    \"deliveryCommission\": \"<number>\",\n    \"deliveryFee\": \"<number>\",\n    \"gmv\": \"<number>\",\n    \"totalBag\": \"<number>\",\n    \"totalCredit\": \"<number>\",\n    \"totalDebit\": \"<number>\",\n    \"initialTotalBag\": \"<number>\",\n    \"consumerPaymentIfood\": \"<number>\",\n    \"deliveryFeeIfood\": \"<number>\",\n    \"anticipationFee\": \"<number>\",\n    \"anticipationFeeRate\": \"<number>\",\n    \"smallOrderFee\": \"<number>\",\n    \"benefitPaymentCredit\": \"<number>\",\n    \"benefitAcquirerFee\": \"<number>\",\n    \"otherDebits\": \"<object>\",\n    \"otherCredits\": \"<object>\"\n  },\n  \"businessModelOrder\": \"<string>\",\n  \"companyName\": \"<string>\",\n  \"documentNumber\": \"<string>\",\n  \"lastProcessingDate\": \"<date>\",\n  \"orderDate\": \"<date>\",\n  \"orderStatus\": \"<string>\",\n  \"payment\": {\n    \"brand\": \"<string>\",\n    \"cardNumber\": \"<string>\",\n    \"liability\": \"<string>\",\n    \"method\": \"<string>\",\n    \"nsu\": \"<string>\",\n    \"type\": \"<string>\"\n  },\n  \"periodId\": \"<string>\",\n  \"transfer\": {\n    \"expectedBankAccount\": {\n      \"accountNumber\": \"<string>\",\n      \"accountNumberDigit\": \"<string>\",\n      \"bankNumber\": \"<string>\",\n      \"branchCode\": \"<string>\",\n      \"branchCodeDigit\": \"<string>\",\n      \"bankName\": \"<string>\"\n    },\n    \"expectedTransferDate\": \"<date>\"\n  },\n  \"orderId\": \"<uuid>\",\n  \"orderDateTime\": \"<yyyy-MM-dd'T'HH:mm:ss.SSSXXX>\",\n  \"lastProcessingDateTime\": \"<yyyy-MM-dd'T'HH:mm:ss.SSSXXX>\",\n  \"deliveryProviderType\": \"<string>\",\n  \"salesChannel\": \"<string>\",\n  \"displayId\": \"<string>\",\n  \"siteMercado\": \"<string>\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "94711b60-2bdf-4728-bf69-c969331620f3",
+          "name": "Bad request, check the request params",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "merchants",
+                ":merchantId",
+                "sales"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "periodId",
+                  "value": "<string>"
+                },
+                {
+                  "key": "beginLastProcessingDate",
+                  "value": "<date>"
+                },
+                {
+                  "key": "endLastProcessingDate",
+                  "value": "<date>"
+                },
+                {
+                  "key": "beginOrderDate",
+                  "value": "<date>"
+                },
+                {
+                  "key": "endOrderDate",
+                  "value": "<date>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "merchantId",
+                  "description": "(Required) Merchant's UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"field\": \"<string>\",\n    \"details\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      }\n    ]\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://merchant-api.ifood.com.br/financial/v2.1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "47b308bb-5203-44ae-87ac-a1886e97bb37",
+    "name": "Financial",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

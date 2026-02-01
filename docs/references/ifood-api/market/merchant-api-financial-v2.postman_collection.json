@@ -1,0 +1,2321 @@
+{
+  "item": [
+    {
+      "id": "d0d0bcad-957c-4ff9-b532-0b96f53e917a",
+      "name": "merchants/{merchantId}",
+      "item": [
+        {
+          "id": "431a48a9-cce1-4999-ace8-76561a36e1b5",
+          "name": "Get sales adjustments by merchant",
+          "request": {
+            "name": "Get sales adjustments by merchant",
+            "description": {
+              "content": "Returns adjustments of merchant information for sales conciliation by a range of dates or period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "merchants",
+                ":merchantId",
+                "salesAdjustments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "periodId",
+                  "value": "<string>",
+                  "description": "Period's ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "beginUpdateDate",
+                  "value": "<date>",
+                  "description": "Order date update begin filter, format: yyyy-MM-dd"
+                },
+                {
+                  "disabled": false,
+                  "key": "endUpdateDate",
+                  "value": "<date>",
+                  "description": "Order date update end filter, format: yyyy-MM-dd"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "merchantId",
+                  "description": "(Required) Merchant's UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a980cbbb-1787-4b98-aef3-e47a0e70a269",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "salesAdjustments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "periodId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "beginUpdateDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endUpdateDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "merchantId",
+                      "description": "(Required) Merchant's UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"adjustmentAmount\": \"<number>\",\n  \"billedOrderUpdate\": {\n    \"acquirerFee\": \"<number>\",\n    \"acquirerFeeRate\": \"<number>\",\n    \"benefitIfood\": \"<number>\",\n    \"benefitMerchant\": \"<number>\",\n    \"commission\": \"<number>\",\n    \"commissionRate\": \"<number>\",\n    \"deliveryCommission\": \"<number>\",\n    \"deliveryFee\": \"<number>\",\n    \"gmv\": \"<number>\",\n    \"totalBag\": \"<number>\",\n    \"totalCredit\": \"<number>\",\n    \"totalDebit\": \"<number>\",\n    \"benefitIndustry\": \"<number>\",\n    \"benefitChain\": \"<number>\",\n    \"anticipationFee\": \"<number>\",\n    \"anticipationFeeRate\": \"<number>\",\n    \"smallOrderFee\": \"<number>\"\n  },\n  \"documentNumber\": \"<string>\",\n  \"orderDate\": \"<date>\",\n  \"orderDateTimeUpdate\": \"<dateTime>\",\n  \"orderDateUpdate\": \"<date>\",\n  \"orderId\": \"<uuid>\",\n  \"billedOrderId\": \"<uuid>\",\n  \"periodId\": \"<string>\",\n  \"expectedPaymentDate\": \"<date>\",\n  \"cancellationCode\": \"<string>\",\n  \"cancellationCodeDescription\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3859068-b50f-4328-b462-2c45a44bc229",
+              "name": "Bad request, check the request params",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "salesAdjustments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "periodId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "beginUpdateDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endUpdateDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "merchantId",
+                      "description": "(Required) Merchant's UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"field\": \"<string>\",\n    \"details\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e7d5e70-1e32-4fe0-945c-b4c7ad5f793e",
+          "name": "Get payments info",
+          "request": {
+            "name": "Get payments info",
+            "description": {
+              "content": "Returns merchant information regarding payments by range of dates or period",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "merchants",
+                ":merchantId",
+                "payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "periodId",
+                  "value": "<string>",
+                  "description": "Period's ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "beginExpectedExecutionDate",
+                  "value": "<date>",
+                  "description": "Begin expected execution date filter, format: yyyy-MM-dd"
+                },
+                {
+                  "disabled": false,
+                  "key": "endExpectedExecutionDate",
+                  "value": "<date>",
+                  "description": "End expected execution date filter, format: yyyy-MM-dd"
+                },
+                {
+                  "disabled": false,
+                  "key": "beginConfirmedPaymentDate",
+                  "value": "<date>",
+                  "description": "Begin confirmed payment date filter, format: yyyy-MM-dd"
+                },
+                {
+                  "disabled": false,
+                  "key": "endConfirmedPaymentDate",
+                  "value": "<date>",
+                  "description": "End confirmed payment date filter, format: yyyy-MM-dd"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "merchantId",
+                  "description": "(Required) Merchant's UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d8e223e3-2412-4ed7-9ffa-1558aa807604",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "periodId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "beginExpectedExecutionDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endExpectedExecutionDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "beginConfirmedPaymentDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endConfirmedPaymentDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "merchantId",
+                      "description": "(Required) Merchant's UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"periodId\": \"<string>\",\n  \"status\": \"<string>\",\n  \"expectedExecutionDate\": \"<date>\",\n  \"nextExecutionDate\": \"<date>\",\n  \"confirmedPaymentDate\": \"<date>\",\n  \"totalAmount\": \"<number>\",\n  \"bankAccount\": {\n    \"bankName\": \"<string>\",\n    \"bankNumber\": \"<string>\",\n    \"number\": \"<string>\",\n    \"numberDigit\": \"<string>\",\n    \"branchCode\": \"<string>\",\n    \"branchCodeDigit\": \"<string>\",\n    \"document\": {\n      \"type\": \"<string>\",\n      \"number\": \"<string>\",\n      \"documentHolderName\": \"<string>\"\n    }\n  },\n  \"merchantsConsolidated\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37dedf3d-c004-45ab-bf49-37a125d762aa",
+              "name": "Bad request, check the request params",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "periodId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "beginExpectedExecutionDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endExpectedExecutionDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "beginConfirmedPaymentDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endConfirmedPaymentDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "merchantId",
+                      "description": "(Required) Merchant's UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"field\": \"<string>\",\n    \"details\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d224e93c-5d42-46a8-b42f-be92f61ec222",
+          "name": "Get payment details",
+          "request": {
+            "name": "Get payment details",
+            "description": {
+              "content": "Return a list of payment filtered by payment date range and status",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "merchants",
+                ":merchantId",
+                "paymentDetails"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "beginPaymentDate",
+                  "value": "<date>",
+                  "description": "Start payment date filter, format: yyyy-MM-dd"
+                },
+                {
+                  "disabled": false,
+                  "key": "endPaymentDate",
+                  "value": "<date>",
+                  "description": "End payment date filter, format: yyyy-MM-dd"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Payment status"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "merchantId",
+                  "description": "(Required) Merchant's UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fcb4f4ab-f5d4-473d-8853-0890564d38ef",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "paymentDetails"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "beginPaymentDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endPaymentDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "merchantId",
+                      "description": "(Required) Merchant's UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "[\n  {\n    \"payment\": {\n      \"status\": \"<string>\",\n      \"type\": \"<string>\",\n      \"method\": \"<string>\",\n      \"brand\": \"<string>\",\n      \"liability\": \"<string>\",\n      \"cardNumber\": \"<string>\",\n      \"acquirer\": \"<string>\",\n      \"nsu\": \"<string>\",\n      \"authCode\": \"<string>\",\n      \"refundType\": \"<string>\",\n      \"refundValue\": \"<string>\",\n      \"refundDate\": \"<string>\",\n      \"paymentDate\": \"<string>\",\n      \"updatedAt\": \"<string>\"\n    },\n    \"orderId\": \"<string>\"\n  },\n  {\n    \"payment\": {\n      \"status\": \"<string>\",\n      \"type\": \"<string>\",\n      \"method\": \"<string>\",\n      \"brand\": \"<string>\",\n      \"liability\": \"<string>\",\n      \"cardNumber\": \"<string>\",\n      \"acquirer\": \"<string>\",\n      \"nsu\": \"<string>\",\n      \"authCode\": \"<string>\",\n      \"refundType\": \"<string>\",\n      \"refundValue\": \"<string>\",\n      \"refundDate\": \"<string>\",\n      \"paymentDate\": \"<string>\",\n      \"updatedAt\": \"<string>\"\n    },\n    \"orderId\": \"<string>\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d2a0838b-47fb-4e7d-b51f-3d3132eda7f0",
+          "name": "Get occurrences",
+          "request": {
+            "name": "Get occurrences",
+            "description": {
+              "content": "Returns information regarding occurrences by a range of dates or period. To search using periodId, assume that periodId is only updated every Wednesday of the next week (Mon-Sun). If search is before Wednesday, use date filters. Read more in the api documentation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "merchants",
+                ":merchantId",
+                "occurrences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "periodId",
+                  "value": "<string>",
+                  "description": "Period's ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Occurrence type"
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionDateBegin",
+                  "value": "<date>",
+                  "description": "Start transaction date filter, format: yyyy-MM-dd"
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionDateEnd",
+                  "value": "<date>",
+                  "description": "End transaction date filter, format: yyyy-MM-dd"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "merchantId",
+                  "description": "(Required) Merchant's UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0d6d6efb-4dd1-4b67-9253-9c39e92f6921",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "occurrences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "periodId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionDateBegin",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "transactionDateEnd",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "merchantId",
+                      "description": "(Required) Merchant's UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"amount\": \"<number>\",\n  \"expectedPaymentDate\": \"<date>\",\n  \"merchantName\": \"<string>\",\n  \"paymentPlan\": \"<string>\",\n  \"periodId\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"transactionDate\": \"<date>\",\n  \"transactionId\": \"<string>\",\n  \"type\": \"<string>\",\n  \"orderId\": \"<uuid>\",\n  \"orderDate\": \"<date>\",\n  \"description\": \"<string>\",\n  \"documentNumber\": \"<string>\",\n  \"transactionDateTime\": \"<yyyy-MM-dd'T'HH:mm:ss.SSSXXX>\",\n  \"referencePeriodId\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68eda339-5773-4479-b77c-5789be183372",
+              "name": "Bad request, check the request params",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "occurrences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "periodId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionDateBegin",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "transactionDateEnd",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "merchantId",
+                      "description": "(Required) Merchant's UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"field\": \"<string>\",\n    \"details\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9fba2289-92a5-46a1-9660-a330b7aac900",
+          "name": "Get maintenance fees",
+          "request": {
+            "name": "Get maintenance fees",
+            "description": {
+              "content": "Returns information regarding maintenance fees by a range of dates or period. To search using periodId, assume that periodId is only updated every Wednesday of the next week (Mon-Sun). If search is before Wednesday, use date filters. Read more in the api documentation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "merchants",
+                ":merchantId",
+                "maintenanceFees"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "periodId",
+                  "value": "<string>",
+                  "description": "Period's ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionDateBegin",
+                  "value": "<date>",
+                  "description": "Start transaction date filter, format: yyyy-MM-dd"
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionDateEnd",
+                  "value": "<date>",
+                  "description": "End transaction date filter, format: yyyy-MM-dd"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "merchantId",
+                  "description": "(Required) Merchant's UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b74e7133-ce9d-4b36-bdb8-a176f50067f5",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "maintenanceFees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "periodId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionDateBegin",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "transactionDateEnd",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "merchantId",
+                      "description": "(Required) Merchant's UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"amount\": \"<number>\",\n  \"expectedPaymentDate\": \"<date>\",\n  \"periodId\": \"<string>\",\n  \"transactionDate\": \"<date>\",\n  \"transactionId\": \"<long>\",\n  \"type\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ea1ebf2-b250-47f0-a0a7-5ed3bf211d37",
+              "name": "Bad request, check the request params",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "maintenanceFees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "periodId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionDateBegin",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "transactionDateEnd",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "merchantId",
+                      "description": "(Required) Merchant's UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"field\": \"<string>\",\n    \"details\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97aa05ea-8f1e-491c-ab05-7bb0acc6eaa5",
+          "name": "Get income taxes",
+          "request": {
+            "name": "Get income taxes",
+            "description": {
+              "content": "Returns information regarding income taxes by a range of dates or period. To search using periodId, assume that periodId is only updated every Wednesday of the next week (Mon-Sun). If search is before Wednesday, use date filters. Read more in the api documentation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "merchants",
+                ":merchantId",
+                "incomeTaxes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "periodId",
+                  "value": "<string>",
+                  "description": "Period's ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionDateBegin",
+                  "value": "<date>",
+                  "description": "Start transaction date filter, format: yyyy-MM-dd"
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionDateEnd",
+                  "value": "<date>",
+                  "description": "End transaction date filter, format: yyyy-MM-dd"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "merchantId",
+                  "description": "(Required) Merchant's UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "80679b30-c9a9-4abf-9993-683fe11df95c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "incomeTaxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "periodId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionDateBegin",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "transactionDateEnd",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "merchantId",
+                      "description": "(Required) Merchant's UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"amount\": \"<number>\",\n  \"expectedPaymentDate\": \"<date>\",\n  \"merchantName\": \"<string>\",\n  \"paymentPlan\": \"<string>\",\n  \"periodId\": \"<string>\",\n  \"transactionDate\": \"<date>\",\n  \"transactionId\": \"<long>\",\n  \"type\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e46f2f4-6250-4aaa-a9d1-846eb1f4a097",
+              "name": "Bad request, check the request params",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "incomeTaxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "periodId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionDateBegin",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "transactionDateEnd",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "merchantId",
+                      "description": "(Required) Merchant's UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"field\": \"<string>\",\n    \"details\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c324dfe9-e48c-4c63-ab06-bca88a623ad5",
+          "name": "Get periods info",
+          "request": {
+            "name": "Get periods info",
+            "description": {
+              "content": "Return a list of Period filtered by competence",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "merchants",
+                ":merchantId",
+                "periods"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "competence",
+                  "value": "{{competence}}"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "merchantId",
+                  "description": "(Required) Merchant's UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d597acbf-c62e-408e-8758-bd1adb68c8dc",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "periods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "merchantId",
+                      "description": "(Required) Merchant's UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"competence\": \"<string>\",\n  \"expectedDate\": \"<string>\",\n  \"merchantId\": \"<uuid>\",\n  \"periodId\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e188dfc-f182-4245-a20a-9e815f18e055",
+              "name": "Bad request, check the request params",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "periods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "merchantId",
+                      "description": "(Required) Merchant's UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"field\": \"<string>\",\n    \"details\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a4d48f3b-1162-4455-ab3c-9419288149ee",
+          "name": "Get charge cancellations",
+          "request": {
+            "name": "Get charge cancellations",
+            "description": {
+              "content": "Returns information regarding charge cancellations by a range of dates or period. To search using periodId, assume that periodId is only updated every Wednesday of the next week (Mon-Sun). If search is before Wednesday, use date filters. Read more in the api documentation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "merchants",
+                ":merchantId",
+                "chargeCancellations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "periodId",
+                  "value": "<string>",
+                  "description": "Period's ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionDateBegin",
+                  "value": "<date>",
+                  "description": "Start transaction date filter, format: yyyy-MM-dd"
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionDateEnd",
+                  "value": "<date>",
+                  "description": "End transaction date filter, format: yyyy-MM-dd"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "merchantId",
+                  "description": "(Required) Merchant's UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4509ab5f-23ca-4270-95f7-649bd6da72e6",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "chargeCancellations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "periodId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionDateBegin",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "transactionDateEnd",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "merchantId",
+                      "description": "(Required) Merchant's UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"amount\": \"<number>\",\n  \"expectedPaymentDate\": \"<date>\",\n  \"merchantName\": \"<string>\",\n  \"orderId\": \"<uuid>\",\n  \"paymentPlan\": \"<string>\",\n  \"periodId\": \"<string>\",\n  \"transactionDate\": \"<date>\",\n  \"transactionId\": \"<string>\",\n  \"orderDate\": \"<date>\",\n  \"cancellationCode\": \"<string>\",\n  \"cancellationCodeDescription\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e21b3601-913a-4a34-bb3d-c55c61ad0fda",
+              "name": "Bad request, check the request params",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "chargeCancellations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "periodId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionDateBegin",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "transactionDateEnd",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "merchantId",
+                      "description": "(Required) Merchant's UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"field\": \"<string>\",\n    \"details\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2cd1b31d-49fd-4362-b51e-61bd6926bfff",
+          "name": "Get cancellations",
+          "request": {
+            "name": "Get cancellations",
+            "description": {
+              "content": "Returns information regarding cancellations",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "merchants",
+                ":merchantId",
+                "cancellations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "periodId",
+                  "value": "<string>",
+                  "description": "Period's ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "beginCancellationDate",
+                  "value": "<date>",
+                  "description": "Start cancellation date filter, format: yyyy-MM-dd"
+                },
+                {
+                  "disabled": false,
+                  "key": "endCancellationDate",
+                  "value": "<date>",
+                  "description": "End cancellation date filter, format: yyyy-MM-dd"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "merchantId",
+                  "description": "(Required) Merchant's UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "de8429f0-1ec9-43f0-89be-efb660d3399f",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "cancellations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "periodId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "beginCancellationDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endCancellationDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "merchantId",
+                      "description": "(Required) Merchant's UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"amount\": \"<number>\",\n  \"cancellationDate\": \"<date>\",\n  \"liability\": \"<string>\",\n  \"merchantId\": \"<uuid>\",\n  \"merchantName\": \"<string>\",\n  \"operationType\": \"<string>\",\n  \"orderId\": \"<uuid>\",\n  \"periodId\": \"<string>\",\n  \"expectedPaymentDate\": \"<date>\",\n  \"orderDate\": \"<date>\",\n  \"cancellationCode\": \"<string>\",\n  \"cancellationCodeDescription\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4885dff1-b191-4251-9217-8c869a03c47e",
+              "name": "Bad request, check the request params",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "cancellations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "periodId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "beginCancellationDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endCancellationDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "merchantId",
+                      "description": "(Required) Merchant's UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"field\": \"<string>\",\n    \"details\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a8e9d19-4596-4af9-b2b3-0b5dc854585b",
+          "name": "Get receivable records info",
+          "request": {
+            "name": "Get receivable records info",
+            "description": {
+              "content": "Returns merchant information regarding receivable records by range of dates and merchantId",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "merchants",
+                ":merchantId",
+                "receivableRecords"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "beginReceivableDate",
+                  "value": "<date>",
+                  "description": "Begin receivable date filter, format: yyyy-MM-dd"
+                },
+                {
+                  "disabled": false,
+                  "key": "endReceivableDate",
+                  "value": "<date>",
+                  "description": "End receivable date filter, format: yyyy-MM-dd"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "merchantId",
+                  "description": "(Required) Merchant's UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aa4a1ec7-b02d-4a9c-bf07-a495b3afc5e6",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "receivableRecords"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "beginReceivableDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endReceivableDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "merchantId",
+                      "description": "(Required) Merchant's UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"merchantId\": \"<uuid>\",\n  \"originPaymentId\": \"<string>\",\n  \"paymentSplit\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17d09d3d-59b1-48f4-a3d7-2d6849197547",
+              "name": "Bad request, check the request params",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "receivableRecords"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "beginReceivableDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endReceivableDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "merchantId",
+                      "description": "(Required) Merchant's UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"field\": \"<string>\",\n    \"details\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2a1c9a00-fa72-4f7e-ba75-052eccbb5489",
+          "name": "Get sales ifood benefits by merchant",
+          "request": {
+            "name": "Get sales ifood benefits by merchant",
+            "description": {
+              "content": "Returns ifood benefits of merchant information for sales conciliation by a range of dates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "merchants",
+                ":merchantId",
+                "salesBenefits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "periodId",
+                  "value": "<string>",
+                  "description": "Period's ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "beginOrderDate",
+                  "value": "<date>",
+                  "description": "Order date update begin filter, format: yyyy-MM-dd"
+                },
+                {
+                  "disabled": false,
+                  "key": "endOrderDate",
+                  "value": "<date>",
+                  "description": "Order date update end filter, format: yyyy-MM-dd"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "merchantId",
+                  "description": "(Required) Merchant's UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bce7860e-5595-4e7e-af76-820aad33bf17",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "salesBenefits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "periodId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "beginOrderDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endOrderDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "merchantId",
+                      "description": "(Required) Merchant's UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orderId\": \"<uuid>\",\n  \"displayId\": \"<string>\",\n  \"orderDate\": \"<date>\",\n  \"totalAmount\": \"<double>\",\n  \"taxPolAmount\": \"<double>\",\n  \"netAmount\": \"<double>\",\n  \"merchantId\": \"<uuid>\",\n  \"documentNumber\": \"<string>\",\n  \"periodId\": \"<string>\",\n  \"expectedPaymentDate\": \"<date>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed12d271-3657-4caf-9dc5-5fe6f3f6736d",
+              "name": "Bad request, check the request params",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "salesBenefits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "periodId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "beginOrderDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endOrderDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "merchantId",
+                      "description": "(Required) Merchant's UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"field\": \"<string>\",\n    \"details\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7e01dc2e-7535-4d07-a78e-908f43c0608b",
+          "name": "Get adjustments ifood benefits by merchant",
+          "request": {
+            "name": "Get adjustments ifood benefits by merchant",
+            "description": {
+              "content": "Returns adjustments from ifood benefits of merchant information for sales conciliation by a range of dates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "merchants",
+                ":merchantId",
+                "adjustmentsBenefits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "periodId",
+                  "value": "<string>",
+                  "description": "Period's ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "beginOrderDate",
+                  "value": "<date>",
+                  "description": "Order date update begin filter, format: yyyy-MM-dd"
+                },
+                {
+                  "disabled": false,
+                  "key": "endOrderDate",
+                  "value": "<date>",
+                  "description": "Order date update end filter, format: yyyy-MM-dd"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "merchantId",
+                  "description": "(Required) Merchant's UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "71451d46-3ccd-44e8-b1db-014fc1a1ebd3",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "adjustmentsBenefits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "periodId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "beginOrderDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endOrderDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "merchantId",
+                      "description": "(Required) Merchant's UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orderId\": \"<uuid>\",\n  \"displayId\": \"<string>\",\n  \"orderDate\": \"<date>\",\n  \"totalAmount\": \"<double>\",\n  \"taxPolAmount\": \"<double>\",\n  \"netAmount\": \"<double>\",\n  \"merchantId\": \"<uuid>\",\n  \"documentNumber\": \"<string>\",\n  \"codeEvent\": \"<integer>\",\n  \"typeEvent\": \"<string>\",\n  \"adjustmentDate\": \"<date>\",\n  \"periodId\": \"<string>\",\n  \"expectedPaymentDate\": \"<date>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5405509b-5c4e-4d0c-9b02-d8d90ad7ef2c",
+              "name": "Bad request, check the request params",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "adjustmentsBenefits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "periodId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "beginOrderDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endOrderDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "merchantId",
+                      "description": "(Required) Merchant's UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"field\": \"<string>\",\n    \"details\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/HttpError detected>\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://merchant-api.ifood.com.br/financial/v2.0",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Competence Year and Month ",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "competence"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "47b308bb-5203-44ae-87ac-a1886e97bb37",
+    "name": "Financial",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

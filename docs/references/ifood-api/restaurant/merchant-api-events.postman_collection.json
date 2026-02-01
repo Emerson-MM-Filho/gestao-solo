@@ -1,0 +1,998 @@
+{
+  "item": [
+    {
+      "id": "6f5d7434-01f2-4dfa-8791-b4f35266b935",
+      "name": "Get New Events",
+      "request": {
+        "name": "Get New Events",
+        "description": {
+          "content": "Polls events for any orders from merchants associated with the authenticated user.\n\nEach event received from this endpoint must be properly acknowledged, otherwise it will continue to be returned on further requests.[(Read more)](https://developer.ifood.com.br/docs/guides/modules/order/events)",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "events:polling"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "types",
+              "value": "<string>",
+              "description": "Desired event types. All other events not selected by type will be automatically acknowledged and omitted from the response. Must either be omitted or non-empty. [(Read more)](https://developer.ifood.com.br/docs/guides/modules/events/polling-overview)"
+            },
+            {
+              "disabled": false,
+              "key": "groups",
+              "value": "<string>",
+              "description": "Desired event groups. All other events not selected by group will be automatically acknowledged and omitted from the response. Must either be omitted or non-empty. [(Read more)](https://developer.ifood.com.br/docs/guides/modules/events/polling-overview)"
+            },
+            {
+              "disabled": false,
+              "key": "categories",
+              "value": "<string>",
+              "description": "Desired event categories. All other events not selected by category will be automatically acknowledged and omitted from the response. Must either be omitted or non-empty. [(Read more)](https://developer.ifood.com.br/docs/guides/modules/events/polling-overview)"
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "disabled": false,
+            "description": "Subset of merchants to fetch events from. Must either be omitted or non-empty.",
+            "key": "x-polling-merchants",
+            "value": "<string>"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{bearerToken}}"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "d0d0bcad-957c-4ff9-b532-0b96f53e917a",
+          "name": "OK",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "events:polling"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "types",
+                  "value": "<string>"
+                },
+                {
+                  "key": "groups",
+                  "value": "<string>"
+                },
+                {
+                  "key": "categories",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "disabled": false,
+                "description": "Subset of merchants to fetch events from. Must either be omitted or non-empty.",
+                "key": "x-polling-merchants",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"createdAt\": \"<dateTime>\",\n    \"fullCode\": \"<string>\",\n    \"metadata\": {\n      \"aliqua_a0\": \"<object>\",\n      \"minim2\": \"<object>\",\n      \"voluptate_c8d\": \"<object>\"\n    },\n    \"code\": \"<string>\",\n    \"orderId\": \"<uuid>\"\n  }\n]",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "94711b60-2bdf-4728-bf69-c969331620f3",
+          "name": "No pending events found.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "events:polling"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "types",
+                  "value": "<string>"
+                },
+                {
+                  "key": "groups",
+                  "value": "<string>"
+                },
+                {
+                  "key": "categories",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "disabled": false,
+                "description": "Subset of merchants to fetch events from. Must either be omitted or non-empty.",
+                "key": "x-polling-merchants",
+                "value": "<string>"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "No Content",
+          "code": 204,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        },
+        {
+          "id": "563acbe7-ec2a-4534-8181-0bde5c5f6d6e",
+          "name": "Bad Request. One or more request parameters were not valid.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "events:polling"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "types",
+                  "value": "<string>"
+                },
+                {
+                  "key": "groups",
+                  "value": "<string>"
+                },
+                {
+                  "key": "categories",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "disabled": false,
+                "description": "Subset of merchants to fetch events from. Must either be omitted or non-empty.",
+                "key": "x-polling-merchants",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"details\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/ErrorDTO detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/ErrorDTO detected>\"\n      }\n    ],\n    \"message\": \"<string>\",\n    \"field\": \"<string>\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "d4b24b11-8b1a-467f-801a-af07990cf079",
+          "name": "Forbidden",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "events:polling"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "types",
+                  "value": "<string>"
+                },
+                {
+                  "key": "groups",
+                  "value": "<string>"
+                },
+                {
+                  "key": "categories",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "disabled": false,
+                "description": "Subset of merchants to fetch events from. Must either be omitted or non-empty.",
+                "key": "x-polling-merchants",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Forbidden",
+          "code": 403,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "*/*"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"details\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Error403PollingDTO detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Error403PollingDTO detected>\"\n      }\n    ],\n    \"message\": \"<string>\",\n    \"field\": \"<string>\",\n    \"unauthorizedMerchants\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ]\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "431a48a9-cce1-4999-ace8-76561a36e1b5",
+          "name": "Not Found",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "events:polling"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "types",
+                  "value": "<string>"
+                },
+                {
+                  "key": "groups",
+                  "value": "<string>"
+                },
+                {
+                  "key": "categories",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "disabled": false,
+                "description": "Subset of merchants to fetch events from. Must either be omitted or non-empty.",
+                "key": "x-polling-merchants",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "*/*"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"details\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/ErrorDTO detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/ErrorDTO detected>\"\n      }\n    ],\n    \"message\": \"<string>\",\n    \"field\": \"<string>\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "a980cbbb-1787-4b98-aef3-e47a0e70a269",
+          "name": "The request would query too many merchants (maximum is 100).",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "events:polling"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "types",
+                  "value": "<string>"
+                },
+                {
+                  "key": "groups",
+                  "value": "<string>"
+                },
+                {
+                  "key": "categories",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "disabled": false,
+                "description": "Subset of merchants to fetch events from. Must either be omitted or non-empty.",
+                "key": "x-polling-merchants",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Request Entity Too Large",
+          "code": 413,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"details\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/ErrorDTO detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/ErrorDTO detected>\"\n      }\n    ],\n    \"message\": \"<string>\",\n    \"field\": \"<string>\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "a3859068-b50f-4328-b462-2c45a44bc229",
+          "name": "Unsupported Media Type",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "events:polling"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "types",
+                  "value": "<string>"
+                },
+                {
+                  "key": "groups",
+                  "value": "<string>"
+                },
+                {
+                  "key": "categories",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "disabled": false,
+                "description": "Subset of merchants to fetch events from. Must either be omitted or non-empty.",
+                "key": "x-polling-merchants",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Unsupported Media Type",
+          "code": 415,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "*/*"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"details\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/ErrorDTO detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/ErrorDTO detected>\"\n      }\n    ],\n    \"message\": \"<string>\",\n    \"field\": \"<string>\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "9e7d5e70-1e32-4fe0-945c-b4c7ad5f793e",
+          "name": "Internal Server Error",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "events:polling"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "types",
+                  "value": "<string>"
+                },
+                {
+                  "key": "groups",
+                  "value": "<string>"
+                },
+                {
+                  "key": "categories",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "disabled": false,
+                "description": "Subset of merchants to fetch events from. Must either be omitted or non-empty.",
+                "key": "x-polling-merchants",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "*/*"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"details\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/ErrorDTO detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/ErrorDTO detected>\"\n      }\n    ],\n    \"message\": \"<string>\",\n    \"field\": \"<string>\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "d8e223e3-2412-4ed7-9ffa-1558aa807604",
+      "name": "Acknowledge Events",
+      "request": {
+        "name": "Acknowledge Events",
+        "description": {
+          "content": "Acknowledge a set of events, dismissing them from future polling calls.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "events",
+            "acknowledgment"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{bearerToken}}"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "[\n  {\n    \"id\": \"<uuid>\"\n  }\n]",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "37dedf3d-c004-45ab-bf49-37a125d762aa",
+          "name": "Accepted. The request may be processed asynchronously",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "events",
+                "acknowledgment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"<uuid>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Accepted",
+          "code": 202,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        },
+        {
+          "id": "d224e93c-5d42-46a8-b42f-be92f61ec222",
+          "name": "Bad request.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "events",
+                "acknowledgment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"<uuid>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"details\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/ErrorDTO detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/ErrorDTO detected>\"\n      }\n    ],\n    \"message\": \"<string>\",\n    \"field\": \"<string>\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "fcb4f4ab-f5d4-473d-8853-0890564d38ef",
+          "name": "Forbidden",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "events",
+                "acknowledgment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"<uuid>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Forbidden",
+          "code": 403,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "*/*"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"details\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/ErrorDTO detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/ErrorDTO detected>\"\n      }\n    ],\n    \"message\": \"<string>\",\n    \"field\": \"<string>\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "d2a0838b-47fb-4e7d-b51f-3d3132eda7f0",
+          "name": "Not Found",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "events",
+                "acknowledgment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"<uuid>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "*/*"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"details\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/ErrorDTO detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/ErrorDTO detected>\"\n      }\n    ],\n    \"message\": \"<string>\",\n    \"field\": \"<string>\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "0d6d6efb-4dd1-4b67-9253-9c39e92f6921",
+          "name": "Payload too large. You may acknowledge at most 10000 events at a time.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "events",
+                "acknowledgment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"<uuid>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Request Entity Too Large",
+          "code": 413,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"details\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/ErrorDTO detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/ErrorDTO detected>\"\n      }\n    ],\n    \"message\": \"<string>\",\n    \"field\": \"<string>\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "68eda339-5773-4479-b77c-5789be183372",
+          "name": "Unsupported Media Type",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "events",
+                "acknowledgment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"<uuid>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unsupported Media Type",
+          "code": 415,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "*/*"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"details\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/ErrorDTO detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/ErrorDTO detected>\"\n      }\n    ],\n    \"message\": \"<string>\",\n    \"field\": \"<string>\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "9fba2289-92a5-46a1-9660-a330b7aac900",
+          "name": "Internal Server Error",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "events",
+                "acknowledgment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"<uuid>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "*/*"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"details\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/ErrorDTO detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/ErrorDTO detected>\"\n      }\n    ],\n    \"message\": \"<string>\",\n    \"field\": \"<string>\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://merchant-api.ifood.com.br/events/v1.0",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "47b308bb-5203-44ae-87ac-a1886e97bb37",
+    "name": "Events",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Order API provides means to interact with orders on the platform. It is separated into three core parts: Events, Details and Actions, which are described in further detail hereafter. All endpoints require [authentication](#authentication).",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,2781 @@
+{
+  "item": [
+    {
+      "id": "1381ef27-324f-43ab-ad8d-a20feeb46a6e",
+      "name": "merchants",
+      "item": [
+        {
+          "id": "451b54b9-9673-4831-9259-66b9aceb5aab",
+          "name": "List merchants",
+          "request": {
+            "name": "List merchants",
+            "description": {
+              "content": "Lists the summary of all merchants related to the client in the token that contains MERCHANT scope.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "merchants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<number>",
+                  "description": "The page number, starting at 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "<number>",
+                  "description": "The number of merchants by page. Default is 100."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d864b676-faeb-4c6c-ab9f-7dea21060ccc",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"corporateName\": \"<string>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"corporateName\": \"<string>\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21df570e-44de-4c32-bf71-9c21b51c32be",
+              "name": "Unauthorized. User is not authenticated at all, token is expired or token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "293326cd-2c09-458d-aab8-192ea51f3eed",
+              "name": "InternalServerError. Something unexpected went wrong while fetching the list of merchants associated with the token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a43af753-a574-432c-b9d5-4572a69e344e",
+          "name": "{merchantId}",
+          "item": [
+            {
+              "id": "228b92ac-1eb5-431e-b55b-01733301947d",
+              "name": "Get merchant details",
+              "request": {
+                "name": "Get merchant details",
+                "description": {
+                  "content": "Gets detailed information about the merchant, such as merchant basic info, address and operations.",
+                  "type": "text/plain"
+                },
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "merchantId",
+                      "description": "(Required) ID of the Merchant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "9b4621e6-6829-4b7d-849b-a5a26eb9aef4",
+                  "name": "OK",
+                  "originalRequest": {
+                    "url": {
+                      "path": [
+                        "merchants",
+                        ":merchantId"
+                      ],
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "query": [],
+                      "variable": [
+                        {
+                          "disabled": false,
+                          "type": "any",
+                          "value": "<string>",
+                          "key": "merchantId",
+                          "description": "(Required) ID of the Merchant"
+                        }
+                      ]
+                    },
+                    "header": [
+                      {
+                        "description": {
+                          "content": "Added as a part of security scheme: bearer",
+                          "type": "text/plain"
+                        },
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "method": "GET",
+                    "body": {}
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"corporateName\": \"<string>\",\n  \"description\": \"<string>\",\n  \"averageTicket\": \"<number>\",\n  \"exclusive\": \"<boolean>\",\n  \"type\": \"<string>\",\n  \"status\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"address\": {\n    \"country\": \"<string>\",\n    \"state\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"district\": \"<string>\",\n    \"street\": \"<string>\",\n    \"number\": \"<string>\",\n    \"latitude\": \"<number>\",\n    \"longitude\": \"<number>\"\n  },\n  \"operations\": {\n    \"name\": \"<string>\",\n    \"salesChannel\": {\n      \"name\": \"<string>\",\n      \"enabled\": \"<string>\"\n    }\n  }\n}",
+                  "cookie": [],
+                  "_postman_previewlanguage": "json"
+                },
+                {
+                  "id": "97089154-ee49-4ee7-81bc-13304afe9583",
+                  "name": "Unauthorized. User is not authenticated at all, token is expired or token is invalid.",
+                  "originalRequest": {
+                    "url": {
+                      "path": [
+                        "merchants",
+                        ":merchantId"
+                      ],
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "query": [],
+                      "variable": [
+                        {
+                          "disabled": false,
+                          "type": "any",
+                          "value": "<string>",
+                          "key": "merchantId",
+                          "description": "(Required) ID of the Merchant"
+                        }
+                      ]
+                    },
+                    "header": [
+                      {
+                        "description": {
+                          "content": "Added as a part of security scheme: bearer",
+                          "type": "text/plain"
+                        },
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "method": "GET",
+                    "body": {}
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "cookie": [],
+                  "_postman_previewlanguage": "json"
+                },
+                {
+                  "id": "755e643b-2196-4312-8716-4f5c2fbc818f",
+                  "name": "Forbidden. User has no access to the given merchant.",
+                  "originalRequest": {
+                    "url": {
+                      "path": [
+                        "merchants",
+                        ":merchantId"
+                      ],
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "query": [],
+                      "variable": [
+                        {
+                          "disabled": false,
+                          "type": "any",
+                          "value": "<string>",
+                          "key": "merchantId",
+                          "description": "(Required) ID of the Merchant"
+                        }
+                      ]
+                    },
+                    "header": [
+                      {
+                        "description": {
+                          "content": "Added as a part of security scheme: bearer",
+                          "type": "text/plain"
+                        },
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "method": "GET",
+                    "body": {}
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "cookie": [],
+                  "_postman_previewlanguage": "json"
+                },
+                {
+                  "id": "74b7fcb3-dea0-45dc-868e-a1ee92f62734",
+                  "name": "InternalServerError. Something unexpected went wrong while fetching the details of the given merchant.",
+                  "originalRequest": {
+                    "url": {
+                      "path": [
+                        "merchants",
+                        ":merchantId"
+                      ],
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "query": [],
+                      "variable": [
+                        {
+                          "disabled": false,
+                          "type": "any",
+                          "value": "<string>",
+                          "key": "merchantId",
+                          "description": "(Required) ID of the Merchant"
+                        }
+                      ]
+                    },
+                    "header": [
+                      {
+                        "description": {
+                          "content": "Added as a part of security scheme: bearer",
+                          "type": "text/plain"
+                        },
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "method": "GET",
+                    "body": {}
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "cookie": [],
+                  "_postman_previewlanguage": "json"
+                }
+              ],
+              "event": [],
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              }
+            },
+            {
+              "id": "f05feb7b-cbb6-438b-a51e-e1eb01ca45a3",
+              "name": "interruptions",
+              "item": [
+                {
+                  "id": "cb7a5064-5d49-424a-a639-59d17bbe6fd7",
+                  "name": "List merchant's interruptions",
+                  "request": {
+                    "name": "List merchant's interruptions",
+                    "description": {
+                      "content": "Lists current and future interruptions of the given merchant.",
+                      "type": "text/plain"
+                    },
+                    "url": {
+                      "path": [
+                        "merchants",
+                        ":merchantId",
+                        "interruptions"
+                      ],
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "query": [],
+                      "variable": [
+                        {
+                          "disabled": false,
+                          "type": "any",
+                          "value": "<string>",
+                          "key": "merchantId",
+                          "description": "(Required) ID of the Merchant"
+                        }
+                      ]
+                    },
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "method": "GET",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "e985dac9-1466-4073-952d-6be7e0659a8b",
+                      "name": "OK",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "interruptions"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "GET",
+                        "body": {}
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "[\n  {\n    \"id\": \"<id>\",\n    \"description\": \"<string>\",\n    \"start\": \"<dateTime>\",\n    \"end\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<id>\",\n    \"description\": \"<string>\",\n    \"start\": \"<dateTime>\",\n    \"end\": \"<dateTime>\"\n  }\n]",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    },
+                    {
+                      "id": "376aa6e8-f989-469f-8039-b85ccd73ce2c",
+                      "name": "Unauthorized. User is not authenticated at all, token is expired or token is invalid.",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "interruptions"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "GET",
+                        "body": {}
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    },
+                    {
+                      "id": "a8d3f100-ed9b-4230-b045-f3428b935fbc",
+                      "name": "Forbidden. User has no access to the given merchant.",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "interruptions"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "GET",
+                        "body": {}
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    },
+                    {
+                      "id": "d848bd7a-f54b-4e1a-a648-b20d1f641cd8",
+                      "name": "InternalServerError. Something unexpected went wrong while fetching the current and future interruptions for the given merchant.",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "interruptions"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "GET",
+                        "body": {}
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    }
+                  ],
+                  "event": [],
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  }
+                },
+                {
+                  "id": "f8a7d274-9ca1-4425-afc8-67cace3a165c",
+                  "name": "Create an interruption",
+                  "request": {
+                    "name": "Create an interruption",
+                    "description": {
+                      "content": "Creates an interruption for the given merchant. Will return the created interruption if the request is successful.",
+                      "type": "text/plain"
+                    },
+                    "url": {
+                      "path": [
+                        "merchants",
+                        ":merchantId",
+                        "interruptions"
+                      ],
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "query": [],
+                      "variable": [
+                        {
+                          "disabled": false,
+                          "type": "any",
+                          "value": "<string>",
+                          "key": "merchantId",
+                          "description": "(Required) ID of the Merchant"
+                        }
+                      ]
+                    },
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "method": "POST",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}"
+                        }
+                      ]
+                    },
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string>\",\n  \"start\": \"<dateTime>\",\n  \"end\": \"<dateTime>\",\n  \"id\": \"<id>\"\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "930e47c2-bec3-48cd-bf0b-3774d4c06de5",
+                      "name": "OK",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "interruptions"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "POST",
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"description\": \"<string>\",\n  \"start\": \"<dateTime>\",\n  \"end\": \"<dateTime>\",\n  \"id\": \"<id>\"\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"id\": \"<id>\",\n  \"description\": \"<string>\",\n  \"start\": \"<dateTime>\",\n  \"end\": \"<dateTime>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    },
+                    {
+                      "id": "3ddc2f85-64aa-40fb-8db9-74ba7d58fc79",
+                      "name": "BadRequest. Some body parameter is missing, start and/or end aren't in ISO 8601 format, start is after end, etc.",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "interruptions"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "POST",
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"description\": \"<string>\",\n  \"start\": \"<dateTime>\",\n  \"end\": \"<dateTime>\",\n  \"id\": \"<id>\"\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    },
+                    {
+                      "id": "b9b10452-ceba-4641-aa86-209c879a4f9e",
+                      "name": "Unauthorized. User is not authenticated at all, token is expired or token is invalid.",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "interruptions"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "POST",
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"description\": \"<string>\",\n  \"start\": \"<dateTime>\",\n  \"end\": \"<dateTime>\",\n  \"id\": \"<id>\"\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    },
+                    {
+                      "id": "207a84ec-5460-4aa0-9bb7-9bd4d667550c",
+                      "name": "Forbidden. User has no access to the given merchant.",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "interruptions"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "POST",
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"description\": \"<string>\",\n  \"start\": \"<dateTime>\",\n  \"end\": \"<dateTime>\",\n  \"id\": \"<id>\"\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    },
+                    {
+                      "id": "53af91d6-482d-4dbb-afd8-e83ea5123a20",
+                      "name": "InternalServerError. Something unexpected happened while creating the interruption.",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "interruptions"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "POST",
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"description\": \"<string>\",\n  \"start\": \"<dateTime>\",\n  \"end\": \"<dateTime>\",\n  \"id\": \"<id>\"\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    }
+                  ],
+                  "event": [],
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  }
+                },
+                {
+                  "id": "cfd5c6fa-4ca2-48cd-aa76-9a9ade3a554f",
+                  "name": "Delete an interruption",
+                  "request": {
+                    "name": "Delete an interruption",
+                    "description": {
+                      "content": "Deletes a current or future interruption from the given merchant.",
+                      "type": "text/plain"
+                    },
+                    "url": {
+                      "path": [
+                        "merchants",
+                        ":merchantId",
+                        "interruptions",
+                        ":interruptionId"
+                      ],
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "query": [],
+                      "variable": [
+                        {
+                          "disabled": false,
+                          "type": "any",
+                          "value": "<string>",
+                          "key": "merchantId",
+                          "description": "(Required) ID of the Merchant"
+                        },
+                        {
+                          "disabled": false,
+                          "type": "any",
+                          "value": "<string>",
+                          "key": "interruptionId",
+                          "description": "(Required) ID of the interruption"
+                        }
+                      ]
+                    },
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "method": "DELETE",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "2e86ff5f-6628-4e02-bba9-7ba126bf4325",
+                      "name": "No Content. Interruption was deleted.",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "interruptions",
+                            ":interruptionId"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            },
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "interruptionId",
+                              "description": "(Required) ID of the interruption"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "method": "DELETE",
+                        "body": {}
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "text/plain"
+                        }
+                      ],
+                      "body": "",
+                      "cookie": [],
+                      "_postman_previewlanguage": "text"
+                    },
+                    {
+                      "id": "54b6cb1c-5c41-4289-be3a-eb5b43dd96cd",
+                      "name": "Unauthorized. User is not authenticated at all, token is expired or token is invalid.",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "interruptions",
+                            ":interruptionId"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            },
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "interruptionId",
+                              "description": "(Required) ID of the interruption"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "DELETE",
+                        "body": {}
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    },
+                    {
+                      "id": "c0860a22-aac8-48b7-aa0d-b6a819b27d2c",
+                      "name": "Forbidden. User has no access to the given merchant.",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "interruptions",
+                            ":interruptionId"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            },
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "interruptionId",
+                              "description": "(Required) ID of the interruption"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "DELETE",
+                        "body": {}
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    },
+                    {
+                      "id": "96f9c41c-c031-4542-b66b-dcc18ba0bf6c",
+                      "name": "InternalServerError. Something unexpected happened while deleting the interruption.",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "interruptions",
+                            ":interruptionId"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            },
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "interruptionId",
+                              "description": "(Required) ID of the interruption"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "DELETE",
+                        "body": {}
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    }
+                  ],
+                  "event": [],
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  }
+                }
+              ],
+              "event": []
+            },
+            {
+              "id": "15c24523-d16d-4f3a-a94c-74e437cead78",
+              "name": "status",
+              "item": [
+                {
+                  "id": "d6705da2-8f36-4282-a4ca-cfa703b61af3",
+                  "name": "Get merchant status",
+                  "request": {
+                    "name": "Get merchant status",
+                    "description": {
+                      "content": "Lists availability details for all merchant's available operations.",
+                      "type": "text/plain"
+                    },
+                    "url": {
+                      "path": [
+                        "merchants",
+                        ":merchantId",
+                        "status"
+                      ],
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "query": [],
+                      "variable": [
+                        {
+                          "disabled": false,
+                          "type": "any",
+                          "value": "<string>",
+                          "key": "merchantId",
+                          "description": "(Required) ID of the Merchant"
+                        }
+                      ]
+                    },
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "method": "GET",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "c72ae588-b984-4a87-a1f3-99ec5c7d6e18",
+                      "name": "OK",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "status"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "GET",
+                        "body": {}
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "[\n  {\n    \"operation\": \"<string>\",\n    \"salesChannel\": \"<string>\",\n    \"available\": \"<boolean>\",\n    \"state\": \"<string>\",\n    \"reopenable\": {\n      \"identifier\": \"<string>\",\n      \"type\": \"<string>\",\n      \"reopenable\": \"<boolean>\"\n    },\n    \"validations\": [\n      {\n        \"id\": \"<string>\",\n        \"code\": \"<string>\",\n        \"state\": \"<string>\",\n        \"message\": {\n          \"title\": \"<string>\",\n          \"subtitle\": \"<string>\",\n          \"description\": \"<string>\"\n        }\n      },\n      {\n        \"id\": \"<string>\",\n        \"code\": \"<string>\",\n        \"state\": \"<string>\",\n        \"message\": {\n          \"title\": \"<string>\",\n          \"subtitle\": \"<string>\",\n          \"description\": \"<string>\"\n        }\n      }\n    ],\n    \"message\": {\n      \"title\": \"<string>\",\n      \"subtitle\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  },\n  {\n    \"operation\": \"<string>\",\n    \"salesChannel\": \"<string>\",\n    \"available\": \"<boolean>\",\n    \"state\": \"<string>\",\n    \"reopenable\": {\n      \"identifier\": \"<string>\",\n      \"type\": \"<string>\",\n      \"reopenable\": \"<boolean>\"\n    },\n    \"validations\": [\n      {\n        \"id\": \"<string>\",\n        \"code\": \"<string>\",\n        \"state\": \"<string>\",\n        \"message\": {\n          \"title\": \"<string>\",\n          \"subtitle\": \"<string>\",\n          \"description\": \"<string>\"\n        }\n      },\n      {\n        \"id\": \"<string>\",\n        \"code\": \"<string>\",\n        \"state\": \"<string>\",\n        \"message\": {\n          \"title\": \"<string>\",\n          \"subtitle\": \"<string>\",\n          \"description\": \"<string>\"\n        }\n      }\n    ],\n    \"message\": {\n      \"title\": \"<string>\",\n      \"subtitle\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  }\n]",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    },
+                    {
+                      "id": "8d6a355b-4ff7-4ebf-ab4a-c7fdb0531ebb",
+                      "name": "Unauthorized. User is not authenticated at all, token is expired or token is invalid.",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "status"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "GET",
+                        "body": {}
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    },
+                    {
+                      "id": "3ea1e193-21b4-44e1-bc09-3936cc375023",
+                      "name": "Forbidden. User has no access to the given merchant.",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "status"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "GET",
+                        "body": {}
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    },
+                    {
+                      "id": "f94a6050-155e-4930-891b-d2efcba72fb5",
+                      "name": "InternalServerError. Something unexpected went wrong while fetching the status validations for the given merchant.",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "status"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "GET",
+                        "body": {}
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    }
+                  ],
+                  "event": [],
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  }
+                },
+                {
+                  "id": "19c7c45b-98d9-42d6-8b8e-6e82a2b2817e",
+                  "name": "Get merchant status by operation",
+                  "request": {
+                    "name": "Get merchant status by operation",
+                    "description": {
+                      "content": "Gets the details of the merchant's status based on the given operation.",
+                      "type": "text/plain"
+                    },
+                    "url": {
+                      "path": [
+                        "merchants",
+                        ":merchantId",
+                        "status",
+                        ":operation"
+                      ],
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "query": [],
+                      "variable": [
+                        {
+                          "disabled": false,
+                          "type": "any",
+                          "value": "<string>",
+                          "key": "merchantId",
+                          "description": "(Required) ID of the Merchant"
+                        },
+                        {
+                          "disabled": false,
+                          "type": "any",
+                          "value": "<string>",
+                          "key": "operation",
+                          "description": "(Required) name of the operation"
+                        }
+                      ]
+                    },
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "method": "GET",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "ed8fa68a-6e16-44c3-b3ef-2793700d8787",
+                      "name": "OK",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "status",
+                            ":operation"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            },
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "operation",
+                              "description": "(Required) name of the operation"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "GET",
+                        "body": {}
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"operation\": \"<string>\",\n  \"salesChannel\": \"<string>\",\n  \"available\": \"<boolean>\",\n  \"state\": \"<string>\",\n  \"reopenable\": {\n    \"identifier\": \"<string>\",\n    \"type\": \"<string>\",\n    \"reopenable\": \"<boolean>\"\n  },\n  \"validations\": [\n    {\n      \"id\": \"<string>\",\n      \"code\": \"<string>\",\n      \"state\": \"<string>\",\n      \"message\": {\n        \"title\": \"<string>\",\n        \"subtitle\": \"<string>\",\n        \"description\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"code\": \"<string>\",\n      \"state\": \"<string>\",\n      \"message\": {\n        \"title\": \"<string>\",\n        \"subtitle\": \"<string>\",\n        \"description\": \"<string>\"\n      }\n    }\n  ],\n  \"message\": {\n    \"title\": \"<string>\",\n    \"subtitle\": \"<string>\",\n    \"description\": \"<string>\"\n  }\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    },
+                    {
+                      "id": "ffa013e3-d6db-41f8-8189-edbef154ca5a",
+                      "name": "BadRequest. The given operation is probably invalid.",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "status",
+                            ":operation"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            },
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "operation",
+                              "description": "(Required) name of the operation"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "GET",
+                        "body": {}
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    },
+                    {
+                      "id": "843af85e-f7bc-4188-8697-00cf5b3ebbb0",
+                      "name": "Unauthorized. User is not authenticated at all, token is expired or token is invalid.",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "status",
+                            ":operation"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            },
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "operation",
+                              "description": "(Required) name of the operation"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "GET",
+                        "body": {}
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    },
+                    {
+                      "id": "fa365fe9-7acb-47d2-a275-65b96be5c61d",
+                      "name": "Forbidden. User has no access to the given merchant.",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "status",
+                            ":operation"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            },
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "operation",
+                              "description": "(Required) name of the operation"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "GET",
+                        "body": {}
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    },
+                    {
+                      "id": "9bb0bab1-d53c-4e69-8428-3c578448b3bf",
+                      "name": "InternalServerError. Something unexpected went wrong while fetching the status validations for the given merchant.",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "status",
+                            ":operation"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            },
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "operation",
+                              "description": "(Required) name of the operation"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "GET",
+                        "body": {}
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    }
+                  ],
+                  "event": [],
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  }
+                }
+              ],
+              "event": []
+            },
+            {
+              "id": "d8116858-8aab-4b7b-a973-c51c5728ad40",
+              "name": "opening-hours",
+              "item": [
+                {
+                  "id": "1c686f4a-ed2c-435c-9126-58497296df21",
+                  "name": "Get opening hours",
+                  "request": {
+                    "name": "Get opening hours",
+                    "description": {
+                      "content": "Gets opening hours of the given merchant.",
+                      "type": "text/plain"
+                    },
+                    "url": {
+                      "path": [
+                        "merchants",
+                        ":merchantId",
+                        "opening-hours"
+                      ],
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "query": [],
+                      "variable": [
+                        {
+                          "disabled": false,
+                          "type": "any",
+                          "value": "<string>",
+                          "key": "merchantId",
+                          "description": "(Required) ID of the Merchant"
+                        }
+                      ]
+                    },
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "method": "GET",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "6b6e0fb1-69bf-4882-b4c0-6856f14ead69",
+                      "name": "OK",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "opening-hours"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "GET",
+                        "body": {}
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "[\n  {\n    \"shifts\": [\n      {\n        \"id\": \"<uuid>\",\n        \"dayOfWeek\": \"<string>\",\n        \"start\": \"<string>\",\n        \"duration\": \"<integer>\"\n      },\n      {\n        \"id\": \"<uuid>\",\n        \"dayOfWeek\": \"<string>\",\n        \"start\": \"<string>\",\n        \"duration\": \"<integer>\"\n      }\n    ]\n  },\n  {\n    \"shifts\": [\n      {\n        \"id\": \"<uuid>\",\n        \"dayOfWeek\": \"<string>\",\n        \"start\": \"<string>\",\n        \"duration\": \"<integer>\"\n      },\n      {\n        \"id\": \"<uuid>\",\n        \"dayOfWeek\": \"<string>\",\n        \"start\": \"<string>\",\n        \"duration\": \"<integer>\"\n      }\n    ]\n  }\n]",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    },
+                    {
+                      "id": "0aa53bc4-b18a-4f68-a880-7cf72219c221",
+                      "name": "Unauthorized. User is not authenticated at all, token is expired or token is invalid.",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "opening-hours"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "GET",
+                        "body": {}
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    },
+                    {
+                      "id": "170f7873-e8c0-4c7c-86b3-c4bef9113c6c",
+                      "name": "Forbidden. User has no access to the given merchant.",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "opening-hours"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "GET",
+                        "body": {}
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    },
+                    {
+                      "id": "6535faa4-f16b-4ffd-82ea-52b98e005c8d",
+                      "name": "Specified Opening Hours was not found.",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "opening-hours"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "method": "GET",
+                        "body": {}
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "text/plain"
+                        }
+                      ],
+                      "body": "",
+                      "cookie": [],
+                      "_postman_previewlanguage": "text"
+                    },
+                    {
+                      "id": "67bb1da5-6bf5-42c6-a3ab-f5c617eff5a8",
+                      "name": "InternalServerError. Something unexpected went wrong while fetching the opening hours for the given merchant.",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "opening-hours"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "GET",
+                        "body": {}
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    }
+                  ],
+                  "event": [],
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  }
+                },
+                {
+                  "id": "d9da0082-9442-4e26-8654-a8c5f4e1d508",
+                  "name": "Create an opening hours",
+                  "request": {
+                    "name": "Create an opening hours",
+                    "description": {
+                      "content": "Creates an opening hours for the given merchant.",
+                      "type": "text/plain"
+                    },
+                    "url": {
+                      "path": [
+                        "merchants",
+                        ":merchantId",
+                        "opening-hours"
+                      ],
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "query": [],
+                      "variable": [
+                        {
+                          "disabled": false,
+                          "type": "any",
+                          "value": "<string>",
+                          "key": "merchantId",
+                          "description": "(Required) ID of the Merchant"
+                        }
+                      ]
+                    },
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "method": "PUT",
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}"
+                        }
+                      ]
+                    },
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"storeId\": \"<uuid>\",\n  \"shifts\": [\n    {\n      \"dayOfWeek\": \"<string>\",\n      \"start\": \"<string>\",\n      \"duration\": \"<integer>\"\n    },\n    {\n      \"dayOfWeek\": \"<string>\",\n      \"start\": \"<string>\",\n      \"duration\": \"<integer>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "8817553c-5214-439a-838a-e302e9765beb",
+                      "name": "OK",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "opening-hours"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "PUT",
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"storeId\": \"<uuid>\",\n  \"shifts\": [\n    {\n      \"dayOfWeek\": \"<string>\",\n      \"start\": \"<string>\",\n      \"duration\": \"<integer>\"\n    },\n    {\n      \"dayOfWeek\": \"<string>\",\n      \"start\": \"<string>\",\n      \"duration\": \"<integer>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"storeId\": \"<uuid>\",\n  \"shifts\": [\n    {\n      \"id\": \"<uuid>\",\n      \"storeId\": \"<uuid>\",\n      \"dayOfWeek\": \"<string>\",\n      \"start\": \"<string>\",\n      \"duration\": \"<integer>\",\n      \"enabled\": \"<boolean>\",\n      \"createdAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"storeId\": \"<uuid>\",\n      \"dayOfWeek\": \"<string>\",\n      \"start\": \"<string>\",\n      \"duration\": \"<integer>\",\n      \"enabled\": \"<boolean>\",\n      \"createdAt\": \"<dateTime>\"\n    }\n  ]\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    },
+                    {
+                      "id": "d599581d-a824-4bed-a228-4390ba54b1de",
+                      "name": "BadRequest. Some parameters in the request body are missing or nonexistent. Ensure that parameters are in the correct format",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "opening-hours"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "PUT",
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"storeId\": \"<uuid>\",\n  \"shifts\": [\n    {\n      \"dayOfWeek\": \"<string>\",\n      \"start\": \"<string>\",\n      \"duration\": \"<integer>\"\n    },\n    {\n      \"dayOfWeek\": \"<string>\",\n      \"start\": \"<string>\",\n      \"duration\": \"<integer>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    },
+                    {
+                      "id": "0c62d3e3-9a5e-43a2-b5b7-4ff0bd3e0c15",
+                      "name": "Unauthorized. User is not authenticated at all, token is expired or token is invalid.",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "opening-hours"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "PUT",
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"storeId\": \"<uuid>\",\n  \"shifts\": [\n    {\n      \"dayOfWeek\": \"<string>\",\n      \"start\": \"<string>\",\n      \"duration\": \"<integer>\"\n    },\n    {\n      \"dayOfWeek\": \"<string>\",\n      \"start\": \"<string>\",\n      \"duration\": \"<integer>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    },
+                    {
+                      "id": "698d7351-9be7-4dd4-8f1a-9e6a1c8c76db",
+                      "name": "Forbidden. User has no access to the given merchant.",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "opening-hours"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "PUT",
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"storeId\": \"<uuid>\",\n  \"shifts\": [\n    {\n      \"dayOfWeek\": \"<string>\",\n      \"start\": \"<string>\",\n      \"duration\": \"<integer>\"\n    },\n    {\n      \"dayOfWeek\": \"<string>\",\n      \"start\": \"<string>\",\n      \"duration\": \"<integer>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    },
+                    {
+                      "id": "38e31696-dfc3-4a65-92f2-e735660ebeac",
+                      "name": "InternalServerError. Something unexpected happened while creating the opening hours.",
+                      "originalRequest": {
+                        "url": {
+                          "path": [
+                            "merchants",
+                            ":merchantId",
+                            "opening-hours"
+                          ],
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "query": [],
+                          "variable": [
+                            {
+                              "disabled": false,
+                              "type": "any",
+                              "value": "<string>",
+                              "key": "merchantId",
+                              "description": "(Required) ID of the Merchant"
+                            }
+                          ]
+                        },
+                        "header": [
+                          {
+                            "description": {
+                              "content": "Added as a part of security scheme: bearer",
+                              "type": "text/plain"
+                            },
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "PUT",
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"storeId\": \"<uuid>\",\n  \"shifts\": [\n    {\n      \"dayOfWeek\": \"<string>\",\n      \"start\": \"<string>\",\n      \"duration\": \"<integer>\"\n    },\n    {\n      \"dayOfWeek\": \"<string>\",\n      \"start\": \"<string>\",\n      \"duration\": \"<integer>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "cookie": [],
+                      "_postman_previewlanguage": "json"
+                    }
+                  ],
+                  "event": [],
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  }
+                }
+              ],
+              "event": []
+            }
+          ],
+          "event": []
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://merchant-api.ifood.com.br/merchant/v1.0",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6bc9cd3d-a6a6-495a-a850-1004537f45ea",
+    "name": "Merchant",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Merchant API provides means to interact with merchants on the platform. It is separated into four core parts. Merchant, Status, Interruption and Opening Hours, which are described in further detail hereafter. All endpoints require authentication.",
+      "type": "text/plain"
+    }
+  }
+}

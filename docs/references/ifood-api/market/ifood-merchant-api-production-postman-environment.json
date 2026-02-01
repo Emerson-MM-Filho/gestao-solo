@@ -1,0 +1,138 @@
+{
+  "id": "1aa9edd2-8b05-415d-9280-0d82a74b0da9",
+  "name": "Production",
+  "values": [
+    {
+      "key": "merchantApiHost",
+      "value": "https://merchant-api.ifood.com.br",
+      "enabled": true
+    },
+    {
+      "key": "accessToken",
+      "value": "",
+      "enabled": true
+    },
+    {
+      "key": "clientId",
+      "value": "",
+      "enabled": true
+    },
+    {
+      "key": "clientSecret",
+      "value": "",
+      "enabled": true
+    },
+    {
+      "key": "grantType",
+      "value": "client_credentials",
+      "enabled": true
+    },
+    {
+      "key": "authorizationCode",
+      "value": "",
+      "enabled": true
+    },
+    {
+      "key": "authorizationCodeVerifier",
+      "value": "",
+      "enabled": true
+    },
+    {
+      "key": "refreshToken",
+      "value": "",
+      "enabled": true
+    },
+    {
+      "key": "merchantId",
+      "value": "",
+      "enabled": true
+    },
+    {
+      "key": "operation",
+      "value": "",
+      "enabled": true
+    },
+    {
+      "key": "interruptionId",
+      "value": "",
+      "enabled": true
+    },
+    {
+      "key": "orderId",
+      "value": "",
+      "enabled": true
+    },
+    {
+      "key": "cancellationCode",
+      "value": "",
+      "enabled": true
+    },
+    {
+      "key": "cancellationReason",
+      "value": "",
+      "enabled": true
+    },
+    {
+      "key": "changePreparationTime",
+      "value": "",
+      "enabled": true
+    },
+    {
+      "key": "changePreparationReason",
+      "value": "",
+      "enabled": true
+    },
+    {
+      "key": "catalogId",
+      "value": "",
+      "enabled": true
+    },
+    {
+      "key": "categoryId",
+      "value": "",
+      "enabled": true
+    },
+    {
+      "key": "productId",
+      "value": "",
+      "enabled": true
+    },
+    {
+      "key": "pizzaId",
+      "value": "",
+      "enabled": true
+    },
+    {
+      "key": "optionGroupId",
+      "value": "",
+      "enabled": true
+    },
+    {
+      "key": "itemQuantity",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "replacedUniqueId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "ean",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "uniqueId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    }
+  ],
+  "_postman_variable_scope": "environment",
+  "_postman_exported_at": "2021-04-08T18:26:33.831Z",
+  "_postman_exported_using": "Postman/8.2.0"
+}
