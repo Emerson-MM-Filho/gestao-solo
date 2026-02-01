@@ -1,0 +1,1780 @@
+{
+  "info": {
+    "_postman_id": "698b4ed0-1c3a-492c-824d-8611106fbce5",
+    "name": "Marketplace Store API",
+    "description": "The Store API allows you to get and modify store details.\n\n## Before you start\n\n1. Make sure you have the **Uber Eats Marketplace API** Environment selected\n2. Fill the `uber_api_client_id`, `uber_api_client_secret`, and `store_id` variables.\n3. Click on the Authorization tab of this collection\n4. Scroll down and click Get Access Token\n5. After the token is generated successfully, click on Use Token",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52001179",
+    "_collection_link": "https://go.postman.co/collection/29024134-698b4ed0-1c3a-492c-824d-8611106fbce5?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Get Stores",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "tests[\"Successful Request\"] = responseCode.code === 200"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "User-Agent",
+            "value": "Postman/UberEatsMarketplaceCollections",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "headerFamily": "json",
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/v1/delivery/stores",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v1",
+            "delivery",
+            "stores"
+          ]
+        },
+        "description": "This endpoint allows a partner to enumerate the stores that this token is authorized against. Tokens generated via client_credentials grant will return stores linked to your client ID. Tokens generated via authorization_code grant will return stores linked to the user authorizing the client ID."
+      },
+      "response": [
+        {
+          "name": "Stores retrieved successfully",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.uber.com/v1/delivery/stores",
+              "protocol": "https",
+              "host": [
+                "api",
+                "uber",
+                "com"
+              ],
+              "path": [
+                "v1",
+                "delivery",
+                "stores"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "date",
+              "value": "Thu, 08 Feb 2024 00:02:38 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "load",
+              "value": "q=157"
+            },
+            {
+              "key": "x-api-client-id",
+              "value": "auQNqpZnJy5frnVgTpfCwdDnHlsGISw3"
+            },
+            {
+              "key": "x-request-id",
+              "value": "b0ef192b-8697-4efd-a966-ac15b849778c"
+            },
+            {
+              "key": "x-uber-rtapi-duration",
+              "value": "42"
+            },
+            {
+              "key": "x-uber-edge",
+              "value": "e4-dca24:w:436207616"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=0"
+            },
+            {
+              "key": "x-envoy-upstream-service-time",
+              "value": "61"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "content-encoding",
+              "value": "br"
+            },
+            {
+              "key": "server",
+              "value": "ufe"
+            },
+            {
+              "key": "transfer-encoding",
+              "value": "chunked"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"stores\": [\n        {\n            \"id\": \"{store_id}\",\n            \"name\": \"{store_name}\",\n            \"contact\": {\n                \"email\": \"{contact_email}\",\n                \"name\": \"{contact_name}\",\n                \"phone_number\": \"{contact_phone_number}\"\n            },\n            \"location\": {\n                \"latitude\": \"{store_latitude}\",\n                \"longitude\": \"{store_longitude}\",\n                \"street_address_line_one\": \"{store_street_address}\",\n                \"city\": \" {store_city}\",\n                \"country\": \"{store_country}\"\n            },\n            \"timezone\": \"[store_timezone]\",\n            \"prep_times\": {\n                \"default_value\": 15000\n            },\n            \"onboarding_status\": \"ACTIVE\"\n        },\n        {\n            \"id\": \"{store_id}\",\n            \"name\": \"{store_name}\",\n            \"contact\": {\n                \"email\": \"{contact_email}\",\n                \"name\": \"{contact_name}\",\n                \"phone_number\": \"{contact_phone_number}\"\n            },\n            \"location\": {\n                \"latitude\": \"{store_latitude}\",\n                \"longitude\": \"{store_longitude}\",\n                \"street_address_line_one\": \"{store_street_address}\",\n                \"city\": \" {store_city}\",\n                \"country\": \"{store_country}\"\n            },\n            \"timezone\": \"[store_timezone]\",\n            \"prep_times\": {\n                \"default_value\": 900\n            },\n            \"onboarding_status\": \"ACTIVE\"\n        }\n    ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Store Details",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "tests[\"Successful Request\"] = responseCode.code === 200"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "User-Agent",
+            "value": "Postman/UberEatsMarketplaceCollections",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/v1/delivery/store/{{store_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v1",
+            "delivery",
+            "store",
+            "{{store_id}}"
+          ]
+        },
+        "description": "Retrieves the details of a single location."
+      },
+      "response": [
+        {
+          "name": "Store retrieved successfully",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.uber.com/v1/delivery/store/",
+              "protocol": "https",
+              "host": [
+                "api",
+                "uber",
+                "com"
+              ],
+              "path": [
+                "v1",
+                "delivery",
+                "store",
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "date",
+              "value": "Thu, 08 Feb 2024 00:04:17 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "load",
+              "value": "q=162"
+            },
+            {
+              "key": "x-api-client-id",
+              "value": "auQNqpZnJy5frnVgTpfCwdDnHlsGISw3"
+            },
+            {
+              "key": "x-request-id",
+              "value": "f526c80e-f0fa-430c-a3e8-7d3d0da5c565"
+            },
+            {
+              "key": "x-uber-rtapi-duration",
+              "value": "32"
+            },
+            {
+              "key": "x-uber-edge",
+              "value": "e4-dca24:w:419430401"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=0"
+            },
+            {
+              "key": "x-envoy-upstream-service-time",
+              "value": "43"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "content-encoding",
+              "value": "br"
+            },
+            {
+              "key": "server",
+              "value": "ufe"
+            },
+            {
+              "key": "transfer-encoding",
+              "value": "chunked"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"store\": {\n        \"id\": \"{store_id}\",\n        \"name\": \"{store_name}\",\n        \"contact\": {\n            \"email\": \"{contact_email}\",\n            \"name\": \"{contact_name}\",\n            \"phone_number\": \"{contact_phone_number}\"\n        },\n        \"location\": {\n            \"latitude\": \"{store_latitude}\",\n            \"longitude\": \"{store_longitude}\",\n            \"street_address_line_one\": \"{store_street_address}\",\n            \"city\": \" {store_city}\",\n            \"country\": \"{store_country}\"\n        },\n        \"timezone\": \"{store_timezone}\",\n        \"fulfillment_type_availability\": {\n            \"DELIVERY\": true,\n            \"DELIVERY_API\": true,\n            \"DELIVERY_OVER_THE_TOP\": true,\n            \"DELIVERY_OVER_THE_TOP_ORDER_AHEAD\": true,\n            \"DELIVERY_THIRD_PARTY\": true,\n            \"DINE_IN\": true,\n            \"PICKUP\": true\n        },\n        \"prep_times\": {\n            \"default_value\": 900,\n            \"delay\": {\n                \"status\": {\n                    \"type\": \"NORMAL\"\n                },\n                \"allowed\": true\n            }\n        },\n        \"delivery_settings\": {\n            \"enable_uber_delivery\": false,\n            \"enable_uber_delivery_extended\": false\n        },\n        \"onboarding_status\": \"ACTIVE\",\n        \"auto_accept\": false,\n        \"ooi_config\": {\n            \"is_substitute_item_enabled\": false,\n            \"is_store_replace_item_enabled\": false,\n            \"is_cancel_order_enabled\": false,\n            \"is_remove_item_enabled\": false,\n            \"ooi_eligibility\": {\n                \"enabled\": true\n            }\n        },\n        \"orderability\": {\n            \"status\": \"ONLINE\",\n            \"offline_reason\": \"UNKNOWN\",\n            \"is_visible\": true,\n            \"is_orderable\": true,\n            \"next_close_time\": \"2024-02-07T23:59:00-05:00\",\n            \"menu_hours\": {\n                \"menu_hours\": {\n                    \"8fca2905-347e-4ee5-aeb1-717998076d9f\": {\n                        \"menu_hour_intervals\": {\n                            \"FRIDAY\": {\n                                \"time_ranges\": [\n                                    {\n                                        \"start_time\": \"12:00 AM\",\n                                        \"end_time\": \"11:59 PM\"\n                                    }\n                                ]\n                            },\n                            \"MONDAY\": {\n                                \"time_ranges\": [\n                                    {\n                                        \"start_time\": \"12:00 AM\",\n                                        \"end_time\": \"11:59 PM\"\n                                    }\n                                ]\n                            },\n                            \"SATURDAY\": {\n                                \"time_ranges\": [\n                                    {\n                                        \"start_time\": \"12:00 AM\",\n                                        \"end_time\": \"11:59 PM\"\n                                    }\n                                ]\n                            },\n                            \"SUNDAY\": {\n                                \"time_ranges\": [\n                                    {\n                                        \"start_time\": \"12:00 AM\",\n                                        \"end_time\": \"11:59 PM\"\n                                    }\n                                ]\n                            },\n                            \"THURSDAY\": {\n                                \"time_ranges\": [\n                                    {\n                                        \"start_time\": \"12:00 AM\",\n                                        \"end_time\": \"11:59 PM\"\n                                    }\n                                ]\n                            },\n                            \"TUESDAY\": {\n                                \"time_ranges\": [\n                                    {\n                                        \"start_time\": \"12:00 AM\",\n                                        \"end_time\": \"11:59 PM\"\n                                    }\n                                ]\n                            },\n                            \"WEDNESDAY\": {\n                                \"time_ranges\": [\n                                    {\n                                        \"start_time\": \"12:00 AM\",\n                                        \"end_time\": \"11:59 PM\"\n                                    }\n                                ]\n                            }\n                        }\n                    }\n                }\n            }\n        },\n        \"max_delivery_partners_allowed\": 4,\n        \"support_number\": \"{support_number}\",\n        \"adjustment_config\": {\n            \"is_price_adjustment_enabled\": true,\n            \"maximum_price_adjustment\": 3,\n            \"requires_tax_rate_for_adjustment\": true,\n            \"is_tax_inclusive\": true,\n            \"positive_price_adjustment_reasons\": [\n                \"REQUESTED_ADD_ONS\",\n                \"BIGGER_SIZE\",\n                \"NEW_ITEM_ADDED\",\n                \"OTHER\"\n            ],\n            \"negative_price_adjustment_reasons\": [\n                \"ITEM_SOLD_OUT\",\n                \"REMOVED_ITEM\",\n                \"ADD_ON_UNAVAILABLE\",\n                \"OTHER\"\n            ]\n        },\n        \"partner_identifiers\": [\n            {\n                \"value\": \"{order_manager_client_id}\",\n                \"type\": \"ORDER_MANAGER_CLIENT_ID\"\n            }\n        ]\n    }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Update Store Information",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "tests[\"Successful Request\"] = responseCode.code === 200"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "User-Agent",
+            "value": "Postman/UberEatsMarketplaceCollections",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"contact\": {\n        \"email\": \"{contact_email}\",\n        \"name\": \"{contact_name}\",\n        \"phone_number\": \"+12413125768\"\n    }\n}",
+          "options": {
+            "raw": {
+              "headerFamily": "json",
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/v1/delivery/store/{{store_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v1",
+            "delivery",
+            "store",
+            "{{store_id}}"
+          ]
+        },
+        "description": "Allows application to update the metadata for a unique location. Only \"Contact\", \"Location\", and \"Pickup Instructions\" can be updated."
+      },
+      "response": [
+        {
+          "name": "Store information updated successfully",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contact\": {\n    \"email\": \"uber+test+store2+@aomossoecuador.com\",\n    \"name\": \"Aomosso Ecuador\",\n    \"phone_number\": \"+12413125768\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.uber.com/v1/delivery/store/",
+              "protocol": "https",
+              "host": [
+                "api",
+                "uber",
+                "com"
+              ],
+              "path": [
+                "v1",
+                "delivery",
+                "store",
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "date",
+              "value": "Thu, 08 Feb 2024 14:37:06 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "load",
+              "value": "q=139"
+            },
+            {
+              "key": "x-api-client-id",
+              "value": "auQNqpZnJy5frnVgTpfCwdDnHlsGISw3"
+            },
+            {
+              "key": "x-request-id",
+              "value": "0c75fcb6-d5a0-4f17-b097-529d3b360f40"
+            },
+            {
+              "key": "x-uber-rtapi-duration",
+              "value": "151"
+            },
+            {
+              "key": "x-uber-edge",
+              "value": "e4-dca11:w:50331650"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=0"
+            },
+            {
+              "key": "x-envoy-upstream-service-time",
+              "value": "163"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "content-encoding",
+              "value": "br"
+            },
+            {
+              "key": "server",
+              "value": "ufe"
+            },
+            {
+              "key": "transfer-encoding",
+              "value": "chunked"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"store\": {\n        \"id\": \"{store_id}\",\n        \"name\": \"{store_name}\",\n        \"contact\": {\n            \"email\": \"{contact_email}\",\n            \"name\": \"{contact_name}\",\n            \"phone_number\": \"{contact_phone_number}\"\n        },\n        \"location\": {\n            \"latitude\": \"{store_latitude}\",\n            \"longitude\": \"{store_longitude}\",\n            \"street_address_line_one\": \"{store_street_address}\",\n            \"country\": \"{store_country}\"\n        },\n        \"timezone\": \"{store_timezone}\",\n        \"fulfillment_type_availability\": {\n            \"DELIVERY\": true,\n            \"DELIVERY_API\": true,\n            \"DELIVERY_OVER_THE_TOP\": true,\n            \"DELIVERY_OVER_THE_TOP_ORDER_AHEAD\": true,\n            \"DELIVERY_THIRD_PARTY\": true,\n            \"DINE_IN\": true,\n            \"PICKUP\": true\n        },\n        \"prep_times\": {\n            \"default_value\": 900,\n            \"delay\": {\n                \"status\": {\n                    \"type\": \"NORMAL\"\n                },\n                \"allowed\": true\n            }\n        },\n        \"delivery_settings\": {\n            \"enable_uber_delivery\": false,\n            \"enable_uber_delivery_extended\": false\n        },\n        \"onboarding_status\": \"ACTIVE\",\n        \"auto_accept\": false,\n        \"ooi_config\": {\n            \"is_substitute_item_enabled\": false,\n            \"is_store_replace_item_enabled\": false,\n            \"is_cancel_order_enabled\": false,\n            \"is_remove_item_enabled\": false,\n            \"ooi_eligibility\": {\n                \"enabled\": true\n            }\n        },\n        \"orderability\": {\n            \"status\": \"ONLINE\",\n            \"offline_reason\": \"UNKNOWN\",\n            \"is_visible\": true,\n            \"is_orderable\": true,\n            \"next_close_time\": \"2024-02-07T23:59:00-05:00\",\n            \"menu_hours\": {\n                \"menu_hours\": {\n                    \"8fca2905-347e-4ee5-aeb1-717998076d9f\": {\n                        \"menu_hour_intervals\": {\n                            \"FRIDAY\": {\n                                \"time_ranges\": [\n                                    {\n                                        \"start_time\": \"12:00 AM\",\n                                        \"end_time\": \"11:59 PM\"\n                                    }\n                                ]\n                            },\n                            \"MONDAY\": {\n                                \"time_ranges\": [\n                                    {\n                                        \"start_time\": \"12:00 AM\",\n                                        \"end_time\": \"11:59 PM\"\n                                    }\n                                ]\n                            },\n                            \"SATURDAY\": {\n                                \"time_ranges\": [\n                                    {\n                                        \"start_time\": \"12:00 AM\",\n                                        \"end_time\": \"11:59 PM\"\n                                    }\n                                ]\n                            },\n                            \"SUNDAY\": {\n                                \"time_ranges\": [\n                                    {\n                                        \"start_time\": \"12:00 AM\",\n                                        \"end_time\": \"11:59 PM\"\n                                    }\n                                ]\n                            },\n                            \"THURSDAY\": {\n                                \"time_ranges\": [\n                                    {\n                                        \"start_time\": \"12:00 AM\",\n                                        \"end_time\": \"11:59 PM\"\n                                    }\n                                ]\n                            },\n                            \"TUESDAY\": {\n                                \"time_ranges\": [\n                                    {\n                                        \"start_time\": \"12:00 AM\",\n                                        \"end_time\": \"11:59 PM\"\n                                    }\n                                ]\n                            },\n                            \"WEDNESDAY\": {\n                                \"time_ranges\": [\n                                    {\n                                        \"start_time\": \"12:00 AM\",\n                                        \"end_time\": \"11:59 PM\"\n                                    }\n                                ]\n                            }\n                        }\n                    }\n                }\n            }\n        },\n        \"max_delivery_partners_allowed\": 4,\n        \"support_number\": \"{support_number}\",\n        \"adjustment_config\": {\n            \"is_price_adjustment_enabled\": true,\n            \"maximum_price_adjustment\": 3,\n            \"requires_tax_rate_for_adjustment\": true,\n            \"is_tax_inclusive\": true,\n            \"positive_price_adjustment_reasons\": [\n                \"REQUESTED_ADD_ONS\",\n                \"BIGGER_SIZE\",\n                \"NEW_ITEM_ADDED\",\n                \"OTHER\"\n            ],\n            \"negative_price_adjustment_reasons\": [\n                \"ITEM_SOLD_OUT\",\n                \"REMOVED_ITEM\",\n                \"ADD_ON_UNAVAILABLE\",\n                \"OTHER\"\n            ]\n        },\n        \"partner_identifiers\": [\n            {\n                \"value\": \"{order_manager_client_id}\",\n                \"type\": \"ORDER_MANAGER_CLIENT_ID\"\n            }\n        ]\n    }\n}"
+        },
+        {
+          "name": "Invalid Store ID",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contact\": {\n    \"email\": \"uber+test+store2+@aomossoecuador.com\",\n    \"name\": \"Aomosso Ecuador\",\n    \"phone_number\": \"+12413125768\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/delivery/store/{{store_id}}1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v1",
+                "delivery",
+                "store",
+                "{{store_id}}1"
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "date",
+              "value": "Thu, 08 Feb 2024 14:37:37 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "load",
+              "value": "q=107"
+            },
+            {
+              "key": "x-api-client-id",
+              "value": "auQNqpZnJy5frnVgTpfCwdDnHlsGISw3"
+            },
+            {
+              "key": "x-request-id",
+              "value": "a9aefe05-4b26-42ed-be7b-722f180d3237"
+            },
+            {
+              "key": "x-uber-rtapi-duration",
+              "value": "21"
+            },
+            {
+              "key": "x-uber-edge",
+              "value": "e4-dca11:w:67108865"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=0"
+            },
+            {
+              "key": "x-envoy-upstream-service-time",
+              "value": "31"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "content-encoding",
+              "value": "br"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "server",
+              "value": "ufe"
+            },
+            {
+              "key": "transfer-encoding",
+              "value": "chunked"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"code\": \"bad_request\",\n    \"message\": \"Please pass a valid identifier for the store. Please check and fix before retrying.\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Retrieve Store Status",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "tests[\"Successful Request\"] = responseCode.code === 200"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "User-Agent",
+            "value": "Postman/UberEatsMarketplaceCollections",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/v1/delivery/store/{{store_id}}/status",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v1",
+            "delivery",
+            "store",
+            "{{store_id}}",
+            "status"
+          ]
+        },
+        "description": "The Get Store Status endpoint retrieves the orderability status of a location."
+      },
+      "response": [
+        {
+          "name": "Online store status",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.uber.com/v1/delivery/store//status",
+              "protocol": "https",
+              "host": [
+                "api",
+                "uber",
+                "com"
+              ],
+              "path": [
+                "v1",
+                "delivery",
+                "store",
+                "",
+                "status"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "date",
+              "value": "Thu, 08 Feb 2024 14:38:39 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "content-length",
+              "value": "19"
+            },
+            {
+              "key": "load",
+              "value": "q=104"
+            },
+            {
+              "key": "x-api-client-id",
+              "value": "auQNqpZnJy5frnVgTpfCwdDnHlsGISw3"
+            },
+            {
+              "key": "x-request-id",
+              "value": "6c493c41-97fc-4f6a-b2c6-fffdd47ba7c9"
+            },
+            {
+              "key": "x-uber-rtapi-duration",
+              "value": "21"
+            },
+            {
+              "key": "x-uber-edge",
+              "value": "e4-dca11:w:50331648"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=0"
+            },
+            {
+              "key": "x-envoy-upstream-service-time",
+              "value": "29"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "server",
+              "value": "ufe"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"status\": \"ONLINE\"\n}"
+        },
+        {
+          "name": "Offline store status",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v1/delivery/store/{{store_id}}/status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v1",
+                "delivery",
+                "store",
+                "{{store_id}}",
+                "status"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "date",
+              "value": "Thu, 08 Feb 2024 14:39:52 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "load",
+              "value": "q=131"
+            },
+            {
+              "key": "x-api-client-id",
+              "value": "auQNqpZnJy5frnVgTpfCwdDnHlsGISw3"
+            },
+            {
+              "key": "x-request-id",
+              "value": "9201b774-b99b-4c7f-9ee9-38e860194843"
+            },
+            {
+              "key": "x-uber-rtapi-duration",
+              "value": "24"
+            },
+            {
+              "key": "x-uber-edge",
+              "value": "e4-dca18:w:301989889"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=0"
+            },
+            {
+              "key": "x-envoy-upstream-service-time",
+              "value": "33"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "content-encoding",
+              "value": "br"
+            },
+            {
+              "key": "server",
+              "value": "ufe"
+            },
+            {
+              "key": "transfer-encoding",
+              "value": "chunked"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"status\": \"OFFLINE\",\n    \"is_offline_until\": \"2024-02-08T10:04:49-05:00\",\n    \"offline_reason\": \"PAUSED_BY_RESTAURANT\",\n    \"offline_reason_metadata\": \"PROBLEM_IN_RESTAURANT\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Set Store Status",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "tests[\"Successful Request\"] = responseCode.code === 200"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "User-Agent",
+            "value": "Postman/UberEatsMarketplaceCollections",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"OFFLINE\",\n  \"is_offline_until\":\"2024-02-25T10:00:00-06:00\",\n  \"reason\": \"STORE_CLOSED\"\n}",
+          "options": {
+            "raw": {
+              "headerFamily": "json",
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/v1/delivery/store/{{store_id}}/update-store-status",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v1",
+            "delivery",
+            "store",
+            "{{store_id}}",
+            "update-store-status"
+          ]
+        },
+        "description": "The Set Restaurant Status endpoint sets the online status of a restaurant."
+      },
+      "response": [
+        {
+          "name": "Set store Online",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"ONLINE\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.uber.com/v1/delivery/store//update-store-status",
+              "protocol": "https",
+              "host": [
+                "api",
+                "uber",
+                "com"
+              ],
+              "path": [
+                "v1",
+                "delivery",
+                "store",
+                "",
+                "update-store-status"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "date",
+              "value": "Thu, 08 Feb 2024 14:40:50 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "content-length",
+              "value": "47"
+            },
+            {
+              "key": "load",
+              "value": "q=98"
+            },
+            {
+              "key": "x-api-client-id",
+              "value": "auQNqpZnJy5frnVgTpfCwdDnHlsGISw3"
+            },
+            {
+              "key": "x-request-id",
+              "value": "afe56ef7-a549-4341-b4bb-eba01018488f"
+            },
+            {
+              "key": "x-uber-rtapi-duration",
+              "value": "73"
+            },
+            {
+              "key": "x-uber-edge",
+              "value": "e4-dca20:w:83886080"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=0"
+            },
+            {
+              "key": "x-envoy-upstream-service-time",
+              "value": "83"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "server",
+              "value": "ufe"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"status\": \"ONLINE\",\n    \"previous_status\": \"OFFLINE\"\n}"
+        },
+        {
+          "name": "Set store Offline",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"OFFLINE\",\n  \"is_offline_until\":\"2024-02-25T10:00:00-06:00\",\n  \"reason\": \"STORE_CLOSED\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/delivery/store/{{store_id}}/update-store-status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v1",
+                "delivery",
+                "store",
+                "{{store_id}}",
+                "update-store-status"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "date",
+              "value": "Thu, 08 Feb 2024 14:42:46 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "content-length",
+              "value": "47"
+            },
+            {
+              "key": "load",
+              "value": "q=127"
+            },
+            {
+              "key": "x-api-client-id",
+              "value": "auQNqpZnJy5frnVgTpfCwdDnHlsGISw3"
+            },
+            {
+              "key": "x-request-id",
+              "value": "e757443f-8845-49dd-a65b-8533d30812c3"
+            },
+            {
+              "key": "x-uber-rtapi-duration",
+              "value": "64"
+            },
+            {
+              "key": "x-uber-edge",
+              "value": "e4-dca11:w:67108866"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=0"
+            },
+            {
+              "key": "x-envoy-upstream-service-time",
+              "value": "74"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "server",
+              "value": "ufe"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"status\": \"OFFLINE\",\n    \"previous_status\": \"ONLINE\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Update Prep Time",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "tests[\"Successful Request\"] = responseCode.code === 200"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "User-Agent",
+            "value": "Postman/UberEatsMarketplaceCollections",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"default_prep_time\": 600\n}",
+          "options": {
+            "raw": {
+              "headerFamily": "json",
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/v1/delivery/store/{{store_id}}/update-store-prep-time",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v1",
+            "delivery",
+            "store",
+            "{{store_id}}",
+            "update-store-prep-time"
+          ]
+        },
+        "description": "Updates the preptime of a given store"
+      },
+      "response": [
+        {
+          "name": "Prep time updated succesfully",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"default_prep_time\": 600\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.uber.com/v1/delivery/store//update-store-prep-time",
+              "protocol": "https",
+              "host": [
+                "api",
+                "uber",
+                "com"
+              ],
+              "path": [
+                "v1",
+                "delivery",
+                "store",
+                "",
+                "update-store-prep-time"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "date",
+              "value": "Thu, 08 Feb 2024 14:51:59 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "content-length",
+              "value": "88"
+            },
+            {
+              "key": "load",
+              "value": "q=122"
+            },
+            {
+              "key": "x-api-client-id",
+              "value": "auQNqpZnJy5frnVgTpfCwdDnHlsGISw3"
+            },
+            {
+              "key": "x-request-id",
+              "value": "4bd6bcf2-1dc0-45e8-8af0-7d95f9161239"
+            },
+            {
+              "key": "x-uber-rtapi-duration",
+              "value": "111"
+            },
+            {
+              "key": "x-uber-edge",
+              "value": "e4-dca18:w:301989889"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=0"
+            },
+            {
+              "key": "x-envoy-upstream-service-time",
+              "value": "121"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "server",
+              "value": "ufe"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"prep_times\": {\n        \"default_value\": 600,\n        \"delay\": {\n            \"status\": {\n                \"type\": \"NORMAL\"\n            },\n            \"allowed\": true\n        }\n    }\n}"
+        },
+        {
+          "name": "Invalid prep time value",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"default_prep_time\": \"600\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/delivery/store/{{store_id}}/update-store-prep-time",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v1",
+                "delivery",
+                "store",
+                "{{store_id}}",
+                "update-store-prep-time"
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "date",
+              "value": "Thu, 08 Feb 2024 14:52:21 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "load",
+              "value": "q=140"
+            },
+            {
+              "key": "x-api-client-id",
+              "value": "auQNqpZnJy5frnVgTpfCwdDnHlsGISw3"
+            },
+            {
+              "key": "x-request-id",
+              "value": "35364bef-6a32-4704-9608-8b5221d88950"
+            },
+            {
+              "key": "x-uber-rtapi-duration",
+              "value": "9"
+            },
+            {
+              "key": "x-uber-edge",
+              "value": "e4-dca50:w:335544320"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=0"
+            },
+            {
+              "key": "x-envoy-upstream-service-time",
+              "value": "17"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "content-encoding",
+              "value": "br"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "server",
+              "value": "ufe"
+            },
+            {
+              "key": "transfer-encoding",
+              "value": "chunked"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"error\":\"Could not parse json: merchant_orders_presentation.UpdateStorePrepTimeRequest.DefaultPrepTime: readUint32: unexpected character: �, error found in #10 byte of ...|p_time\": \"600\"\n}|..., bigger context ...|{\n  \"default_prep_time\": \"600\"\n}|...\"}"
+        }
+      ]
+    },
+    {
+      "name": "Set Busy Mode",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "tests[\"Successful Request\"] = responseCode.code === 200"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "User-Agent",
+            "value": "Postman/UberEatsMarketplaceCollections",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"delay_config\": {\n        \"delay_until\": \"2024-02-08T10:00:00-06:00\",\n        \"delay_duration\": 600\n    }\n}",
+          "options": {
+            "raw": {
+              "headerFamily": "json",
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/v1/delivery/store/{{store_id}}/update-store-prep-time",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v1",
+            "delivery",
+            "store",
+            "{{store_id}}",
+            "update-store-prep-time"
+          ]
+        },
+        "description": "Sets the store on Busy mode"
+      },
+      "response": [
+        {
+          "name": "Busy Mode set successfully",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"delay_config\": {\n        \"delay_until\": \"2024-02-08T10:00:00-06:00\",\n        \"delay_duration\": 600\n    }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.uber.com/v1/delivery/store//update-store-prep-time",
+              "protocol": "https",
+              "host": [
+                "api",
+                "uber",
+                "com"
+              ],
+              "path": [
+                "v1",
+                "delivery",
+                "store",
+                "",
+                "update-store-prep-time"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "date",
+              "value": "Thu, 08 Feb 2024 15:08:00 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "load",
+              "value": "q=169"
+            },
+            {
+              "key": "x-api-client-id",
+              "value": "auQNqpZnJy5frnVgTpfCwdDnHlsGISw3"
+            },
+            {
+              "key": "x-request-id",
+              "value": "b85e626a-8076-4b3b-aef9-69e786d330cb"
+            },
+            {
+              "key": "x-uber-rtapi-duration",
+              "value": "68"
+            },
+            {
+              "key": "x-uber-edge",
+              "value": "e4-dca22:w:369098753"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=0"
+            },
+            {
+              "key": "x-envoy-upstream-service-time",
+              "value": "79"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "content-encoding",
+              "value": "br"
+            },
+            {
+              "key": "server",
+              "value": "ufe"
+            },
+            {
+              "key": "transfer-encoding",
+              "value": "chunked"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"prep_times\": {\n        \"default_value\": 600,\n        \"delay\": {\n            \"status\": {\n                \"type\": \"BUSY\",\n                \"is_active_until\": \"2024-02-08T11:00:00-05:00\",\n                \"delay_duration\": 600\n            },\n            \"allowed\": true\n        }\n    }\n}"
+        },
+        {
+          "name": "Invalid Busy Mode time",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"delay_config\": {\n        \"delay_until\": \"2024-02-98T10:00:00-06:00\",\n        \"delay_duration\": 600\n    }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/delivery/store/{{store_id}}/update-store-prep-time",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v1",
+                "delivery",
+                "store",
+                "{{store_id}}",
+                "update-store-prep-time"
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "date",
+              "value": "Thu, 08 Feb 2024 15:07:35 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "load",
+              "value": "q=134"
+            },
+            {
+              "key": "x-api-client-id",
+              "value": "auQNqpZnJy5frnVgTpfCwdDnHlsGISw3"
+            },
+            {
+              "key": "x-request-id",
+              "value": "5a23e9a6-95ea-45ea-beaa-5a57010afeab"
+            },
+            {
+              "key": "x-uber-rtapi-duration",
+              "value": "11"
+            },
+            {
+              "key": "x-uber-edge",
+              "value": "e4-dca24:w:419430403"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=0"
+            },
+            {
+              "key": "x-envoy-upstream-service-time",
+              "value": "20"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "content-encoding",
+              "value": "br"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "server",
+              "value": "ufe"
+            },
+            {
+              "key": "transfer-encoding",
+              "value": "chunked"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"code\": \"bad_request\",\n    \"message\": \"There are invalid or missing arguments in the request. Please fix before retrying.\",\n    \"metadata\": {\n        \"field_violations\": [\n            {\n                \"field\": \"delay_until\",\n                \"description\": \"Provided value is not in RFC3339 format: 2024-02-98T10:00:00-06:00\"\n            }\n        ]\n    }\n}"
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "grant_type",
+        "value": "client_credentials",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://auth.uber.com/oauth/v2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "",
+        "type": "string"
+      },
+      {
+        "key": "authRequestParams",
+        "value": [
+          {
+            "key": "grant_type",
+            "value": "client_credentials",
+            "enabled": true,
+            "send_as": "request_url"
+          }
+        ],
+        "type": "any"
+      },
+      {
+        "key": "scope",
+        "value": "eats.store eats.store.status.write",
+        "type": "string"
+      },
+      {
+        "key": "clientSecret",
+        "value": "{{uber_api_client_secret}}",
+        "type": "string"
+      },
+      {
+        "key": "clientId",
+        "value": "{{uber_api_client_id}}",
+        "type": "string"
+      },
+      {
+        "key": "tokenName",
+        "value": "store_token",
+        "type": "string"
+      },
+      {
+        "key": "addTokenTo",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.uber.com"
+    },
+    {
+      "key": "store_token",
+      "value": ""
+    },
+    {
+      "key": "store_id",
+      "value": ""
+    }
+  ]
+}

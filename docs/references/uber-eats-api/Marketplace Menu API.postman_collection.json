@@ -1,0 +1,807 @@
+{
+  "info": {
+    "_postman_id": "766b69ef-f090-4161-999f-761259e30b31",
+    "name": "Marketplace Menu API",
+    "description": "The Menu API allows you to get your store's menu, put the menu as a whole and update individual items in it. Full documentation is available [here](https://developer.uber.com/docs/eats/references/api/v2/get-eats-stores-storeid-menu).\n\n## Before you start\n\n1. Make sure you have the **Uber Eats Marketplace API** Environment selected\n2. Fill the `uber_api_client_id`, `uber_api_client_secret`, and `store_id` variables.\n3. Click on the Authorization tab of this collection\n4. Scroll down and click Get Access Token\n5. After the token is generated successfully, click on Use Token",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52001179",
+    "_collection_link": "https://go.postman.co/collection/29024134-766b69ef-f090-4161-999f-761259e30b31?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Get Menu",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "tests[\"Successful Request\"] = responseCode.code === 200"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "User-Agent",
+            "value": "Postman/UberEatsMarketplaceCollections",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/v2/eats/stores/{{store_id}}/menus",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v2",
+            "eats",
+            "stores",
+            "{{store_id}}",
+            "menus"
+          ]
+        },
+        "description": "This _Get Menu_ endpoint allows a developer pull the entire menu for a specific store. Note, this response may be very large."
+      },
+      "response": [
+        {
+          "name": "Successful menu request",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v2/eats/stores/{{store_id}}/menus",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v2",
+                "eats",
+                "stores",
+                "{{store_id}}",
+                "menus"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "date",
+              "value": "Thu, 08 Feb 2024 16:57:02 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "load",
+              "value": "q=150"
+            },
+            {
+              "key": "x-api-client-id",
+              "value": "auQNqpZnJy5frnVgTpfCwdDnHlsGISw3"
+            },
+            {
+              "key": "x-request-id",
+              "value": "c23f6e37-cf12-4032-8794-f3da8563e287"
+            },
+            {
+              "key": "x-uber-rtapi-duration",
+              "value": "53"
+            },
+            {
+              "key": "x-uber-edge",
+              "value": "e4-dca23:w:385875968"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=0"
+            },
+            {
+              "key": "x-envoy-upstream-service-time",
+              "value": "61"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "content-encoding",
+              "value": "br"
+            },
+            {
+              "key": "server",
+              "value": "ufe"
+            },
+            {
+              "key": "transfer-encoding",
+              "value": "chunked"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"menus\": [\n        {\n            \"id\": \"All-day\",\n            \"title\": {\n                \"translations\": {\n                    \"en\": \"All day\"\n                }\n            },\n            \"service_availability\": [\n                {\n                    \"day_of_week\": \"monday\",\n                    \"time_periods\": [\n                        {\n                            \"start_time\": \"00:00\",\n                            \"end_time\": \"23:59\"\n                        }\n                    ]\n                },\n                {\n                    \"day_of_week\": \"tuesday\",\n                    \"time_periods\": [\n                        {\n                            \"start_time\": \"00:00\",\n                            \"end_time\": \"23:59\"\n                        }\n                    ]\n                },\n                {\n                    \"day_of_week\": \"wednesday\",\n                    \"time_periods\": [\n                        {\n                            \"start_time\": \"00:00\",\n                            \"end_time\": \"23:59\"\n                        }\n                    ]\n                },\n                {\n                    \"day_of_week\": \"thursday\",\n                    \"time_periods\": [\n                        {\n                            \"start_time\": \"00:00\",\n                            \"end_time\": \"23:59\"\n                        }\n                    ]\n                },\n                {\n                    \"day_of_week\": \"friday\",\n                    \"time_periods\": [\n                        {\n                            \"start_time\": \"00:00\",\n                            \"end_time\": \"23:59\"\n                        }\n                    ]\n                },\n                {\n                    \"day_of_week\": \"saturday\",\n                    \"time_periods\": [\n                        {\n                            \"start_time\": \"00:00\",\n                            \"end_time\": \"23:59\"\n                        }\n                    ]\n                },\n                {\n                    \"day_of_week\": \"sunday\",\n                    \"time_periods\": [\n                        {\n                            \"start_time\": \"00:00\",\n                            \"end_time\": \"23:59\"\n                        }\n                    ]\n                }\n            ],\n            \"category_ids\": [\n                \"Sandwiches\",\n                \"Snacks\",\n                \"Drinks\"\n            ]\n        }\n    ],\n    \"categories\": [\n        {\n            \"id\": \"Drinks\",\n            \"title\": {\n                \"translations\": {\n                    \"en\": \"Drinks\"\n                }\n            },\n            \"entities\": [\n                {\n                    \"id\": \"Coffee\"\n                },\n                {\n                    \"id\": \"Tea\"\n                }\n            ]\n        },\n        {\n            \"id\": \"Snacks\",\n            \"title\": {\n                \"translations\": {\n                    \"en\": \"Snacks\"\n                }\n            },\n            \"entities\": [\n                {\n                    \"id\": \"Muffin\"\n                }\n            ]\n        },\n        {\n            \"id\": \"Sandwiches\",\n            \"title\": {\n                \"translations\": {\n                    \"en\": \"Sandwiches\"\n                }\n            },\n            \"entities\": [\n                {\n                    \"id\": \"sanwidepollo\"\n                }\n            ]\n        }\n    ],\n    \"items\": [\n        {\n            \"id\": \"Chocolate-deluxe\",\n            \"external_data\": \"External data for chocolate deluxe flavor\",\n            \"title\": {\n                \"translations\": {\n                    \"en\": \"Chocolate deluxe\"\n                }\n            },\n            \"description\": {\n                \"translations\": {\n                    \"en\": \"\"\n                }\n            },\n            \"price_info\": {\n                \"price\": 50,\n                \"overrides\": []\n            },\n            \"quantity_info\": {\n                \"overrides\": [\n                    {\n                        \"context_type\": \"MODIFIER_GROUP\",\n                        \"context_value\": \"Choose-flavor\",\n                        \"quantity\": {\n                            \"max_permitted\": 1\n                        }\n                    }\n                ]\n            },\n            \"tax_info\": {\n                \"tax_rate\": 8\n            },\n            \"nutritional_info\": {\n                \"allergens\": null\n            },\n            \"dish_info\": {},\n            \"bundled_items\": null\n        },\n        {\n            \"id\": \"Coffee\",\n            \"external_data\": \"External data for coffee\",\n            \"title\": {\n                \"translations\": {\n                    \"en\": \"Coffee\"\n                }\n            },\n            \"description\": {\n                \"translations\": {\n                    \"en\": \"Deliciously roasted beans\"\n                }\n            },\n            \"price_info\": {\n                \"price\": 300,\n                \"overrides\": []\n            },\n            \"modifier_group_ids\": {\n                \"ids\": [\n                    \"Add-milk\",\n                    \"Add-sugar\"\n                ],\n                \"overrides\": []\n            },\n            \"tax_info\": {\n                \"tax_rate\": 8\n            },\n            \"nutritional_info\": {\n                \"allergens\": null\n            },\n            \"dish_info\": {},\n            \"bundled_items\": null\n        },\n        {\n            \"id\": \"Blueberry\",\n            \"external_data\": \"External data for blueberry flavor\",\n            \"title\": {\n                \"translations\": {\n                    \"en\": \"Blueberry\"\n                }\n            },\n            \"description\": {\n                \"translations\": {\n                    \"en\": \"\"\n                }\n            },\n            \"price_info\": {\n                \"price\": 0,\n                \"overrides\": []\n            },\n            \"quantity_info\": {\n                \"overrides\": [\n                    {\n                        \"context_type\": \"MODIFIER_GROUP\",\n                        \"context_value\": \"Choose-flavor\",\n                        \"quantity\": {\n                            \"max_permitted\": 1\n                        }\n                    }\n                ]\n            },\n            \"tax_info\": {\n                \"tax_rate\": 8\n            },\n            \"nutritional_info\": {\n                \"allergens\": null\n            },\n            \"dish_info\": {},\n            \"bundled_items\": null\n        },\n        {\n            \"id\": \"sanwidepollo\",\n            \"external_data\": \"External data for chicken sandwich\",\n            \"title\": {\n                \"translations\": {\n                    \"en\": \"Chicken sandwich\"\n                }\n            },\n            \"description\": {\n                \"translations\": {\n                    \"en\": \"Whole grain bread, grilled chicken and salad\"\n                }\n            },\n            \"price_info\": {\n                \"price\": 700,\n                \"overrides\": []\n            },\n            \"tax_info\": {\n                \"tax_rate\": 8\n            },\n            \"nutritional_info\": {\n                \"allergens\": null\n            },\n            \"dish_info\": {},\n            \"bundled_items\": null\n        },\n        {\n            \"id\": \"Sugar\",\n            \"external_data\": \"External data for sugar\",\n            \"title\": {\n                \"translations\": {\n                    \"en\": \"Sugar\"\n                }\n            },\n            \"description\": {\n                \"translations\": {\n                    \"en\": \"\"\n                }\n            },\n            \"price_info\": {\n                \"price\": 0,\n                \"overrides\": []\n            },\n            \"quantity_info\": {\n                \"overrides\": [\n                    {\n                        \"context_type\": \"MODIFIER_GROUP\",\n                        \"context_value\": \"Add-sugar\",\n                        \"quantity\": {\n                            \"max_permitted\": 2\n                        }\n                    }\n                ]\n            },\n            \"tax_info\": {\n                \"tax_rate\": 8\n            },\n            \"nutritional_info\": {\n                \"allergens\": null\n            },\n            \"dish_info\": {},\n            \"bundled_items\": null\n        },\n        {\n            \"id\": \"Muffin\",\n            \"external_data\": \"External data for muffin\",\n            \"title\": {\n                \"translations\": {\n                    \"en\": \"Fresh-baked muffin\"\n                }\n            },\n            \"description\": {\n                \"translations\": {\n                    \"en\": \"Great for afternoon snack time!\"\n                }\n            },\n            \"price_info\": {\n                \"price\": 300,\n                \"overrides\": []\n            },\n            \"modifier_group_ids\": {\n                \"ids\": [\n                    \"Choose-flavor\"\n                ],\n                \"overrides\": []\n            },\n            \"tax_info\": {\n                \"tax_rate\": 8\n            },\n            \"nutritional_info\": {\n                \"allergens\": null\n            },\n            \"dish_info\": {},\n            \"bundled_items\": null\n        },\n        {\n            \"id\": \"Tea\",\n            \"external_data\": \"External data for tea\",\n            \"title\": {\n                \"translations\": {\n                    \"en\": \"Tea\"\n                }\n            },\n            \"description\": {\n                \"translations\": {\n                    \"en\": \"A soothing cuppa\"\n                }\n            },\n            \"price_info\": {\n                \"price\": 250,\n                \"overrides\": []\n            },\n            \"modifier_group_ids\": {\n                \"ids\": [\n                    \"Add-milk\",\n                    \"Add-sugar\"\n                ],\n                \"overrides\": []\n            },\n            \"tax_info\": {\n                \"tax_rate\": 8\n            },\n            \"nutritional_info\": {\n                \"allergens\": null\n            },\n            \"dish_info\": {},\n            \"bundled_items\": null\n        },\n        {\n            \"id\": \"Milk\",\n            \"external_data\": \"External data for milk\",\n            \"title\": {\n                \"translations\": {\n                    \"en\": \"Milk\"\n                }\n            },\n            \"description\": {\n                \"translations\": {\n                    \"en\": \"\"\n                }\n            },\n            \"price_info\": {\n                \"price\": 0,\n                \"overrides\": []\n            },\n            \"quantity_info\": {\n                \"overrides\": [\n                    {\n                        \"context_type\": \"MODIFIER_GROUP\",\n                        \"context_value\": \"Add-milk\",\n                        \"quantity\": {\n                            \"max_permitted\": 1\n                        }\n                    }\n                ]\n            },\n            \"tax_info\": {\n                \"tax_rate\": 8\n            },\n            \"nutritional_info\": {\n                \"allergens\": null\n            },\n            \"dish_info\": {},\n            \"bundled_items\": null\n        }\n    ],\n    \"modifier_groups\": [\n        {\n            \"id\": \"Add-milk\",\n            \"external_data\": \"External data for milk choice\",\n            \"title\": {\n                \"translations\": {\n                    \"en\": \"Add milk\"\n                }\n            },\n            \"quantity_info\": {\n                \"quantity\": {\n                    \"max_permitted\": 1\n                },\n                \"overrides\": []\n            },\n            \"modifier_options\": [\n                {\n                    \"id\": \"Milk\",\n                    \"type\": \"ITEM\"\n                }\n            ]\n        },\n        {\n            \"id\": \"Add-sugar\",\n            \"external_data\": \"External data for sugar choice\",\n            \"title\": {\n                \"translations\": {\n                    \"en\": \"Add sugar\"\n                }\n            },\n            \"quantity_info\": {\n                \"quantity\": {\n                    \"max_permitted\": 2\n                },\n                \"overrides\": []\n            },\n            \"modifier_options\": [\n                {\n                    \"id\": \"Sugar\",\n                    \"type\": \"ITEM\"\n                }\n            ]\n        },\n        {\n            \"id\": \"Choose-flavor\",\n            \"external_data\": \"External data for muffin flavor choice\",\n            \"title\": {\n                \"translations\": {\n                    \"en\": \"Choose flavor\"\n                }\n            },\n            \"quantity_info\": {\n                \"quantity\": {\n                    \"min_permitted\": 1,\n                    \"max_permitted\": 1\n                },\n                \"overrides\": []\n            },\n            \"modifier_options\": [\n                {\n                    \"id\": \"Blueberry\",\n                    \"type\": \"ITEM\"\n                },\n                {\n                    \"id\": \"Chocolate-deluxe\",\n                    \"type\": \"ITEM\"\n                }\n            ]\n        }\n    ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "Upload Menu",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "tests[\"Successful Request\"] = responseCode.code === 204"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "User-Agent",
+            "value": "Postman/UberEatsMarketplaceCollections",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"items\": [\n        {\n            \"description\": {\n                \"translations\": {\n                    \"en_us\": \"Deliciously roasted beans\"\n                }\n            },\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"Coffee\"\n                }\n            },\n            \"nutritional_info\": {\n                \"allergens\": null,\n                \"kilojoules\": null,\n                \"calories\": null\n            },\n            \"quantity_info\": null,\n            \"external_data\": \"External data for coffee\",\n            \"suspension_info\": null,\n            \"modifier_group_ids\": {\n                \"overrides\": [],\n                \"ids\": [\n                    \"Add-milk\",\n                    \"Add-sugar\"\n                ]\n            },\n            \"image_url\": null,\n            \"price_info\": {\n                \"price\": 300,\n                \"overrides\": []\n            },\n            \"tax_info\": {\n                \"tax_rate\": 8,\n                \"vat_rate_percentage\": null\n            },\n            \"id\": \"Coffee\"\n        },\n        {\n            \"description\": {\n                \"translations\": {\n                    \"en_us\": \"\"\n                }\n            },\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"Blueberry\"\n                }\n            },\n            \"nutritional_info\": {\n                \"allergens\": null,\n                \"kilojoules\": null,\n                \"calories\": null\n            },\n            \"quantity_info\": {\n                \"overrides\": [\n                    {\n                        \"context_type\": \"MODIFIER_GROUP\",\n                        \"context_value\": \"Choose-flavor\",\n                        \"quantity\": {\n                            \"max_permitted\": 1,\n                            \"min_permitted\": null,\n                            \"default_quantity\": null,\n                            \"charge_above\": null,\n                            \"refund_under\": null\n                        }\n                    }\n                ],\n                \"quantity\": null\n            },\n            \"external_data\": \"External data for blueberry flavor\",\n            \"suspension_info\": null,\n            \"modifier_group_ids\": {\n                \"overrides\": [],\n                \"ids\": null\n            },\n            \"image_url\": null,\n            \"price_info\": {\n                \"price\": 0,\n                \"overrides\": [\n                    {\n                        \"context_type\": \"MODIFIER_GROUP\",\n                        \"context_value\": \"Choose-flavor\",\n                        \"price\": 0\n                    }\n                ]\n            },\n            \"tax_info\": {\n                \"tax_rate\": 8,\n                \"vat_rate_percentage\": null\n            },\n            \"id\": \"Blueberry\"\n        },\n        {\n            \"description\": {\n                \"translations\": {\n                    \"en_us\": \"Great for afternoon snack time!\"\n                }\n            },\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"Fresh-baked muffin\"\n                }\n            },\n            \"nutritional_info\": {\n                \"allergens\": null,\n                \"kilojoules\": null,\n                \"calories\": null\n            },\n            \"quantity_info\": null,\n            \"external_data\": \"External data for muffin\",\n            \"suspension_info\": null,\n            \"modifier_group_ids\": {\n                \"overrides\": [],\n                \"ids\": [\n                    \"Choose-flavor\"\n                ]\n            },\n            \"image_url\": null,\n            \"price_info\": {\n                \"price\": 300,\n                \"overrides\": []\n            },\n            \"tax_info\": {\n                \"tax_rate\": 8,\n                \"vat_rate_percentage\": null\n            },\n            \"id\": \"Muffin\"\n        },\n        {\n            \"description\": {\n                \"translations\": {\n                    \"en_us\": \"\"\n                }\n            },\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"Sugar\"\n                }\n            },\n            \"nutritional_info\": {\n                \"allergens\": null,\n                \"kilojoules\": null,\n                \"calories\": null\n            },\n            \"quantity_info\": {\n                \"overrides\": [\n                    {\n                        \"context_type\": \"MODIFIER_GROUP\",\n                        \"context_value\": \"Add-sugar\",\n                        \"quantity\": {\n                            \"max_permitted\": 2,\n                            \"min_permitted\": null,\n                            \"default_quantity\": null,\n                            \"charge_above\": null,\n                            \"refund_under\": null\n                        }\n                    }\n                ],\n                \"quantity\": null\n            },\n            \"external_data\": \"External data for sugar\",\n            \"suspension_info\": null,\n            \"modifier_group_ids\": {\n                \"overrides\": [],\n                \"ids\": null\n            },\n            \"image_url\": null,\n            \"price_info\": {\n                \"price\": 0,\n                \"overrides\": [\n                    {\n                        \"context_type\": \"MODIFIER_GROUP\",\n                        \"context_value\": \"Add-sugar\",\n                        \"price\": 0\n                    }\n                ]\n            },\n            \"tax_info\": {\n                \"tax_rate\": 8,\n                \"vat_rate_percentage\": null\n            },\n            \"id\": \"Sugar\"\n        },\n        {\n            \"description\": {\n                \"translations\": {\n                    \"en_us\": \"\"\n                }\n            },\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"Chocolate deluxe\"\n                }\n            },\n            \"nutritional_info\": {\n                \"allergens\": null,\n                \"kilojoules\": null,\n                \"calories\": null\n            },\n            \"quantity_info\": {\n                \"overrides\": [\n                    {\n                        \"context_type\": \"MODIFIER_GROUP\",\n                        \"context_value\": \"Choose-flavor\",\n                        \"quantity\": {\n                            \"max_permitted\": 1,\n                            \"min_permitted\": null,\n                            \"default_quantity\": null,\n                            \"charge_above\": null,\n                            \"refund_under\": null\n                        }\n                    }\n                ],\n                \"quantity\": null\n            },\n            \"external_data\": \"External data for chocolate deluxe flavor\",\n            \"suspension_info\": null,\n            \"modifier_group_ids\": {\n                \"overrides\": [],\n                \"ids\": null\n            },\n            \"image_url\": null,\n            \"price_info\": {\n                \"price\": 50,\n                \"overrides\": [\n                    {\n                        \"context_type\": \"MODIFIER_GROUP\",\n                        \"context_value\": \"Choose-flavor\",\n                        \"price\": 50\n                    }\n                ]\n            },\n            \"tax_info\": {\n                \"tax_rate\": 8,\n                \"vat_rate_percentage\": null\n            },\n            \"id\": \"Chocolate-deluxe\"\n        },\n        {\n            \"description\": {\n                \"translations\": {\n                    \"en_us\": \"\"\n                }\n            },\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"Milk\"\n                }\n            },\n            \"nutritional_info\": {\n                \"allergens\": null,\n                \"kilojoules\": null,\n                \"calories\": null\n            },\n            \"quantity_info\": {\n                \"overrides\": [\n                    {\n                        \"context_type\": \"MODIFIER_GROUP\",\n                        \"context_value\": \"Add-milk\",\n                        \"quantity\": {\n                            \"max_permitted\": 1,\n                            \"min_permitted\": null,\n                            \"default_quantity\": null,\n                            \"charge_above\": null,\n                            \"refund_under\": null\n                        }\n                    }\n                ],\n                \"quantity\": null\n            },\n            \"external_data\": \"External data for milk\",\n            \"suspension_info\": null,\n            \"modifier_group_ids\": {\n                \"overrides\": [],\n                \"ids\": null\n            },\n            \"image_url\": null,\n            \"price_info\": {\n                \"price\": 0,\n                \"overrides\": [\n                    {\n                        \"context_type\": \"MODIFIER_GROUP\",\n                        \"context_value\": \"Add-milk\",\n                        \"price\": 0\n                    }\n                ]\n            },\n            \"tax_info\": {\n                \"tax_rate\": 8,\n                \"vat_rate_percentage\": null\n            },\n            \"id\": \"Milk\"\n        },\n        {\n            \"description\": {\n                \"translations\": {\n                    \"en_us\": \"A soothing cuppa\"\n                }\n            },\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"Tea\"\n                }\n            },\n            \"nutritional_info\": {\n                \"allergens\": null,\n                \"kilojoules\": null,\n                \"calories\": null\n            },\n            \"quantity_info\": null,\n            \"external_data\": \"External data for tea\",\n            \"suspension_info\": null,\n            \"modifier_group_ids\": {\n                \"overrides\": [],\n                \"ids\": [\n                    \"Add-milk\",\n                    \"Add-sugar\"\n                ]\n            },\n            \"image_url\": null,\n            \"price_info\": {\n                \"price\": 250,\n                \"overrides\": []\n            },\n            \"tax_info\": {\n                \"tax_rate\": 8,\n                \"vat_rate_percentage\": null\n            },\n            \"id\": \"Tea\"\n        },\n        {\n            \"description\": {\n                \"translations\": {\n                    \"en_us\": \"Whole grain bread, grilled chicken and salad\"\n                }\n            },\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"Chicken sandwich\"\n                }\n            },\n            \"nutritional_info\": {\n                \"allergens\": null,\n                \"kilojoules\": null,\n                \"calories\": null\n            },\n            \"quantity_info\": null,\n            \"external_data\": \"External data for chicken sandwich\",\n            \"suspension_info\": null,\n            \"modifier_group_ids\": {\n                \"overrides\": [],\n                \"ids\": null\n            },\n            \"image_url\": null,\n            \"price_info\": {\n                \"price\": 700,\n                \"overrides\": []\n            },\n            \"tax_info\": {\n                \"tax_rate\": 8,\n                \"vat_rate_percentage\": null\n            },\n            \"id\": \"sanwidepollo\"\n        }\n    ],\n    \"display_options\": {\n        \"disable_item_instructions\": true\n    },\n    \"menus\": [\n        {\n            \"service_availability\": [\n                {\n                    \"time_periods\": [\n                        {\n                            \"start_time\": \"00:00\",\n                            \"end_time\": \"23:59\"\n                        }\n                    ],\n                    \"day_of_week\": \"monday\"\n                },\n                {\n                    \"time_periods\": [\n                        {\n                            \"start_time\": \"00:00\",\n                            \"end_time\": \"23:59\"\n                        }\n                    ],\n                    \"day_of_week\": \"tuesday\"\n                },\n                {\n                    \"time_periods\": [\n                        {\n                            \"start_time\": \"00:00\",\n                            \"end_time\": \"23:59\"\n                        }\n                    ],\n                    \"day_of_week\": \"wednesday\"\n                },\n                {\n                    \"time_periods\": [\n                        {\n                            \"start_time\": \"00:00\",\n                            \"end_time\": \"23:59\"\n                        }\n                    ],\n                    \"day_of_week\": \"thursday\"\n                },\n                {\n                    \"time_periods\": [\n                        {\n                            \"start_time\": \"00:00\",\n                            \"end_time\": \"23:59\"\n                        }\n                    ],\n                    \"day_of_week\": \"friday\"\n                },\n                {\n                    \"time_periods\": [\n                        {\n                            \"start_time\": \"00:00\",\n                            \"end_time\": \"23:59\"\n                        }\n                    ],\n                    \"day_of_week\": \"saturday\"\n                },\n                {\n                    \"time_periods\": [\n                        {\n                            \"start_time\": \"00:00\",\n                            \"end_time\": \"23:59\"\n                        }\n                    ],\n                    \"day_of_week\": \"sunday\"\n                }\n            ],\n            \"category_ids\": [\n                \"Sandwiches\",\n                \"Snacks\",\n                \"Drinks\"\n            ],\n            \"id\": \"All-day\",\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"All day\"\n                }\n            }\n        }\n    ],\n    \"categories\": [\n        {\n            \"entities\": [\n                {\n                    \"type\": \"ITEM\",\n                    \"id\": \"Muffin\"\n                }\n            ],\n            \"id\": \"Snacks\",\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"Snacks\"\n                }\n            }\n        },\n        {\n            \"entities\": [\n                {\n                    \"type\": \"ITEM\",\n                    \"id\": \"sanwidepollo\"\n                }\n            ],\n            \"id\": \"Sandwiches\",\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"Sandwiches\"\n                }\n            }\n        },\n        {\n            \"entities\": [\n                {\n                    \"type\": \"ITEM\",\n                    \"id\": \"Coffee\"\n                },\n                {\n                    \"type\": \"ITEM\",\n                    \"id\": \"Tea\"\n                }\n            ],\n            \"id\": \"Drinks\",\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"Drinks\"\n                }\n            }\n        }\n    ],\n    \"modifier_groups\": [\n        {\n            \"quantity_info\": {\n                \"overrides\": [],\n                \"quantity\": {\n                    \"max_permitted\": 2,\n                    \"min_permitted\": null,\n                    \"default_quantity\": null,\n                    \"charge_above\": null,\n                    \"refund_under\": null\n                }\n            },\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"Add sugar\"\n                }\n            },\n            \"external_data\": \"External data for sugar choice\",\n            \"modifier_options\": [\n                {\n                    \"type\": \"ITEM\",\n                    \"id\": \"Sugar\"\n                }\n            ],\n            \"display_type\": null,\n            \"id\": \"Add-sugar\"\n        },\n        {\n            \"quantity_info\": {\n                \"overrides\": [],\n                \"quantity\": {\n                    \"max_permitted\": 1,\n                    \"min_permitted\": 1,\n                    \"default_quantity\": null,\n                    \"charge_above\": null,\n                    \"refund_under\": null\n                }\n            },\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"Choose flavor\"\n                }\n            },\n            \"external_data\": \"External data for muffin flavor choice\",\n            \"modifier_options\": [\n                {\n                    \"type\": \"ITEM\",\n                    \"id\": \"Blueberry\"\n                },\n                {\n                    \"type\": \"ITEM\",\n                    \"id\": \"Chocolate-deluxe\"\n                }\n            ],\n            \"display_type\": null,\n            \"id\": \"Choose-flavor\"\n        },\n        {\n            \"quantity_info\": {\n                \"overrides\": [],\n                \"quantity\": {\n                    \"max_permitted\": 1,\n                    \"min_permitted\": null,\n                    \"default_quantity\": null,\n                    \"charge_above\": null,\n                    \"refund_under\": null\n                }\n            },\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"Add milk\"\n                }\n            },\n            \"external_data\": \"External data for milk choice\",\n            \"modifier_options\": [\n                {\n                    \"type\": \"ITEM\",\n                    \"id\": \"Milk\"\n                }\n            ],\n            \"display_type\": null,\n            \"id\": \"Add-milk\"\n        }\n    ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/v2/eats/stores/{{store_id}}/menus",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v2",
+            "eats",
+            "stores",
+            "{{store_id}}",
+            "menus"
+          ]
+        },
+        "description": "This _Upload Menu_ endpoint allows a developer to create or override the entire menu for a specific store."
+      },
+      "response": [
+        {
+          "name": "Invalid Menu upload",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"items\": [\n        {\n            \"description\": {\n                \"translations\": {\n                    \"en_us\": \"Deliciously roasted beans\"\n                }\n            },\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"Coffee\"\n                }\n            },\n            \"nutritional_info\": {\n                \"allergens\": null,\n                \"kilojoules\": null,\n                \"calories\": null\n            },\n            \"quantity_info\": null,\n            \"external_data\": \"External data for coffee\",\n            \"suspension_info\": null,\n            \"modifier_group_ids\": {\n                \"overrides\": [],\n                \"ids\": [\n                    \"Add-milk\",\n                    \"Add-sugar\"\n                ]\n            },\n            \"image_url\": null,\n            \"price_info\": {\n                \"price\": 300,\n                \"overrides\": []\n            },\n            \"tax_info\": {\n                \"tax_rate\": 8,\n                \"vat_rate_percentage\": null\n            },\n        },\n        {\n            \"description\": {\n                \"translations\": {\n                    \"en_us\": \"\"\n                }\n            },\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"Blueberry\"\n                }\n            },\n            \"nutritional_info\": {\n                \"allergens\": null,\n                \"kilojoules\": null,\n                \"calories\": null\n            },\n            \"quantity_info\": {\n                \"overrides\": [\n                    {\n                        \"context_type\": \"MODIFIER_GROUP\",\n                        \"context_value\": \"Choose-flavor\",\n                        \"quantity\": {\n                            \"max_permitted\": 1,\n                            \"min_permitted\": null,\n                            \"default_quantity\": null,\n                            \"charge_above\": null,\n                            \"refund_under\": null\n                        }\n                    }\n                ],\n                \"quantity\": null\n            },\n            \"external_data\": \"External data for blueberry flavor\",\n            \"suspension_info\": null,\n            \"modifier_group_ids\": {\n                \"overrides\": [],\n                \"ids\": null\n            },\n            \"image_url\": null,\n            \"price_info\": {\n                \"price\": 0,\n                \"overrides\": [\n                    {\n                        \"context_type\": \"MODIFIER_GROUP\",\n                        \"context_value\": \"Choose-flavor\",\n                        \"price\": 0\n                    }\n                ]\n            },\n            \"tax_info\": {\n                \"tax_rate\": 8,\n                \"vat_rate_percentage\": null\n            },\n            \"id\": \"Blueberry\"\n        },\n        {\n            \"description\": {\n                \"translations\": {\n                    \"en_us\": \"Great for afternoon snack time!\"\n                }\n            },\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"Fresh-baked muffin\"\n                }\n            },\n            \"nutritional_info\": {\n                \"allergens\": null,\n                \"kilojoules\": null,\n                \"calories\": null\n            },\n            \"quantity_info\": null,\n            \"external_data\": \"External data for muffin\",\n            \"suspension_info\": null,\n            \"modifier_group_ids\": {\n                \"overrides\": [],\n                \"ids\": [\n                    \"Choose-flavor\"\n                ]\n            },\n            \"image_url\": null,\n            \"price_info\": {\n                \"price\": 300,\n                \"overrides\": []\n            },\n            \"tax_info\": {\n                \"tax_rate\": 8,\n                \"vat_rate_percentage\": null\n            },\n            \"id\": \"Muffin\"\n        },\n        {\n            \"description\": {\n                \"translations\": {\n                    \"en_us\": \"\"\n                }\n            },\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"Sugar\"\n                }\n            },\n            \"nutritional_info\": {\n                \"allergens\": null,\n                \"kilojoules\": null,\n                \"calories\": null\n            },\n            \"quantity_info\": {\n                \"overrides\": [\n                    {\n                        \"context_type\": \"MODIFIER_GROUP\",\n                        \"context_value\": \"Add-sugar\",\n                        \"quantity\": {\n                            \"max_permitted\": 2,\n                            \"min_permitted\": null,\n                            \"default_quantity\": null,\n                            \"charge_above\": null,\n                            \"refund_under\": null\n                        }\n                    }\n                ],\n                \"quantity\": null\n            },\n            \"external_data\": \"External data for sugar\",\n            \"suspension_info\": null,\n            \"modifier_group_ids\": {\n                \"overrides\": [],\n                \"ids\": null\n            },\n            \"image_url\": null,\n            \"price_info\": {\n                \"price\": 0,\n                \"overrides\": [\n                    {\n                        \"context_type\": \"MODIFIER_GROUP\",\n                        \"context_value\": \"Add-sugar\",\n                        \"price\": 0\n                    }\n                ]\n            },\n            \"tax_info\": {\n                \"tax_rate\": 8,\n                \"vat_rate_percentage\": null\n            },\n            \"id\": \"Sugar\"\n        },\n        {\n            \"description\": {\n                \"translations\": {\n                    \"en_us\": \"\"\n                }\n            },\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"Chocolate deluxe\"\n                }\n            },\n            \"nutritional_info\": {\n                \"allergens\": null,\n                \"kilojoules\": null,\n                \"calories\": null\n            },\n            \"quantity_info\": {\n                \"overrides\": [\n                    {\n                        \"context_type\": \"MODIFIER_GROUP\",\n                        \"context_value\": \"Choose-flavor\",\n                        \"quantity\": {\n                            \"max_permitted\": 1,\n                            \"min_permitted\": null,\n                            \"default_quantity\": null,\n                            \"charge_above\": null,\n                            \"refund_under\": null\n                        }\n                    }\n                ],\n                \"quantity\": null\n            },\n            \"external_data\": \"External data for chocolate deluxe flavor\",\n            \"suspension_info\": null,\n            \"modifier_group_ids\": {\n                \"overrides\": [],\n                \"ids\": null\n            },\n            \"image_url\": null,\n            \"price_info\": {\n                \"price\": 50,\n                \"overrides\": [\n                    {\n                        \"context_type\": \"MODIFIER_GROUP\",\n                        \"context_value\": \"Choose-flavor\",\n                        \"price\": 50\n                    }\n                ]\n            },\n            \"tax_info\": {\n                \"tax_rate\": 8,\n                \"vat_rate_percentage\": null\n            },\n            \"id\": \"Chocolate-deluxe\"\n        },\n        {\n            \"description\": {\n                \"translations\": {\n                    \"en_us\": \"\"\n                }\n            },\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"Milk\"\n                }\n            },\n            \"nutritional_info\": {\n                \"allergens\": null,\n                \"kilojoules\": null,\n                \"calories\": null\n            },\n            \"quantity_info\": {\n                \"overrides\": [\n                    {\n                        \"context_type\": \"MODIFIER_GROUP\",\n                        \"context_value\": \"Add-milk\",\n                        \"quantity\": {\n                            \"max_permitted\": 1,\n                            \"min_permitted\": null,\n                            \"default_quantity\": null,\n                            \"charge_above\": null,\n                            \"refund_under\": null\n                        }\n                    }\n                ],\n                \"quantity\": null\n            },\n            \"external_data\": \"External data for milk\",\n            \"suspension_info\": null,\n            \"modifier_group_ids\": {\n                \"overrides\": [],\n                \"ids\": null\n            },\n            \"image_url\": null,\n            \"price_info\": {\n                \"price\": 0,\n                \"overrides\": [\n                    {\n                        \"context_type\": \"MODIFIER_GROUP\",\n                        \"context_value\": \"Add-milk\",\n                        \"price\": 0\n                    }\n                ]\n            },\n            \"tax_info\": {\n                \"tax_rate\": 8,\n                \"vat_rate_percentage\": null\n            },\n            \"id\": \"Milk\"\n        },\n        {\n            \"description\": {\n                \"translations\": {\n                    \"en_us\": \"A soothing cuppa\"\n                }\n            },\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"Tea\"\n                }\n            },\n            \"nutritional_info\": {\n                \"allergens\": null,\n                \"kilojoules\": null,\n                \"calories\": null\n            },\n            \"quantity_info\": null,\n            \"external_data\": \"External data for tea\",\n            \"suspension_info\": null,\n            \"modifier_group_ids\": {\n                \"overrides\": [],\n                \"ids\": [\n                    \"Add-milk\",\n                    \"Add-sugar\"\n                ]\n            },\n            \"image_url\": null,\n            \"price_info\": {\n                \"price\": 250,\n                \"overrides\": []\n            },\n            \"tax_info\": {\n                \"tax_rate\": 8,\n                \"vat_rate_percentage\": null\n            },\n            \"id\": \"Tea\"\n        },\n        {\n            \"description\": {\n                \"translations\": {\n                    \"en_us\": \"Whole grain bread, grilled chicken and salad\"\n                }\n            },\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"Chicken sandwich\"\n                }\n            },\n            \"nutritional_info\": {\n                \"allergens\": null,\n                \"kilojoules\": null,\n                \"calories\": null\n            },\n            \"quantity_info\": null,\n            \"external_data\": \"External data for chicken sandwich\",\n            \"suspension_info\": null,\n            \"modifier_group_ids\": {\n                \"overrides\": [],\n                \"ids\": null\n            },\n            \"image_url\": null,\n            \"price_info\": {\n                \"price\": 700,\n                \"overrides\": []\n            },\n            \"tax_info\": {\n                \"tax_rate\": 8,\n                \"vat_rate_percentage\": null\n            },\n            \"id\": \"sanwidepollo\"\n        }\n    ],\n    \"display_options\": {\n        \"disable_item_instructions\": true\n    },\n    \"menus\": [\n        {\n            \"service_availability\": [\n                {\n                    \"time_periods\": [\n                        {\n                            \"start_time\": \"00:00\",\n                            \"end_time\": \"23:59\"\n                        }\n                    ],\n                    \"day_of_week\": \"monday\"\n                },\n                {\n                    \"time_periods\": [\n                        {\n                            \"start_time\": \"00:00\",\n                            \"end_time\": \"23:59\"\n                        }\n                    ],\n                    \"day_of_week\": \"tuesday\"\n                },\n                {\n                    \"time_periods\": [\n                        {\n                            \"start_time\": \"00:00\",\n                            \"end_time\": \"23:59\"\n                        }\n                    ],\n                    \"day_of_week\": \"wednesday\"\n                },\n                {\n                    \"time_periods\": [\n                        {\n                            \"start_time\": \"00:00\",\n                            \"end_time\": \"23:59\"\n                        }\n                    ],\n                    \"day_of_week\": \"thursday\"\n                },\n                {\n                    \"time_periods\": [\n                        {\n                            \"start_time\": \"00:00\",\n                            \"end_time\": \"23:59\"\n                        }\n                    ],\n                    \"day_of_week\": \"friday\"\n                },\n                {\n                    \"time_periods\": [\n                        {\n                            \"start_time\": \"00:00\",\n                            \"end_time\": \"23:59\"\n                        }\n                    ],\n                    \"day_of_week\": \"saturday\"\n                },\n                {\n                    \"time_periods\": [\n                        {\n                            \"start_time\": \"00:00\",\n                            \"end_time\": \"23:59\"\n                        }\n                    ],\n                    \"day_of_week\": \"sunday\"\n                }\n            ],\n            \"category_ids\": [\n                \"Sandwiches\",\n                \"Snacks\",\n                \"Drinks\"\n            ],\n            \"id\": \"All-day\",\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"All day\"\n                }\n            }\n        }\n    ],\n    \"categories\": [\n        {\n            \"entities\": [\n                {\n                    \"type\": \"ITEM\",\n                    \"id\": \"Muffin\"\n                }\n            ],\n            \"id\": \"Snacks\",\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"Snacks\"\n                }\n            }\n        },\n        {\n            \"entities\": [\n                {\n                    \"type\": \"ITEM\",\n                    \"id\": \"sanwidepollo\"\n                }\n            ],\n            \"id\": \"Sandwiches\",\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"Sandwiches\"\n                }\n            }\n        },\n        {\n            \"entities\": [\n                {\n                    \"type\": \"ITEM\",\n                    \"id\": \"Coffee\"\n                },\n                {\n                    \"type\": \"ITEM\",\n                    \"id\": \"Tea\"\n                }\n            ],\n            \"id\": \"Drinks\",\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"Drinks\"\n                }\n            }\n        }\n    ],\n    \"modifier_groups\": [\n        {\n            \"quantity_info\": {\n                \"overrides\": [],\n                \"quantity\": {\n                    \"max_permitted\": 2,\n                    \"min_permitted\": null,\n                    \"default_quantity\": null,\n                    \"charge_above\": null,\n                    \"refund_under\": null\n                }\n            },\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"Add sugar\"\n                }\n            },\n            \"external_data\": \"External data for sugar choice\",\n            \"modifier_options\": [\n                {\n                    \"type\": \"ITEM\",\n                    \"id\": \"Sugar\"\n                }\n            ],\n            \"display_type\": null,\n            \"id\": \"Add-sugar\"\n        },\n        {\n            \"quantity_info\": {\n                \"overrides\": [],\n                \"quantity\": {\n                    \"max_permitted\": 1,\n                    \"min_permitted\": 1,\n                    \"default_quantity\": null,\n                    \"charge_above\": null,\n                    \"refund_under\": null\n                }\n            },\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"Choose flavor\"\n                }\n            },\n            \"external_data\": \"External data for muffin flavor choice\",\n            \"modifier_options\": [\n                {\n                    \"type\": \"ITEM\",\n                    \"id\": \"Blueberry\"\n                },\n                {\n                    \"type\": \"ITEM\",\n                    \"id\": \"Chocolate-deluxe\"\n                }\n            ],\n            \"display_type\": null,\n            \"id\": \"Choose-flavor\"\n        },\n        {\n            \"quantity_info\": {\n                \"overrides\": [],\n                \"quantity\": {\n                    \"max_permitted\": 1,\n                    \"min_permitted\": null,\n                    \"default_quantity\": null,\n                    \"charge_above\": null,\n                    \"refund_under\": null\n                }\n            },\n            \"title\": {\n                \"translations\": {\n                    \"en_us\": \"Add milk\"\n                }\n            },\n            \"external_data\": \"External data for milk choice\",\n            \"modifier_options\": [\n                {\n                    \"type\": \"ITEM\",\n                    \"id\": \"Milk\"\n                }\n            ],\n            \"display_type\": null,\n            \"id\": \"Add-milk\"\n        }\n    ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/v2/eats/stores/{{store_id}}/menus",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v2",
+                "eats",
+                "stores",
+                "{{store_id}}",
+                "menus"
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "date",
+              "value": "Thu, 08 Feb 2024 18:27:33 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "load",
+              "value": "q=171"
+            },
+            {
+              "key": "x-api-client-id",
+              "value": "auQNqpZnJy5frnVgTpfCwdDnHlsGISw3"
+            },
+            {
+              "key": "x-request-id",
+              "value": "3510211b-fa84-4eef-809a-07da8daac717"
+            },
+            {
+              "key": "x-uber-rtapi-duration",
+              "value": "7"
+            },
+            {
+              "key": "x-uber-edge",
+              "value": "e4-dca24:w:436207617"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=0"
+            },
+            {
+              "key": "x-envoy-upstream-service-time",
+              "value": "45"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "content-encoding",
+              "value": "br"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "server",
+              "value": "ufe"
+            },
+            {
+              "key": "transfer-encoding",
+              "value": "chunked"
+            }
+          ],
+          "cookie": [],
+          "body": "[]"
+        }
+      ]
+    },
+    {
+      "name": "Update Menu Item",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "tests[\"Successful Request\"] = responseCode.code === 204"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "User-Agent",
+            "value": "Postman/UberEatsMarketplaceCollections",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"id\": \"Coffee\",\n    \"external_data\": \"External data for coffee\",\n    \"title\": {\n        \"translations\": {\n            \"en\": \"Coffee\"\n        }\n    },\n    \"description\": {\n        \"translations\": {\n            \"en\": \"Deliciously roasted beans\"\n        }\n    },\n    \"price_info\": {\n        \"price\": 300,\n        \"overrides\": []\n    },\n    \"suspension_info\": {\n        \"suspension\": {\n            \"suspend_until\": 8640000000,\n            \"reason\": \"sold out\"\n        },\n        \"overrides\": []\n    },\n    \"modifier_group_ids\": {\n        \"ids\": [\n            \"Add-milk\",\n            \"Add-sugar\"\n        ],\n        \"overrides\": []\n    },\n    \"tax_info\": {\n        \"tax_rate\": 8\n    },\n    \"nutritional_info\": {\n        \"allergens\": null\n    },\n    \"dish_info\": {},\n    \"bundled_items\": null\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/v2/eats/stores/{{store_id}}/menus/items/{{item_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v2",
+            "eats",
+            "stores",
+            "{{store_id}}",
+            "menus",
+            "items",
+            "{{item_id}}"
+          ]
+        },
+        "description": "This _Update Item_ endpoint updates an individual item within a menu. This allows you to make smaller edits without needing to send the entire menu. This endpoint performs sparse updates, meaning that it will only update a field if it is specified.\n\n**Note**: In order to run this request, add an item ID to the `item_id` collection variable by clicking on the **Collection** and accessing the **Variables** tab."
+      },
+      "response": [
+        {
+          "name": "Update Menu Item",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": \"Coffee\",\n    \"external_data\": \"External data for coffee\",\n    \"title\": {\n        \"translations\": {\n            \"en\": \"Coffee\"\n        }\n    },\n    \"description\": {\n        \"translations\": {\n            \"en\": \"Deliciously roasted beans\"\n        }\n    },\n    \"price_info\": {\n        \"price\": 300,\n        \"overrides\": []\n    },\n    \"suspension_info\": {\n        \"suspension\": {\n            \"suspend_until\": 8640000000,\n            \"reason\": \"sold out\"\n        },\n        \"overrides\": []\n    },\n    \"modifier_group_ids\": {\n        \"ids\": [\n            \"Add-milk\",\n            \"Add-sugar\"\n        ],\n        \"overrides\": []\n    },\n    \"tax_info\": {\n        \"tax_rate\": 8\n    },\n    \"nutritional_info\": {\n        \"allergens\": null\n    },\n    \"dish_info\": {},\n    \"bundled_items\": null\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/v2/eats/stores/{{store_id}}/menus/items/{{item_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v2",
+                "eats",
+                "stores",
+                "{{store_id}}",
+                "menus",
+                "items",
+                "{{item_id}}"
+              ]
+            }
+          },
+          "status": "No Content",
+          "code": 204,
+          "_postman_previewlanguage": "plain",
+          "header": [
+            {
+              "key": "date",
+              "value": "Thu, 08 Feb 2024 18:23:06 GMT"
+            },
+            {
+              "key": "load",
+              "value": "q=155"
+            },
+            {
+              "key": "x-api-client-id",
+              "value": "auQNqpZnJy5frnVgTpfCwdDnHlsGISw3"
+            },
+            {
+              "key": "x-request-id",
+              "value": "f1ac25a4-d337-4b95-8cb5-e506e8b405fe"
+            },
+            {
+              "key": "x-uber-rtapi-duration",
+              "value": "78"
+            },
+            {
+              "key": "x-uber-edge",
+              "value": "e4-dca50:w:335544320"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=0"
+            },
+            {
+              "key": "x-envoy-upstream-service-time",
+              "value": "86"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "server",
+              "value": "ufe"
+            }
+          ],
+          "cookie": [],
+          "body": ""
+        },
+        {
+          "name": "Mark Item Out of Stock",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"suspension_info\": {\n    \"suspension\": {\n    \t\"suspend_until\": 8640000000,\n    \t\"reason\": \"sold out\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.uber.com/v2/eats/stores//menus/items/",
+              "protocol": "https",
+              "host": [
+                "api",
+                "uber",
+                "com"
+              ],
+              "path": [
+                "v2",
+                "eats",
+                "stores",
+                "",
+                "menus",
+                "items",
+                ""
+              ]
+            }
+          },
+          "status": "No Content",
+          "code": 204,
+          "_postman_previewlanguage": "plain",
+          "header": [
+            {
+              "key": "date",
+              "value": "Thu, 08 Feb 2024 18:21:49 GMT"
+            },
+            {
+              "key": "load",
+              "value": "q=156"
+            },
+            {
+              "key": "x-api-client-id",
+              "value": "auQNqpZnJy5frnVgTpfCwdDnHlsGISw3"
+            },
+            {
+              "key": "x-request-id",
+              "value": "e2a07b10-542b-4678-921a-1241709bfa94"
+            },
+            {
+              "key": "x-uber-rtapi-duration",
+              "value": "89"
+            },
+            {
+              "key": "x-uber-edge",
+              "value": "e4-dca24:w:419430402"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=0"
+            },
+            {
+              "key": "x-envoy-upstream-service-time",
+              "value": "97"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "server",
+              "value": "ufe"
+            }
+          ],
+          "cookie": [],
+          "body": ""
+        },
+        {
+          "name": "Modify item price",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"price_info\": {\n        \"price\": 500\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.uber.com/v2/eats/stores//menus/items/",
+              "protocol": "https",
+              "host": [
+                "api",
+                "uber",
+                "com"
+              ],
+              "path": [
+                "v2",
+                "eats",
+                "stores",
+                "",
+                "menus",
+                "items",
+                ""
+              ]
+            }
+          },
+          "status": "No Content",
+          "code": 204,
+          "_postman_previewlanguage": "plain",
+          "header": [
+            {
+              "key": "date",
+              "value": "Thu, 08 Feb 2024 18:24:05 GMT"
+            },
+            {
+              "key": "load",
+              "value": "q=148"
+            },
+            {
+              "key": "x-api-client-id",
+              "value": "auQNqpZnJy5frnVgTpfCwdDnHlsGISw3"
+            },
+            {
+              "key": "x-request-id",
+              "value": "e6275959-ab49-4274-8a2a-7f89a10a42a9"
+            },
+            {
+              "key": "x-uber-rtapi-duration",
+              "value": "78"
+            },
+            {
+              "key": "x-uber-edge",
+              "value": "e4-dca23:w:385875968"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=0"
+            },
+            {
+              "key": "x-envoy-upstream-service-time",
+              "value": "90"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "server",
+              "value": "ufe"
+            }
+          ],
+          "cookie": [],
+          "body": ""
+        },
+        {
+          "name": "Invalid Item ID",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"price_info\": {\n        \"price\": 500\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.uber.com/v2/eats/stores//menus/items/invalid-item",
+              "protocol": "https",
+              "host": [
+                "api",
+                "uber",
+                "com"
+              ],
+              "path": [
+                "v2",
+                "eats",
+                "stores",
+                "",
+                "menus",
+                "items",
+                "invalid-item"
+              ]
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "date",
+              "value": "Thu, 08 Feb 2024 18:24:47 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "content-length",
+              "value": "42"
+            },
+            {
+              "key": "load",
+              "value": "q=151"
+            },
+            {
+              "key": "x-api-client-id",
+              "value": "auQNqpZnJy5frnVgTpfCwdDnHlsGISw3"
+            },
+            {
+              "key": "x-request-id",
+              "value": "cdfeab19-4041-459b-a0de-c14e8f98d835"
+            },
+            {
+              "key": "x-uber-rtapi-duration",
+              "value": "60"
+            },
+            {
+              "key": "x-uber-edge",
+              "value": "e4-dca18:w:301989890"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=0"
+            },
+            {
+              "key": "x-envoy-upstream-service-time",
+              "value": "68"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "server",
+              "value": "ufe"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"code\": \"not_found\",\n    \"message\": \"not found\"\n}"
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "tokenName",
+        "value": "menu_token",
+        "type": "string"
+      },
+      {
+        "key": "scope",
+        "value": "eats.store",
+        "type": "string"
+      },
+      {
+        "key": "clientSecret",
+        "value": "{{uber_api_client_secret}}",
+        "type": "string"
+      },
+      {
+        "key": "clientId",
+        "value": "{{uber_api_client_id}}",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://auth.uber.com/oauth/v2/token",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials",
+        "type": "string"
+      },
+      {
+        "key": "addTokenTo",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "item_id",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}

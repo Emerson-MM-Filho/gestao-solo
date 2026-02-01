@@ -1,0 +1,1293 @@
+{
+  "info": {
+    "_postman_id": "0c75b446-ad57-4c4f-8484-808de20735a4",
+    "name": "Marketplace Promotions API",
+    "description": "The Promotions API allows you to create, read and delete promotions of an Uber Eats storefront. Full documentation is available [here](https://developer.uber.com/docs/eats/references/api/promotions_suite).\n\n## Before you start\n\n1. Make sure you have the **Uber Eats Marketplace API** Environment selected\n2. Fill the `uber_api_client_id`, `uber_api_client_secret`, and `store_id` variables.\n3. Click on the Authorization tab of this collection\n4. Scroll down and click Get Access Token\n5. After the token is generated successfully, click on Use Token",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52001179",
+    "_collection_link": "https://go.postman.co/collection/29024134-0c75b446-ad57-4c4f-8484-808de20735a4?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Create Store Promotion - FLATOFF",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "tests[\"Successful Request\"] = responseCode.code === 200",
+              "",
+              "var jsonData = JSON.parse(responseBody);",
+              "tests[\"Response contains 'promotion_id'\"] = jsonData.hasOwnProperty(\"promotion_id\");",
+              "pm.collectionVariables.set(\"promotion_id\", jsonData.promotion_id);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "User-Agent",
+            "value": "Postman/UberEatsMarketplaceCollections",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"start_time\": \"2024-01-25T10:00:00-06:00\",\n    \"end_time\": \"2024-01-30T10:00:00-06:00\",\n    \"user_group\": \"ALL_CUSTOMERS\",\n    \"budget\": {\n        \"unlimited_budget\": true\n    },\n    \"external_promotion_id\":\"test_promo\",\n    \"promo_type\": \"FLATOFF\",\n    \"flat_off_discount\": {\n        \"min_basket_constraint\": {\n            \"min_spend\": {\n                \"amount\": 1000\n            }\n        },\n        \"discount_value\": {\n            \"amount\": 400\n        }\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/v1/delivery/stores/{{store_id}}/promotion",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v1",
+            "delivery",
+            "stores",
+            "{{store_id}}",
+            "promotion"
+          ]
+        },
+        "description": "Creates a Flatoff promotion for the given store with a minimum basket spend. The discount_value amount cannot be higher than 40% of minimum order spend amount.\n\nIf you run this request succesfully, the `promotion_id` in the response body will be saved in the corresponding environment variable."
+      },
+      "response": [
+        {
+          "name": "Promotion created succesfully",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{promotions_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"start_time\": \"2024-01-25T10:00:00-06:00\",\n    \"end_time\": \"2024-01-30T10:00:00-06:00\",\n    \"user_group\": \"ALL_CUSTOMERS\",\n    \"budget\": {\n        \"unlimited_budget\": true\n    },\n    \"external_promotion_id\":\"test_promo\",\n    \"promo_type\": \"FLATOFF\",\n    \"flat_off_discount\": {\n        \"min_basket_constraint\": {\n            \"min_spend\": {\n                \"amount\": 1000\n            }\n        },\n        \"discount_value\": {\n            \"amount\": 400\n        }\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.uber.com/v1/delivery/stores//promotion",
+              "protocol": "https",
+              "host": [
+                "api",
+                "uber",
+                "com"
+              ],
+              "path": [
+                "v1",
+                "delivery",
+                "stores",
+                "",
+                "promotion"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "date",
+              "value": "Tue, 06 Feb 2024 20:33:53 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "content-length",
+              "value": "55"
+            },
+            {
+              "key": "load",
+              "value": "q=142"
+            },
+            {
+              "key": "x-api-client-id",
+              "value": "auQNqpZnJy5frnVgTpfCwdDnHlsGISw3"
+            },
+            {
+              "key": "x-request-id",
+              "value": "7fa8a7ed-3849-4b53-9958-a3237e7cf60e"
+            },
+            {
+              "key": "x-uber-rtapi-duration",
+              "value": "287"
+            },
+            {
+              "key": "x-uber-edge",
+              "value": "e4-dca24:w:419430400"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=0"
+            },
+            {
+              "key": "x-envoy-upstream-service-time",
+              "value": "296"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "server",
+              "value": "ufe"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"promotion_id\": \"{promotion_id}\"\n}"
+        },
+        {
+          "name": "Invalid discount value",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{promotions_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"start_time\": \"2024-01-25T10:00:00-06:00\",\n    \"end_time\": \"2024-01-30T10:00:00-06:00\",\n    \"user_group\": \"ALL_CUSTOMERS\",\n    \"budget\": {\n        \"unlimited_budget\": true\n    },\n    \"external_promotion_id\":\"test_promo\",\n    \"promo_type\": \"FLATOFF\",\n    \"flat_off_discount\": {\n        \"min_basket_constraint\": {\n            \"min_spend\": {\n                \"amount\": 1000\n            }\n        },\n        \"discount_value\": {\n            \"amount\": 4000\n        }\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.uber.com/v1/delivery/stores/{{store_id}}/promotion",
+              "protocol": "https",
+              "host": [
+                "api",
+                "uber",
+                "com"
+              ],
+              "path": [
+                "v1",
+                "delivery",
+                "stores",
+                "{{store_id}}",
+                "promotion"
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "date",
+              "value": "Tue, 06 Feb 2024 20:39:37 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "load",
+              "value": "q=132"
+            },
+            {
+              "key": "x-api-client-id",
+              "value": "auQNqpZnJy5frnVgTpfCwdDnHlsGISw3"
+            },
+            {
+              "key": "x-request-id",
+              "value": "d5e160cb-fa49-40f2-a20c-14f156ecc3e5"
+            },
+            {
+              "key": "x-uber-rtapi-duration",
+              "value": "10"
+            },
+            {
+              "key": "x-uber-edge",
+              "value": "e4-dca18:w:285212672"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=0"
+            },
+            {
+              "key": "x-envoy-upstream-service-time",
+              "value": "21"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "content-encoding",
+              "value": "br"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "server",
+              "value": "ufe"
+            },
+            {
+              "key": "transfer-encoding",
+              "value": "chunked"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"code\": \"bad_request\",\n    \"message\": \"There are invalid or missing arguments in the request. Please fix before retrying.\",\n    \"metadata\": {\n        \"field_violations\": [\n            {\n                \"field\": \"discount_value\",\n                \"description\": \"discount_value amount cannot be higher than 40% of minimum order spend amount\"\n            }\n        ]\n    }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Create Store Promotion - FREEITEM_MINIBASKET",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "tests[\"Successful Request\"] = responseCode.code === 200",
+              "",
+              "var jsonData = JSON.parse(responseBody);",
+              "tests[\"Response contains 'promotion_id'\"] = jsonData.hasOwnProperty(\"promotion_id\");",
+              "pm.collectionVariables.set(\"promotion_id\", jsonData.promotion_id);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "User-Agent",
+            "value": "Postman/UberEatsMarketplaceCollections",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"start_time\": \"2024-02-03T10:00:00-06:00\",\n    \"end_time\": \"2024-02-10T10:00:00-06:00\",\n    \"user_group\": \"ALL_CUSTOMERS\",\n    \"budget\": {\n        \"unlimited_budget\": true\n    },\n    \"external_promotion_id\":\"test_promo\",\n    \"allow_unlimited_apply\":true,\n    \"promo_type\": \"FREEITEM_MINBASKET\",\n    \"free_item_discount\": {\n        \"min_basket_constraint\": {\n            \"min_spend\": {\n                \"amount\": 1000\n            }\n        },\n        \"free_items\": [\n            {\n                \"free_item_id\": \"Coffee\"\n            }\n        ]\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/v1/delivery/stores/{{store_id}}/promotion",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v1",
+            "delivery",
+            "stores",
+            "{{store_id}}",
+            "promotion"
+          ]
+        },
+        "description": "Creates a Free item promotion for the given store with a minimum basket spend. The `free_item_id` corresponds to the **External Item ID** in the menu.\n\nIf you run this request succesfully, the `promotion_id` in the response body will be saved in the corresponding environment variable.\n\n**Note**: You need to replace the `free_item_id` with an existing External Item ID in your menu."
+      },
+      "response": [
+        {
+          "name": "Promotion created succesfully",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{eats_promotions_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"start_time\": \"2024-01-03T10:00:00-06:00\",\n    \"end_time\": \"2024-01-10T10:00:00-06:00\",\n    \"user_group\": \"ALL_CUSTOMERS\",\n    \"budget\": {\n        \"unlimited_budget\": true\n    },\n    \"external_promotion_id\":\"test_promo\",\n    \"allow_unlimited_apply\":true,\n    \"promo_type\": \"FREEITEM_MINBASKET\",\n    \"free_item_discount\": {\n        \"min_basket_constraint\": {\n            \"min_spend\": {\n                \"amount\": 1000\n            }\n        },\n        \"free_items\": [\n            {\n                \"free_item_id\": \"10838\"\n            }\n        ]\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.uber.com/v1/delivery/stores//promotion",
+              "protocol": "https",
+              "host": [
+                "api",
+                "uber",
+                "com"
+              ],
+              "path": [
+                "v1",
+                "delivery",
+                "stores",
+                "",
+                "promotion"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "date",
+              "value": "Tue, 06 Feb 2024 20:41:43 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "content-length",
+              "value": "55"
+            },
+            {
+              "key": "load",
+              "value": "q=138"
+            },
+            {
+              "key": "x-api-client-id",
+              "value": "auQNqpZnJy5frnVgTpfCwdDnHlsGISw3"
+            },
+            {
+              "key": "x-request-id",
+              "value": "e34eb57a-11aa-4e0b-b3fc-bf36916923a6"
+            },
+            {
+              "key": "x-uber-rtapi-duration",
+              "value": "315"
+            },
+            {
+              "key": "x-uber-edge",
+              "value": "e4-dca24:w:436207617"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=0"
+            },
+            {
+              "key": "x-envoy-upstream-service-time",
+              "value": "381"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "server",
+              "value": "ufe"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"promotion_id\": \"{promotion_id}\"\n}"
+        },
+        {
+          "name": "Invalid Free item ID",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{eats_promotions_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"start_time\": \"2024-01-03T10:00:00-06:00\",\n    \"end_time\": \"2024-01-10T10:00:00-06:00\",\n    \"user_group\": \"ALL_CUSTOMERS\",\n    \"budget\": {\n        \"unlimited_budget\": true\n    },\n    \"external_promotion_id\":\"test_promo\",\n    \"allow_unlimited_apply\":true,\n    \"promo_type\": \"FREEITEM_MINBASKET\",\n    \"free_item_discount\": {\n        \"min_basket_constraint\": {\n            \"min_spend\": {\n                \"amount\": 1000\n            }\n        },\n        \"free_items\": [\n            {\n                \"free_item_id\": \"41514616\"\n            }\n        ]\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.uber.com/v1/delivery/stores/{{store_id}}/promotion",
+              "protocol": "https",
+              "host": [
+                "api",
+                "uber",
+                "com"
+              ],
+              "path": [
+                "v1",
+                "delivery",
+                "stores",
+                "{{store_id}}",
+                "promotion"
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "date",
+              "value": "Tue, 06 Feb 2024 20:33:57 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "load",
+              "value": "q=126"
+            },
+            {
+              "key": "x-api-client-id",
+              "value": "auQNqpZnJy5frnVgTpfCwdDnHlsGISw3"
+            },
+            {
+              "key": "x-request-id",
+              "value": "8f569eaa-d25c-4585-b6c3-5f32dbbe31ce"
+            },
+            {
+              "key": "x-uber-rtapi-duration",
+              "value": "71"
+            },
+            {
+              "key": "x-uber-edge",
+              "value": "e4-dca50:w:335544322"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=0"
+            },
+            {
+              "key": "x-envoy-upstream-service-time",
+              "value": "82"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "content-encoding",
+              "value": "br"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "server",
+              "value": "ufe"
+            },
+            {
+              "key": "transfer-encoding",
+              "value": "chunked"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"code\": \"bad_request\",\n    \"message\": \"There are invalid or missing arguments in the request. Please fix before retrying.\",\n    \"metadata\": {\n        \"field_violations\": [\n            {\n                \"field\": \"item_id\",\n                \"description\": \"cannot find target item based on item external ID\"\n            }\n        ]\n    }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Store Promotion Details",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "tests[\"Successful Request\"] = responseCode.code === 200"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "User-Agent",
+            "value": "Postman/UberEatsMarketplaceCollections",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/v1/delivery/promotions/{{promotion_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v1",
+            "delivery",
+            "promotions",
+            "{{promotion_id}}"
+          ]
+        },
+        "description": "Get single promotion metadata by specifying the `promotion_id`"
+      },
+      "response": [
+        {
+          "name": "Succesful promotion details request",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{eats_promotions_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.uber.com/v1/delivery/promotions/",
+              "protocol": "https",
+              "host": [
+                "api",
+                "uber",
+                "com"
+              ],
+              "path": [
+                "v1",
+                "delivery",
+                "promotions",
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "date",
+              "value": "Tue, 06 Feb 2024 20:42:05 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "load",
+              "value": "q=138"
+            },
+            {
+              "key": "x-api-client-id",
+              "value": "auQNqpZnJy5frnVgTpfCwdDnHlsGISw3"
+            },
+            {
+              "key": "x-request-id",
+              "value": "7259e685-cdf2-41d5-b304-a5a03c411085"
+            },
+            {
+              "key": "x-uber-rtapi-duration",
+              "value": "84"
+            },
+            {
+              "key": "x-uber-edge",
+              "value": "e4-dca20:w:100663296"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=0"
+            },
+            {
+              "key": "x-envoy-upstream-service-time",
+              "value": "95"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "content-encoding",
+              "value": "br"
+            },
+            {
+              "key": "server",
+              "value": "ufe"
+            },
+            {
+              "key": "transfer-encoding",
+              "value": "chunked"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"promotion\": {\n        \"promotion_id\": \"{prpmotion_id}\",\n        \"store_id\": \"{store_id}\",\n        \"start_time\": \"2024-01-03T16:00:00Z\",\n        \"end_time\": \"2024-01-10T16:00:00Z\",\n        \"created_time\": \"2024-02-06T20:41:43Z\",\n        \"state\": \"ACTIVE\",\n        \"external_promotion_id\": \"test_promo\",\n        \"user_group\": \"ALL_CUSTOMERS\",\n        \"allow_unlimited_apply\": true,\n        \"currency_code\": \"MXN\",\n        \"budget\": {\n            \"unlimited_budget\": true\n        },\n        \"promo_type\": \"FREEITEM_MINBASKET\",\n        \"free_item_discount\": {\n            \"min_basket_constraint\": {\n                \"min_spend\": {\n                    \"amount\": 1000,\n                    \"currency_code\": \"MXN\"\n                }\n            },\n            \"free_items\": [\n                {\n                    \"free_item_id\": \"10838\"\n                }\n            ]\n        }\n    }\n}"
+        },
+        {
+          "name": "Invalid Promotion ID",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{eats_promotions_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.uber.com/v1/delivery/promotions/{{promotion_id}}",
+              "protocol": "https",
+              "host": [
+                "api",
+                "uber",
+                "com"
+              ],
+              "path": [
+                "v1",
+                "delivery",
+                "promotions",
+                "{{promotion_id}}"
+              ]
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "date",
+              "value": "Tue, 06 Feb 2024 20:42:30 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "content-length",
+              "value": "94"
+            },
+            {
+              "key": "load",
+              "value": "q=145"
+            },
+            {
+              "key": "x-api-client-id",
+              "value": "auQNqpZnJy5frnVgTpfCwdDnHlsGISw3"
+            },
+            {
+              "key": "x-request-id",
+              "value": "ebcf6e47-5d02-4704-ade8-aee589d07421"
+            },
+            {
+              "key": "x-uber-rtapi-duration",
+              "value": "29"
+            },
+            {
+              "key": "x-uber-edge",
+              "value": "e4-dca24:w:436207617"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=0"
+            },
+            {
+              "key": "x-envoy-upstream-service-time",
+              "value": "38"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "server",
+              "value": "ufe"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"code\": \"not_found\",\n    \"message\": \"promotion {promotion_id} does not exist\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Revoke Store Promotion",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "tests[\"Successful Request\"] = responseCode.code === 200"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "User-Agent",
+            "value": "Postman/UberEatsMarketplaceCollections",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/v1/delivery/promotions/{{promotion_id}}/revoke",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v1",
+            "delivery",
+            "promotions",
+            "{{promotion_id}}",
+            "revoke"
+          ]
+        },
+        "description": "Revoke promotion by specifying the `promotion_id`"
+      },
+      "response": [
+        {
+          "name": "Promotion revoked succesfully",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{eats_promotions_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.uber.com/v1/delivery/promotions//revoke",
+              "protocol": "https",
+              "host": [
+                "api",
+                "uber",
+                "com"
+              ],
+              "path": [
+                "v1",
+                "delivery",
+                "promotions",
+                "",
+                "revoke"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "date",
+              "value": "Tue, 06 Feb 2024 20:43:58 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "content-length",
+              "value": "2"
+            },
+            {
+              "key": "load",
+              "value": "q=133"
+            },
+            {
+              "key": "x-api-client-id",
+              "value": "auQNqpZnJy5frnVgTpfCwdDnHlsGISw3"
+            },
+            {
+              "key": "x-request-id",
+              "value": "7cc2bfcb-b042-4b41-8500-efe57b7da66f"
+            },
+            {
+              "key": "x-uber-rtapi-duration",
+              "value": "104"
+            },
+            {
+              "key": "x-uber-edge",
+              "value": "e4-dca18:w:301989891"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=0"
+            },
+            {
+              "key": "x-envoy-upstream-service-time",
+              "value": "120"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "server",
+              "value": "ufe"
+            }
+          ],
+          "cookie": [],
+          "body": "{}"
+        },
+        {
+          "name": "Invalid Promotion ID",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{eats_promotions_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.uber.com/v1/delivery/promotions/{{promotion_id}}/revoke",
+              "protocol": "https",
+              "host": [
+                "api",
+                "uber",
+                "com"
+              ],
+              "path": [
+                "v1",
+                "delivery",
+                "promotions",
+                "{{promotion_id}}",
+                "revoke"
+              ]
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "date",
+              "value": "Tue, 06 Feb 2024 20:43:05 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "content-length",
+              "value": "94"
+            },
+            {
+              "key": "load",
+              "value": "q=143"
+            },
+            {
+              "key": "x-api-client-id",
+              "value": "auQNqpZnJy5frnVgTpfCwdDnHlsGISw3"
+            },
+            {
+              "key": "x-request-id",
+              "value": "333e235e-d777-45d6-b5b6-0044bb789e8c"
+            },
+            {
+              "key": "x-uber-rtapi-duration",
+              "value": "27"
+            },
+            {
+              "key": "x-uber-edge",
+              "value": "e4-dca50:w:318767105"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=0"
+            },
+            {
+              "key": "x-envoy-upstream-service-time",
+              "value": "36"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "server",
+              "value": "ufe"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"code\": \"not_found\",\n    \"message\": \"promotion {promotion_id} does not exist\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Store Promotions",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "tests[\"Successful Request\"] = responseCode.code === 200"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "User-Agent",
+            "value": "Postman/UberEatsMarketplaceCollections",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/v1/delivery/stores/{{store_id}}/promotions?state=active",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v1",
+            "delivery",
+            "stores",
+            "{{store_id}}",
+            "promotions"
+          ],
+          "query": [
+            {
+              "key": "state",
+              "value": "active",
+              "description": "Optional. If it is specified, the result will only contain the promotions with target state. \nEnum: \"active\" \"pending\" \"completed\" \"revoked\" \"expired\" \"deleted\""
+            }
+          ]
+        },
+        "description": "Provides a list of all promotions existing on a store filtered on state and time range. **Note**: the result only contains the promotions created via API, instead of Uber ops tool or self-serve dashboard."
+      },
+      "response": [
+        {
+          "name": "Succesful promotion details request",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer "
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.uber.com/v1/delivery/stores//promotions?state=active",
+              "protocol": "https",
+              "host": [
+                "api",
+                "uber",
+                "com"
+              ],
+              "path": [
+                "v1",
+                "delivery",
+                "stores",
+                "",
+                "promotions"
+              ],
+              "query": [
+                {
+                  "key": "state",
+                  "value": "active"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "date",
+              "value": "Tue, 06 Feb 2024 20:29:13 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "load",
+              "value": "q=127"
+            },
+            {
+              "key": "x-api-client-id",
+              "value": "auQNqpZnJy5frnVgTpfCwdDnHlsGISw3"
+            },
+            {
+              "key": "x-request-id",
+              "value": "e73e149e-5663-4eae-bd09-4738819c3c3a"
+            },
+            {
+              "key": "x-uber-rtapi-duration",
+              "value": "62"
+            },
+            {
+              "key": "x-uber-edge",
+              "value": "e4-dca24:w:419430403"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=0"
+            },
+            {
+              "key": "x-envoy-upstream-service-time",
+              "value": "72"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "content-encoding",
+              "value": "br"
+            },
+            {
+              "key": "server",
+              "value": "ufe"
+            },
+            {
+              "key": "transfer-encoding",
+              "value": "chunked"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"promotions\": [\n        {\n            \"promotion_id\": \"{promotion_id}\",\n            \"store_id\": \"{store_id}\",\n            \"start_time\": \"2024-02-03T16:00:00Z\",\n            \"end_time\": \"2024-02-10T16:00:00Z\",\n            \"created_time\": \"2024-01-23T22:26:21Z\",\n            \"state\": \"ACTIVE\",\n            \"external_promotion_id\": \"test_promo\",\n            \"user_group\": \"ALL_CUSTOMERS\",\n            \"allow_unlimited_apply\": false,\n            \"currency_code\": \"MXN\",\n            \"budget\": {\n                \"unlimited_budget\": true\n            },\n            \"promo_type\": \"FLATOFF\",\n            \"flat_off_discount\": {\n                \"min_basket_constraint\": {\n                    \"min_spend\": {\n                        \"amount\": 1000,\n                        \"currency_code\": \"MXN\"\n                    }\n                },\n                \"discount_value\": {\n                    \"amount\": 400,\n                    \"currency_code\": \"MXN\"\n                }\n            }\n        },\n        {\n            \"promotion_id\": \"{promotion_id}\",\n            \"store_id\": \"{store_id}\",\n            \"start_time\": \"2024-02-03T16:00:00Z\",\n            \"end_time\": \"2024-02-10T16:00:00Z\",\n            \"created_time\": \"2024-01-23T22:24:55Z\",\n            \"state\": \"ACTIVE\",\n            \"external_promotion_id\": \"test_promo\",\n            \"user_group\": \"ALL_CUSTOMERS\",\n            \"allow_unlimited_apply\": false,\n            \"currency_code\": \"MXN\",\n            \"budget\": {\n                \"unlimited_budget\": true\n            },\n            \"promo_type\": \"FLATOFF\",\n            \"flat_off_discount\": {\n                \"min_basket_constraint\": {\n                    \"min_spend\": {\n                        \"amount\": 1000,\n                        \"currency_code\": \"MXN\"\n                    }\n                },\n                \"discount_value\": {\n                    \"amount\": 400,\n                    \"currency_code\": \"MXN\"\n                }\n            }\n        }\n    ]\n}"
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "eats.store.promotion.read eats.store.promotion.write",
+        "type": "string"
+      },
+      {
+        "key": "clientSecret",
+        "value": "{{uber_api_client_secret}}",
+        "type": "string"
+      },
+      {
+        "key": "clientId",
+        "value": "{{uber_api_client_id}}",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://auth.uber.com/oauth/v2/token",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials",
+        "type": "string"
+      },
+      {
+        "key": "tokenName",
+        "value": "promotions_token",
+        "type": "string"
+      },
+      {
+        "key": "addTokenTo",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "promotion_id",
+      "value": ""
+    }
+  ]
+}

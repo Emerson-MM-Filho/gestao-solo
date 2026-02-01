@@ -1,0 +1,513 @@
+{
+  "info": {
+    "_postman_id": "a8546d71-7879-4e62-9be5-e3d96245f417",
+    "name": "Marketplace Integration Configuration  API",
+    "description": "The Integration Configuration API allows you to get a user's store list, associate your application, retrieve your application's configuration, update your application's configuration on a store, and remove your application entirely. Full documentation is available [here](https://developer.uber.com/docs/eats/guides/integration-activation-flows).\n\n## Before you start\n\n1. Make sure you have the **Uber Eats Marketplace API** Environment selected\n2. Fill the `uber_api_client_id`, `uber_api_client_secret`, and `store_id` variables.\n3. Click on the Authorization tab of this collection\n4. Scroll down and click Get Access Token\n5. After the token is generated successfully, click on Use Token",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52001179",
+    "_collection_link": "https://go.postman.co/collection/6384856-a8546d71-7879-4e62-9be5-e3d96245f417?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "User Access Token Guide & APIs",
+      "item": [
+        {
+          "name": "Link Application to Store",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "{{uber_api_client_secret}}",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "{{uber_api_client_id}}",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://login.uber.com/oauth/v2/token?client_id={{uber_api_client_id}}&client_secret={{uber_api_client_secret}}&grant_type=authorization_code&code=",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://login.uber.com/oauth/v2/authorize?response_type=code&client_id={{uber_api_client_id}}&redirect_uri=https://oauth.pstmn.io/v1/callback?scope=eats.pos_provisioning",
+                  "type": "string"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "POS Provision Testing",
+                  "type": "string"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "eats.pos_provisioning",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://oauth.pstmn.io/v1/callback",
+                  "type": "string"
+                },
+                {
+                  "key": "tokenType",
+                  "value": "Bearer",
+                  "type": "string"
+                },
+                {
+                  "key": "headerPrefix",
+                  "value": "Bearer ",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "User-Agent",
+                "value": "Postman/UberEatsMarketplaceCollections",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"allowed_customer_requests\": {\n    \"allow_single_use_items_requests\": false,\n    \"allow_special_instruction_requests\": false\n  },\n  \"integrator_brand_id\": \"app-brand-1jj9th32\",\n  \"integrator_store_id\": \"app-1f2a3b4c-5d6e-7f8g-9h01-i2j3k4l5m6n7\",\n  \"is_order_manager\": true,\n  \"merchant_store_id\": \"UberStore1\",\n  \"require_manual_acceptance\": false,\n  \"store_configuration_data\": \"string\",\n  \"webhooks_config\": {\n    \"order_release_webhooks\": {\n      \"is_enabled\": true\n    },\n    \"schedule_order_webhooks\": {\n      \"is_enabled\": true\n    },\n    \"delivery_status_webhooks\": {\n        \"is_enabled\": true\n    },\n    \"webhooks_version\": \"1.0\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/v1/eats/stores/{{store_id}}/pos_data",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "eats",
+                "stores",
+                "{{store_id}}",
+                "pos_data"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Retrieve Merchant Stores",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://login.uber.com/oauth/v2/token?client_id={{uber_api_client_id}}&client_secret={{uber_api_client_secret}}&grant_type=authorization_code&code=",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://login.uber.com/oauth/v2/authorize?response_type=code&client_id={{uber_api_client_id}}}&redirect_uri=https://oauth.pstmn.io/v1/callback",
+                  "type": "string"
+                },
+                {
+                  "key": "clientSecret",
+                  "value": "{{uber_api_client_secret}}",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "{{uber_api_client_id}}",
+                  "type": "string"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "POS Provision Testing",
+                  "type": "string"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "eats.pos_provisioning",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://oauth.pstmn.io/v1/callback",
+                  "type": "string"
+                },
+                {
+                  "key": "tokenType",
+                  "value": "Bearer",
+                  "type": "string"
+                },
+                {
+                  "key": "headerPrefix",
+                  "value": "Bearer ",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "User-Agent",
+                "value": "Postman/UberEatsMarketplaceCollections",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/v1/delivery/stores",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "delivery",
+                "stores"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Store List",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://api.uber.com/v1/delivery/stores",
+                  "protocol": "https",
+                  "host": [
+                    "api",
+                    "uber",
+                    "com"
+                  ],
+                  "path": [
+                    "v1",
+                    "delivery",
+                    "stores"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Sun, 22 Oct 2023 17:21:48 GMT"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "vary",
+                  "value": "Accept-Encoding"
+                },
+                {
+                  "key": "load",
+                  "value": "q=30"
+                },
+                {
+                  "key": "x-api-client-id",
+                  "value": "kUwOD-fyBAlGAou3XgqZ5MH0J4fLnKjf"
+                },
+                {
+                  "key": "x-uber-rtapi-duration",
+                  "value": "103"
+                },
+                {
+                  "key": "x-uber-edge",
+                  "value": "e4-dca8:w:268435457"
+                },
+                {
+                  "key": "x-frame-options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "cache-control",
+                  "value": "max-age=0"
+                },
+                {
+                  "key": "x-envoy-upstream-service-time",
+                  "value": "120"
+                },
+                {
+                  "key": "strict-transport-security",
+                  "value": "max-age=31536000"
+                },
+                {
+                  "key": "x-content-type-options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "x-xss-protection",
+                  "value": "1; mode=block"
+                },
+                {
+                  "key": "content-encoding",
+                  "value": "br"
+                },
+                {
+                  "key": "server",
+                  "value": "ufe"
+                },
+                {
+                  "key": "transfer-encoding",
+                  "value": "chunked"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"stores\": [\n        {\n            \"id\": \"96013581-ce48-4f62-9b6c-082080sssmmm\",\n            \"name\": \"Test Store 1\",\n            \"contact\": {\n                \"email\": \"teststore1@uber.com\",\n                \"name\": \"Test Store 1\",\n                \"phone_number\": \"+202-022-2020\"\n            },\n            \"location\": {\n                \"latitude\": \"40.74734\",\n                \"longitude\": \"-73.95705\",\n                \"street_address_line_one\": \"4334 Center Boulevard, New York, NY 11109, US\",\n                \"city\": \"New York\",\n                \"country\": \"US\",\n                \"postal_code\": \"11109\"\n            },\n            \"timezone\": \"America/New_York\",\n            \"prep_times\": {\n                \"default_value\": 60\n            },\n            \"onboarding_status\": \"ACTIVE\"\n        },\n        {\n            \"id\": \"96013581-ce48-4f62-9b6c-082080ffffll\",\n            \"name\": \"Test Store 2\",\n            \"contact\": {\n                \"email\": \"teststore2@uber.com\",\n                \"name\": \"Test Store 2\",\n                \"phone_number\": \"+303-030-0303\"\n            },\n            \"location\": {\n                \"latitude\": \"40.74734\",\n                \"longitude\": \"-73.95705\",\n                \"street_address_line_one\": \"18 18th Street, New York, NY 10016, US\",\n                \"city\": \"New York\",\n                \"country\": \"US\",\n                \"postal_code\": \"10016\"\n            },\n            \"timezone\": \"America/New_York\",\n            \"prep_times\": {\n                \"default_value\": 60\n            },\n            \"onboarding_status\": \"ACTIVE\"\n        }\n    ],\n    \"pagination_data\": {\n        \"page_size\": 2\n    }\n}"
+            },
+            {
+              "name": "Auth Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "",
+                    "value": "",
+                    "type": "text",
+                    "disabled": true
+                  }
+                ],
+                "url": {
+                  "raw": "https://api.uber.com/v1/delivery/stores",
+                  "protocol": "https",
+                  "host": [
+                    "api",
+                    "uber",
+                    "com"
+                  ],
+                  "path": [
+                    "v1",
+                    "delivery",
+                    "stores"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Sun, 22 Oct 2023 17:25:49 GMT"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "content-length",
+                  "value": "75"
+                },
+                {
+                  "key": "x-uber-edge",
+                  "value": "e4-dca8:w:268435456"
+                },
+                {
+                  "key": "x-frame-options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "cache-control",
+                  "value": "max-age=0"
+                },
+                {
+                  "key": "x-envoy-upstream-service-time",
+                  "value": "6"
+                },
+                {
+                  "key": "strict-transport-security",
+                  "value": "max-age=31536000"
+                },
+                {
+                  "key": "x-content-type-options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "x-xss-protection",
+                  "value": "1; mode=block"
+                },
+                {
+                  "key": "server",
+                  "value": "ufe"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"code\": \"unauthorized\",\n    \"message\": \"Invalid OAuth 2.0 credentials provided.\"\n}"
+            }
+          ]
+        }
+      ],
+      "description": "**This guide provides step-by-step instructions for generating an 'eats.pos_provisioning' token in Postman using the 'authorization_code' grant type.**\n\n**Prerequisites and Notes:**\n\n1. Postman callback URL must be set within the Uber developer portal as a redirect URL.\n    \n2. Set your variables in Postman:\n    1. Client ID\n        \n    2. Client Secrets\n        \n    3. Scope\n        \n    4. Callback / Redirect URL\n        \n3. Ensure your browser pop-ups are not blocked. You will need to \"Login to Uber\" with the Uber Eats Manager credentials and you will retrieve your token within Postman + a refreshable token for this user.\n    \n\n**Steps:**\n\n1. **Postman -> Create Request → Authorization Page**\n    \n\n<img src=\"https://lh7-us.googleusercontent.com/8G3uR0ttPySBZs_wZQFzl0d69MS8vrBoqhe0E9fGg9YGrxUwqhZ0t-KEiBCrrLXS6T3pR31g4Q1tYFXgfklLVMtNacgW1j-dqjlJP9TLhiNgIPrTxkjJXClM63sZsm8oPaVGW5OpLINEoBnkUhlFkP0\">\n\n2\\. **Configure Variables**\n\n<img src=\"https://lh7-us.googleusercontent.com/zchnQPMI6ah1jY7p1Er8pUvw8fmqIPaUuYQHTfRvmTVAKaovIr1d6Tx5MwfI0h4uisWvU6FBUew2zqnMYgN091XiscGF7jGK5KD5-RYRtDfsUhfCBnlszg2zAgEaSeYWutu3PCw2JAbhaEj84EWGchU\">\n\n**3\\. Sample URLs to Configure**\n\nAuthorization URL\n\n**`https://auth.uber.com/oauth/v2/authorize?response_type=code&client_id=[[uber_api_client_id]]&redirect_uri=https://oauth.pstmn.io/v1/callback&scope=eats.pos_provisioning`**\n\nAccess Token URL\n\n**`https://auth.uber.com/oauth/v2/token?client_id=[[uber_api_client_id]]&client_secret=[[uber_api_client_secret]]&grant_type=authorization_code&code=`**\n\n**4\\. Execute the Flow**\n\nEnsure pop-ups are not blocked"
+    },
+    {
+      "name": "Update Integration Data",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "User-Agent",
+            "value": "Postman/UberEatsMarketplaceCollections",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"allowed_customer_requests\": {\n    \"allow_single_use_items_requests\": false,\n    \"allow_special_instruction_requests\": false\n  },\n  \"integrator_brand_id\": \"app-brand-1jj9th32\",\n  \"integrator_store_id\": \"app-1f2a3b4c-5d6e-7f8g-9h01-i2j3k4l5m6n7\",\n  \"is_order_manager\": true,\n  \"merchant_store_id\": \"UberStore1\",\n  \"require_manual_acceptance\": false,\n  \"store_configuration_data\": \"string\",\n  \"webhooks_config\": {\n    \"order_release_webhooks\": {\n      \"is_enabled\": true\n    },\n    \"schedule_order_webhooks\": {\n      \"is_enabled\": true\n    },\n    \"delivery_status_webhooks\": {\n        \"is_enabled\": true\n    },\n    \"webhooks_version\": \"1.0\"\n  },\n  \"integration_enabled\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/v1/eats/stores/{{store_id}}/pos_data",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v1",
+            "eats",
+            "stores",
+            "{{store_id}}",
+            "pos_data"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Integration Data",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "User-Agent",
+            "value": "Postman/UberEatsMarketplaceCollections",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/v1/eats/stores/{{store_id}}/pos_data",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v1",
+            "eats",
+            "stores",
+            "{{store_id}}",
+            "pos_data"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Remove Integration",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "User-Agent",
+            "value": "Postman/UberEatsMarketplaceCollections",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/v1/eats/stores/{{store_id}}/pos_data",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v1",
+            "eats",
+            "stores",
+            "{{store_id}}",
+            "pos_data"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{eats_store_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
